@@ -1,3 +1,4 @@
+@section('content')
 <!doctype html>
 <html lang="{{ config('app.locale') }}">
     <head>
@@ -14,7 +15,7 @@
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                color: #363b3f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
@@ -50,7 +51,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #363b3f;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -62,6 +63,7 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
         </style>
     </head>
     <body>
@@ -88,6 +90,11 @@
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
+                <div class="links">
+                    @foreach($article as $a)
+                        <a>{{$a->id}} : {{$user->get($a->user_id-1)->name}} <br/> {{$a->content}}</a><br/>
+                    @endforeach
                 </div>
             </div>
         </div>

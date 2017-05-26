@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Hashtag extends Model
 {
     public function article()
     {
-        return $this->hasOne(Article::class);
+        return $this->belongsToMany(Article::class);
     }
 }

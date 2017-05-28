@@ -38,18 +38,22 @@ This web page has been developed by Wani.
             color: #333;
         }
     </style>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- TestADS -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:728px;height:90px"
-         data-ad-client="ca-pub-8665007420370986"
-         data-ad-slot="6492176154"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+
 
 </head>
 <body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- TestADS -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-8665007420370986"
+     data-ad-slot="6492176154"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <div class="chat"></div>
 
@@ -59,7 +63,7 @@ This web page has been developed by Wani.
     <button type="submit">Send</button>
 </form>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 <script src="/js/brain-socket-js/brain-socket.min.js"></script>
 <script>
     (function (global, $, BrainSocket) {
@@ -92,4 +96,14 @@ This web page has been developed by Wani.
     })(this, jQuery, BrainSocket);
 </script>
 </body>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99980515-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </html>

@@ -55,7 +55,7 @@ This web page has been developed by Wani.
     (function (global, $, BrainSocket) {
         // (3-2) 앱 연결, 메시지 보내기
         var app = new BrainSocket(
-            new WebSocket('ws://hash_chat.osteng:8080'),
+            new WebSocket('ws://ssulchat.net:8080'),
             new BrainSocketPubSub()
         );
         console.log(app);

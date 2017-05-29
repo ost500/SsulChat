@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateChannelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('channels', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('profile_img');
-            $table->rememberToken();
+            $table->string('name');
+            $table->integer('ssul_id')->unsigned()->index();
+            $table->foreign('ssul_id')->references('id')->on('ssuls')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('channels');
     }
 }

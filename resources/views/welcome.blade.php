@@ -58,7 +58,11 @@ This web page has been developed by Wani.
 <div class="chat"></div>
 
 <form class="form">
-    <input type="text" id="name" placeholder="Name" value="손님{{ rand(0,1000) }}"/>
+    @if (Auth::guest())
+        <input type="text" id="name" placeholder="Name" value="손님{{ rand(0,1000) }}"/>
+    @else
+        <input type="text" id="name" placeholder="Name" value="{{ Auth::user()->name }}"/>
+    @endif
     <input type="text" id="message" placeholder="Your Message" autofocus/>
     <button type="submit">Send</button>
 </form>
@@ -85,14 +89,13 @@ This web page has been developed by Wani.
         });
 
         // (3-3) 수신된 메시지 처리
-        app.Event.listen('receive.message', function (msg) {
-            // 본문 추가
-            $('div.chat').append('<div class="item"><div class="name">' + msg.server.data.name + '</div>' +
-                '<div class="message">' + msg.server.data.message + '</div></div>');
-
-            // 맨 아래로 스크롤 이동
-            $('div.chat').scrollTop($('div.chat')[0].scrollHeight);
-        });
+    app.Event.listen('receive.message', function (msg) {
+        // 본문 추가
+        $('div.chat').append('<div class="item"><div class="name">' + msg.server.data.name + '</div>' +
+            '<div class="message">' + msg.server.data.message + '</div></div>');
+        // 맨 아래로 스크롤 이동
+        $('div.chat').scrollTop($('div.chat')[0].scrollHeight);
+    });
     })(this, jQuery, BrainSocket);
 </script>
 </body>

@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('profile_img');
+            $table->string('profile_img')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -33,4 +33,5 @@ class CreateUsersTable extends Migration
     {
         Schema::dropIfExists('users');
     }
+
 }

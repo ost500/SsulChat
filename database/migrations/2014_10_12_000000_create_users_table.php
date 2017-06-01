@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
         App\User::create([
             'name' => 'anonymous',
             'email' => 'anonymous',
-            'password' => '!@#$%^&*()'
+            'password' => bcrypt('!@#$%^&*()')
         ]);
     }
 

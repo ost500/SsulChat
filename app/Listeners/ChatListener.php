@@ -29,8 +29,7 @@ class ChatListener
         $brain = new BrainSocketAppResponse();
 
 
-        event(new ChatEvent("hi"));
-
+        event(new ChatEvent($data->data->name, $data->data->message));
 
         return $brain->message( "receive.message", [
             'name' => $data->data->name,

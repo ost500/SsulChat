@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Chatting;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
@@ -21,9 +22,13 @@ class ChatEvent implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($text)
+    public function __construct($name, $message)
     {
-        Log::info($text);
+        $chat = new Chatting();
+        $chat->content = $message;
+        $chat->ipadress = 123;
+        $chat->user_id = 1;
+        $chat->save();
     }
 
     /**

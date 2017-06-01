@@ -18,9 +18,9 @@ class CreateChattingsTable extends Migration
             $table->string('content');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('ipadress');
+            $table->string('ipaddress');
             $table->timestamps();
-        });
+    });
     }
 
     /**

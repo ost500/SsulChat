@@ -38,14 +38,12 @@ This web page has been developed by Wani.
             color: #333;
         }
     </style>
-
+    <script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 </head>
 <body>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- TestADS -->
 <ins class="adsbygoogle"
      style="display:inline-block;width:728px;height:90px"
@@ -59,12 +57,12 @@ This web page has been developed by Wani.
 
 <form class="form">
     @if (Auth::guest())
-        <input type="text" id="name" placeholder="Name" value="손님{{ rand(0,1000) }}"/>
+        <input type="text" id="name" placeholder="닉네임" value="" readonly="true" />
     @else
-        <input type="text" id="name" placeholder="Name" value="{{ Auth::user()->name }}"/>
+        <input type="text" id="name" placeholder="닉네임" value="{{ Auth::user()->name }}" readonly="true"/>
     @endif
-    <input type="text" id="message" placeholder="Your Message" autofocus/>
-    <button type="submit">Send</button>
+    <input type="text" id="message" placeholder="메세지를 입력해주세요." autofocus/>
+    <button type="submit">보내기</button>
 </form>
 
 
@@ -73,15 +71,21 @@ This web page has been developed by Wani.
     (function (global, $, BrainSocket) {
         // (3-2) 앱 연결, 메시지 보내기
         var app = new BrainSocket(
-            new WebSocket('ws://ssulchat.net:8080'),
+            new WebSocket('ws://homestead.app:8080'),
             new BrainSocketPubSub()
         );
         console.log(app);
         var submitMessage = function () {
             var name = $('#name').val();
             var message = $('#message').val();
+            var ipaddress = ip();
             $('#message').val(''); // 폼 초기화
-            app.message('send.message', {name: name, message: message});
+            @if(Auth::guest())
+                app.message('send.message', {name: null, message: message, ip: ipaddress, user_id: 1});
+            @else
+                app.message('send.message', {name: name, message: message, ip: ipaddress, user_id: {{Auth::user()->id}}}
+            );
+            @endif
         };
         $('form').bind('submit', function () {
             setTimeout(submitMessage, 0);
@@ -89,14 +93,17 @@ This web page has been developed by Wani.
         });
 
         // (3-3) 수신된 메시지 처리
-    app.Event.listen('receive.message', function (msg) {
+        app.Event.listen('receive.message', function (msg) {
         // 본문 추가
-        $('div.chat').append('<div class="item"><div class="name">' + msg.server.data.name + '</div>' +
-            '<div class="message">' + msg.server.data.message + '</div></div>');
+            $('div.chat').append('<div class="item"><div class="name">' + msg.server.data.name + '</div>' +
+                '<div class="message">' + msg.server.data.message + '</div></div>');
         // 맨 아래로 스크롤 이동
-        $('div.chat').scrollTop($('div.chat')[0].scrollHeight);
-    });
+            $('div.chat').scrollTop($('div.chat')[0].scrollHeight);
+        });
     })(this, jQuery, BrainSocket);
+    @if(Auth::guest())
+        $('input#name')[0].value = ip();
+    @endif
 </script>
 </body>
 <script>

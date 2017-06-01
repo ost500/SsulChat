@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-        
+
         App\User::create([
             'name' => 'anonymous',
             'email' => 'anonymous',

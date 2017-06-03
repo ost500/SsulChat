@@ -4,6 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Like
+ *
+ * @property-read \App\Chatting $chatting
+ * @property-read \App\User $user
+ * @mixin \Eloquent
+ */
 class Like extends Model
 {
     //

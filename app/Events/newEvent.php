@@ -2,44 +2,29 @@
 
 namespace App\Events;
 
-use App\Chatting;
-use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Support\Facades\Log;
 
-class ChatEvent implements ShouldBroadcast
+class newEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $data;
-
-    public $user;
+    public $message;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($name, $message)
+    public function __construct($message)
     {
-        $chat = new Chatting();
-        $chat->content = $message;
-        $chat->ipadress = 123;
-        $chat->user_id = 1;
-        $chat->save();
-
-        $user = User::find(1);
-        $this->user = $user;
-
-        $this->data = array('power' => 10);
+        $this->message = $message;
     }
 
     /**
@@ -49,11 +34,19 @@ class ChatEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('channel-name');
+        return new PresenceChannel('testing');
     }
 
     public function broadcastAs()
     {
-        return 'server.created';
+        return 'testing';
+    }
+
+    public function broadcastWith()
+    {
+        // This must always be an array. Since it will be parsed with json_encode()
+        return [
+            'message' => $this->message,
+        ];
     }
 }

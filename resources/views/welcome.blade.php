@@ -12,6 +12,8 @@ This web page has been developed by Wani.
 <html class="ie8" lang="ko"><![endif]-->
 <!--[if gt IE 8]><!-->
 <html lang="ko"><!--<![endif]-->
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <head>
     <title>Your Title</title>
     <meta charset="utf-8"/>
@@ -57,7 +59,7 @@ This web page has been developed by Wani.
 
 <form class="form">
     @if (Auth::guest())
-        <input type="text" id="name" placeholder="닉네임" value="" readonly="true" />
+        <input type="text" id="name" placeholder="닉네임" value="" readonly="true"/>
     @else
         <input type="text" id="name" placeholder="닉네임" value="{{ Auth::user()->name }}" readonly="true"/>
     @endif
@@ -66,51 +68,73 @@ This web page has been developed by Wani.
 </form>
 
 
-<script src="/js/brain-socket-js/brain-socket.min.js"></script>
-<script>
-    (function (global, $, BrainSocket) {
-        // (3-2) 앱 연결, 메시지 보내기
-        var app = new BrainSocket(
-            new WebSocket('ws://homestead.app:8080'),
-            new BrainSocketPubSub()
-        );
-        console.log(app);
-        var submitMessage = function () {
-            var name = $('#name').val();
-            var message = $('#message').val();
-            var ipaddress = ip();
-            $('#message').val(''); // 폼 초기화
-            @if(Auth::guest())
-                app.message('send.message', {name: null, message: message, ip: ipaddress, user_id: 1});
-            @else
-                app.message('send.message', {name: name, message: message, ip: ipaddress, user_id: {{Auth::user()->id}}}
-            );
-            @endif
-        };
-        $('form').bind('submit', function () {
-            setTimeout(submitMessage, 0);
-            return false;
-        });
-
-        // (3-3) 수신된 메시지 처리
-        app.Event.listen('receive.message', function (msg) {
-        // 본문 추가
-            $('div.chat').append('<div class="item"><div class="name">' + msg.server.data.name + '</div>' +
-                '<div class="message">' + msg.server.data.message + '</div></div>');
-        // 맨 아래로 스크롤 이동
-            $('div.chat').scrollTop($('div.chat')[0].scrollHeight);
-        });
-    })(this, jQuery, BrainSocket);
-    @if(Auth::guest())
-        $('input#name')[0].value = ip();
-    @endif
-</script>
 </body>
+
+
+<script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+
+
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    var submitMessage = function () {
+        var name = $('#name').val();
+        var message = $('#message').val();
+        $('#message').val(''); // 폼 초기화
+//        app.message('send.message', {name: name, message: message});
+
+        axios.post('/task', {'message': message})
+            .then((response) => {
+//                console.log(response);
+
+
+            });
+
+
+    };
+    $('form').bind('submit', function () {
+        setTimeout(submitMessage, 0);
+        return false;
+    });
+
+    //    Echo.channel('test2').listen('.test2Event', (e) => {
+    //        console.log('test2EventLog');
+    //        console.log(e);
+    //    });
+    //    Echo.channel('try').listen('.ggg', (e) => {
+    //        console.log('zxc');
+    //        console.log(e);
+    //    });
+    Echo.join('testing').listen('.testing', (e) => {
+//        console.log('abc');
+        console.log(e);
+        $('div.chat').append('<div class="item"><div class="name">' + '</div>' +
+            '<div class="message">' + e.message + '</div></div>');
+
+        // 맨 아래로 스크롤 이동
+        $('div.chat').scrollTop($('div.chat')[0].scrollHeight);
+    });
+
+
+    //    Echo.channel('channel-name').listen('.server.created', (e) => {
+    //        console.log('123');
+    //        console.log(e);
+    //    });
+
+</script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-99980515-1', 'auto');
     ga('send', 'pageview');

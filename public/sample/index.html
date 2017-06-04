@@ -24,19 +24,22 @@ window.onload=function(){
 <body>
 	<div id="wrap">
     	<div class="header_chat">
-        	<ul class="chat_top_hot">
+        <div class="header_hot">
+          <ul class="chat_top_hot">
             	<li class="hot_01"><img src="images/top_hot.png" alt="hot썰"></li>
-                <li class="hot_02"><span class="hot_num">13</span><span class="hot_txt">박근혜 오늘의 법정에서</span><span><img src="images/top_hot_btn.png" alt="핫썰 더보기"></span></li>
-            </ul>
-			<h1><a href="#"><img src="images/main_logo01.png" alt="썰챗 로고"></a></h1>
-            <div class="chat_search">
-            	<form class="form-wrapper cf">
-					<input type="text" onfocus="if(this.value ==''찾고 싶은 주제를 검색하세요') this.value='';" onblur="if(this.value =='') this.value='찾고 싶은 주제를 검색하세요';" value="찾고 싶은 주제를 검색하세요">
-				</form>
-						<button type="submit"><img src="images/main_search_btn01.png" alt="검색하기"></button>
-						</div>
-
+              <li class="hot_02"><span class="hot_num">13</span><span class="hot_txt">박근혜 오늘의 법정에서</span><span><img src="images/top_hot_btn.png" alt="핫썰 더보기"></span></li>
+          </ul>
         </div>
+        <div class="header_logo">
+          <a href="#"><img src="images/main_logo01.png" alt="썰챗 로고" class="logo"></a>
+        </div>
+        <div class="header_search">
+          <input type="text" onfocus="if(this.value ==''찾고 싶은 주제를 검색하세요') this.value='';" onblur="if(this.value =='') this.value='찾고 싶은 주제를 검색하세요';" value="찾고 싶은 주제를 검색하세요">
+        </div>
+        <div class="header_profile">
+          <button type="submit" class="btn_profile"><img src="images/main_search_btn01.png" alt="검색하기"></button>
+        </div>
+      </div>
 
         <div class="clear"></div>
         <div class="contents_chat">
@@ -82,6 +85,7 @@ window.onload=function(){
                     Purpose: <span class="chat_txt_area1_txt04">This channel is for team-wide communication and announcements. All team members are in the channel.</span> (<a href="#"><span class="chat_txt_area1_txt03">edit</span></a>)</p><br>
                     <a href="#"><span class="chat_txt_area1_txt03">+ Add an app or custom integration</span></a><a href="#"><span class="chat_txt_area1_txt03 chat_txt_area1_txt05">Invite others to this channel</span></a> -->
                 </div>
+
 
 
                 <div class="chat_txt_area2">

@@ -45,20 +45,20 @@ div#wrap {
 /*header_chat*/
 
 .header_hot {
-  float: left;
-  width: 30%;
+    float: left;
+    width: 30%;
 }
 .header_logo {
-  float: left;
-  width: 40%;
+    float: left;
+    width: 40%;
 }
 .header_search {
-  float: left;
-  width: 20%;
+    float: left;
+    width: 20%;
 }
 .header_profile {
-  float: left;
-  width: 10%;
+    float: left;
+    width: 10%;
 }
 
 
@@ -171,13 +171,13 @@ div.chat_search input {
 }
 
 div.chat_search button {
-  border: none;
-  background: none;
-  width: 28px;
-  height: 28px;
-  float: right;
-  border: 3px solid white;
-  border-radius: 19px;
+    border: none;
+    background: none;
+    width: 28px;
+    height: 28px;
+    float: right;
+    border: 3px solid white;
+    border-radius: 19px;
 }
 
 div.chat_search button:focus {
@@ -741,40 +741,40 @@ div.chat_btn {
 
 /*데스크탑 반응형 대응*/
 @media ( max-width: 767px ) {
-  .chat_list {
-    display: none;
-    position: relative;
-    float: left;
-    box-sizing: border-box;
-    width: 20%;
-    height: 100%;
+    .chat_list {
+        display: none;
+        position: relative;
+        float: left;
+        box-sizing: border-box;
+        width: 20%;
+        height: 100%;
     }
 
-  .chat_box {
-    position: relative;
-    float: left;
-    box-sizing: border-box;
-    width: 17%;
-    height: 100%;
-    display: none;
+    .chat_box {
+        position: relative;
+        float: left;
+        box-sizing: border-box;
+        width: 17%;
+        height: 100%;
+        display: none;
     }
 
-.chat_txt {
-    position: relative;
-    float: left;
-    box-sizing: border-box;
-    width: 100%;
-    border-right: solid 2px #e1e1e1;
-    height: 100%;
+    .chat_txt {
+        position: relative;
+        float: left;
+        box-sizing: border-box;
+        width: 100%;
+        border-right: solid 2px #e1e1e1;
+        height: 100%;
     }
-div.chat_input_wrap {
-    position: fixed;
-    width: 100%;
-    bottom: 11px;
+    div.chat_input_wrap {
+        position: fixed;
+        width: 100%;
+        bottom: 11px;
     }
-div.chat_txt_area2 ul li.chat_text {
-    padding-left: 52px;
-    font-size: 3em;
+    div.chat_txt_area2 ul li.chat_text {
+        padding-left: 52px;
+        font-size: 3em;
     }
 
 

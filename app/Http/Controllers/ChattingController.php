@@ -13,6 +13,6 @@ class ChattingController extends Controller
             Auth::loginUsingId(1);
         }
 
-        return view('chat');
+        return view('chatting');
     }
 }

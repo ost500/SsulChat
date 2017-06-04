@@ -45,3 +45,5 @@ Route::post('task', function(Request $request){
 
     event(new App\Events\newEvent($request->message));
 });
+
+Route::get('/chattings/{id}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);

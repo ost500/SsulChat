@@ -13,6 +13,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
@@ -35,7 +36,10 @@ class newEvent implements ShouldBroadcastNow
         if (!Auth::check()) {
             Auth::loginUsingId(1);
         }
-        $this->userName = Auth::user()->name;
+        $testuser = json_encode(Auth::user());
+        Notification::send(User::first(), new ChattingLog("test {$testuser}"));
+
+        $this->userName = "testname";
         $this->time = Carbon::now()->toDateTimeString();
     }
 

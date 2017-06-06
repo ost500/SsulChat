@@ -153,7 +153,7 @@
                 "</ul>");
 
             // 맨 아래로 스크롤 이동
-            $('chat_txt_area2').scrollTop=$('chat_txt_area2').scrollHeight;
+        $('chat_txt_area2').scrollTop=$('chat_txt_area2').scrollHeight;
         });
     </script>
 

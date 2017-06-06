@@ -12,7 +12,7 @@
     </script>
 
 
-    <div id="wrap">
+    <div id="app">
         <div class="header_chat">
             <ul class="chat_top_hot">
                 <li class="hot_01"><img src="/images/top_hot.png" alt="hot썰"></li>
@@ -79,7 +79,7 @@
                 </div>
 
 
-                <div class="chat_txt_area2">
+                <div id="chats" class="chat_txt_area2">
                     <span class="chat_date">May 21st</span>
                     <ul>
                         <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
@@ -135,15 +135,14 @@
                         <li class="chat_text">깃헙 아이디<br><br>를 말해라</li>
                     </ul>
 
-                    <div class="chat_input_wrap">
-                        <form class="form-wrapper cf">
-                            <input type='file' name="a" id="a" style="display:none;"/>
-                            <input type="button" onclick="document.getElementById('a').click();" class="chat_file">
-                            <input type="text" placeholder="Message #general" class="chat_input">
-                        </form>
-                    </div>
 
-
+                </div>
+                <div class="chat_input_wrap">
+                    <form class="form-wrapper cf">
+                        <input type='file' name="a" id="a" style="display:none;"/>
+                        <input type="button" onclick="document.getElementById('a').click();" class="chat_file">
+                        <input id="message" type="text" placeholder="Message #general" class="chat_input">
+                    </form>
                 </div>
             </div>
 
@@ -152,13 +151,54 @@
                 <ul class="gry_box">
                     <li class="grybox_sj">ost</li>
                     <li class="grybox_good">54</li>
-                    <li class="grybox_txt clear">안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택...</li>
+                    <li class="grybox_txt clear">안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택...
+                    </li>
                 </ul>
             </div>
+
+
         </div>
 
 
     </div>
     </body>
+
+    <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+
+    <script>
+
+        var submitMessage = function () {
+            var name = $('#name').val();
+            var message = $('#message').val();
+            $('#message').val(''); // 폼 초기화
+
+
+            axios.post('/task', {'message': message})
+                .then((response) => {
+//                console.log(response);
+                });
+        };
+
+        $('form').bind('submit', function () {
+            console.log('hihihi');
+            setTimeout(submitMessage, 0);
+            return false;
+        });
+
+        Echo.join('testing').listen('.testing', (e) => {
+
+            console.log(e);
+            $('#chats').append("<ul>" +
+                "<li class=\"chat_pic\"><img src=\"/images/chatpic01.png\" alt=\"프로필사진\"></li>" +
+                "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span></li>" +
+                "<li class=\"chat_text\">" + e.message + "</li>" +
+                "</ul>");
+
+            // 맨 아래로 스크롤 이동
+            $('#chats').scrollTop($('div.chat')[0].scrollHeight);
+        });
+    </script>
 
 @endsection

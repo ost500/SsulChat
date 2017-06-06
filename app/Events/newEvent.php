@@ -36,8 +36,7 @@ class newEvent implements ShouldBroadcastNow
         if (!Auth::check()) {
             Auth::loginUsingId(1);
         }
-        $testuser = json_encode(Auth::user());
-        Notification::send(User::first(), new ChattingLog("test {$testuser}"));
+        Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
         $this->userName = "testname";
         $this->time = Carbon::now()->toDateTimeString();

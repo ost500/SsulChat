@@ -3,7 +3,7 @@
     <body>
     <script>
         window.onload=function(){
-            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height();
+            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height()-$('.chat_input_wrap').height();
             var inner = $('.chat_txt_area2');
 
             $('.chat_txt_area2').css('height', outerheight);
@@ -13,7 +13,7 @@
 
     <script>
         window.onresize=function(){
-            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height();
+            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height()-$('.chat_input_wrap').height();
             var inner = $('.chat_txt_area2');
 
             $('.chat_txt_area2').css('height', outerheight);
@@ -91,61 +91,7 @@
 
                 <div id="chats" class="chat_txt_area2">
                     <span class="chat_date">May 21st</span>
-                    <ul>
-                        <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
-                        <li class="chat_id">ost<span>3:10 PM</span></li>
-                        <li class="chat_text chat_textFirst">joined #general. Also, <i>@ruin_alen</i> joined, <i>@t
-                                0dd</i>
-                            joined.
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
-                        <li class="chat_id">ost<span>10:47 PM</span></li>
-                        <li class="chat_text">우리끼리 얘기할 때<br><br>슬랙으로 하는 버릇을 가지자<br><br>ㅋㅋ</li>
-                    </ul>
-                    <ul>
-                        <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
-                        <li class="chat_id">ost<span>10:47 PM</span></li>
-                        <li class="chat_text">우리끼리 얘기할 때<br><br>슬랙으로 하는 버릇을 가지자<br><br>ㅋㅋ</li>
-                    </ul>
-                    <ul>
-                        <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
-                        <li class="chat_id">ost<span>10:47 PM</span></li>
-                        <li class="chat_text">우리끼리 얘기할 때<br><br>슬랙으로 하는 버릇을 가지자<br><br>ㅋㅋ</li>
-                    </ul>
-                    <ul>
-                        <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
-                        <li class="chat_id">ost<span>10:47 PM</span></li>
-                        <li class="chat_text">우리끼리 얘기할 때 슬랙으로 하는 버릇을 가지자ㅋㅋ우리끼리 얘기할 때 슬랙으로 하는 버릇을 가지자ㅋㅋ우리끼리 얘기할 때 슬랙으로 하는
-                            버릇을
-                            가지자ㅋㅋ
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
-                        <li class="chat_id">ost<span>10:47 PM</span></li>
-                        <li class="chat_text">우리끼리 얘기할 때<br><br>슬랙으로 하는 버릇을 가지자<br><br>ㅋㅋ</li>
-                    </ul>
-                    <ul>
-                        <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
-                        <li class="chat_id">ost<span>10:47 PM</span></li>
-                        <li class="chat_text">우리끼리 얘기할 때<br><br>슬랙으로 하는 버릇을 가지자<br><br>ㅋㅋ</li>
-                    </ul>
-
-                    <ul>
-                        <li class="chat_pic"><img src="/images/chatpic02.png" alt="프로필사진"></li>
-                        <li class="chat_id">t0dd<span><img src="/images/chat_icon11.png"></span><span>10:47 PM</span>
-                        </li>
-                        <li class="chat_text">옙 형ㅋㅋ</li>
-                    </ul>
-                    <ul>
-                        <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
-                        <li class="chat_id">ost<span>10:49 PM</span></li>
-                        <li class="chat_text">깃헙 아이디<br><br>를 말해라</li>
-                    </ul>
-
-
+                <!-- 채팅생성영역-->
                 </div>
                 <div class="chat_input_wrap">
                     <form class="form-wrapper cf">
@@ -207,7 +153,7 @@
                 "</ul>");
 
             // 맨 아래로 스크롤 이동
-            $('#chats').scrollTop($('div.chat')[0].scrollHeight);
+            $('chat_txt_area2').scrollTop=$('chat_txt_area2').scrollHeight;
         });
     </script>
 

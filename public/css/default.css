@@ -23,7 +23,7 @@ body, h1, h2, h3, h4, input, button {
 
 body { /* text-align:center; */
     *word-break: break-all;
-    -ms-word-break: break-all
+    -ms-word-break: break-all;
 }
 
 img, fieldset, iframe {
@@ -124,7 +124,6 @@ table {
     width: 100%;
     background-color: #039;
     color: #eee;
-    font-family:;
     text-transform: uppercase;
     text-decoration: none;
     line-height: 30px;

@@ -348,14 +348,14 @@ div.chat_left_menu p {
     box-sizing: border-box;
     width: 63%;
     border-right: solid 2px #e1e1e1;
-
+    height: 100%;
 }
 
 div.chat_txt_area1 {
     position: relative;
     padding-bottom: 69px;
     border-bottom: solid 2px #e1e1e1;
-    padding: 26px 20px 69px 20px;
+    padding: 26px 20px 2px 20px;
 }
 
 div.graph {
@@ -468,7 +468,8 @@ span.chat_date {
 
 div.chat_txt_area2 {
     position: relative;
-    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 div.chat_txt_area2 ul {

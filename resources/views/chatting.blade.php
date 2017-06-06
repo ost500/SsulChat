@@ -2,8 +2,18 @@
 @section('content')
     <body>
     <script>
-        window.onload = function () {
-            var outerheight = $('.chat_txt').height() - $('.chat_input_wrap').height() - $('.header_chat').height();
+        window.onload=function(){
+            var outerheight=$('.chat_txt').height()-$('.chat_input_wrap').height()-$('.chat_txt_area1').height()-82;
+            var inner = $('.chat_txt_area2');
+
+            $('.chat_txt_area2').css('height', outerheight);
+
+        }
+    </script>
+
+    <script>
+        window.onresize=function(){
+            var outerheight=$('.chat_txt').height()-$('.chat_input_wrap').height()-$('.chat_txt_area1').height()-82;
             var inner = $('.chat_txt_area2');
 
             $('.chat_txt_area2').css('height', outerheight);

@@ -54,19 +54,18 @@ This web page has been developed by Wani.
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
+<div id="app">
 <div class="chat"></div>
-
-<form class="form">
-    @if (Auth::guest())
-        <input type="text" id="name" placeholder="닉네임" value="" readonly="true"/>
-    @else
-        <input type="text" id="name" placeholder="닉네임" value="{{ Auth::user()->name }}" readonly="true"/>
-    @endif
-    <input type="text" id="message" placeholder="메세지를 입력해주세요." autofocus/>
-    <button type="submit">보내기</button>
-</form>
-
+    <form class="form">
+        @if (Auth::guest())
+            <input type="text" id="name" placeholder="닉네임" value="" readonly="true"/>
+        @else
+            <input type="text" id="name" placeholder="닉네임" value="{{ Auth::user()->name }}" readonly="true"/>
+        @endif
+        <input type="text" id="message" placeholder="메세지를 입력해주세요." autofocus/>
+        <button type="submit">보내기</button>
+    </form>
+</div>
 
 </body>
 

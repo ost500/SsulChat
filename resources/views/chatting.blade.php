@@ -91,6 +91,13 @@
 
                 <div id="chats" class="chat_txt_area2">
                     <span class="chat_date">May 21st</span>
+                    @foreach($chats as $chat)
+                        <ul>
+                            <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
+                            <li class="chat_id">{{$chat->user->name}}<span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
+                            <li class="chat_text">{{$chat->content}}</li>
+                        </ul>
+                    @endforeach
                 <!-- 채팅생성영역-->
                 </div>
                 <div class="chat_input_wrap">
@@ -111,14 +118,11 @@
                     </li>
                 </ul>
             </div>
-
-
         </div>
-
-
     </div>
     </body>
 
+    <script type="text/javascript" src="http://jsgetip.appspot.com"></script>
     <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
@@ -131,7 +135,7 @@
             $('#message').val(''); // 폼 초기화
 
 
-            axios.post('/task', {'message': message})
+            axios.post('/task', {'message': message, 'ipaddress' : ip()})
                 .then((response) => {
 //                console.log(response);
                 });
@@ -142,13 +146,11 @@
             setTimeout(submitMessage, 0);
             return false;
         });
-
         Echo.join('testing').listen('.testing', (e) => {
-
             console.log(e);
             $('#chats').append("<ul>" +
                 "<li class=\"chat_pic\"><img src=\"/images/chatpic01.png\" alt=\"프로필사진\"></li>" +
-                "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span></li>" +
+                "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
                 "<li class=\"chat_text\">" + e.message + "</li>" +
                 "</ul>");
 

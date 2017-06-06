@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Chatting;
 use App\Notifications\ChattingLog;
 use App\User;
 use Carbon\Carbon;
@@ -24,22 +25,29 @@ class newEvent implements ShouldBroadcastNow
     public $message;
     public $userName;
     public $time;
-
+    public $ipAddress;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($request)
     {
-        $this->message = $message;
+        $this->message = $request->message;
         if (!Auth::check()) {
             Auth::loginUsingId(1);
         }
         Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
-        $this->userName = "testname";
+        $this->ipAddress = $request->ipaddress;
+        $this->userName = Auth::user()->name;
         $this->time = Carbon::now()->toDateTimeString();
+
+        $chat = new Chatting();
+        $chat->content = $this->message;
+        $chat->user_id = Auth::user()->id;
+        $chat->ipaddress = $this->ipAddress;
+        $chat->save();
     }
 
     /**
@@ -65,7 +73,8 @@ class newEvent implements ShouldBroadcastNow
         return [
             'message' => $this->message,
             'userName' => $this->userName,
-            'time' => $this->time
+            'time' => $this->time,
+            'ipAddress' => $this->ipAddress
         ];
     }
 }

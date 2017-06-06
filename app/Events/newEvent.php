@@ -32,6 +32,9 @@ class newEvent implements ShouldBroadcastNow
     public function __construct($message)
     {
         $this->message = $message;
+        if (!Auth::check()) {
+            Auth::loginUsingId(1);
+        }
         $this->userName = Auth::user()->name;
         $this->time = Carbon::now()->toDateTimeString();
     }

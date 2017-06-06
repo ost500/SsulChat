@@ -9,15 +9,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-<script>
-window.onload=function(){
-	var outerheight=$('.chat_txt').height()-$('.chat_input_wrap').height()-$('.header_chat').height();
-	var inner = $('.chat_txt_area2');
+    <script>
+        window.onload=function(){
+            var outerheight=$('.chat_txt').height()-$('.chat_input_wrap').height()-$('.chat_txt_area1').height()-82;
+            var inner = $('.chat_txt_area2');
 
-	$('.chat_txt_area2').css('height', outerheight);
+            $('.chat_txt_area2').css('height', outerheight);
 
-}
-</script>
+        }
+    </script>
+
+    <script>
+        window.onresize=function(){
+            var outerheight=$('.chat_txt').height()-$('.chat_input_wrap').height()-$('.chat_txt_area1').height()-82;
+            var inner = $('.chat_txt_area2');
+
+            $('.chat_txt_area2').css('height', outerheight);
+
+        }
+    </script>
 
 
 </head>

@@ -3,7 +3,7 @@
     <body>
     <script>
         window.onload=function(){
-            var outerheight=$('.chat_txt').height()-$('.chat_input_wrap').height()-$('.chat_txt_area1').height()-82;
+            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height();
             var inner = $('.chat_txt_area2');
 
             $('.chat_txt_area2').css('height', outerheight);
@@ -13,7 +13,7 @@
 
     <script>
         window.onresize=function(){
-            var outerheight=$('.chat_txt').height()-$('.chat_input_wrap').height()-$('.chat_txt_area1').height()-82;
+            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height();
             var inner = $('.chat_txt_area2');
 
             $('.chat_txt_area2').css('height', outerheight);
@@ -32,7 +32,7 @@
             <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
             <div class="chat_search">
                 <form class="form-wrapper cf">
-                    <input type="text" onfocus="if(this.value ==''찾고 싶은 주제를 검색하세요') this.value='';"
+                    <input type="text" onfocus="if(this.value =='찾고 싶은 주제를 검색하세요') this.value='';"
                            onblur="if(this.value =='') this.value='찾고 싶은 주제를 검색하세요';" value="찾고 싶은 주제를 검색하세요">
                 </form>
                 <button type="submit"><img src="/images/main_search_btn01.png" alt="검색하기"></button>

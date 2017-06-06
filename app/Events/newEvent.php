@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Notifications\ChattingLog;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
@@ -12,6 +14,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class newEvent implements ShouldBroadcastNow
 {
@@ -40,6 +43,8 @@ class newEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
+        Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
+
         return new PresenceChannel('testing');
     }
 

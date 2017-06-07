@@ -3,7 +3,7 @@
     <body>
     <script>
         window.onload=function(){
-            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height()-$('.chat_input_wrap').height();
+            var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-$('.chat_input_wrap').outerHeight(true);
             var inner = $('.chat_txt_area2');
 
             $('.chat_txt_area2').css('height', outerheight);
@@ -13,7 +13,7 @@
 
     <script>
         window.onresize=function(){
-            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height()-$('.chat_input_wrap').height();
+            var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-$('.chat_input_wrap').outerHeight(true);
             var inner = $('.chat_txt_area2');
 
             $('.chat_txt_area2').css('height', outerheight);

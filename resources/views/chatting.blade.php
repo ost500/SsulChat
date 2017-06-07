@@ -25,7 +25,7 @@
 
                 $('.chat_txt_area2').css('height', outerheight);
             } else {
-                var $(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
@@ -60,9 +60,16 @@
                 <dl class="chann">
                     <dt>CHANNELS<span>(4)</span><span class="chat_more"><a href="#"><img src="/images/chat_icon05.png"
                                                                                          alt="더보기"></a></span></dt>
-                    <dd><a href="#"><span class="ddf">development</span></a></dd>
-                    <dd class="active"><a href="#"><span class="dds">general</span></a></dd>
-                    <dd><a href="#"><span class="ddt">wiki</span></a></dd>
+                    @foreach($ssuls as $ssul)
+                        <dd>
+                            <a href="#"><span class="ddf">{{$ssul->name}}</span></a>
+                            @foreach($ssul->channels as $channel)
+                                <dd><a href="#"><span class="ddt">{{$channel->name}}</span></a></dd>
+                            @endforeach
+                        </dd>
+                        {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
+                        {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
+                    @endforeach
                 </dl>
                 <dl class="message">
                     <dt>DIRECT MESSAGES<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
@@ -73,8 +80,7 @@
                     </dd>
                     <dd><a href="#"><span class="mess_icon02">obie</span></a></dd>
                     <dd><a href="#"><span class="mess_icon02">ost</span></a></dd>
-                    <dd><a href="#"><span class="mess_icon03">t0dd</span></a><img class="mess_pic"
-                                                                                  src="/images/chat_icon11.png"></dd>
+                    <dd><a href="#"><span class="mess_icon03">t0dd</span></a></dd>
                     <dd><a href="#"><span class="invite">+ Invite people</span></a></dd>
                 </dl>
                 <div class="chat_left_menu">
@@ -100,15 +106,23 @@
                     Purpose: <span class="chat_txt_area1_txt04">This channel is for team-wide communication and announcements. All team members are in the channel.</span> (<a href="#"><span class="chat_txt_area1_txt03">edit</span></a>)</p><br>
                     <a href="#"><span class="chat_txt_area1_txt03">+ Add an app or custom integration</span></a><a href="#"><span class="chat_txt_area1_txt03 chat_txt_area1_txt05">Invite others to this channel</span></a> -->
                 </div>
-
+                <script>
+                    function like(event)
+                    {
+                        axios.post('/like', {'chattingId':event.target.parentNode.parentNode.parentNode.id})
+                            .then((response) => {
+//                                console.log(response);
+                            });
+                    }
+                </script>
 
                 <div id="chats" class="chat_txt_area2">
                     <span class="chat_date">May 21st</span>
                     @foreach($chats as $chat)
-                        <ul>
+                        <ul id="{{$chat->id}}">
                             <li class="chat_pic"><img src="/images/chatpic01.png" alt="프로필사진"></li>
                             <li class="chat_id">{{$chat->user->name}}<span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
-                            <li class="chat_text">{{$chat->content}}</li>
+                            <li class="chat_text"> {{$chat->content}} <button style="border:0;background:transparent" onclick="like(event)"><img src="../images/gry_box_icon.png"></img><div style="float:right">{{$chat->likes->count()}}</div></button></li>
                         </ul>
                     @endforeach
                 <!-- 채팅생성영역-->
@@ -148,9 +162,9 @@
             $('#message').val(''); // 폼 초기화
 
 
-            axios.post('/task', {'message': message, 'ipaddress' : ip()})
+            axios.post('/chat', {'message': message, 'ipaddress' : ip()})
                 .then((response) => {
-//                console.log(response);
+                console.log(response);
                 });
         };
 
@@ -160,15 +174,20 @@
             return false;
         });
         Echo.join('testing').listen('.testing', (e) => {
-            console.log(e);
-            $('#chats').append("<ul>" +
+            //console.log(e);
+            $('#chats').append("<ul id="+e.id+">" +
                 "<li class=\"chat_pic\"><img src=\"/images/chatpic01.png\" alt=\"프로필사진\"></li>" +
                 "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
-                "<li class=\"chat_text\">" + e.message + "</li>" +
+                "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent\" onclick=\"like(event)\"><img src=\"../images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
                 "</ul>");
 
             // 맨 아래로 스크롤 이동
         $('.chat_txt_area2').scrollTop=$('.chat_txt_area2').scrollHeight;
+        });
+        Echo.join('testing').listen('.like', (e) => {
+            //console.log(e);
+            $('#chats ul#'+e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#'+e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
+            // 맨 아래로 스크롤 이동
         });
     </script>
 

@@ -26,7 +26,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/chat', 'HomeController@chat');
+//Route::get('/chat', 'HomeController@chat');
 
 Route::get('/log_in', function () {
     Auth::loginUsingId(1);
@@ -39,8 +39,12 @@ Route::get('test', function(){
     event(new App\Events\test2Event());
 });
 
-Route::post('task', function(Request $request){
+Route::post('chat', function(Request $request){
     event(new App\Events\newEvent($request));
 });
+Route::post('like', function(Request $request){
+    event(new App\Events\likeEvent($request));
+});
+
 
 Route::get('/chattings/{id}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);

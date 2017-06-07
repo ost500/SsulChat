@@ -49,3 +49,7 @@ Broadcast::channel('testing', function () {
     Log::info("try!!!!!!!!!!!!!!!!");
     return true;
 });
+Broadcast::channel('like', function () {
+    Log::info("try!!!!!!!!!!!!!!!!");
+    return true;
+});

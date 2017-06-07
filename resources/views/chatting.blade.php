@@ -12,13 +12,13 @@
     </script>
 
     <script>
-        window.onresize=function(){
+        w$(window).resize(function (){
             var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-$('.chat_input_wrap').outerHeight(true);
             var inner = $('.chat_txt_area2');
 
             $('.chat_txt_area2').css('height', outerheight);
 
-        }
+        })
     </script>
 
 

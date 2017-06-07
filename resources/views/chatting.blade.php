@@ -3,22 +3,35 @@
     <body>
     <script>
         window.onload=function(){
-            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height()-$('.chat_input_wrap').height();
-            var inner = $('.chat_txt_area2');
+            if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
+                var outerheight=$(window).outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var inner = $('.chat_txt_area2');
 
-            $('.chat_txt_area2').css('height', outerheight);
+                $('.chat_txt_area2').css('height', outerheight);
+            } else {
+                var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var inner = $('.chat_txt_area2');
 
+                $('.chat_txt_area2').css('height', outerheight);
+            }
         }
     </script>
 
     <script>
-        window.onresize=function(){
-            var outerheight=$(window).height()-$('.header_chat').height()-$('.chat_txt_area1').height()-$('.chat_input_wrap').height()-$('.chat_input_wrap').height();
-            var inner = $('.chat_txt_area2');
+        $(window).resize(function (){
+            if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
+                var outerheight=$(window).outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var inner = $('.chat_txt_area2');
 
-            $('.chat_txt_area2').css('height', outerheight);
+                $('.chat_txt_area2').css('height', outerheight);
+            } else {
+                var $(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var inner = $('.chat_txt_area2');
 
-        }
+                $('.chat_txt_area2').css('height', outerheight);
+            }
+
+        })
     </script>
 
 
@@ -104,7 +117,7 @@
                     <form class="form-wrapper cf">
                         <input type='file' name="a" id="a" style="display:none;"/>
                         <input type="button" onclick="document.getElementById('a').click();" class="chat_file">
-                        <input id="message" type="text" placeholder="Message #general" class="chat_input">
+                        <input id="message" type="text" placeholder="당신의 의견은?" class="chat_input"  autocomplete=off>
                     </form>
                 </div>
             </div>

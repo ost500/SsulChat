@@ -3,20 +3,33 @@
     <body>
     <script>
         window.onload=function(){
-            var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-$('.chat_input_wrap').outerHeight(true);
-            var inner = $('.chat_txt_area2');
+            if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
+                var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-$('.chat_input_wrap').outerHeight(true);
+                var inner = $('.chat_txt_area2');
 
-            $('.chat_txt_area2').css('height', outerheight);
+                $('.chat_txt_area2').css('height', outerheight);
+            } else {
+                var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-$('.chat_input_wrap').outerHeight(true);
+                var inner = $('.chat_txt_area2');
 
+                $('.chat_txt_area2').css('height', outerheight);
+            }
         }
     </script>
 
     <script>
-        w$(window).resize(function (){
-            var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-$('.chat_input_wrap').outerHeight(true);
-            var inner = $('.chat_txt_area2');
+        $(window).resize(function (){
+            if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
+                var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-$('.chat_input_wrap').outerHeight(true);
+                var inner = $('.chat_txt_area2');
 
-            $('.chat_txt_area2').css('height', outerheight);
+                $('.chat_txt_area2').css('height', outerheight);
+            } else {
+                var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-$('.chat_input_wrap').outerHeight(true);
+                var inner = $('.chat_txt_area2');
+
+                $('.chat_txt_area2').css('height', outerheight);
+            }
 
         })
     </script>

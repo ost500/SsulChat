@@ -18,8 +18,12 @@ class Chatting extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function like()
+    public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+    public function channel()
+    {
+        return  $this->belongsTo(Channel::class);
     }
 }

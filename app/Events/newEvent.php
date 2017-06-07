@@ -52,9 +52,9 @@ class newEvent implements ShouldBroadcastNow
 
     /**
      * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
-     */
+*
+* @return Channel|array
+*/
     public function broadcastOn()
     {
         Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ssul extends Model
 {
     //
-    public function channel()
+    public function channels()
     {
         return $this->hasMany(Channel::class);
     }

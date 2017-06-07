@@ -117,7 +117,7 @@
                     <form class="form-wrapper cf">
                         <input type='file' name="a" id="a" style="display:none;"/>
                         <input type="button" onclick="document.getElementById('a').click();" class="chat_file">
-                        <input id="message" type="text" placeholder="Message #general" class="chat_input">
+                        <input id="message" type="text" placeholder="당신의 의견은?" class="chat_input"  autocomplete=off>
                     </form>
                 </div>
             </div>

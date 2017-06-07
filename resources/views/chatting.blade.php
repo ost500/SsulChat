@@ -8,11 +8,17 @@
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
+
+                var objDiv = document.getElementById(".chat_txt_area2");
+                objDiv.scrollTop = objDiv.scrollHeight;
             } else {
                 var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
+
+                var objDiv = document.getElementById(".chat_txt_area2");
+                objDiv.scrollTop = objDiv.scrollHeight;
             }
         }
     </script>
@@ -24,11 +30,17 @@
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
+
+                var objDiv = document.getElementById(".chat_txt_area2");
+                objDiv.scrollTop = objDiv.scrollHeight;
             } else {
-                var $(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var outerheight= $(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
+
+                var objDiv = document.getElementById(".chat_txt_area2");
+                objDiv.scrollTop = objDiv.scrollHeight;
             }
 
         })
@@ -166,9 +178,11 @@
                 "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
                 "<li class=\"chat_text\">" + e.message + "</li>" +
                 "</ul>");
+        var objDiv = document.getElementById(".chat_txt_area2");
+        objDiv.scrollTop = objDiv.scrollHeight;
 
             // 맨 아래로 스크롤 이동
-        $('.chat_txt_area2').scrollTop=$('.chat_txt_area2').scrollHeight;
+
         });
     </script>
 

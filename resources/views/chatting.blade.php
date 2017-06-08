@@ -19,6 +19,10 @@
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             }
         }
+        $(function()
+        {
+            $('.chat_txt_area2').jScrollPane();
+        });
     </script>
 
     <script>

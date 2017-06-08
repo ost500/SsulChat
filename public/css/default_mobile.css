@@ -31,7 +31,7 @@
         bottom: 11px;
     }
     div.chat_txt_area2 ul li.chat_text {
-        padding-left: 40px;
+        padding-left: 57px;
         font-size: 1em;
         line-height: 1.3;
     }
@@ -133,7 +133,7 @@
         border-radius: 4px;
     }
     div.chat_txt_area2 ul li.chat_id {
-        padding-left: 40px;
+        padding-left: 57px;
         font-family: arial, Helvetica, AppleSDGothicNeo, sans-serif;
         font-size: 18px;
         font-weight: 600;

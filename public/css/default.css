@@ -62,10 +62,11 @@ div#wrap {
 }
 
 
-.chat_profile_img{
+.chat_profile_img {
     width: 42px;
     height: 42px;
     border-radius: 4px;
+    background-size: cover;
 }
 div.header_chat {
     position: relative;

@@ -192,8 +192,7 @@
                 "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
                 "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent\" onclick=\"like(event)\"><img src=\"../images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
                 "</ul>");
-        var objDiv = document.getElementById(".chat_txt_area2");
-        objDiv.scrollTop = objDiv.scrollHeight;
+        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
 
             // 맨 아래로 스크롤 이동
 

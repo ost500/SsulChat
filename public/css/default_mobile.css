@@ -135,10 +135,11 @@
     div.chat_txt_area2 ul li.chat_id {
         padding-left: 57px;
         font-family: arial, Helvetica, AppleSDGothicNeo, sans-serif;
-        font-size: 18px;
+        font-size: 12px;
         font-weight: 600;
         color: #222;
         letter-spacing: 0px;
+        line-height: 23px;
     }
 
     div.header_chat h1 img {
@@ -171,4 +172,10 @@
         height: 28px;
     }
 
+    div.chat_txt_area2 ul li.chat_id span {
+        margin-left: 10px;
+        font-size: 9px;
+        color: #999;
+        vertical-align: top;
+    }
 }

@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/jquery.jscrollpane.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/js/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.jscrollpane.min.js"></script>
 </head>
 
 @yield('content')

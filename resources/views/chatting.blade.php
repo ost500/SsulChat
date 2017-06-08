@@ -188,7 +188,7 @@
         Echo.join('testing').listen('.testing', (e) => {
             //console.log(e);
             $('#chats').append("<ul id="+e.id+">" +
-                "<li class=\"chat_pic\"><img src=\"/images/chatpic01.png\" alt=\"프로필사진\"></li>" +
+                "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(\"/images/chatpic01.png\")\"></div></li>" +
                 "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
                 "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent\" onclick=\"like(event)\"><img src=\"../images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
                 "</ul>");

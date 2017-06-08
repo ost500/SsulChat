@@ -9,16 +9,14 @@
 
                 $('.chat_txt_area2').css('height', outerheight);
 
-                var objDiv = document.getElementById(".chat_txt_area2");
-                objDiv.scrollTop = objDiv.scrollHeight;
+                $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             } else {
                 var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
 
-                var objDiv = document.getElementById(".chat_txt_area2");
-                objDiv.scrollTop = objDiv.scrollHeight;
+                $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             }
         }
     </script>
@@ -31,16 +29,14 @@
 
                 $('.chat_txt_area2').css('height', outerheight);
 
-                var objDiv = document.getElementById(".chat_txt_area2");
-                objDiv.scrollTop = objDiv.scrollHeight;
+                $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             } else {
                 var outerheight= $(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
 
-                var objDiv = document.getElementById(".chat_txt_area2");
-                objDiv.scrollTop = objDiv.scrollHeight;
+                $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             }
 
         })
@@ -201,6 +197,7 @@
             //console.log(e);
             $('#chats ul#'+e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#'+e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
             // 맨 아래로 스크롤 이동
+        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
         });
     </script>
 

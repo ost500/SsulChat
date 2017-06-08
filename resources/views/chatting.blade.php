@@ -132,7 +132,7 @@
                     <span class="chat_date">May 21st</span>
                     @foreach($chats as $chat)
                         <ul id="{{$chat->id}}">
-                            <li class="chat_pic"><div class="chat_profile_img" style="background-image: url('../images/chatpic01.png');"></div></li>
+                            <li class="chat_pic" style="background-image: url('../images/chatpic01.png');"><div class="chat_profile_img" style="background-image: url('../images/chatpic01.png');"></div></li>
                             <li class="chat_id">{{$chat->user->name}}<span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}} <button style="border:0;background:transparent" onclick="like(event)"><img src="../images/gry_box_icon.png"></img><div style="float:right">{{$chat->likes->count()}}</div></button></li>
                         </ul>

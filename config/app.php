@@ -178,7 +178,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
-        BrainSocket\BrainSocketServiceProvider::class,
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
     ],
 
@@ -229,7 +228,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'BrainSocket' => BrainSocket\BrainSocketFacade::class,
         'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class
     ],
 

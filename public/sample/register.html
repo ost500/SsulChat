@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <title>ssulchat</title>
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+    <link rel="stylesheet" type="text/css" href="css/register_mobile.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <script>
+        $("input").change(function(e) {
+
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+
+                var file = e.originalEvent.srcElement.files[i];
+
+                var img = document.createElement("img");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                    img.src = reader.result;
+                }
+                reader.readAsDataURL(file);
+                $("input").after(img);
+            }
+        });
+    </script>
+
+
+</head>
+<body>
+<div id="wrap">
+    <div class="header_chat">
+        <h1>REGISTER</h1>
+        <button type="submit" class="register_back_btn"><img src="images/main_search_btn01.png" alt="뒤로가기" class="register_back_img"></button>
+    </div>
+
+    <div class="clear"></div>
+    <div class="register">
+        <div class="register_form_field">
+            <form class="form-horizontal" role="form" method="POST" action="http://ssulchat.net/register">
+                <input type="hidden" name="_token" value="9mengtrAsRMVewoBa0UYjTF5U5ZzBLCNevZNzHd9">
+
+
+                <div class="filebox bs3-primary preview-image">
+                    <input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+
+                    <label for="input_file">업로드</label>
+                    <input type="file" id="input_file" class="upload-hidden">
+                </div>
+                <div class="form-group">
+                    <label for="profile_img" class="col-md-4 control-label">프로필 사진</label>
+
+                    <div class="col-md-4">
+                        <input id="profile_img" type="file" class="form-control" name="profile_img" value="">
+
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="name" class="col-md-4 control-label">닉네임</label>
+
+                    <div class="col-md-4">
+                        <input id="name" type="text" class="form-control" name="name" value="" required="">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="col-md-4 control-label">이메일 주소</label>
+
+                    <div class="col-md-4">
+                        <input id="email" type="email" class="form-control" name="email" value="" required="">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="col-md-4 control-label">비밀번호</label>
+
+                    <div class="col-md-4">
+                        <input id="password" type="password" class="form-control" name="password" required="">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password-confirm" class="col-md-4 control-label">비밀번호 확인</label>
+
+                    <div class="col-md-4">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6 col-md-offset-4">
+                        <button type="submit" class="btn btn-primary">
+                            가입
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="chat_box">
+            <ul class="gry_box">
+                <li class="grybox_sj">ost</li>
+                <li class="grybox_good">54</li>
+                <li class="grybox_txt clear">안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택...</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

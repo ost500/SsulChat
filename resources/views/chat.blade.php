@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>ssulchat</title>
 <link rel="stylesheet" type="text/css" href="/css/default.css">
+<link rel="stylesheet" type="text/css" href="/css/default_mobile.css">
 </head>
 <body>
 	<div id="wrap">

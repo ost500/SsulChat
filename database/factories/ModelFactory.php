@@ -20,5 +20,53 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'created_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '-1 years'),
+        'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
+    ];
+});
+
+    $factory->define(App\Chatting::class, function (Faker\Generator $faker) {
+        $userIds = App\User::pluck('id')->toArray();
+        $channelIds = App\Channel::pluck('id')->toArray();
+
+        return [
+            'content' => $faker->sentence,
+            'ipaddress' => $faker->ipv4,
+            'user_id' => $faker->randomElement($userIds),
+            'channel_id' => $faker->randomElement($channelIds),
+            'created_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '-1 years'),
+            'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
+        ];
+});
+
+$factory->define(App\Like::class, function (Faker\Generator $faker) {
+    $userIds = App\User::pluck('id')->toArray();
+    $chattingIds = App\Chatting::pluck('id')->toArray();
+
+    return [
+        'chatting_id' => $faker->randomElement($chattingIds),
+        'user_id' => $faker->randomElement($userIds),
+        'created_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '-1 years'),
+        'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
+    ];
+});
+
+$factory->define(App\Ssul::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->sentence,
+        'created_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '-1 years'),
+        'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
+    ];
+});
+
+$factory->define(App\Channel::class, function (Faker\Generator $faker) {
+    $ssulIds = App\Ssul::pluck('id')->toArray();
+
+    return [
+        'name' => $faker->sentence,
+        'ssul_id' => $faker->randomElement($ssulIds),
+        'created_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '-1 years'),
+        'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
     ];
 });

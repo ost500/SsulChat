@@ -83,7 +83,7 @@ This web page has been developed by Wani.
         $('#message').val(''); // 폼 초기화
 //        app.message('send.message', {name: name, message: message});
 
-        axios.post('/task', {'message': message})
+        axios.post('/chat', {'message': message})
             .then((response) => {
 //                console.log(response);
 

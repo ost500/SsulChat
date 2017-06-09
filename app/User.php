@@ -35,12 +35,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function chatting()
+    public function chattings()
     {
         return $this->hasMany(Chatting::class);
     }
 
-    public function like()
+    public function likes()
     {
         return $this->hasMany(Like::class);
     }

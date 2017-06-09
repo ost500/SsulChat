@@ -16,5 +16,8 @@ class Channel extends Model
     {
         return $this->belongsTo(Ssul::class);
     }
-
+    public function chattings()
+    {
+        return $this->hasMany(Chatting::class);
+    }
 }

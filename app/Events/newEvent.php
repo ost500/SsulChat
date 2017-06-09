@@ -26,6 +26,7 @@ class newEvent implements ShouldBroadcastNow
     public $userName;
     public $time;
     public $ipAddress;
+    public $chattingId;
     /**
      * Create a new event instance.
      *
@@ -37,7 +38,7 @@ class newEvent implements ShouldBroadcastNow
         if (!Auth::check()) {
             Auth::loginUsingId(1);
         }
-        Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
+        //Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
         $this->ipAddress = $request->ipaddress;
         $this->userName = Auth::user()->name;
@@ -45,19 +46,22 @@ class newEvent implements ShouldBroadcastNow
 
         $chat = new Chatting();
         $chat->content = $this->message;
+        $chat->channel_id = 1;
         $chat->user_id = Auth::user()->id;
         $chat->ipaddress = $this->ipAddress;
         $chat->save();
+
+        $this->chattingId = $chat->id;
     }
 
     /**
      * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
-     */
+*
+* @return Channel|array
+*/
     public function broadcastOn()
     {
-        Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
+        //Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
         return new PresenceChannel('testing');
     }
@@ -74,7 +78,8 @@ class newEvent implements ShouldBroadcastNow
             'message' => $this->message,
             'userName' => $this->userName,
             'time' => $this->time,
-            'ipAddress' => $this->ipAddress
+            'ipAddress' => $this->ipAddress,
+            'id' => $this->chattingId
         ];
     }
 }

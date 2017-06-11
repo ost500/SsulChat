@@ -15,10 +15,10 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('channel_id')->unsigned();
+            $table->integer('ssul_id')->unsigned();
             $table->string('name');
             $table->integer('value');
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
+            $table->foreign('ssul_id')->references('id')->on('ssuls')->onDelete('cascade');
             $table->timestamps();
         });
     }

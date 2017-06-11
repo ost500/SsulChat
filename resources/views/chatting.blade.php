@@ -100,6 +100,7 @@
             <div class="chat_txt">
                 <div class="chat_txt_area1">
                     <div class="graph">
+                        @foreach($ssuls->channels)
                         <dl class="selectL" style="width:35%">
                             <dt>아고라</dt>
                             <dd>35%</dd>

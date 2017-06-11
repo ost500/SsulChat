@@ -24,11 +24,5 @@ class Channel extends Model
         return $this->hasMany(Chatting::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function teams()
-    {
-        return $this->hasMany(Team::class);
-    }
+
 }

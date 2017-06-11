@@ -11,11 +11,11 @@ class TeamSeeder extends Seeder
      */
     public function run()
     {
-        $channels = App\Channel::get();
+        $ssuls = App\Ssul::get();
 
-        $channels->each(function ($channel) {
-            $channel->teams()->save(factory(App\Team::class)->make());
-            $channel->teams()->save(factory(App\Team::class)->make());
+        $ssuls->each(function ($ssul) {
+            $ssul->teams()->save(factory(App\Team::class)->make());
+            $ssul->teams()->save(factory(App\Team::class)->make());
         });
 
     }

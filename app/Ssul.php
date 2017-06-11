@@ -18,4 +18,12 @@ class Ssul extends Model
     {
         return $this->hasMany(Channel::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function teams()
+    {
+        return $this->hasMany(Team::class);
+    }
 }

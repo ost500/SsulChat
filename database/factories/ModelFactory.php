@@ -72,11 +72,11 @@ $factory->define(App\Channel::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Team::class, function (Faker\Generator $faker) {
-    $channelIds = App\Channel::pluck('id')->toArray();
+    $ssulId = App\Ssul::pluck('id')->toArray();
 
     return [
         'name' => $faker->city,
-        'channel_id' => $faker->randomElement($channelIds),
+        'ssul_id' => $faker->randomElement($ssulId),
         'value' => $faker->randomDigit
 
     ];

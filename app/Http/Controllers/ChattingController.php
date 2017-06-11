@@ -24,7 +24,7 @@ class ChattingController extends Controller
 
         $ssuls = Ssul::with('channels')->with('teams')->get();
 
-        $thisChannel = Channel::with('ssul.teams')->findOrFail($id);
+        $thisChannel = Channel::with('ssul.teams')->with('ssul.channels')->findOrFail($channelId);
 
         if (!Auth::check()) {
             Auth::loginUsingId(1);

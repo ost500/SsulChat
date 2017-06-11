@@ -64,20 +64,35 @@
         <div class="clear"></div>
         <div class="contents_chat">
             <div class="chat_list">
-                <h2>All Threads</h2>
+                {{--<h2>All Threads</h2>--}}
                 <dl class="chann">
-                    <dt>CHANNELS<span>(4)</span><span class="chat_more"><a href="#"><img src="/images/chat_icon05.png"
-                                                                                         alt="더보기"></a></span></dt>
-                    @foreach($ssuls as $ssul)
-                        <dd>
-                            <a href="#"><span class="ddf">{{$ssul->name}}</span></a>
-                        @foreach($ssul->channels as $channel)
-                            <dd><a href="#"><span class="ddt">{{$channel->name}}</span></a></dd>
+                    <dt>CHANNELS<span>({{ $ssuls->count() }})</span><span class="chat_more"><a href="#"><img
+                                        src="/images/chat_icon05.png"
+                                        alt="더보기"></a></span></dt>
+                    <dd>
+                        <a href="#"><span class="ddf">{{ str_limit($thisChannel->ssul->name, 30)}}</span></a>
+                    @foreach($thisChannel->ssul->channels as $num => $channel)
+                        @if($channel->id == $thisChannel->id)
+                            <dd><a href="#"><span class="ddt">-->{{ $num+1 }}번 채널</span></a></dd>
+                        @else
+                            <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
+                            @endif
                             @endforeach
                             </dd>
-                            {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
-                            {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
-                        @endforeach
+
+                            @foreach($ssuls as  $ssul)
+                                @if($ssul->id == $thisChannel->ssul->id)
+                                    @continue
+                                @endif
+                                <dd>
+                                    <a href="#"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
+                                @foreach($ssul->channels as $num => $channel)
+                                    <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
+                                    @endforeach
+                                    </dd>
+                                    {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
+                                    {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
+                                @endforeach
                 </dl>
                 <dl class="message">
                     <dt>DIRECT MESSAGES<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>

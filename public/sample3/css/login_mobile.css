@@ -52,8 +52,16 @@ div#wrap{ position:relative; margin:0px; padding:0px; }
     div.profile_form_btn div {
         width: 100%;
         float: left;
-        margin-left: 17%;
+        margin-left: 15%;
     }
     div.profile_form_btn div span#form_btn_n input{ width:120px; margin-right:10px; float:left; border:solid 2px #cfd0d3; background:#fff; border-radius:4px; height:34px; color:#333; }
-    div.profile_form_btn div span#form_btn_o input{ width:120px; background:#fbce2d; border:solid 2px #fbce2d; border-radius:4px; height:34px; color:#fff; font-weight:600; }
+    div.profile_form_btn div span#form_btn_o input {
+        width: 70%;
+        background: #fbce2d;
+        border: solid 2px #fbce2d;
+        border-radius: 4px;
+        height: 34px;
+        color: #fff;
+        font-weight: 600;
+    }
 }

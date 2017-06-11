@@ -26,6 +26,7 @@ class likeEvent implements ShouldBroadcastNow
     public $userId;
     public $time;
     public $chattingId;
+    public $channelId;
     /**
      * Create a new event instance.
      *
@@ -41,6 +42,7 @@ class likeEvent implements ShouldBroadcastNow
         $this->userId = Auth::user()->id;
         $this->time = Carbon::now()->toDateTimeString();
         $this->chattingId = $request->chattingId;
+        $this->channelId = $request->channelId;
 
         $like = new Like();
         $like->chatting_id = $this->chattingId;
@@ -58,7 +60,7 @@ class likeEvent implements ShouldBroadcastNow
     {
         //Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
-        return new PresenceChannel('testing');
+        return new PresenceChannel('newMessage' . $this->channelId);
     }
 
     public function broadcastAs()

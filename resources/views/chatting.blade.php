@@ -209,7 +209,7 @@
                     // 맨 아래로 스크롤 이동
 
                 });
-                Echo.join('testing').listen('.like', (e) => {
+                Echo.join('newMessage{{$thisChannel->id}}').listen('.like', (e) => {
                     //console.log(e);
                     $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
                     // 맨 아래로 스크롤 이동
@@ -231,7 +231,7 @@
                 },
                 like: function (id) {
                     console.log('like');
-                    axios.post('/like', {'chattingId': id})
+                    axios.post('/like', {'chattingId': id, 'channel_id': "{{ $thisChannel->id }}"})
                         .then((response) => {
 //                                console.log(response);
                         });

@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Channel::class,20)->create();
         factory(App\Chatting::class,50)->create();
         factory(App\Like::class,30)->create();
+
+        $this->call(TeamSeeder::class);
     }
 }

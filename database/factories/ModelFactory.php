@@ -70,3 +70,14 @@ $factory->define(App\Channel::class, function (Faker\Generator $faker) {
         'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
     ];
 });
+
+$factory->define(App\Team::class, function (Faker\Generator $faker) {
+    $channelIds = App\Channel::pluck('id')->toArray();
+
+    return [
+        'name' => $faker->city,
+        'channel_id' => $faker->randomElement($channelIds),
+        'value' => $faker->randomDigit
+
+    ];
+});

@@ -13,12 +13,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Channel extends Model
 {
+
     public function ssul()
     {
         return $this->belongsTo(Ssul::class);
     }
+
     public function chattings()
     {
         return $this->hasMany(Chatting::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function teams()
+    {
+        return $this->hasMany(Team::class);
     }
 }

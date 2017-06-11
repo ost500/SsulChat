@@ -10,18 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ChattingController extends Controller
 {
-    public function chattings($id)
+    public function chattings($id, $channelId)
     {
-        $chats = Chatting::orderBy('created_at', 'desc')->paginate(20);
+        $chats = Chatting::where('channel_id', $channelId)->orderBy('created_at', 'desc')
+            ->paginate(20)->sortBy('created_at');
+
+        $popularChats = Chatting::where('channel_id', $channelId)
+            ->has('likes')
+            ->with('likes')->withCount('likes')
+            ->with('user')
+            ->orderBy('likes_count', 'desc')
+            ->get();
+
         $ssuls = Ssul::with('channels')->with('teams')->get();
 
-        $thisSsul = Ssul::with('channels')->with('teams')->findOrFail($id);
+        $thisChannel = Channel::with('ssul.teams')->findOrFail($id);
 
         if (!Auth::check()) {
             Auth::loginUsingId(1);
         }
 
-//        return $ssuls->toJson();
-        return view('chatting', compact('ssuls', 'chats', 'thisSsul'));
+//        return $thisChannel->toJson();
+        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats'));
     }
 }

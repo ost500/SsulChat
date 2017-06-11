@@ -46,7 +46,7 @@ class newEvent implements ShouldBroadcastNow
 
         $chat = new Chatting();
         $chat->content = $this->message;
-        $chat->channel_id = 1;
+        $chat->channel_id = $request->channel_id;
         $chat->user_id = Auth::user()->id;
         $chat->ipaddress = $this->ipAddress;
         $chat->save();

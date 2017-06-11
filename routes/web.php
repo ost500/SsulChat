@@ -45,4 +45,4 @@ Route::post('like', function(Request $request){
 });
 
 
-Route::get('/chattings/{id}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);
+Route::get('/chattings/{id}/{channelId}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);

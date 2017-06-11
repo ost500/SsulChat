@@ -102,12 +102,12 @@
                     <div class="graph">
 
                         <dl class="selectL" style="width:35%">
-                            <dt>{{ $thisSsul->teams[0]->name }}</dt>
-                            <dd>{{ $thisSsul->teams[0]->value }}%</dd>
+                            <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
+                            <dd>{{ $thisChannel->ssul->teams[0]->value }}%</dd>
                         </dl>
                         <dl class="selectR" style="width:65%">
-                            <dt>{{ $thisSsul->teams[1]->name }}</dt>
-                            <dd>{{ $thisSsul->teams[1]->value }}%</dd>
+                            <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
+                            <dd>{{ $thisChannel->ssul->teams[1]->value }}%</dd>
                         </dl>
 
                     </div>
@@ -124,13 +124,13 @@
                         <ul id="{{$chat->id}}">
                             <li class="chat_pic">
                                 <div class="chat_profile_img"
-                                     style="background-image: url('../images/chatpic01.png');"></div>
+                                     style="background-image: url('/images/chatpic01.png');"></div>
                             </li>
                             <li class="chat_id">{{$chat->user->name}}
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}}
-                                <button style="border:0;background:transparent" v-on:click="like('{{$chat->id}}')"><img
-                                            src="../images/gry_box_icon.png"></img>
+                                <button style="border:0;background:transparent" v-on:click="like('{{$chat->id}}')">
+                                    <img src="/images/gry_box_icon.png"></img>
                                     <div style="float:right">{{$chat->likes->count()}}</div>
                                 </button>
                             </li>
@@ -148,14 +148,16 @@
             </div>
 
 
-            <div class="chat_box">
-                <ul class="gry_box">
-                    <li class="grybox_sj">ost</li>
-                    <li class="grybox_good">54</li>
-                    <li class="grybox_txt clear">안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택입니다 안녕하세요 저는 오상택...
-                    </li>
-                </ul>
-            </div>
+            @foreach($popularChats as $popularChat)
+                <div class="chat_box">
+                    <ul class="gry_box">
+                        <li class="grybox_sj">{{ $popularChat->user->name }}</li>
+                        <li class="grybox_good">{{ $popularChat->likes_count }}</li>
+                        <li class="grybox_txt clear">{{ $popularChat->content }}
+                        </li>
+                    </ul>
+                </div>
+            @endforeach
         </div>
     </div>
     </body>
@@ -185,7 +187,7 @@
                     $('#chats').append("<ul id=" + e.id + ">" +
                         "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(\'/images/chatpic01.png\')\"></div></li>" +
                         "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
-                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" v-on:click=\"e.id\"><img src=\"../images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
+                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" v-on:click=\"e.id\"><img src=\"/images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
                         "</ul>");
                     $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
 
@@ -207,7 +209,7 @@
                     $('#message').val(''); // 폼 초기화
 
 
-                    axios.post('/chat', {'message': message, 'ipaddress': ip()})
+                    axios.post('/chat', {'message': message, 'ipaddress': ip(), 'channel_id': "{{ $thisChannel->id }}"})
                         .then((response) => {
                             console.log(response);
                         });

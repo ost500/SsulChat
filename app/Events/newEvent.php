@@ -27,6 +27,8 @@ class newEvent implements ShouldBroadcastNow
     public $time;
     public $ipAddress;
     public $chattingId;
+    public $channelId;
+
     /**
      * Create a new event instance.
      *
@@ -43,6 +45,7 @@ class newEvent implements ShouldBroadcastNow
         $this->ipAddress = $request->ipaddress;
         $this->userName = Auth::user()->name;
         $this->time = Carbon::now()->toDateTimeString();
+        $this->channelId = $request->channel_id;
 
         $chat = new Chatting();
         $chat->content = $this->message;
@@ -56,14 +59,14 @@ class newEvent implements ShouldBroadcastNow
 
     /**
      * Get the channels the event should broadcast on.
-*
-* @return Channel|array
-*/
+     *
+     * @return Channel|array
+     */
     public function broadcastOn()
     {
 //        Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
-        return new PresenceChannel('testing');
+        return new PresenceChannel('newMessage' . $this->channelId);
     }
 
     public function broadcastAs()

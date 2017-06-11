@@ -196,7 +196,7 @@
             data: {},
             mounted: function () {
 
-                Echo.join('testing').listen('.testing', (e) => {
+                Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
                     //console.log(e);
 
                     $('#chats').append("<ul id=" + e.id + ">" +

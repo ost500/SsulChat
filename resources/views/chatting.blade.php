@@ -145,7 +145,7 @@
                                 <div class="chat_profile_img"
                                      style="background-image: url('/images/chatpic01.png');"></div>
                             </li>
-                            <li class="chat_id">{{$chat->user->name}}
+                            <li class="chat_id">{{$chat->user->name == "anonymous" ? ("익명".dechex(str_slug($chat->ipaddress,''))) : $chat->user->name}}
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}}
                                 <button style="border:0;background:transparent;margin-left:2%" v-on:click="like('{{$chat->id}}')">
@@ -209,12 +209,18 @@
                     //console.log(e);
                     if(e.available)
                     {
+                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like.png";
                         $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
+                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#D75A4A";
+                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "bold";
                         // 맨 아래로 스크롤 이동
 //                        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
                     }
                     else {
+                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like_blank.png";
                         $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) - 1;
+                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#000";
+                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "";
                         // 맨 아래로 스크롤 이동
 //                        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
                     }

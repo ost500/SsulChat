@@ -1,17 +1,17 @@
 @extends('layouts.header')
 @section('content')
-    <body>
+    <body xmlns:v-on="http://www.w3.org/1999/xhtml">
     <script>
-        window.onload=function(){
+        window.onload = function () {
             if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
-                var outerheight=$(window).outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var outerheight = $(window).outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
 
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             } else {
-                var outerheight=$(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var outerheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
@@ -22,16 +22,16 @@
     </script>
 
     <script>
-        $(window).resize(function (){
+        $(window).resize(function () {
             if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
-                var outerheight=$(window).outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var outerheight = $(window).outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
 
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             } else {
-                var outerheight= $(window).outerHeight(true)-$('.header_chat').outerHeight(true)-$('.chat_txt_area1').outerHeight(true)-$('.chat_input_wrap').outerHeight(true)-20;
+                var outerheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
@@ -43,7 +43,7 @@
     </script>
 
 
-    <div>
+    <div id="chatting">
         <div class="header_chat">
             <ul class="chat_top_hot">
                 <li class="hot_01"><img src="/images/top_hot.png" alt="hot썰"></li>
@@ -71,13 +71,13 @@
                     @foreach($ssuls as $ssul)
                         <dd>
                             <a href="#"><span class="ddf">{{$ssul->name}}</span></a>
-                            @foreach($ssul->channels as $channel)
-                                <dd><a href="#"><span class="ddt">{{$channel->name}}</span></a></dd>
+                        @foreach($ssul->channels as $channel)
+                            <dd><a href="#"><span class="ddt">{{$channel->name}}</span></a></dd>
                             @endforeach
-                        </dd>
-                        {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
-                        {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
-                    @endforeach
+                            </dd>
+                            {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
+                            {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
+                        @endforeach
                 </dl>
                 <dl class="message">
                     <dt>DIRECT MESSAGES<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
@@ -114,32 +114,33 @@
                     Purpose: <span class="chat_txt_area1_txt04">This channel is for team-wide communication and announcements. All team members are in the channel.</span> (<a href="#"><span class="chat_txt_area1_txt03">edit</span></a>)</p><br>
                     <a href="#"><span class="chat_txt_area1_txt03">+ Add an app or custom integration</span></a><a href="#"><span class="chat_txt_area1_txt03 chat_txt_area1_txt05">Invite others to this channel</span></a> -->
                 </div>
-                <script>
-                    function like(event)
-                    {
-                        axios.post('/like', {'chattingId':event.target.parentNode.parentNode.parentNode.id})
-                            .then((response) => {
-//                                console.log(response);
-                            });
-                    }
-                </script>
+
 
                 <div id="chats" class="chat_txt_area2">
                     <span class="chat_date">May 21st</span>
                     @foreach($chats as $chat)
                         <ul id="{{$chat->id}}">
-                            <li class="chat_pic"><div class="chat_profile_img" style="background-image: url('../images/chatpic01.png');"></div></li>
-                            <li class="chat_id">{{$chat->user->name}}<span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
-                            <li class="chat_text"> {{$chat->content}} <button style="border:0;background:transparent" onclick="like(event)"><img src="../images/gry_box_icon.png"></img><div style="float:right">{{$chat->likes->count()}}</div></button></li>
+                            <li class="chat_pic">
+                                <div class="chat_profile_img"
+                                     style="background-image: url('../images/chatpic01.png');"></div>
+                            </li>
+                            <li class="chat_id">{{$chat->user->name}}
+                                <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
+                            <li class="chat_text"> {{$chat->content}}
+                                <button style="border:0;background:transparent" v-on:click="like('{{$chat->id}}')"><img
+                                            src="../images/gry_box_icon.png"></img>
+                                    <div style="float:right">{{$chat->likes->count()}}</div>
+                                </button>
+                            </li>
                         </ul>
-                    @endforeach
+                @endforeach
                 <!-- 채팅생성영역-->
                 </div>
                 <div class="chat_input_wrap">
-                    <form class="form-wrapper cf">
+                    <form v-on:submit.prevent="messageFormSubmit()" id="messageForm" class="form-wrapper cf">
                         <input type='file' name="a" id="a" style="display:none;"/>
                         <input type="button" onclick="document.getElementById('a').click();" class="chat_file">
-                        <input id="message" type="text" placeholder="당신의 의견은?" class="chat_input"  autocomplete=off>
+                        <input id="message" type="text" placeholder="당신의 의견은?" class="chat_input" autocomplete=off>
                     </form>
                 </div>
             </div>
@@ -162,44 +163,69 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
 
+
+
+
     <script>
 
-        var submitMessage = function () {
-            var name = $('#name').val();
-            var message = $('#message').val();
-            $('#message').val(''); // 폼 초기화
+    </script>
 
+    <script>
 
-            axios.post('/chat', {'message': message, 'ipaddress' : ip()})
-                .then((response) => {
-                console.log(response);
+        var chatting_app = new Vue({
+            el: '#chatting',
+            data: {},
+            mounted: function () {
+
+                Echo.join('testing').listen('.testing', (e) => {
+                    //console.log(e);
+
+                    $('#chats').append("<ul id=" + e.id + ">" +
+                        "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(\'/images/chatpic01.png\')\"></div></li>" +
+                        "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
+                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" v-on:click=\"e.id\"><img src=\"../images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
+                        "</ul>");
+                    $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+
+                    // 맨 아래로 스크롤 이동
+
                 });
-        };
+                Echo.join('testing').listen('.like', (e) => {
+                    //console.log(e);
+                    $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
+                    // 맨 아래로 스크롤 이동
+                    $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+                });
+            },
 
-        $('form').bind('submit', function () {
-            console.log('hihihi');
-            setTimeout(submitMessage, 0);
-            return false;
-        });
-        Echo.join('testing').listen('.testing', (e) => {
-            //console.log(e);
+            methods: {
+                submitMessage: function () {
+                    var name = $('#name').val();
+                    var message = $('#message').val();
+                    $('#message').val(''); // 폼 초기화
 
-            $('#chats').append("<ul id="+e.id+">" +
-                "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(\'/images/chatpic01.png\')\"></div></li>" +
-                "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
-                "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" onclick=\"like(event)\"><img src=\"../images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
-                "</ul>");
-        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
 
-            // 맨 아래로 스크롤 이동
+                    axios.post('/chat', {'message': message, 'ipaddress': ip()})
+                        .then((response) => {
+                            console.log(response);
+                        });
+                },
+                like: function (id) {
+                    console.log('like');
+                    axios.post('/like', {'chattingId': id})
+                        .then((response) => {
+//                                console.log(response);
+                        });
+                },
+                messageFormSubmit: function(){
+                    console.log('hihihi');
+                    setTimeout(chatting_app.submitMessage(), 0);
+                    return false;
+                }
+            }
+        })
 
-        });
-        Echo.join('testing').listen('.like', (e) => {
-            //console.log(e);
-            $('#chats ul#'+e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#'+e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
-            // 맨 아래로 스크롤 이동
-        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
-        });
+
     </script>
 
 @endsection

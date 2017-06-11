@@ -43,7 +43,7 @@
     </script>
 
 
-    <div id="app">
+    <div>
         <div class="header_chat">
             <ul class="chat_top_hot">
                 <li class="hot_01"><img src="/images/top_hot.png" alt="hot썰"></li>

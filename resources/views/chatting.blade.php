@@ -18,6 +18,10 @@
 
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             }
+            if(localStorage['SsulChatAnonymous'] === undefined)
+            {
+                localStorage['SsulChatAnonymous'] = '익명' + parseInt(ip().split('.').join('')).toString(16);
+            }
         }
     </script>
 
@@ -145,7 +149,7 @@
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}}
                                 <button style="border:0;background:transparent;margin-left:2%" v-on:click="like('{{$chat->id}}')">
-                                    <img src="/images/gry_box_icon.png"></img>
+                                    <img src="/images/like.png"></img>
                                     <div style="float:right">{{$chat->likes->count()}}</div>
                                 </button>
                             </li>
@@ -181,14 +185,6 @@
     <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
-
-
-
-
-    <script>
-
-    </script>
-
     <script>
 
         var chatting_app = new Vue({
@@ -202,7 +198,7 @@
                     $('#chats').append("<ul id=" + e.id + ">" +
                         "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(\'/images/chatpic01.png\')\"></div></li>" +
                         "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
-                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" onclick=\"chatting_app.like("+e.id+")\"><img src=\"/images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
+                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" onclick=\"chatting_app.like("+e.id+")\"><img class=\"likeButtonImg\" src=\"/images/like_blank.png\"></img><div style=\"float:right\">0</div></button></li>" +
                         "</ul>");
                     $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
 
@@ -211,9 +207,17 @@
                 });
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.like', (e) => {
                     //console.log(e);
-                    $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
-                    // 맨 아래로 스크롤 이동
-                    $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+                    if(e.available)
+                    {
+                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
+                        // 맨 아래로 스크롤 이동
+//                        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+                    }
+                    else {
+                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) - 1;
+                        // 맨 아래로 스크롤 이동
+//                        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+                    }
                 });
             },
 
@@ -224,7 +228,7 @@
                     $('#message').val(''); // 폼 초기화
 
 
-                    axios.post('/chat', {'message': message, 'ipaddress': ip(), 'channel_id': "{{ $thisChannel->id }}"})
+                    axios.post('/chat', {'message': message, 'ipaddress': ip(), 'channel_id': "{{ $thisChannel->id }}", anony_name : localStorage['SsulChatAnonymous']})
                         .then((response) => {
                             console.log(response);
                         });

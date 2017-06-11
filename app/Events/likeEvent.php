@@ -17,6 +17,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
 class likeEvent implements ShouldBroadcastNow
@@ -27,6 +28,7 @@ class likeEvent implements ShouldBroadcastNow
     public $time;
     public $chattingId;
     public $channelId;
+    public $available;
     /**
      * Create a new event instance.
      *
@@ -44,11 +46,19 @@ class likeEvent implements ShouldBroadcastNow
         $this->chattingId = $request->chattingId;
         $this->channelId = $request->channel_id;
 
-        $like = new Like();
-        $like->chatting_id = $this->chattingId;
-        $like->user_id = Auth::user()->id;
-        $like->save();
-
+        $old = DB::table('likes')->where('chatting_id',$this->chattingId)->where('user_id',$this->userId)->first();
+        if($old)
+        {
+            DB::table('likes')->where('chatting_id',$this->chattingId)->where('user_id',$this->userId)->delete();
+            $this->available = false;
+        }
+        else {
+            $like = new Like();
+            $like->chatting_id = $this->chattingId;
+            $like->user_id = Auth::user()->id;
+            $like->save();
+            $this->available = true;
+        }
     }
 
     /**
@@ -73,7 +83,8 @@ class likeEvent implements ShouldBroadcastNow
         // This must always be an array. Since it will be parsed with json_encode()
         return [
             'chattingId' => $this->chattingId,
-            'userId' => $this->userId
+            'userId' => $this->userId,
+            'available' => $this->available
         ];
     }
 }

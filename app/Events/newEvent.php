@@ -43,7 +43,10 @@ class newEvent implements ShouldBroadcastNow
 //        Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
         $this->ipAddress = $request->ipaddress;
-        $this->userName = Auth::user()->name;
+        if(Auth::user()->name == "anonymous")
+        {
+            $this->userName = $request->anony_name;
+        }
         $this->time = Carbon::now()->toDateTimeString();
         $this->channelId = $request->channel_id;
 

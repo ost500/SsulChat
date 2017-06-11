@@ -25,11 +25,11 @@ div.header_profile h1{ text-align:center; font-family:arial,Helvetica,AppleSDGot
 div.header_profile span{position:relative; top:-20px; right:38px;  float:right;}
 div.profile_form_wrap {
     position: relative;
-    width: 25%;
+    width: 40%;
     display: table;
     margin: 0px auto;
     margin-bottom: 80px;
-    padding-top: 4%;
+    padding-top: 40%;
 }
 div.profile_form_wrap div.profile_formL{ box-sizing:border-box; position:relative; float:left;padding-top:32px;}
 div.profile_form_wrap div.profile_formL div#box{ }
@@ -50,6 +50,18 @@ div.profile_form_wrap div.profile_formR div{ width:100%; margin-top:4px; }
 div.profile_form_wrap div.profile_formR div img{ width:100%; border-radius:4px;}
 
 div.profile_form_btn{ width:100%; background:#f1f1f1; position:fixed; bottom:0px; padding:20px 0px 20px 0px; box-sizing:border-box;}
-div.profile_form_btn div{width:250px; float:right; padding-right:38px;}
+div.profile_form_btn div {
+    width: 150PX;
+    float: right;
+    padding-right: 40px;
+}
 div.profile_form_btn div span#form_btn_n input{ width:120px; margin-right:10px; float:left; border:solid 2px #cfd0d3; background:#fff; border-radius:4px; height:34px; color:#333; }
-div.profile_form_btn div span#form_btn_o input{ width:120px; background:#fbce2d; border:solid 2px #fbce2d; border-radius:4px; height:34px; color:#fff; font-weight:600; }
+div.profile_form_btn div span#form_btn_o input {
+    width: 150px;
+    background: #fbce2d;
+    border: solid 2px #fbce2d;
+    border-radius: 4px;
+    height: 34px;
+    color: #fff;
+    font-weight: 600;
+}

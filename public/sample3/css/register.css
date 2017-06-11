@@ -1,0 +1,55 @@
+@charset "utf-8";
+@import url(common.css);
+
+*{font-family:"돋움", dotum, sans-serif; font-size:13px;}
+#header:after{ display: block; content: ''; clear: both; }
+#visual:after{ display: block; content: ''; clear: both; }
+#container:after{ display: block; content: ''; clear: both; }
+
+body{letter-spacing:-1px; font-weight:400; }
+div#wrap{ position:relative; margin:0px; padding:0px; }
+
+.clear{clear:both;}
+
+div.header_profile {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+    border-bottom: solid 2px #e6e6e6;
+    height: 50px;
+    padding-top: 14px;
+    background-color: #fbce2d;
+}
+div.header_profile h1{ text-align:center; font-family:arial,Helvetica,AppleSDGothicNeo,sans-serif; font-size:20px; color:#000;}
+div.header_profile span{position:relative; top:-20px; right:38px;  float:right;}
+div.profile_form_wrap {
+    position: relative;
+    width: 25%;
+    display: table;
+    margin: 0px auto;
+    margin-bottom: 80px;
+    padding-top: 4%;
+}
+div.profile_form_wrap div.profile_formL{ box-sizing:border-box; position:relative; float:left;padding-top:32px;}
+div.profile_form_wrap div.profile_formL div#box{ }
+div#box table tr{ float:left; width:100%; margin-bottom:15px; }
+div#box table tr th{ float:left; width:100%; text-align:left; margin-bottom:1px; }
+div#box table tr th label{ font-family:arial,Helvetica,AppleSDGothicNeo,sans-serif; font-size:16px; letter-spacing:0px; width:100%;}
+div#box table tr td{ float:left; width:100%; }
+div#box table tr td input,select{ background:#fff; width:100%; border:solid 2px #d9d9d9; border-radius:4px; padding:0px 10px; box-sizing:border-box; height:48px; }
+div#box table tr td select.form06{ height:48px;}
+div#box table tr td input:focus{ border:solid 2px #fdbf00;}
+div#box table tr td span.smileI{ position:absolute; top:2px; z-index:1000; width:46px; height:46px; border-right:solid 2px #d9d9d9; background:url(../images/form_icon.png) center center no-repeat; background-size:20px; }
+div#box table tr td.form04-1{position:relative;}
+td.td_txt{ margin-left:2px; font-family:arial,Helvetica,AppleSDGothicNeo,sans-serif; font-size:12px; letter-spacing:0px; margin-top:0px; color:#b1b1b1; font-weight:600; line-height:20px; }
+
+div.profile_form_wrap div.profile_formR{ box-sizing:border-box; position:relative; float:right; width:30%; padding-top:32px;}
+div.profile_form_wrap div.profile_formR h4{ font-family:arial,Helvetica,AppleSDGothicNeo,sans-serif; font-size:16px; letter-spacing:0px; width:100%;}
+div.profile_form_wrap div.profile_formR div{ width:100%; margin-top:4px; }
+div.profile_form_wrap div.profile_formR div img{ width:100%; border-radius:4px;}
+
+div.profile_form_btn{ width:100%; background:#f1f1f1; position:fixed; bottom:0px; padding:20px 0px 20px 0px; box-sizing:border-box;}
+div.profile_form_btn div{width:250px; float:right; padding-right:38px;}
+div.profile_form_btn div span#form_btn_n input{ width:120px; margin-right:10px; float:left; border:solid 2px #cfd0d3; background:#fff; border-radius:4px; height:34px; color:#333; }
+div.profile_form_btn div span#form_btn_o input{ width:120px; background:#fbce2d; border:solid 2px #fbce2d; border-radius:4px; height:34px; color:#fff; font-weight:600; }

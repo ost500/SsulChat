@@ -10,15 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class ChattingController extends Controller
 {
-    public function chattings()
+    public function chattings($id)
     {
-        $chats = Chatting::get();
-        $ssuls = Ssul::with('channels')->get();
+        $chats = Chatting::orderBy('created_at', 'desc')->paginate(20);
+        $ssuls = Ssul::with('channels')->with('teams')->get();
 
-        if(!Auth::check()){
+        $thisSsul = Ssul::with('channels')->with('teams')->findOrFail($id);
+
+        if (!Auth::check()) {
             Auth::loginUsingId(1);
         }
 
-        return view('chatting',compact('ssuls'), compact('chats'));
+//        return $ssuls->toJson();
+        return view('chatting', compact('ssuls', 'chats', 'thisSsul'));
     }
 }

@@ -100,15 +100,16 @@
             <div class="chat_txt">
                 <div class="chat_txt_area1">
                     <div class="graph">
-                        @foreach($ssuls->channels)
+
                         <dl class="selectL" style="width:35%">
-                            <dt>아고라</dt>
-                            <dd>35%</dd>
+                            <dt>{{ $thisSsul->teams[0]->name }}</dt>
+                            <dd>{{ $thisSsul->teams[0]->value }}%</dd>
                         </dl>
                         <dl class="selectR" style="width:65%">
-                            <dt>일베</dt>
-                            <dd>65%</dd>
+                            <dt>{{ $thisSsul->teams[1]->name }}</dt>
+                            <dd>{{ $thisSsul->teams[1]->value }}%</dd>
                         </dl>
+
                     </div>
                     <!--<p class="chat_txt_area1_txt01">#general</p>
                     <p><span class="chat_txt_area1_txt02">ost</span> created htis channel on May 21st. This is hte very beginning of the <span class="chat_txt_area1_txt03">#general</span> channel.<br>
@@ -218,7 +219,7 @@
 //                                console.log(response);
                         });
                 },
-                messageFormSubmit: function(){
+                messageFormSubmit: function () {
                     console.log('hihihi');
                     setTimeout(chatting_app.submitMessage(), 0);
                     return false;

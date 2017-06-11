@@ -202,7 +202,7 @@
                     $('#chats').append("<ul id=" + e.id + ">" +
                         "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(\'/images/chatpic01.png\')\"></div></li>" +
                         "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
-                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" v-on:click=\"like(e.id)\"><img src=\"/images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
+                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" v-on:click=\"like("+e.id+")\"><img src=\"/images/gry_box_icon.png\"></img><div style=\"float:right\">0</div></button></li>" +
                         "</ul>");
                     $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
 

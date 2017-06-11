@@ -42,7 +42,7 @@ class likeEvent implements ShouldBroadcastNow
         $this->userId = Auth::user()->id;
         $this->time = Carbon::now()->toDateTimeString();
         $this->chattingId = $request->chattingId;
-        $this->channelId = $request->channelId;
+        $this->channelId = $request->channel_id;
 
         $like = new Like();
         $like->chatting_id = $this->chattingId;
@@ -73,7 +73,7 @@ class likeEvent implements ShouldBroadcastNow
         // This must always be an array. Since it will be parsed with json_encode()
         return [
             'chattingId' => $this->chattingId,
-            'userId' => $this->userId,
+            'userId' => $this->userId
         ];
     }
 }

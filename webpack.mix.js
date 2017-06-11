@@ -13,6 +13,4 @@ const {mix} = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/bootstrap.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css')
-    .copy('public/sample/css/default.css', 'public/css')
-    .copy('public/sample/css/default_mobile.css', 'public/css');
+    .sass('resources/assets/sass/app.scss', 'public/css');

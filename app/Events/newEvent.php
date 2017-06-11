@@ -61,7 +61,7 @@ class newEvent implements ShouldBroadcastNow
 */
     public function broadcastOn()
     {
-        //Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
+        Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
         return new PresenceChannel('testing');
     }

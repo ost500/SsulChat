@@ -602,7 +602,7 @@ li.grybox_good {
     font-weight: 600;
     letter-spacing: 1px;
     float: right;
-    background: url(../images/gry_box_icon.png) no-repeat 0px 0px;
+    background: url(../images/like.png) no-repeat 0px 0px;
     background-size: 17px;
     padding-left: 20px;
 }

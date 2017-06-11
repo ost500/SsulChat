@@ -47,6 +47,10 @@ class newEvent implements ShouldBroadcastNow
         {
             $this->userName = $request->anony_name;
         }
+        else
+        {
+            $this->userName = Auth::user()->name;
+        }
         $this->time = Carbon::now()->toDateTimeString();
         $this->channelId = $request->channel_id;
 

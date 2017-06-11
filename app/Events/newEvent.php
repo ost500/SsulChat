@@ -38,7 +38,7 @@ class newEvent implements ShouldBroadcastNow
         if (!Auth::check()) {
             Auth::loginUsingId(1);
         }
-        Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
+//        Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
         $this->ipAddress = $request->ipaddress;
         $this->userName = Auth::user()->name;

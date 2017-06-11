@@ -18,7 +18,7 @@
 
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             }
-            if(localStorage['SsulChatAnonymous'] === undefined)
+            if(localStorage['SsulChatAnonymous'] === undefined || localStorage['SsulChatAnonymous'] != '익명' + parseInt(ip().split('.').join('')).toString(16))
             {
                 localStorage['SsulChatAnonymous'] = '익명' + parseInt(ip().split('.').join('')).toString(16);
             }
@@ -75,28 +75,27 @@
                                         alt="더보기"></a></span></dt>
                     <dd>
                         <a href="#"><span class="ddf">{{ str_limit($thisChannel->ssul->name, 30)}}</span></a>
-                    @foreach($thisChannel->ssul->channels as $num => $channel)
-                        @if($channel->id == $thisChannel->id)
-                            <dd><a href="#"><span class="ddt">-->{{ $num+1 }}번 채널</span></a></dd>
-                        @else
-                            <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
+                        @foreach($thisChannel->ssul->channels as $num => $channel)
+                            @if($channel->id == $thisChannel->id)
+                                <dd><a href="#"><span class="ddt">-->{{ $num+1 }}번 채널</span></a></dd>
+                            @else
+                                <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
                             @endif
+                        @endforeach
+                    </dd>
+                    @foreach($ssuls as  $ssul)
+                        @if($ssul->id == $thisChannel->ssul->id)
+                            @continue
+                        @endif
+                        <dd>
+                            <a href="#"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
+                            @foreach($ssul->channels as $num => $channel)
+                                <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
                             @endforeach
-                            </dd>
-
-                            @foreach($ssuls as  $ssul)
-                                @if($ssul->id == $thisChannel->ssul->id)
-                                    @continue
-                                @endif
-                                <dd>
-                                    <a href="#"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
-                                @foreach($ssul->channels as $num => $channel)
-                                    <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
-                                    @endforeach
-                                    </dd>
-                                    {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
-                                    {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
-                                @endforeach
+                        </dd>
+                    {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
+                    {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
+                    @endforeach
                 </dl>
                 <dl class="message">
                     <dt>DIRECT MESSAGES<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
@@ -149,8 +148,13 @@
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}}
                                 <button style="border:0;background:transparent;margin-left:2%" v-on:click="like('{{$chat->id}}')">
-                                    <img src="/images/like.png"></img>
-                                    <div style="float:right">{{$chat->likes->count()}}</div>
+                                    @if($likes->where('chatting_id',$chat->id)->first())
+                                        <img src="/images/like.png"></img>
+                                        <div style="float:right;font-weight: bold;color:#D75A4A">{{$chat->likes->count()}}</div>
+                                    @else
+                                        <img src="/images/like_blank.png"></img>
+                                        <div style="float:right">{{$chat->likes->count()}}</div>
+                                    @endif
                                 </button>
                             </li>
                         </ul>
@@ -209,20 +213,23 @@
                     //console.log(e);
                     if(e.available)
                     {
-                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like.png";
                         $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
-                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#D75A4A";
-                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "bold";
-                        // 맨 아래로 스크롤 이동
-//                        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+                        if(e.userId == {{Auth::user()->id}})
+                        {
+                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like.png";
+                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#D75A4A";
+                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "bold";
+                        }
                     }
                     else {
-                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like_blank.png";
+
                         $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) - 1;
-                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#000";
-                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "";
-                        // 맨 아래로 스크롤 이동
-//                        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+                        if(e.userId == {{Auth::user()->id}})
+                        {
+                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like_blank.png";
+                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#000";
+                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "";
+                        }
                     }
                 });
             },

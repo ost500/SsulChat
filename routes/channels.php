@@ -14,7 +14,7 @@
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Log;
 
-Log::info("abcd");
+
 Broadcast::channel('App.User.*', function ($user, $id) {
 //    return (int) $user->id === (int) $id;
     Log::info("here1!!!!!!!!!!!!!!!!");
@@ -45,8 +45,8 @@ Broadcast::channel('presence-try', function () {
     Log::info("try!!!!!!!!!!!!!!!!");
     return true;
 });
-Broadcast::channel('testing', function () {
-    Log::info("try!!!!!!!!!!!!!!!!");
+Broadcast::channel('newMessage*', function () {
+    Log::info("new Message!");
     return true;
 });
 Broadcast::channel('like', function () {

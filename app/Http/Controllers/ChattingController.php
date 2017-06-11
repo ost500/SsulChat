@@ -14,6 +14,10 @@ class ChattingController extends Controller
 {
     public function chattings($id, $channelId)
     {
+        if (!Auth::check()) {
+            Auth::loginUsingId(1);
+        }
+
         $chats = Chatting::where('channel_id', $channelId)
             ->orderBy('created_at', 'desc')
             ->paginate(20)->sortBy('created_at');
@@ -33,9 +37,6 @@ class ChattingController extends Controller
 
         $thisChannel = Channel::with('ssul.teams')->with('ssul.channels')->findOrFail($channelId);
 
-        if (!Auth::check()) {
-            Auth::loginUsingId(1);
-        }
 //        return $thisChannel->toJson();
         return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes'));
     }

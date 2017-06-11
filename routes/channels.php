@@ -53,3 +53,8 @@ Broadcast::channel('like', function () {
     Log::info("try!!!!!!!!!!!!!!!!");
     return true;
 });
+
+Broadcast::channel('isTyping*', function () {
+    Log::info('is Typing!');
+    return true;
+});

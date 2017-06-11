@@ -18,8 +18,7 @@
 
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             }
-            if(localStorage['SsulChatAnonymous'] === undefined || localStorage['SsulChatAnonymous'] != '익명' + parseInt(ip().split('.').join('')).toString(16))
-            {
+            if (localStorage['SsulChatAnonymous'] === undefined || localStorage['SsulChatAnonymous'] != '익명' + parseInt(ip().split('.').join('')).toString(16)) {
                 localStorage['SsulChatAnonymous'] = '익명' + parseInt(ip().split('.').join('')).toString(16);
             }
         }
@@ -75,27 +74,27 @@
                                         alt="더보기"></a></span></dt>
                     <dd>
                         <a href="#"><span class="ddf">{{ str_limit($thisChannel->ssul->name, 30)}}</span></a>
-                        @foreach($thisChannel->ssul->channels as $num => $channel)
-                            @if($channel->id == $thisChannel->id)
-                                <dd><a href="#"><span class="ddt">-->{{ $num+1 }}번 채널</span></a></dd>
-                            @else
-                                <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
+                    @foreach($thisChannel->ssul->channels as $num => $channel)
+                        @if($channel->id == $thisChannel->id)
+                            <dd><a href="#"><span class="ddt">-->{{ $num+1 }}번 채널</span></a></dd>
+                        @else
+                            <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
                             @endif
-                        @endforeach
-                    </dd>
-                    @foreach($ssuls as  $ssul)
-                        @if($ssul->id == $thisChannel->ssul->id)
-                            @continue
-                        @endif
-                        <dd>
-                            <a href="#"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
-                            @foreach($ssul->channels as $num => $channel)
-                                <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
                             @endforeach
-                        </dd>
-                    {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
-                    {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
-                    @endforeach
+                            </dd>
+                            @foreach($ssuls as  $ssul)
+                                @if($ssul->id == $thisChannel->ssul->id)
+                                    @continue
+                                @endif
+                                <dd>
+                                    <a href="#"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
+                                @foreach($ssul->channels as $num => $channel)
+                                    <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
+                                    @endforeach
+                                    </dd>
+                                    {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
+                                    {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
+                                @endforeach
                 </dl>
                 <dl class="message">
                     <dt>DIRECT MESSAGES<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
@@ -144,10 +143,11 @@
                                 <div class="chat_profile_img"
                                      style="background-image: url('/images/chatpic01.png');"></div>
                             </li>
-                            <li class="chat_id">{{$chat->user->name == "anonymous" ? ("익명".dechex(str_slug($chat->ipaddress,''))) : $chat->user->name}}
+                            <li class="chat_id">{{$chat->user->name }}
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}}
-                                <button style="border:0;background:transparent;margin-left:2%" v-on:click="like('{{$chat->id}}')">
+                                <button style="border:0;background:transparent;margin-left:2%"
+                                        v-on:click="like('{{$chat->id}}')">
                                     @if($likes->where('chatting_id',$chat->id)->first())
                                         <img src="/images/like.png"></img>
                                         <div style="float:right;font-weight: bold;color:#D75A4A">{{$chat->likes->count()}}</div>
@@ -160,12 +160,20 @@
                         </ul>
                 @endforeach
                 <!-- 채팅생성영역-->
+
                 </div>
+
+                <div v-if="typing" style="position: fixed;bottom: 55px;" >
+                    <div v-for="user in typingUserName">@{{ user }},</div> 님이 입력 중 입니다..
+                </div>
+
+
                 <div class="chat_input_wrap">
                     <form v-on:submit.prevent="messageFormSubmit()" id="messageForm" class="form-wrapper cf">
                         <input type='file' name="a" id="a" style="display:none;"/>
                         <input type="button" onclick="document.getElementById('a').click();" class="chat_file">
-                        <input id="message" type="text" placeholder="당신의 의견은?" class="chat_input" autocomplete=off>
+                        <input id="message" type="text" placeholder="당신의 의견은?" class="chat_input" autocomplete=off
+                               @keydown="isTyping">
                     </form>
                 </div>
             </div>
@@ -193,7 +201,10 @@
 
         var chatting_app = new Vue({
             el: '#chatting',
-            data: {},
+            data: {
+                typingUserName: [],
+                typing: false
+            },
             mounted: function () {
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
@@ -202,20 +213,20 @@
                     $('#chats').append("<ul id=" + e.id + ">" +
                         "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(\'/images/chatpic01.png\')\"></div></li>" +
                         "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
-                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" onclick=\"chatting_app.like("+e.id+")\"><img class=\"likeButtonImg\" src=\"/images/like_blank.png\"></img><div style=\"float:right\">0</div></button></li>" +
+                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" onclick=\"chatting_app.like(" + e.id + ")\"><img class=\"likeButtonImg\" src=\"/images/like_blank.png\"></img><div style=\"float:right\">0</div></button></li>" +
                         "</ul>");
                     $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
 
                     // 맨 아래로 스크롤 이동
 
                 });
+
+
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.like', (e) => {
                     //console.log(e);
-                    if(e.available)
-                    {
+                    if (e.available) {
                         $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
-                        if(e.userId == {{Auth::user()->id}})
-                        {
+                        if (e.userId == {{Auth::user()->id}}) {
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like.png";
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#D75A4A";
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "bold";
@@ -224,35 +235,93 @@
                     else {
 
                         $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) - 1;
-                        if(e.userId == {{Auth::user()->id}})
-                        {
+                        if (e.userId == {{Auth::user()->id}}) {
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like_blank.png";
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#000";
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "";
                         }
                     }
                 });
+
+
             },
 
             methods: {
+                isTyping: function () {
+                    let channel = Echo.join('isTyping{{$thisChannel->id}}');
+
+                    setTimeout(function () {
+                        console.log('whisper!!');
+                        channel.whisper('isTyping', {
+                            name: "{{ $user->name }}",
+                            typing: true
+                        })
+                    }, 300);
+
+
+                    console.log('listen whisper!!');
+                    channel.listenForWhisper('isTyping', (e) => {
+                        console.log(e.name);
+
+                        console.log(this.typingUserName);
+                        if (e.typing === false) {
+                            this.typingUserName.pop(e.name);
+                        } else {
+                            if (this.typingUserName.indexOf(e.name) == -1) {
+                                this.typingUserName.push(e.name);
+                            }
+                        }
+                        this.typing = e.typing;
+
+
+                        setTimeout(function () {
+                            chatting_app.typing = false;
+                        }, 5000);
+                    });
+                },
+
+                isNotTyping: function () {
+                    let channel = Echo.join('isTyping{{$thisChannel->id}}');
+
+                    console.log('whisperStotp!!');
+                    setTimeout(function () {
+                        channel.whisper('isTyping', {
+                            name: "{{ $user->name }}",
+                            typing: false
+                        });
+                    }, 300);
+
+
+                },
+
+
                 submitMessage: function () {
-                    var name = $('#name').val();
+                    this.isNotTyping();
+
+                    var name = "{{ $user->name }}";
                     var message = $('#message').val();
                     $('#message').val(''); // 폼 초기화
 
 
-                    axios.post('/chat', {'message': message, 'ipaddress': ip(), 'channel_id': "{{ $thisChannel->id }}", anony_name : localStorage['SsulChatAnonymous']})
+                    axios.post('/chat', {
+                        'message': message,
+                        'ipaddress': ip(),
+                        'channel_id': "{{ $thisChannel->id }}",
+                        anony_name: localStorage['SsulChatAnonymous']
+                    })
                         .then((response) => {
                             console.log(response);
                         });
-                },
+                }
+                ,
                 like: function (id) {
                     console.log('like');
                     axios.post('/like', {'chattingId': id, 'channel_id': "{{ $thisChannel->id }}"})
                         .then((response) => {
 //                                console.log(response);
                         });
-                },
+                }
+                ,
                 messageFormSubmit: function () {
                     console.log('hihihi');
                     setTimeout(chatting_app.submitMessage(), 0);

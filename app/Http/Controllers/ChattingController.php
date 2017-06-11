@@ -12,17 +12,25 @@ use Illuminate\Support\Str;
 
 class ChattingController extends Controller
 {
-    public function chattings($id, $channelId)
+    public function chattings(Request $request, $id, $channelId)
     {
         if (!Auth::check()) {
-            Auth::loginUsingId(1);
+            $user = Auth::loginUsingId(1);
+
+        } else {
+            $user = Auth::user();
+        }
+
+        // 익명이면 익명아이디 발행
+        if ($user->id == 1) {
+            $user->name = "익명" . dechex(str_slug($request->getClientIp(), ''));
         }
 
         $chats = Chatting::where('channel_id', $channelId)
             ->orderBy('created_at', 'desc')
             ->paginate(20)->sortBy('created_at');
 
-        $likes = Like::where('user_id',Auth::user()->id)
+        $likes = Like::where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(20)->sortBy('created_at');
 
@@ -38,7 +46,7 @@ class ChattingController extends Controller
         $thisChannel = Channel::with('ssul.teams')->with('ssul.channels')->findOrFail($channelId);
 
 //        return $thisChannel->toJson();
-        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes'));
+        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user'));
     }
 
 }

@@ -144,7 +144,7 @@
                             <li class="chat_id">{{$chat->user->name}}
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}}
-                                <button style="border:0;background:transparent" v-on:click="like('{{$chat->id}}')">
+                                <button style="border:0;background:transparent;margin-left:2%" v-on:click="like('{{$chat->id}}')">
                                     <img src="/images/gry_box_icon.png"></img>
                                     <div style="float:right">{{$chat->likes->count()}}</div>
                                 </button>

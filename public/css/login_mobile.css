@@ -30,7 +30,12 @@ div#wrap{ position:relative; margin:0px; padding:0px; }
         margin: 0px auto;
         margin-bottom: 80px;
     }
-    div.profile_form_wrap div.profile_formL{ box-sizing:border-box; position:relative; float:left;padding-top:32px;}
+    div.profile_form_wrap div.profile_formL {
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        padding-top: 150px;
+    }
     div.profile_form_wrap div.profile_formL div#box{ }
     div#box table tr{ float:left; width:100%; margin-bottom:15px; }
     div#box table tr th{ float:left; width:100%; text-align:left; margin-bottom:1px; }

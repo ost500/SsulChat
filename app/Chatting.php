@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $like
  * @property-read \App\User $user
  * @mixin \Eloquent
+ * @property-read \App\Channel $channel
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
  */
 class Chatting extends Model
 {

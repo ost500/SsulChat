@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Channel[] $channel
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Channel[] $channels
  */
 class Ssul extends Model
 {

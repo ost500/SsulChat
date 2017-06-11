@@ -12,6 +12,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $like
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Chatting[] $chattings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
  */
 class User extends Authenticatable
 {

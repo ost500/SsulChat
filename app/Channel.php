@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read \App\Ssul $ssul
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Chatting[] $chattings
  */
 class Channel extends Model
 {

@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Chatting;
+use App\Http\Controllers\ChattingController;
 use App\Like;
 use App\Notifications\ChattingLog;
 use App\User;
@@ -29,6 +30,7 @@ class likeEvent implements ShouldBroadcastNow
     public $chattingId;
     public $channelId;
     public $available;
+    public $popularChats;
     /**
      * Create a new event instance.
      *
@@ -59,6 +61,11 @@ class likeEvent implements ShouldBroadcastNow
             $like->save();
             $this->available = true;
         }
+        $this->popularChats = Chatting::where('channel_id', $request->channel_id)
+            ->has('likes')
+            ->with('likes')->withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->get();
     }
 
     /**
@@ -84,7 +91,8 @@ class likeEvent implements ShouldBroadcastNow
         return [
             'chattingId' => $this->chattingId,
             'userId' => $this->userId,
-            'available' => $this->available
+            'available' => $this->available,
+            'popularChats' => $this->popularChats,
         ];
     }
 }

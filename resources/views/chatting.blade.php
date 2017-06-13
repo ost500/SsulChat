@@ -82,7 +82,7 @@
                             @endif
                             @endforeach
                             </dd>
-                            @foreach($ssuls as  $ssul)
+                            @foreach($ssuls as $ssul)
                                 @if($ssul->id == $thisChannel->ssul->id)
                                     @continue
                                 @endif
@@ -143,7 +143,7 @@
                                 <div class="chat_profile_img"
                                      style="background-image: url('/images/chatpic01.png');"></div>
                             </li>
-                            <li class="chat_id">{{$chat->user->name }}
+                            <li class="chat_id">{{$chat->user->name}}
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}}
                                 <button style="border:0;background:transparent;margin-left:2%"
@@ -178,17 +178,16 @@
                 </div>
             </div>
 
-
+            <div class="chat_box">
             @foreach($popularChats as $popularChat)
-                <div class="chat_box">
                     <ul class="gry_box">
                         <li class="grybox_sj">{{ $popularChat->user->name }}</li>
                         <li class="grybox_good">{{ $popularChat->likes_count }}</li>
                         <li class="grybox_txt clear">{{ $popularChat->content }}
                         </li>
                     </ul>
-                </div>
             @endforeach
+            </div>
         </div>
     </div>
     </body>
@@ -240,6 +239,16 @@
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#000";
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "";
                         }
+                    }
+                    console.log(e.popularChats);
+                    $(".chat_box")[0].innerHTML = "";
+                    for(var i=0;i<e.popularChats.length;i++)
+                    {
+                        $(".chat_box").append('<ul class="gry_box">' +
+                            '<li class="grybox_sj">USER_ID' + e.popularChats[i].user_id + '</li>' +
+                            '<li class="grybox_good">CHATTING_ID' + e.popularChats[i].id + '</li>' +
+                            '<li class="grybox_txt clear">'+ e.popularChats[i].content + '</li>' +
+                            '</ul>');
                     }
                 });
 

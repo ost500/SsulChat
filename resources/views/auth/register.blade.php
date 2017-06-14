@@ -1,90 +1,98 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">가입하기</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
+    <title>SsulChat</title>
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+    <link rel="stylesheet" type="text/css" href="css/register_mobile.css">
 
-                        <div class="form-group{{ $errors->has('profile_img') ? ' has-error' : '' }}">
-                            <label for="profile_img" class="col-md-4 control-label">프로필 사진</label>
-
-                            <div class="col-md-4">
-                                <input id="profile_img" type="file" class="form-control" name="profile_img" value="{{ old('profile_img') }}">
-
-                                @if ($errors->has('profile_img'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('profile_img') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">닉네임</label>
-
-                            <div class="col-md-4">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
-
+</head>
+<body>
+<div id="wrap">
+    <div class="header_profile">
+        <h1>가입하기</h1>
+        <span><a href="#"><img src="images/profile_X.png" alt="닫기"></a></span>
+    </div>
+    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+        {{ csrf_field() }}
+        <div class="profile_form_wrap">
+            <div class="profile_formL">
+                <fieldset >
+                    <div id="box">
+                        <table summary="프로필 수정하기" >
+                            <caption style="display:none;">프로필 수정하기</caption>
+                            <tr>
+                                <th scope="row" id="form01-1"><label for="form01">닉네임</label></th>
+                                <td headers="form01-1"><input type="text" name="name" id="form01" class="textfield" style="outline:none" placeholder="NICKNAME" required/></td>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">이메일 주소</label>
-
-                            <div class="col-md-4">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
+                            </tr>
+                            <tr>
+                                <th scope="row" id="form02-1"><label for="form02">이메일주소</label></th>
+                                <td headers="form02-1"><input type="text" name="email" id="form02" class="textfield" style="outline:none" placeholder="E-MAIL" required/></td>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">비밀번호</label>
-
-                        <div class="col-md-4">
-                            <input id="password" type="password" class="form-control" name="password" required>
-
-                            @if ($errors->has('password'))
-                                <span class="help-block">
+                            </tr>
+                            <tr>
+                                <th scope="row" id="form02-1"><label for="form02">비밀번호</label></th>
+                                <td headers="form02-1"><input type="password" name="password" id="form03" class="textfield" style="outline:none" placeholder="PASSWORD" required/></td>
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                            @endif
-                        </div>
-                </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">비밀번호 확인</label>
-
-                            <div class="col-md-4">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    가입
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                                @endif
+                            </tr>
+                            <tr>
+                                <th scope="row" id="form02-1"><label for="form02">비밀번호 확인</label></th>
+                                <td headers="form02-1"><input type="password" name="password_confirmation" id="form04" class="textfield" style="outline:none" placeholder="CHECK YOUR PASSWORD" required/></td>
+                            </tr>
+                            <!--												<tr>
+                                                        <th scope="row" id="form03-1"><label for="form03">What I do</label></th>
+                                                        <td headers="form03-1"><input type="text" name="textfield" id="form03" class="textfield" style="outline:none" placeholder="What I do" /></td>
+                                                        <td class="td_txt">Let people know what you do at OP.GG.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row" id="form04-1"><label for="form04">Status</label></th>
+                                                        <td headers="form04-1" class="form04-1"><span class="smileI"></span><input type="text" name="textfield" id="form04" class="textfield" style="outline:none" placeholder="What's your status?" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row" id="form05-1"><label for="form05">Phone number</label></th>
+                                                        <td headers="form05-1"><input type="text" name="textfield" id="form05" class="textfield" style="outline:none" placeholder="(123) 555-5555" /></td>
+                                                        <td class="td_txt">Enter a phone number.</td>
+                                                    </tr>
+                                                    <tr id="select_box">
+                                                        <th scope="row" id="form06-1"><label for="form06">Time Zone</label></th>
+                                                        <td headers="form06-1" id="select_box">
+                                                        <select name="form06" id="form06" class="form06" style="outline:none" >
+                                                         <option selected="selected">Time Zone</option>
+                                                         <option>(UTC+09:00) Osaka, Sapporo, Tokyo</option>
+                                                         <option>(UTC+09:00) Osaka, Sapporo, Tokyo</option>
+                                                         </select>
+                                                        </td>
+                                                        <td class="td_txt">Your current time zone. Used to send summary and notiification emails, for times in your activity feeds, and for reminders.</td>
+                                                    </tr>
+                            -->
+                        </table>
+                    </div>
+                </fieldset>
             </div>
         </div>
-    </div>
+
+        <div class="profile_form_btn">
+            <div>
+                <span id="form_btn_n"><input type="submit" alt="Cancel" value="Cancel" /></span>
+                <span id="form_btn_o"><input type="submit" alt="OK" value="OK" /></span>
+            </div>
+        </div>
+    </form>
 </div>
-@endsection
+</body>
+</html>

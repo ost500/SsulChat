@@ -40,11 +40,15 @@
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             } else {
                 var outerheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
+                var rightSideBarheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - 20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
 
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+
+                $('.chat_box').css('height', rightSideBarheight);
+                $('.chat_box')[0].scrollTop = 0;
             }
 
         })

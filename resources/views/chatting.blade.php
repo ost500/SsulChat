@@ -8,15 +8,20 @@
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
-
+                $('.chat_txt_area2').css('bottom', 0);
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             } else {
                 var outerheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
+                var rightSideBarheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - 20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
 
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+
+                $('.chat_box').css('height', rightSideBarheight);
+                $('.chat_box')[0].scrollTop = 0;
+
             }
             if (localStorage['SsulChatAnonymous'] === undefined || localStorage['SsulChatAnonymous'] != '익명' + parseInt(ip().split('.').join('')).toString(16)) {
                 localStorage['SsulChatAnonymous'] = '익명' + parseInt(ip().split('.').join('')).toString(16);
@@ -178,7 +183,7 @@
                 </div>
             </div>
 
-            <div class="chat_box">
+            <div class="chat_box" style="overflow-y:auto">
             @foreach($popularChats as $popularChat)
                 <ul class="gry_box">
                     <li class="grybox_sj">{{ $popularChat->user->name }}</li>

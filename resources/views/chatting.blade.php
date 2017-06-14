@@ -45,10 +45,7 @@
 
                 $('.chat_txt_area2').css('height', outerheight);
 
-                $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
-
                 $('.chat_box').css('height', rightSideBarheight);
-                $('.chat_box')[0].scrollTop = 0;
             }
 
         })

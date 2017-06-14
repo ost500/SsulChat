@@ -20,6 +20,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use Psy\Util\Json;
 
 class likeEvent implements ShouldBroadcastNow
 {
@@ -61,11 +62,22 @@ class likeEvent implements ShouldBroadcastNow
             $like->save();
             $this->available = true;
         }
-        $this->popularChats = Chatting::where('channel_id', $request->channel_id)
+        $popularChats = Chatting::where('channel_id', $request->channel_id)
             ->has('likes')
             ->with('likes')->withCount('likes')
+            ->with('user')
             ->orderBy('likes_count', 'desc')
             ->get();
+
+        $this->popularChats = Array();
+        for($i=0;$i<$popularChats->count();$i++)
+        {
+            $array = Array();
+            $array = array_add($array,'user_name',$popularChats[$i]->user->name);
+            $array = array_add($array,'likes_count',$popularChats[$i]->likes_count);
+            $array = array_add($array,'content',$popularChats[$i]->content);
+            $this->popularChats = array_add($this->popularChats,$i,$array);
+        }
     }
 
     /**

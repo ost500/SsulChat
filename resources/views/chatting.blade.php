@@ -180,12 +180,12 @@
 
             <div class="chat_box">
             @foreach($popularChats as $popularChat)
-                    <ul class="gry_box">
-                        <li class="grybox_sj">{{ $popularChat->user->name }}</li>
-                        <li class="grybox_good">{{ $popularChat->likes_count }}</li>
-                        <li class="grybox_txt clear">{{ $popularChat->content }}
-                        </li>
-                    </ul>
+                <ul class="gry_box">
+                    <li class="grybox_sj">{{ $popularChat->user->name }}</li>
+                    <li class="grybox_good">{{ $popularChat->likes_count }}</li>
+                    <li class="grybox_txt clear">{{ $popularChat->content }}
+                    </li>
+                </ul>
             @endforeach
             </div>
         </div>
@@ -245,8 +245,8 @@
                     for(var i=0;i<e.popularChats.length;i++)
                     {
                         $(".chat_box").append('<ul class="gry_box">' +
-                            '<li class="grybox_sj">USER_ID' + e.popularChats[i].user_id + '</li>' +
-                            '<li class="grybox_good">CHATTING_ID' + e.popularChats[i].id + '</li>' +
+                            '<li class="grybox_sj">' + e.popularChats[i].user_name + '</li>' +
+                            '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +
                             '<li class="grybox_txt clear">'+ e.popularChats[i].content + '</li>' +
                             '</ul>');
                     }

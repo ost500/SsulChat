@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class ChattingController extends Controller
 {
-    public function chattings(Request $request, $id, $channelId)
+    public function chattings(Request $request, $id, $channelId=1)
     {
         if (!Auth::check()) {
             $user = Auth::loginUsingId(1);

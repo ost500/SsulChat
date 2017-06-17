@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
@@ -7,6 +7,7 @@
     <title>Ssulchat</title>
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/login_mobile.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 <body>
@@ -19,13 +20,14 @@
         {{ csrf_field() }}
         <div class="profile_form_wrap">
             <div class="profile_formL">
-                <fieldset >
+                <fieldset>
                     <div id="box">
-                        <table summary="로그인" >
+                        <table summary="로그인">
                             <caption style="display:none;">로그인</caption>
                             <tr>
                                 <th scope="row" id="form02-1"><label for="form02">이메일주소</label></th>
-                                <td headers="form02-1"><input type="text" name="email" id="form02" class="textfield" style="outline:none" placeholder="E-MAIL" /></td>
+                                <td headers="form02-1"><input type="text" name="email" id="form02" class="textfield"
+                                                              style="outline:none" placeholder="E-MAIL"/></td>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -34,7 +36,9 @@
                             </tr>
                             <tr>
                                 <th scope="row" id="form02-1"><label for="form02">비밀번호</label></th>
-                                <td headers="form02-1"><input type="password" name="password" id="form03" class="textfield" style="outline:none" placeholder="PASSWORD" /></td>
+                                <td headers="form02-1"><input type="password" name="password" id="form03"
+                                                              class="textfield" style="outline:none"
+                                                              placeholder="PASSWORD"/></td>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -82,10 +86,39 @@
 
         <div class="profile_form_btn">
             <div>
-                <span id="form_btn_o"><input type="submit" alt="OK" value="OK" /></span>
+                <span id="form_btn_o"><input type="submit" alt="OK" value="OK"/></span>
+                <span id="form_btn_o"><input v-on:click="facebookLogin" alt="OK" value="facebook"/></span>
             </div>
         </div>
     </form>
 </div>
+
+<script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+<script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+
+
+<script>
+
+    var chatting_app = new Vue({
+        el: '#wrap',
+        data: {},
+        beforeCreate: function () {
+
+        },
+
+        methods: {
+
+            facebookLogin: function () {
+                window.location = "{{ route('facebookLogin') }}";
+            }
+
+        }
+    })
+
+
+</script>
+
 </body>
 </html>

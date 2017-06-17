@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c86ae6b2cde381f72b5798bd4183a91",
+    "content-hash": "d50710cd0ef63227892177682cc0ea65",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -147,64 +147,6 @@
                 "parser"
             ],
             "time": "2017-03-29T16:04:15+00:00"
-        },
-        {
-            "name": "facebook/graph-sdk",
-            "version": "5.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/facebook/php-graph-sdk.git",
-                "reference": "93d7dc87e55a541d2e27d38f3aed40abbffdf6e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/93d7dc87e55a541d2e27d38f3aed40abbffdf6e1",
-                "reference": "93d7dc87e55a541d2e27d38f3aed40abbffdf6e1",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.4|^7.0"
-            },
-            "require-dev": {
-                "guzzlehttp/guzzle": "~5.0",
-                "mockery/mockery": "~0.8",
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
-                "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Facebook\\": "src/Facebook/"
-                },
-                "files": [
-                    "src/Facebook/polyfills.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Facebook Platform"
-            ],
-            "authors": [
-                {
-                    "name": "Facebook",
-                    "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
-                }
-            ],
-            "description": "Facebook SDK for PHP",
-            "homepage": "https://github.com/facebook/php-graph-sdk",
-            "keywords": [
-                "facebook",
-                "sdk"
-            ],
-            "time": "2017-04-20T14:15:02+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -601,6 +543,60 @@
             "time": "2017-05-30T12:44:32+00:00"
         },
         {
+            "name": "laravel/socialite",
+            "version": "v3.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/socialite.git",
+                "reference": "bca777a8526983e0ebdf3350f1b6e031923a473b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/bca777a8526983e0ebdf3350f1b6e031923a473b",
+                "reference": "bca777a8526983e0ebdf3350f1b6e031923a473b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "illuminate/contracts": "~5.4",
+                "illuminate/http": "~5.4",
+                "illuminate/support": "~5.4",
+                "league/oauth1-client": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0|~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Socialite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
+            "keywords": [
+                "laravel",
+                "oauth"
+            ],
+            "time": "2017-05-05T14:17:11+00:00"
+        },
+        {
             "name": "laravel/tinker",
             "version": "v1.0.1",
             "source": {
@@ -745,6 +741,69 @@
                 "storage"
             ],
             "time": "2017-04-28T10:15:08+00:00"
+        },
+        {
+            "name": "league/oauth1-client",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/oauth1-client.git",
+                "reference": "fca5f160650cb74d23fc11aa570dd61f86dcf647"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/fca5f160650cb74d23fc11aa570dd61f86dcf647",
+                "reference": "fca5f160650cb74d23fc11aa570dd61f86dcf647",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9",
+                "phpunit/phpunit": "^4.0",
+                "squizlabs/php_codesniffer": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\OAuth1\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Corlett",
+                    "email": "bencorlett@me.com",
+                    "homepage": "http://www.webcomm.com.au",
+                    "role": "Developer"
+                }
+            ],
+            "description": "OAuth 1.0 Client Library",
+            "keywords": [
+                "Authentication",
+                "SSO",
+                "authorization",
+                "bitbucket",
+                "identity",
+                "idp",
+                "oauth",
+                "oauth1",
+                "single sign on",
+                "trello",
+                "tumblr",
+                "twitter"
+            ],
+            "time": "2016-08-17T00:36:58+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1371,65 +1430,6 @@
                 "uuid"
             ],
             "time": "2017-03-26T20:37:53+00:00"
-        },
-        {
-            "name": "sammyk/laravel-facebook-sdk",
-            "version": "3.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SammyK/LaravelFacebookSdk.git",
-                "reference": "a958996d6f0c7072dfce24a8985c2844deac5d09"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SammyK/LaravelFacebookSdk/zipball/a958996d6f0c7072dfce24a8985c2844deac5d09",
-                "reference": "a958996d6f0c7072dfce24a8985c2844deac5d09",
-                "shasum": ""
-            },
-            "require": {
-                "facebook/graph-sdk": "^5.0",
-                "illuminate/auth": "~5.0|~5.1|~5.2|~5.3",
-                "illuminate/config": "~5.0|~5.1|~5.2|~5.3",
-                "illuminate/database": "~5.0|~5.1|~5.2|~5.3",
-                "illuminate/routing": "~5.0|~5.1|~5.2|~5.3",
-                "illuminate/session": "~5.0|~5.1|~5.2|~5.3",
-                "illuminate/support": "~5.0|~5.1|~5.2|~5.3",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SammyK\\LaravelFacebookSdk\\": "src/LaravelFacebookSdk"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sammy Kaye Powers",
-                    "email": "me@sammyk.me",
-                    "homepage": "http://sammyk.me",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Fully unit tested Facebook SDK v5 integration for Laravel & Lumen 5.x",
-            "homepage": "https://github.com/SammyK/LaravelFacebookSdk",
-            "keywords": [
-                "facebook",
-                "facebook sdk v4",
-                "facebook sdk v5",
-                "laravel",
-                "lumen",
-                "sdk"
-            ],
-            "time": "2017-04-20T14:39:27+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

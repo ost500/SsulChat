@@ -33,12 +33,16 @@ Route::get('/log_in', function () {
 //    event(new App\Events\test2Event());
 //});
 
-Route::post('chat', function(Request $request){
+Route::post('chat', function (Request $request) {
     event(new App\Events\newEvent($request));
 });
-Route::post('like', function(Request $request){
+Route::post('like', function (Request $request) {
     event(new App\Events\likeEvent($request));
 });
 
 
 Route::get('/chattings/{id}/{channelId}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);
+
+Route::get('/facebook/login/', ['as' => 'facebookLogin', 'uses' => 'MainController@facebookLogin']);
+
+Route::get('/facebook/callback', ['as' => 'facebookLoginCallback', 'uses' => 'MainController@facebookCallback']);

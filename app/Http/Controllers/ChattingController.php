@@ -12,8 +12,12 @@ use Illuminate\Support\Str;
 
 class ChattingController extends Controller
 {
-    public function chattings(Request $request, $id, $channelId=1)
+    public function chattings(Request $request, $id, $channelId = 0)
     {
+        if ($channelId == 0) {
+            $channelId = Ssul::find($id)->channels->first()->id;
+        }
+
         if (!Auth::check()) {
             $user = Auth::loginUsingId(1);
 

@@ -83,10 +83,12 @@
                         <a href="#"><span class="ddf">{{ str_limit($thisChannel->ssul->name, 30)}}</span></a>
                     @foreach($thisChannel->ssul->channels as $num => $channel)
                         @if($channel->id == $thisChannel->id)
-                            <dd><a href="{{ route('chattings',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
+                            <dd>
+                                <a href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
                                             class="ddt">-->{{ $num+1 }}번 채널</span></a></dd>
                         @else
-                            <dd><a href="{{ route('chattings',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
+                            <dd>
+                                <a href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
                                             class="ddt">{{ $num+1 }}번 채널</span></a></dd>
                             @endif
                             @endforeach
@@ -96,7 +98,8 @@
                                     @continue
                                 @endif
                                 <dd>
-                                    <a href="{{ route('chattings',['id' => $ssul->id, 'channelId' => $ssul->channels->first()->id]) }}"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
+                                    <a href="{{ route('chattings',['id' => $ssul->id]) }}"><span
+                                                class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
 
                                 </dd>
                                 {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}

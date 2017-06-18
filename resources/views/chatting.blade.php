@@ -124,13 +124,17 @@
 
                 <div class="chat_txt_area1">
                     <!-- TestADS -->
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- ssulchat/chattings/ -->
                     <ins class="adsbygoogle"
                          style="display:inline-block;width:728px;height:90px"
                          data-ad-client="ca-pub-8665007420370986"
-                         data-ad-slot="6492176154"></ins>
+                         data-ad-slot="9657354953"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
+
+
                     <div class="graph">
 
                         <dl class="selectL" style="width:35%">

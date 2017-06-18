@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\User;
-use Facebook\Exceptions\FacebookSDKException;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
-use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
+
 
 class MainController extends Controller
 {
@@ -21,13 +21,13 @@ class MainController extends Controller
         return view('main', compact('channels'));
     }
 
-    public function facebookLogin(LaravelFacebookSdk $fb)
+    public function facebookLogin()
     {
         return Socialite::driver('facebook')->redirect();
 
     }
 
-    public function facebookCallback(LaravelFacebookSdk $fb)
+    public function facebookCallback()
     {
 
         $fbUser = Socialite::driver('facebook')->user();
@@ -48,6 +48,6 @@ class MainController extends Controller
             Auth::loginUsingId($user->id);
         }
 
-        return redirect()->intended($this->redirectPath());
+        return redirect()->intended();
     }
 }

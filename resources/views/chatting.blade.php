@@ -94,9 +94,7 @@
                                 @endif
                                 <dd>
                                     <a href="#"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
-                                @foreach($ssul->channels as $num => $channel)
-                                    <dd><a href="#"><span class="ddt">{{ $num+1 }}번 채널</span></a></dd>
-                                    @endforeach
+
                                     </dd>
                                     {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
                                     {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
@@ -125,11 +123,12 @@
                 <div class="chat_txt_area1">
                     <!-- TestADS -->
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- ssulchat/chattings/ -->
+                    <!-- ssulchat/chattings/1/1 -->
                     <ins class="adsbygoogle"
-                         style="display:inline-block;width:728px;height:90px"
+                         style="display:block"
                          data-ad-client="ca-pub-8665007420370986"
-                         data-ad-slot="9657354953"></ins>
+                         data-ad-slot="4947953757"
+                         data-ad-format="auto"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>

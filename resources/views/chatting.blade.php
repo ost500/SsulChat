@@ -220,7 +220,7 @@
                 typingUserName: [],
                 typing: false
             },
-            beforeCreated: function () {
+            created: function () {
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
                     //console.log(e);
@@ -256,7 +256,7 @@
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "";
                         }
                     }
-                    console.log(e.popularChats);
+//                    console.log(e.popularChats);
                     $(".chat_box")[0].innerHTML = "";
                     for(var i=0;i<e.popularChats.length;i++)
                     {
@@ -278,7 +278,7 @@
                     let channel = Echo.join('isTyping{{$thisChannel->id}}');
 
                     setTimeout(function () {
-                        console.log('whisper!!');
+//                        console.log('whisper!!');
                         channel.whisper('isTyping', {
                             name: "{{ $user->name }}",
                             typing: true
@@ -286,11 +286,11 @@
                     }, 300);
 
 
-                    console.log('listen whisper!!');
+//                    console.log('listen whisper!!');
                     channel.listenForWhisper('isTyping', (e) => {
-                        console.log(e.name);
+//                        console.log(e.name);
 
-                        console.log(this.typingUserName);
+//                        console.log(this.typingUserName);
                         if (e.typing === false) {
                             this.typingUserName.pop(e.name);
                         } else {
@@ -310,7 +310,7 @@
                 isNotTyping: function () {
                     let channel = Echo.join('isTyping{{$thisChannel->id}}');
 
-                    console.log('whisperStotp!!');
+//                    console.log('whisperStotp!!');
                     setTimeout(function () {
                         channel.whisper('isTyping', {
                             name: "{{ $user->name }}",
@@ -337,12 +337,12 @@
                         anony_name: localStorage['SsulChatAnonymous']
                     })
                         .then((response) => {
-                            console.log(response);
+//                            console.log(response);
                         });
                 }
                 ,
                 like: function (id) {
-                    console.log('like');
+//                    console.log('like');
                     axios.post('/like', {'chattingId': id, 'channel_id': "{{ $thisChannel->id }}"})
                         .then((response) => {
 //                                console.log(response);
@@ -350,7 +350,7 @@
                 }
                 ,
                 messageFormSubmit: function () {
-                    console.log('hihihi');
+//                    console.log('hihihi');
                     setTimeout(chatting_app.submitMessage(), 0);
                     return false;
                 }

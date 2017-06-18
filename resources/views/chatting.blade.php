@@ -52,7 +52,14 @@
     </script>
 
 
-    <div id="chatting">
+    <!-- TestADS -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- ssulchat/chattings/1/1 -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <div id="chat_wrapper">
         <div class="header_chat">
             <ul class="chat_top_hot">
                 <li class="hot_01"><img src="/images/top_hot.png" alt="hot썰"></li>
@@ -121,17 +128,12 @@
             <div class="chat_txt">
 
                 <div class="chat_txt_area1">
-                    <!-- TestADS -->
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- ssulchat/chattings/1/1 -->
+
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-8665007420370986"
                          data-ad-slot="4947953757"
                          data-ad-format="auto"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
 
 
                     <div class="graph">
@@ -217,7 +219,7 @@
     <script>
 
         var chatting_app = new Vue({
-            el: '#chatting',
+            el: '#chat_wrapper',
             data: {
                 typingUserName: [],
                 typing: false

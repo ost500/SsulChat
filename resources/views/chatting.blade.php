@@ -96,10 +96,10 @@
                                 <dd>
                                     <a href="#"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
 
-                                    </dd>
-                                    {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
-                                    {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
-                                @endforeach
+                                </dd>
+                                {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
+                                {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
+                            @endforeach
                 </dl>
                 <dl class="message">
                     <dt>DIRECT MESSAGES<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
@@ -154,8 +154,14 @@
                     @foreach($chats as $chat)
                         <ul id="{{$chat->id}}">
                             <li class="chat_pic">
-                                <div class="chat_profile_img"
-                                     style="background-image: url('/images/chatpic01.png');"></div>
+                                @if($chat->user->profile_img == null)
+                                    <div class="chat_profile_img"
+                                         style="background-image: url('/images/chatpic01.png');"></div>
+                                @else
+                                    <div class="chat_profile_img"
+                                         style="background-image: url('{{$chat->user->profile_img}}');"></div>
+                                @endif
+
                             </li>
                             <li class="chat_id">{{$chat->user->name}}
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
@@ -177,8 +183,9 @@
 
                 </div>
 
-                <div id="someone_typing" hidden v-if="typing" style="position: fixed;bottom: 55px;" >
-                    <div v-for="user in typingUserName">@{{ user }},</div> 님이 입력 중 입니다..
+                <div id="someone_typing" hidden v-if="typing" style="position: fixed;bottom: 55px;">
+                    <div v-for="user in typingUserName">@{{ user }},</div>
+                    님이 입력 중 입니다..
                 </div>
 
 
@@ -193,14 +200,14 @@
             </div>
 
             <div class="chat_box" style="overflow-y:auto">
-            @foreach($popularChats as $popularChat)
-                <ul class="gry_box">
-                    <li class="grybox_sj">{{ $popularChat->user->name }}</li>
-                    <li class="grybox_good">{{ $popularChat->likes_count }}</li>
-                    <li class="grybox_txt clear">{{ $popularChat->content }}
-                    </li>
-                </ul>
-            @endforeach
+                @foreach($popularChats as $popularChat)
+                    <ul class="gry_box">
+                        <li class="grybox_sj">{{ $popularChat->user->name }}</li>
+                        <li class="grybox_good">{{ $popularChat->likes_count }}</li>
+                        <li class="grybox_txt clear">{{ $popularChat->content }}
+                        </li>
+                    </ul>
+                @endforeach
             </div>
         </div>
     </div>
@@ -223,10 +230,12 @@
             created: function () {
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
-                    //console.log(e);
+                    console.log(e);
+
+
 
                     $('#chats').append("<ul id=" + e.id + ">" +
-                        "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(\'/images/chatpic01.png\')\"></div></li>" +
+                        "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(" + e.profile_img + ")\"></div></li>" +
                         "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
                         "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" onclick=\"chatting_app.like(" + e.id + ")\"><img class=\"likeButtonImg\" src=\"/images/like_blank.png\"></img><div style=\"float:right\">0</div></button></li>" +
                         "</ul>");
@@ -258,12 +267,11 @@
                     }
 //                    console.log(e.popularChats);
                     $(".chat_box")[0].innerHTML = "";
-                    for(var i=0;i<e.popularChats.length;i++)
-                    {
+                    for (var i = 0; i < e.popularChats.length; i++) {
                         $(".chat_box").append('<ul class="gry_box">' +
                             '<li class="grybox_sj">' + e.popularChats[i].user_name + '</li>' +
                             '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +
-                            '<li class="grybox_txt clear">'+ e.popularChats[i].content + '</li>' +
+                            '<li class="grybox_txt clear">' + e.popularChats[i].content + '</li>' +
                             '</ul>');
                     }
                 });

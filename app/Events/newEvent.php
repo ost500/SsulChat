@@ -28,6 +28,7 @@ class newEvent implements ShouldBroadcastNow
     public $ipAddress;
     public $chattingId;
     public $channelId;
+    public $profile_img;
 
     /**
      * Create a new event instance.
@@ -46,11 +47,15 @@ class newEvent implements ShouldBroadcastNow
         if(Auth::user()->name == "anonymous")
         {
             $this->userName = $request->anony_name;
+
         }
         else
         {
             $this->userName = Auth::user()->name;
+
         }
+        $this->profile_img = Auth::user()->profile_img;
+
         $this->time = Carbon::now()->toDateTimeString();
         $this->channelId = $request->channel_id;
 
@@ -89,7 +94,8 @@ class newEvent implements ShouldBroadcastNow
             'userName' => $this->userName,
             'time' => $this->time,
             'ipAddress' => $this->ipAddress,
-            'id' => $this->chattingId
+            'id' => $this->chattingId,
+            'profile_img' => $this->profile_img
         ];
     }
 }

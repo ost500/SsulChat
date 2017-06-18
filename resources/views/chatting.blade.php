@@ -178,7 +178,7 @@
 
                 </div>
 
-                <div v-if="typing" style="position: fixed;bottom: 55px;" >
+                <div id="someone_typing" hidden v-if="typing" style="position: fixed;bottom: 55px;" >
                     <div v-for="user in typingUserName">@{{ user }},</div> 님이 입력 중 입니다..
                 </div>
 
@@ -219,7 +219,7 @@
                 typingUserName: [],
                 typing: false
             },
-            mounted: function () {
+            beforeCreated: function () {
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
                     //console.log(e);
@@ -266,6 +266,8 @@
                             '</ul>');
                     }
                 });
+
+                $("#someone_typing").show();
 
 
             },

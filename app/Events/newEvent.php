@@ -44,13 +44,10 @@ class newEvent implements ShouldBroadcastNow
 //        Notification::send(Auth::user(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
         $this->ipAddress = $request->ipaddress;
-        if(Auth::user()->name == "anonymous")
-        {
+        if (Auth::user()->name == "anonymous") {
             $this->userName = $request->anony_name;
 
-        }
-        else
-        {
+        } else {
             $this->userName = Auth::user()->name;
 
         }
@@ -76,7 +73,7 @@ class newEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        Notification::send(Auth::user(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
+        Notification::send(Auth::user(), new ChattingLog("[채널:{$this->channelId}]{$this->userName}({$this->time}) : {$this->message}"));
 
         return new PresenceChannel('newMessage' . $this->channelId);
     }

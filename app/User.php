@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return env('SLACK_WEBHOOK_URL');
     }
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'team_users');
+    }
 }

@@ -27,7 +27,7 @@ class MainController extends Controller
 
     }
 
-    public function facebookCallback()
+    public function facebookCallback(Request $request)
     {
 
         $fbUser = Socialite::driver('facebook')->user();

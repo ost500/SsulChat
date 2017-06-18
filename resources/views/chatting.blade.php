@@ -96,7 +96,7 @@
                                     @continue
                                 @endif
                                 <dd>
-                                    <a href="{{ route('chattings',['id' => $ssul->id, 'channelId' => 1]) }}"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
+                                    <a href="{{ route('chattings',['id' => $ssul->id, 'channelId' => $ssul->channels->first()->id]) }}"><span class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
 
                                 </dd>
                                 {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
@@ -104,7 +104,7 @@
                             @endforeach
                 </dl>
                 <dl class="message">
-                    <dt>DIRECT MESSAGES<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
+                    <dt>참석자<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
                     </dt>
                     <dd><a href="#"><span class="mess_icon01">slackbot</span></a></dd>
                     <dd><a href="#"><span class="mess_icon02">ruin_alen(you)</span><img class="mess_pic"

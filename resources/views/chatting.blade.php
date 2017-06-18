@@ -1,6 +1,7 @@
 @extends('layouts.header')
 @section('content')
     <body xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         window.onload = function () {
             if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
@@ -122,17 +123,12 @@
 
                 <div class="chat_txt_area1">
                     <!-- TestADS -->
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- ssulchat/chattings/1/1 -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-8665007420370986"
                          data-ad-slot="4947953757"
                          data-ad-format="auto"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-
 
                     <div class="graph">
 
@@ -209,7 +205,9 @@
         </div>
     </div>
     </body>
-
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     <script type="text/javascript" src="http://jsgetip.appspot.com"></script>
     <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>

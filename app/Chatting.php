@@ -24,8 +24,12 @@ class Chatting extends Model
     {
         return $this->hasMany(Like::class);
     }
-    public function channel()
+        public function channel()
     {
         return  $this->belongsTo(Channel::class);
+    }
+        public function team()
+    {
+        return $this->belongsTo(Team::class);
     }
 }

@@ -10,4 +10,8 @@ class Team extends Model
     {
         return $this->belongsTo(Ssul::class);
     }
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

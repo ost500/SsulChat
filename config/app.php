@@ -180,6 +180,7 @@ return [
 
 
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
     ],
 
     /*
@@ -231,6 +232,8 @@ return [
 
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+
     ],
 
 ];

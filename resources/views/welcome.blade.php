@@ -46,14 +46,7 @@ This web page has been developed by Wani.
 
 </head>
 <body>
-<!-- TestADS -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-8665007420370986"
-     data-ad-slot="6492176154"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+
 <div id="app">
 <div class="chat"></div>
     <form class="form">

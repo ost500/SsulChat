@@ -12,14 +12,14 @@
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             } else {
                 var outerheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
-                var rightSideBarheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - 20;
+//                var rightSideBarheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - 20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
 
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
 
-                $('.chat_box').css('height', rightSideBarheight);
+//                $('.chat_box').css('height', rightSideBarheight);
                 $('.chat_box')[0].scrollTop = 0;
 
             }
@@ -40,12 +40,12 @@
                 $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
             } else {
                 var outerheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
-                var rightSideBarheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - 20;
+//                var rightSideBarheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - 20;
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
 
-                $('.chat_box').css('height', rightSideBarheight);
+//                $('.chat_box').css('height', rightSideBarheight);
             }
 
         })
@@ -121,7 +121,16 @@
 
 
             <div class="chat_txt">
+
                 <div class="chat_txt_area1">
+                    <!-- TestADS -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-8665007420370986"
+                         data-ad-slot="6492176154"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                     <div class="graph">
 
                         <dl class="selectL" style="width:35%">

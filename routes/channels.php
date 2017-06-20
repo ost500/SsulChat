@@ -45,9 +45,14 @@ Broadcast::channel('presence-try', function () {
     Log::info("try!!!!!!!!!!!!!!!!");
     return true;
 });
-Broadcast::channel('newMessage*', function () {
-    Log::info("new Message!");
-    return true;
+Broadcast::channel('newMessage{channelId}', function ($user, $channelId) {
+
+
+
+    return [
+        'id' => $user->id,
+        'name' => $user->name,
+    ];
 });
 Broadcast::channel('like', function () {
     Log::info("try!!!!!!!!!!!!!!!!");

@@ -107,16 +107,13 @@
                             @endforeach
                 </dl>
                 <dl class="message">
-                    <dt>참석자<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
+                    <dt>참석자 (@{{ viewers.length  }})<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
                     </dt>
-                    <dd><a href="#"><span class="mess_icon01">slackbot</span></a></dd>
-                    <dd><a href="#"><span class="mess_icon02">ruin_alen(you)</span><img class="mess_pic"
-                                                                                        src="/images/chat_icon10.png"></a>
+
+                    <dd v-for="viewer in viewers">
+                        <a href="#"><span class="mess_icon01">@{{ viewer.name }}</span></a>
                     </dd>
-                    <dd><a href="#"><span class="mess_icon02">obie</span></a></dd>
-                    <dd><a href="#"><span class="mess_icon02">ost</span></a></dd>
-                    <dd><a href="#"><span class="mess_icon03">t0dd</span></a></dd>
-                    <dd><a href="#"><span class="invite">+ Invite people</span></a></dd>
+
                 </dl>
                 <div class="chat_left_menu">
                     <p><a href="#"><img src="/images/chat_left_menu.png" alt="메뉴"></a></p>
@@ -230,7 +227,8 @@
             el: '#chatting',
             data: {
                 typingUserName: [],
-                typing: false
+                typing: false,
+                viewers: {}
             },
             created: function () {
 
@@ -247,7 +245,18 @@
 
                     // 맨 아래로 스크롤 이동
 
+                }).here(viewers => {
+                    console.log('abc');
+                    console.log(viewers);
+                    this.viewers = viewers;
+                }).joining((user) => {
+                    console.log(user.name);
+                    this.viewers.push(user);
+                }).leaving((user) => {
+                    this.viewers.pop(user);
                 });
+
+
 
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.like', (e) => {

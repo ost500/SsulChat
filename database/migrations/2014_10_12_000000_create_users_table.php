@@ -19,15 +19,21 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('profile_img')->nullable();
+            $table->boolean('annony')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
 
-        App\User::create([
-            'name' => 'anonymous',
-            'email' => 'anonymous',
-            'password' => bcrypt('!@#$%^&*()')
-        ]);
+        for($i=0; $i<=100; ++$i){
+            App\User::create([
+                'name' => '익명'.$i,
+                'email' => "anonymous{$i}@osteng.com",
+                'annony' => true,
+                'profile_img' => '/images/chatpic01.png',
+                'password' => bcrypt('!@#$%^&*()')
+            ]);
+        }
+
     }
 
     /**

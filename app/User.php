@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'annony', 'profile_img'
     ];
 
     /**
@@ -51,6 +51,7 @@ class User extends Authenticatable
     {
         return env('SLACK_WEBHOOK_URL');
     }
+
     public function teams()
     {
         return $this->belongsToMany(Team::class, 'team_users');

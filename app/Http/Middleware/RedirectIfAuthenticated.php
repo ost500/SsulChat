@@ -17,7 +17,7 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::check() && Auth::user()->id == 1) {
+        if (Auth::check() && Auth::user()->annony == true) {
             Auth::logout();
         }
 

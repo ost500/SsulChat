@@ -6,9 +6,12 @@ use App\Channel;
 use App\Chatting;
 use App\Like;
 use App\Ssul;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Mockery\Exception;
+use Redis;
 
 class ChattingController extends Controller
 {
@@ -18,14 +21,54 @@ class ChattingController extends Controller
             $channelId = Ssul::find($id)->channels->first()->id;
         }
 
+        $loginMembers = null;
+
         if (!Auth::check()) {
-            $user = Auth::loginUsingId(1);
+
+            $loginMembers = Redis::get("presence-newMessage{$channelId}:members");
+
+            $loginMembers = json_decode($loginMembers);
+
+            $users = User::where('annony', true)->pluck('id');
+            $users = $users->toArray();
+
+
+            foreach ($loginMembers as $member) {
+                $rmArr = array($member->user_info->id);
+                $users = array_diff($users, $rmArr);
+            }
+
+
+            $user = null;
+
+            if (!is_null($users)) {
+                $user = Auth::loginUsingId($users[1]);
+            } else {
+
+                for ($i = 0; $i <= 100; $i++) {
+
+                    try {
+                        $user = User::create([
+                            'name' => '익명' . rand(1, 10000),
+                            'email' => "anonymous" . rand(1, 10000) . "@osteng.com",
+                            'annony' => true,
+                            'profile_img' => '/images/chatpic01.png',
+                            'password' => bcrypt('!@#$%^&*()')
+                        ]);
+
+                        break;
+                    } catch (Exception $e) {
+
+                    }
+                }
+            }
+
 
         } else {
             $user = Auth::user();
         }
 
-        // 익명이면 익명아이디 발행
+// 익명이면 익명아이디 발행
         if ($user->id == 1) {
             $user->name = "익명" . dechex(str_slug($request->getClientIp(), ''));
         }
@@ -49,8 +92,9 @@ class ChattingController extends Controller
 
         $thisChannel = Channel::with('ssul.teams')->with('ssul.channels')->findOrFail($channelId);
 
+
 //        return $thisChannel->toJson();
-        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user'));
+        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers'));
     }
 
 }

@@ -39,10 +39,12 @@ class ChattingController extends Controller
             }
 
 
+            $users = array_values($users);
+
             $user = null;
 
             if (!is_null($users)) {
-                $user = Auth::loginUsingId($users[1]);
+                $user = Auth::loginUsingId($users[0]);
             } else {
 
                 for ($i = 0; $i <= 100; $i++) {

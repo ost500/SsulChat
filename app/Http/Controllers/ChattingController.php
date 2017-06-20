@@ -17,6 +17,10 @@ class ChattingController extends Controller
 {
     public function chattings(Request $request, $id, $channelId = 0)
     {
+        if (Auth::check() && Auth::user()->annony == true) {
+            Auth::logout();
+        }
+
         if ($channelId == 0) {
             $channelId = Ssul::find($id)->channels->first()->id;
         }

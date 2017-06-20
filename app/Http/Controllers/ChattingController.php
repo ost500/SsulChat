@@ -9,9 +9,9 @@ use App\Ssul;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redis;
 use Mockery\Exception;
-use Redis;
+
 
 class ChattingController extends Controller
 {

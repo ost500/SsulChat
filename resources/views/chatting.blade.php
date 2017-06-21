@@ -63,13 +63,9 @@
             <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
             <div class="chat_search">
                 <button type="submit">
-                    @if($chat->user->profile_img == null)
-                        <div class="chat_profile_img"
-                             style="background-image: url('/images/chatpic01.png');"></div>
-                    @else
-                        <div class="chat_profile_img"
-                             style="background-image: url('{{$chat->user->profile_img}}');"></div>
-                    @endif
+                    <div class="chat_profile_img"
+                         style="background-image: url('{{$chat->user->profile_img}}');"></div>
+
                 </button>
 
 

@@ -92,7 +92,7 @@ div.header_chat ul.chat_top_hot {
     min-width: 265px;
     width: 16%;
     height: 33px;
-    margin-top: 1%;
+    margin-top: 8px;
 }
 
 img.logo {
@@ -167,11 +167,11 @@ div.chat_search input:focus {
 }
 
 div.chat_search input {
-    width: 48%;
-    padding: 0px 10px;
-    height: 28px;
-    float: left;
-    margin-left: 38%;
+    width: 300px;
+    padding: 0px 3%;
+    height: 33px;
+    float: right;
+    /* margin-left: 38%; */
     border: none;
     font-size: smaller;
     border-radius: 25px;
@@ -180,11 +180,11 @@ div.chat_search input {
 div.chat_search button {
     border: none;
     background: none;
-    width: 28px;
-    height: 28px;
+    width: 33px;
+    height: 33px;
     float: right;
     border: 3px solid white;
-    border-radius: 19px;
+    border-radius: 20px;
 }
 
 div.chat_search button:focus {

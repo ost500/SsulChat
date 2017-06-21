@@ -155,7 +155,7 @@
                 <div id="chats" class="chat_txt_area2">
                     <span class="chat_date">May 21st</span>
                     @foreach($chats as $chat)
-                        <ul id="{{$chat->id}}">
+                        <ul class="normal_chat" id="{{$chat->id}}" >
                             <li class="chat_pic">
                                 @if($chat->user->profile_img == null)
                                     <div class="chat_profile_img"

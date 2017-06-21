@@ -185,6 +185,7 @@ div.chat_search button {
     float: right;
     border: 3px solid white;
     border-radius: 20px;
+    background-size: cover;
 }
 
 div.chat_search button:focus {

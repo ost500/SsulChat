@@ -22,17 +22,18 @@
                         <ul>검색 결과가 없습니다</ul>
                     @endif
                     @foreach($channels as $num => $channel)
-                        <ul>
-                            <li class="comm_num">{{ $channels->firstItem() + $num }}</li>
-                            <li class="comm_thumbnail"><img src="/images/comm_pic01.png"></li>
-                            <li class="comm_subject">{{ $channel->name }}<span>
+                        <ul><a href="{{ route('chattings',['id'=>$channel->id]) }}">
+                                <li class="comm_num">{{ $channels->firstItem() + $num }}</li>
+                                <li class="comm_thumbnail"><img src="/images/comm_pic01.png"></li>
+                                <li class="comm_subject">{{ $channel->name }}<span>
                                     @if(isset($channel->chat_count))
-                                        [{{ $channel->chat_count }}]
-                                    @endif</span>
-                            </li>
-                            <li class="comm_info"><span><img
-                                            src="/images/comm_icon02.png"></span><span>자유</span><span>19시간 전</span><span>Zest</span>
-                            </li>
+                                            [{{ $channel->chat_count }}]
+                                        @endif</span>
+                                </li>
+                                <li class="comm_info"><span><img
+                                                src="/images/comm_icon02.png"></span><span>자유</span><span>19시간 전</span><span>Zest</span>
+                                </li>
+                            </a>
                         </ul>
                     @endforeach
 

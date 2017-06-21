@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\Ssul;
 use App\User;
 
 use Illuminate\Http\Request;
@@ -16,13 +17,16 @@ class MainController extends Controller
 
     public function main()
     {
-        $builder = Channel::join('chattings', 'chattings.channel_id', '=', 'channels.id')
-            ->groupBy('channels.id')
-            ->selectRaw("channels.*, count(chattings.id) as chat_count")
+        $builder = Ssul::join('channels', 'channels.ssul_id', '=', 'ssuls.id')
+            ->join('chattings', 'chattings.channel_id', '=', 'channels.id')
+            ->groupBy('ssuls.id')
+            ->selectRaw("ssuls.*, count(chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc');
 
 
-        $channels = $builder->with('ssul')->paginate(5);
+        $channels = $builder->paginate(5);
+
+//        return response()->json($channels);
 //
 ////return response()->json($channels);
         return view('main', compact('channels'));
@@ -32,12 +36,13 @@ class MainController extends Controller
     {
         $question = $request->question;
 
-        $channels = Channel::join('chattings', 'chattings.channel_id', '=', 'channels.id')
-            ->groupBy('channels.id')
-            ->selectRaw("channels.*, count(chattings.id) as chat_count")
+        $channels = Ssul::join('channels', 'channels.ssul_id', '=', 'ssuls.id')
+            ->join('chattings', 'chattings.channel_id', '=', 'channels.id')
+            ->groupBy('ssuls.id')
+            ->selectRaw("ssuls.*, count(chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc')
-            ->where('name', 'like', "%{$question}%")->paginate(5);
-
+            ->where('ssuls.name', 'like', "%{$question}%")
+            ->paginate(5);
 
         return view('main', compact('channels', 'question'));
     }

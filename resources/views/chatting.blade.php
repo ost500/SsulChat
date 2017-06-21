@@ -5,7 +5,7 @@
     <script>
         window.onload = function () {
             if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
-                var outerheight = $(window).outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
+                var outerheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);
@@ -62,11 +62,12 @@
             </ul>
             <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
             <div class="chat_search">
+                <a href="{{ route("login") }}"><button type="submit" style="background-image: url('/images/chatpic01.png');"></button></a>
                 <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
                     <input type="text" name="question"
                            placeholder="찾고 싶은 주제를 검색하세요">
                 </form>
-                <a href="{{ route("login") }}"><button><img src="/images/main_search_btn01.png" alt="검색하기"></button></a>
+
             </div>
 
         </div>
@@ -155,7 +156,7 @@
                 <div id="chats" class="chat_txt_area2">
                     <span class="chat_date">May 21st</span>
                     @foreach($chats as $chat)
-                        <ul id="{{$chat->id}}">
+                        <ul class="normal_chat" id="{{$chat->id}}" >
                             <li class="chat_pic">
                                 @if($chat->user->profile_img == null)
                                     <div class="chat_profile_img"

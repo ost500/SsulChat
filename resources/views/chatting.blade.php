@@ -62,15 +62,7 @@
             </ul>
             <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
             <div class="chat_search">
-                <button type="submit">
-                    <div class="chat_profile_img"
-                         style="background-image: url('{{$chat->user->profile_img}}');"></div>
-
-                </button>
-
-
-
-
+                <button type="submit"><img src="/images/main_search_btn01.png" alt="로그인"></button>
                 <form class="form-wrapper cf">
                     <input type="text" onfocus="if(this.value =='찾고 싶은 주제를 검색하세요') this.value='';"
                            onblur="if(this.value =='') this.value='찾고 싶은 주제를 검색하세요';" value="찾고 싶은 주제를 검색하세요">

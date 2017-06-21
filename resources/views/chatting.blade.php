@@ -5,7 +5,7 @@
     <script>
         window.onload = function () {
             if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
-                var outerheight = $(window).outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
+                var outerheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20
                 var inner = $('.chat_txt_area2');
 
                 $('.chat_txt_area2').css('height', outerheight);

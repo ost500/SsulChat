@@ -4,27 +4,39 @@
     <div id="wrap">
         <div class="header_main">
             <h1><img src="images/main_logo02.png" alt="썰챗로고"></h1>
-            <form>
-                <input type="text">
+            <form method="get" action="{{ route('search') }}">
+
+                @if(isset($question))
+                    <input autofocus type="text" name="question" value="{{ $question }}">
+                @else
+                    <input autofocus type="text" name="question">
+                @endif
             </form>
         </div>
 
         <div class="community_wrap">
             <div class="community">
-                <h2>커뮤니티 인기글</h2>
+                <h2>썰방 리스트</h2>
                 <div>
+                    @if($channels->isEmpty())
+                        <ul>검색 결과가 없습니다</ul>
+                    @endif
                     @foreach($channels as $num => $channel)
                         <ul>
-                            <li class="comm_num">{{ $num + 1 }}</li>
+                            <li class="comm_num">{{ $channels->firstItem() + $num }}</li>
                             <li class="comm_thumbnail"><img src="/images/comm_pic01.png"></li>
-                            <li class="comm_subject">{{ $channel->name }}<img
-                                        src="/images/comm_icon01.png"><span>[86]</span>
+                            <li class="comm_subject">{{ $channel->name }}<span>
+                                    @if(isset($channel->chat_count))
+                                        [{{ $channel->chat_count }}]
+                                    @endif</span>
                             </li>
                             <li class="comm_info"><span><img
                                             src="/images/comm_icon02.png"></span><span>자유</span><span>19시간 전</span><span>Zest</span>
                             </li>
                         </ul>
                     @endforeach
+
+
                     {{--<ul>--}}
                     {{--<li class="comm_num">2</li>--}}
                     {{--<li class="comm_thumbnail"><img src="images/comm_pic02.png"></li>--}}
@@ -51,8 +63,15 @@
                     {{--</li>--}}
                     {{--</ul>--}}
                 </div>
+
             </div>
+
+            <div style=" text-align: center">
+                {!! $channels->links() !!}
+            </div>
+
         </div>
+
 
         <a href="#">
             <div class="chat_btn"></div>

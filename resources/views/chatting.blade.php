@@ -62,11 +62,11 @@
             </ul>
             <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
             <div class="chat_search">
-                <form class="form-wrapper cf">
-                    <input type="text" onfocus="if(this.value =='찾고 싶은 주제를 검색하세요') this.value='';"
-                           onblur="if(this.value =='') this.value='찾고 싶은 주제를 검색하세요';" value="찾고 싶은 주제를 검색하세요">
+                <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
+                    <input type="text" name="question"
+                           placeholder="찾고 싶은 주제를 검색하세요">
                 </form>
-                <button type="submit"><img src="/images/main_search_btn01.png" alt="검색하기"></button>
+                <a href="{{ route("login") }}"><button><img src="/images/main_search_btn01.png" alt="검색하기"></button></a>
             </div>
 
         </div>
@@ -107,7 +107,8 @@
                             @endforeach
                 </dl>
                 <dl class="message">
-                    <dt>참석자 (@{{ viewers.length  }})<span class="chat_more"><a href="#"><img src="/images/chat_icon05.png" alt="더보기"></a></span>
+                    <dt>참석자 (@{{ viewers.length  }})<span class="chat_more"><a href="#"><img
+                                        src="/images/chat_icon05.png" alt="더보기"></a></span>
                     </dt>
 
                     <dd v-for="viewer in viewers">
@@ -171,10 +172,10 @@
                                 <button style="border:0;background:transparent;margin-left:2%"
                                         v-on:click="like('{{$chat->id}}')">
                                     @if($likes->where('chatting_id',$chat->id)->first())
-                                        <img src="/images/like.png"></img>
+                                        <img src="/images/like.png">
                                         <div style="float:right;font-weight: bold;color:#D75A4A">{{$chat->likes->count()}}</div>
                                     @else
-                                        <img src="/images/like_blank.png"></img>
+                                        <img src="/images/like_blank.png">
                                         <div style="float:right">{{$chat->likes->count()}}</div>
                                     @endif
                                 </button>
@@ -204,6 +205,9 @@
             <div class="chat_box" style="overflow-y:auto">
                 @foreach($popularChats as $popularChat)
                     <ul class="gry_box">
+                        {{--<li class="grybox_pf_img">--}}
+                            {{--<div style="background-image: url('/images/chatpic01.png');"></div>--}}
+                        {{--</li>--}}
                         <li class="grybox_sj">{{ $popularChat->user->name }}</li>
                         <li class="grybox_good">{{ $popularChat->likes_count }}</li>
                         <li class="grybox_txt clear">{{ $popularChat->content }}
@@ -255,8 +259,6 @@
                 }).leaving((user) => {
                     this.viewers.pop(user);
                 });
-
-
 
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.like', (e) => {

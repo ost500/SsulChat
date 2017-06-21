@@ -11,6 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>ssulchat</title>
     {{--<link rel="stylesheet" type="text/css" href="/css/app.css">--}}
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="/css/default.css">
     <link rel="stylesheet" type="text/css" href="/css/default_mobile.css">
     <link rel="stylesheet" type="text/css" href="/css/common.css">

@@ -40,6 +40,8 @@ Route::post('like', function (Request $request) {
     event(new App\Events\likeEvent($request));
 });
 
+Route::get('/search', ['as' => 'search', 'uses' => 'MainController@search']);
+
 Route::get('/chattings/{id}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);
 Route::get('/chattings/{id}/{channelId}', ['as' => 'chattingsWithChannel', 'uses' => 'ChattingController@chattings']);
 

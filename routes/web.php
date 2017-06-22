@@ -45,6 +45,8 @@ Route::get('/search', ['as' => 'search', 'uses' => 'MainController@search']);
 Route::get('/chattings/{id}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);
 Route::get('/chattings/{id}/{channelId}', ['as' => 'chattingsWithChannel', 'uses' => 'ChattingController@chattings']);
 
+Route::post('/teamselect', ['as' => 'team_select', 'uses' => 'ChattingController@teamSelect']);
+
 Route::get('/facebook/login/', ['as' => 'facebookLogin', 'uses' => 'MainController@facebookLogin']);
 
 Route::get('/facebook/callback', ['as' => 'facebookLoginCallback', 'uses' => 'MainController@facebookCallback']);

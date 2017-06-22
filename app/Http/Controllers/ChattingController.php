@@ -7,9 +7,11 @@ use App\Chatting;
 use App\Like;
 use App\Ssul;
 use App\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
 
 
@@ -74,10 +76,7 @@ class ChattingController extends Controller
             $user = Auth::user();
         }
 
-// 익명이면 익명아이디 발행
-        if ($user->id == 1) {
-            $user->name = "익명" . dechex(str_slug($request->getClientIp(), ''));
-        }
+        $myTeam = $request->session()->get('myTeam');
 
         $chats = Chatting::where('channel_id', $channelId)
             ->orderBy('created_at', 'desc')
@@ -100,7 +99,17 @@ class ChattingController extends Controller
 
 
 //        return $thisChannel->toJson();
-        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers'));
+        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam'));
+    }
+
+    public function teamSelect(Request $request)
+    {
+
+
+        Session::put('myTeam', $request->teamSelect);
+
+
+        return redirect()->back();
     }
 
 }

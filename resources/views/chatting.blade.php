@@ -62,7 +62,9 @@
             </ul>
             <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
             <div class="chat_search">
-                <a href="{{ route("login") }}"><button type="submit" style="background-image: url('/images/chatpic01.png');"></button></a>
+                <a href="{{ route("login") }}">
+                    <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
+                </a>
                 <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
                     <input type="text" name="question"
                            placeholder="찾고 싶은 주제를 검색하세요">
@@ -134,7 +136,8 @@
                          data-ad-slot="4947953757"
                          data-ad-format="auto"></ins>
 
-                    <div class="graph">
+
+                    <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
 
                         <dl class="selectL" style="width:35%">
                             <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
@@ -154,9 +157,9 @@
 
 
                 <div id="chats" class="chat_txt_area2">
-                    <span class="chat_date">May 21st</span>
+                    {{--<span class="chat_date">May 21st</span>--}}
                     @foreach($chats as $chat)
-                        <ul class="normal_chat" id="{{$chat->id}}" >
+                        <ul class="normal_chat" id="{{$chat->id}}">
                             <li class="chat_pic">
                                 @if($chat->user->profile_img == null)
                                     <div class="chat_profile_img"
@@ -207,7 +210,7 @@
                 @foreach($popularChats as $popularChat)
                     <ul class="gry_box">
                         {{--<li class="grybox_pf_img">--}}
-                            {{--<div style="background-image: url('/images/chatpic01.png');"></div>--}}
+                        {{--<div style="background-image: url('/images/chatpic01.png');"></div>--}}
                         {{--</li>--}}
                         <li class="grybox_sj">{{ $popularChat->user->name }}</li>
                         <li class="grybox_good">{{ $popularChat->likes_count }}</li>
@@ -218,6 +221,44 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">진영 선택</h4>
+                </div>
+                <form method="post" action="{{ route('team_select') }}">
+                    {!! csrf_field() !!}
+                    <div class="modal-body">
+                        <div class="radio">
+                            <label>
+
+                                <input type="radio" name="teamSelect" id="optionsRadios1"
+                                       value="{{ $thisChannel->ssul->teams[0]->id }}" checked>
+                                {{ $thisChannel->ssul->teams[0]->name }}
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="teamSelect" id="optionsRadios2"
+                                       value="{{ $thisChannel->ssul->teams[1]->id }}">
+                                {{ $thisChannel->ssul->teams[1]->name }}
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                        <button type="submit" class="btn btn-primary">확인</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
     </body>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
@@ -358,7 +399,8 @@
                         'message': message,
                         'ipaddress': ip(),
                         'channel_id': "{{ $thisChannel->id }}",
-                        anony_name: localStorage['SsulChatAnonymous']
+                        anony_name: localStorage['SsulChatAnonymous'],
+                        'myTeam': "{{ $myTeam }}"
                     })
                         .then((response) => {
 //                            console.log(response);

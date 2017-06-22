@@ -76,4 +76,5 @@ class MainController extends Controller
 
         return redirect()->intended();
     }
+
 }

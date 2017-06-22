@@ -32,7 +32,7 @@ class ChattingsAlterTeamId extends Migration
     public function down()
     {
         Schema::table('chattings', function (Blueprint $table) {
-            $table->dropForeign('chattings_team_id_foreign');
+            $table->dropForeign(['team_id']);
             $table->dropColumn('team_id');
 
         });

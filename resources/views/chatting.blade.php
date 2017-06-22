@@ -326,7 +326,7 @@
                     $(".chat_box")[0].innerHTML = "";
                     for (var i = 0; i < e.popularChats.length; i++) {
                         $(".chat_box").append('<ul class="gry_box">' +
-                            '<li class="grybox_profilecircle">' + '<div class="grybox_profileimg" style="background-image: url("/images/chatpic01.png");">' +'</div>' + '</li>' +
+                            '<li class="grybox_profilecircle">' + '<div class="grybox_profileimg" style="background-image: url("\|/images\|/chatpic01.png");">' +'</div>' + '</li>' +
                             '<li class="grybox_sj">' + e.popularChats[i].user_name + '</li>' +
                             '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +
                             '<li class="grybox_txt clear">' + e.popularChats[i].content + '</li>' +

@@ -79,7 +79,7 @@
             <div class="chat_list">
                 {{--<h2>All Threads</h2>--}}
                 <dl class="chann">
-                    <dt>CHANNELS<span>({{ $ssuls->count() }})</span><span class="chat_more"><a href="#"><img
+                    <dt>썰방<span>({{ $ssuls->count() }})</span><span class="chat_more"><a href="#"><img
                                         src="/images/chat_icon05.png"
                                         alt="더보기"></a></span></dt>
                     <dd>
@@ -139,13 +139,13 @@
 
                     <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
 
-                        <dl class="selectL" style="width:35%">
+                        <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
                             <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
-                            <dd>{{ $thisChannel->ssul->teams[0]->value }}%</dd>
+                            <dd id="teamApower">@{{ teamsPower[0] }}%</dd>
                         </dl>
-                        <dl class="selectR" style="width:65%">
+                        <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}">
                             <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
-                            <dd>{{ $thisChannel->ssul->teams[1]->value }}%</dd>
+                            <dd id="teamBpower">@{{ teamsPower[1] }}%</dd>
                         </dl>
 
                     </div>
@@ -274,7 +274,9 @@
             data: {
                 typingUserName: [],
                 typing: false,
-                viewers: {}
+                viewers: {},
+                teamsPower: [{{ $teamAPower }},{{$teamBPower}}],
+
             },
             created: function () {
 
@@ -304,7 +306,7 @@
 
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.like', (e) => {
-                    //console.log(e);
+                    console.log(e);
                     if (e.available) {
                         $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
                         if (e.userId == {{Auth::user()->id}}) {
@@ -326,12 +328,14 @@
                     $(".chat_box")[0].innerHTML = "";
                     for (var i = 0; i < e.popularChats.length; i++) {
                         $(".chat_box").append('<ul class="gry_box">' +
-                            '<li class="grybox_profilecircle">' + '<div class="grybox_profileimg">' +'</div>' + '</li>' +
+                            '<li class="grybox_profilecircle">' + '<div class="grybox_profileimg">' + '</div>' + '</li>' +
                             '<li class="grybox_sj">' + e.popularChats[i].user_name + '</li>' +
                             '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +
                             '<li class="grybox_txt clear">' + e.popularChats[i].content + '</li>' +
                             '</ul>');
                     }
+
+                    this.teamsPower = e.teamsPower;
                 });
 
                 $("#someone_typing").show();
@@ -410,7 +414,11 @@
                 ,
                 like: function (id) {
 //                    console.log('like');
-                    axios.post('/like', {'chattingId': id, 'channel_id': "{{ $thisChannel->id }}"})
+                    axios.post('/like', {
+                        'chattingId': id,
+                        'channel_id': "{{ $thisChannel->id }}",
+                        'ssul_id': "{{$thisChannel->ssul->id}}"
+                    })
                         .then((response) => {
 //                                console.log(response);
                         });

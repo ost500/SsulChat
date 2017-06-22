@@ -24,8 +24,11 @@ class ChattingController extends Controller
             Auth::logout();
         }
 
+        $ssul = Ssul::find($id);
+
         if ($channelId == 0) {
-            $channelId = Ssul::find($id)->channels->first()->id;
+
+            $channelId = $ssul->channels->first()->id;
         }
 
         $loginMembers = null;
@@ -41,9 +44,12 @@ class ChattingController extends Controller
             $users = $users->toArray();
 
 
-            foreach ($loginMembers as $member) {
-                $rmArr = array($member->user_info->id);
-                $users = array_diff($users, $rmArr);
+            if (!is_null($loginMembers)) {
+                foreach ($loginMembers as $member) {
+                    $rmArr = array($member->user_info->id);
+                    $users = array_diff($users, $rmArr);
+                }
+
             }
 
 
@@ -101,9 +107,21 @@ class ChattingController extends Controller
 
         $thisChannel = Channel::with('ssul.teams')->with('ssul.channels')->findOrFail($channelId);
 
+        $teamACount = $ssul->teams[0]->chattings()
+            ->join("likes", "likes.chatting_id", "chattings.id")->count();
+        $teamBCount = $ssul->teams[1]->chattings()
+            ->join("likes", "likes.chatting_id", "chattings.id")->count();
 
-//        return $thisChannel->toJson();
-        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam'));
+        if (($teamACount + $teamBCount) != 0) {
+            $teamAPower = round($teamACount / ($teamACount + $teamBCount) * 100);
+            $teamBPower = round($teamBCount / ($teamACount + $teamBCount) * 100);
+        } else {
+            $teamAPower = $teamACount;
+            $teamBPower = $teamBCount;
+        }
+
+
+        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'teamAPower', 'teamBPower'));
     }
 
     public function teamSelect(Request $request)

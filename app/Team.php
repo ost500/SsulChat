@@ -10,8 +10,14 @@ class Team extends Model
     {
         return $this->belongsTo(Ssul::class);
     }
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'team_users');
+    }
+
+    public function chattings()
+    {
+        return $this->hasMany(Chatting::class);
     }
 }

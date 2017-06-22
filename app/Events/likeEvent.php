@@ -6,6 +6,8 @@ use App\Chatting;
 use App\Http\Controllers\ChattingController;
 use App\Like;
 use App\Notifications\ChattingLog;
+use App\Ssul;
+use App\Team;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
@@ -32,6 +34,9 @@ class likeEvent implements ShouldBroadcastNow
     public $channelId;
     public $available;
     public $popularChats;
+    public $ssulId;
+    public $teamsPower;
+
     /**
      * Create a new event instance.
      *
@@ -48,18 +53,18 @@ class likeEvent implements ShouldBroadcastNow
         $this->time = Carbon::now()->toDateTimeString();
         $this->chattingId = $request->chattingId;
         $this->channelId = $request->channel_id;
+        $this->ssulId = $request->ssul_id;
 
-        $old = DB::table('likes')->where('chatting_id',$this->chattingId)->where('user_id',$this->userId)->first();
-        if($old)
-        {
-            DB::table('likes')->where('chatting_id',$this->chattingId)->where('user_id',$this->userId)->delete();
+        $old = DB::table('likes')->where('chatting_id', $this->chattingId)->where('user_id', $this->userId)->first();
+        if ($old) {
+            DB::table('likes')->where('chatting_id', $this->chattingId)->where('user_id', $this->userId)->delete();
             $this->available = false;
-        }
-        else {
+        } else {
             $like = new Like();
             $like->chatting_id = $this->chattingId;
             $like->user_id = Auth::user()->id;
             $like->save();
+
             $this->available = true;
         }
         $popularChats = Chatting::where('channel_id', $request->channel_id)
@@ -70,14 +75,27 @@ class likeEvent implements ShouldBroadcastNow
             ->get();
 
         $this->popularChats = Array();
-        for($i=0;$i<$popularChats->count();$i++)
-        {
+        for ($i = 0; $i < $popularChats->count(); $i++) {
             $array = Array();
-            $array = array_add($array,'user_name',$popularChats[$i]->user->name);
-            $array = array_add($array,'likes_count',$popularChats[$i]->likes_count);
-            $array = array_add($array,'content',$popularChats[$i]->content);
-            $this->popularChats = array_add($this->popularChats,$i,$array);
+            $array = array_add($array, 'user_name', $popularChats[$i]->user->name);
+            $array = array_add($array, 'likes_count', $popularChats[$i]->likes_count);
+            $array = array_add($array, 'content', $popularChats[$i]->content);
+            $this->popularChats = array_add($this->popularChats, $i, $array);
         }
+
+        $teamsPowerCount = Team::where('ssul_id', $this->ssulId)
+            ->join('chattings', 'chattings.team_id', 'teams.id')
+            ->join("likes", "likes.chatting_id", "chattings.id")
+            ->groupBy('teams.id')
+            ->selectRaw('count(likes.id) as count')
+            ->get()->map(function ($team) {
+                return $team->count;
+            })->toArray();
+
+        $this->teamsPower[] = round($teamsPowerCount[0] / ($teamsPowerCount[0] + $teamsPowerCount[1]) * 100, 0);
+        $this->teamsPower[] = round($teamsPowerCount[1] / ($teamsPowerCount[0] + $teamsPowerCount[1]) * 100, 0);
+
+
     }
 
     /**
@@ -105,6 +123,7 @@ class likeEvent implements ShouldBroadcastNow
             'userId' => $this->userId,
             'available' => $this->available,
             'popularChats' => $this->popularChats,
+            'teamsPower' => $this->teamsPower
         ];
     }
 }

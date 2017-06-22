@@ -87,7 +87,7 @@
         <div class="profile_form_btn">
             <div>
                 <span id="form_btn_o"><input type="submit" alt="OK" value="OK"/></span>
-                <span id="form_btn_o"><input v-on:click="facebookLogin" alt="OK" value="facebook"/></span>
+                <span id="form_btn_o" class="facebook_login_button"><input type="submit" v-on:click="facebookLogin" alt="OK" value="facebook"/></span>
             </div>
         </div>
     </form>

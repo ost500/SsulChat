@@ -34,7 +34,7 @@ div#wrap{ position:relative; margin:0px; padding:0px; }
         box-sizing: border-box;
         position: relative;
         float: left;
-        padding-top: 150px;
+        padding-top: 0%;
     }
     div.profile_form_wrap div.profile_formL div#box{ }
     div#box table tr{ float:left; width:100%; margin-bottom:15px; }

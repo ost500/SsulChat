@@ -21,7 +21,7 @@
         <div class="profile_form_wrap">
             <div class="profile_formL">
                 <div class="login_logo" >
-                    <img src="images/main_logo02.png" alt="썰챗로고">
+                    <img src="images/main_logo02.png" alt="썰챗로고" class="login_logo_img">
                 </div>
                 <fieldset>
                     <div id="box">

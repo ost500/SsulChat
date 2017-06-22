@@ -58,3 +58,12 @@ div.profile_form_btn{ width:100%; background:#f1f1f1; position:fixed; bottom:0px
 div.profile_form_btn div{width:250px; float:right; padding-right:38px;}
 div.profile_form_btn div span#form_btn_n input{ width:120px; margin-right:10px; float:left; border:solid 2px #cfd0d3; background:#fff; border-radius:4px; height:34px; color:#333; }
 div.profile_form_btn div span#form_btn_o input{ width:120px; background:#fbce2d; border:solid 2px #fbce2d; border-radius:4px; height:34px; color:#fff; font-weight:600; }
+.facebook_login_button{
+    width: 120px;
+    background: #3b5998!important;
+    border: solid 2px #3b5998!important;
+    border-radius: 4px;
+    height: 34px;
+    color: #fff;
+    font-weight: 600;
+}

@@ -8,6 +8,7 @@ use App\Like;
 use App\Ssul;
 use App\User;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
@@ -29,13 +30,14 @@ class ChattingController extends Controller
 
         $loginMembers = null;
 
+        // 로그인 안 됐다면 익명
         if (!Auth::check()) {
 
             $loginMembers = Redis::get("presence-newMessage{$channelId}:members");
 
             $loginMembers = json_decode($loginMembers);
 
-            $users = User::where('annony', true)->pluck('id');
+            $users = User::where('annony', true)->orderby('updated_at')->pluck('id');
             $users = $users->toArray();
 
 
@@ -51,6 +53,8 @@ class ChattingController extends Controller
 
             if (!is_null($users)) {
                 $user = Auth::loginUsingId($users[0]);
+                $user->updated_at = Carbon::now();
+                $user->save();
             } else {
 
                 for ($i = 0; $i <= 100; $i++) {

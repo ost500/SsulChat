@@ -83,6 +83,7 @@ div.profile_form_btn div span#form_btn_o input{ width:120px; background:#fbce2d;
     width: 50%;
     padding-left: 25%;
 }
-.login_logo_img{
+.login_logo_img {
     width: 100%;
+    padding-bottom: 40%;
 }

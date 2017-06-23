@@ -237,7 +237,7 @@
                 @foreach($popularChats as $popularChat)
                     <ul class="gry_box">
                         <li class="grybox_pf_img">
-                            <div style="background-image: url({{$popularChat->user->profile_img}});"></div>
+                            <div class="pf_img" style="background-image: url({{$popularChat->user->profile_img}});"></div>
                         </li>
                         <li class="grybox_sj">{{ $popularChat->user->name }}</li>
                         <li class="grybox_good">{{ $popularChat->likes_count }}</li>

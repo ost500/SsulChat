@@ -80,6 +80,7 @@ class likeEvent implements ShouldBroadcastNow
             $array = array_add($array, 'user_name', $popularChats[$i]->user->name);
             $array = array_add($array, 'likes_count', $popularChats[$i]->likes_count);
             $array = array_add($array, 'content', $popularChats[$i]->content);
+            $array = array_add($array, 'user_profile_img', $popularChats[$i]->user->profile_img);
             $this->popularChats = array_add($this->popularChats, $i, $array);
         }
 

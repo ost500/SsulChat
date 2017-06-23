@@ -352,12 +352,13 @@
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "";
                         }
                     }
+
 //                    console.log(e.popularChats);
                     $(".chat_box")[0].innerHTML = "";
                     for (var i = 0; i < e.popularChats.length; i++) {
                         $(".chat_box").append('<ul class="gry_box">' +
-                            '<li class="grybox_profilecircle">' +
-                            '<div class="grybox_profileimg" style="background-image: url('+ e.popularChats[i].user_profile_img + ');">' + '</div>' +
+                            '<li class="grybox_pf_img">' +
+                            '<div class="pf_img" style="background-image: url('+ e.popularChats[i].user_profile_img + ');">' + '</div>' +
                             '</li>' +
                             '<li class="grybox_sj">' + e.popularChats[i].user_name + '</li>' +
                             '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +

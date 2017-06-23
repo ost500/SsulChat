@@ -84,11 +84,12 @@
             </ul>
             <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
             <div class="chat_search">
-                <a href="{{ route("login") }}">
                     @if(Auth::user()->annony == true)
-                        <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
+                        <a href="{{ route("login") }}">
+                            <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
                     @else
-                        <button type="submit" style="background-image: url({{Auth::user()->profile_img}});"></button>
+                        <a href="{{ route("logout") }}">
+                            <button type="submit" style="background-image: url({{Auth::user()->profile_img}});"></button>
                     @endif
                 </a>
                 <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
@@ -355,7 +356,9 @@
                     $(".chat_box")[0].innerHTML = "";
                     for (var i = 0; i < e.popularChats.length; i++) {
                         $(".chat_box").append('<ul class="gry_box">' +
-                            '<li class="grybox_profilecircle">' + '<div class="grybox_profileimg">' + '</div>' + '</li>' +
+                            '<li class="grybox_profilecircle">' +
+                            '<div class="grybox_profileimg" style="background-image: url({{$popularChat->user->profile_img}});">' + '</div>' +
+                            '</li>' +
                             '<li class="grybox_sj">' + e.popularChats[i].user_name + '</li>' +
                             '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +
                             '<li class="grybox_txt clear">' + e.popularChats[i].content + '</li>' +

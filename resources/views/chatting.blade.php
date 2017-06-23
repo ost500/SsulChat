@@ -85,7 +85,11 @@
             <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
             <div class="chat_search">
                 <a href="{{ route("login") }}">
-                    <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
+                    @if(Auth::user()->annony == true)
+                        <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
+                    @else
+                        <button type="submit" style="background-image: url({{Auth::user()->profile_img}});"></button>
+                    @endif
                 </a>
                 <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
                     <input type="text" name="question"
@@ -232,9 +236,9 @@
             <div class="chat_box" style="overflow-y:auto">
                 @foreach($popularChats as $popularChat)
                     <ul class="gry_box">
-                        {{--<li class="grybox_pf_img">--}}
-                        {{--<div style="background-image: url('/images/chatpic01.png');"></div>--}}
-                        {{--</li>--}}
+                        <li class="grybox_pf_img">
+                            <div style="background-image: url({{$popularChat->user->profile_img}});"></div>
+                        </li>
                         <li class="grybox_sj">{{ $popularChat->user->name }}</li>
                         <li class="grybox_good">{{ $popularChat->likes_count }}</li>
                         <li class="grybox_txt clear">{{ $popularChat->content }}

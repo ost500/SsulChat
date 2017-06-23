@@ -275,7 +275,7 @@
                 typingUserName: [],
                 typing: false,
                 viewers: {},
-                teamsPower: [{{ $teamAPower }},{{$teamBPower}}],
+                teamsPower: [{{ $teamAPower }},{{ 100 - $teamAPower}}],
 
             },
             created: function () {

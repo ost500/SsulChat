@@ -55,6 +55,17 @@ class likeEvent implements ShouldBroadcastNow
         $this->channelId = $request->channel_id;
         $this->ssulId = $request->ssul_id;
 
+
+        //        //여기 썰에 해당하는 팀이 아니면 팀 아이디 초기화
+        $hereTeams = Ssul::find($this->ssulId)->teams;
+        $chatting = Chatting::find($this->chattingId);
+        $chattingTeamId = $chatting->team_id;
+
+        if ($hereTeams->pluck('id')->has($chattingTeamId)) {
+            $chatting->team_id = null;
+            $chatting->save();
+        }
+
         $old = DB::table('likes')->where('chatting_id', $this->chattingId)->where('user_id', $this->userId)->first();
         if ($old) {
             DB::table('likes')->where('chatting_id', $this->chattingId)->where('user_id', $this->userId)->delete();
@@ -92,8 +103,15 @@ class likeEvent implements ShouldBroadcastNow
                 return $team->count;
             })->toArray();
 
+        if (!isset($teamsPowerCount[0])) {
+            $teamsPowerCount[0] = 0;
+        }
+        if (!isset($teamsPowerCount[1])) {
+            $teamsPowerCount[1] = 0;
+        }
+
         $this->teamsPower[] = round($teamsPowerCount[0] / ($teamsPowerCount[0] + $teamsPowerCount[1]) * 100, 0);
-        $this->teamsPower[] = round($teamsPowerCount[1] / ($teamsPowerCount[0] + $teamsPowerCount[1]) * 100, 0);
+        $this->teamsPower[] = 100 - $this->teamsPower[0];
 
 
     }

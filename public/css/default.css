@@ -610,7 +610,7 @@ li.grybox_pf_img{
     border-radius: 21px;
     margin-right: 11px;
 }
-}
+
 
 li.grybox_sj {
     font-family: arial, Helvetica, AppleSDGothicNeo, sans-serif;
@@ -620,6 +620,7 @@ li.grybox_sj {
     font-weight: 600;
     float: left;
 }
+
 
 li.grybox_good {
     margin-top: 4px;

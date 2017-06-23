@@ -1,6 +1,14 @@
 @extends('layouts.header')
 @section('content')
     <body xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <style>
+        dl.selectL, dl.selectR {
+            transition: height 0.5s;
+        }
+        dl.selectL:hover, dl.selectR:hover{
+            height:125%;
+        }
+    </style>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         window.onload = function () {
@@ -24,9 +32,11 @@
                 $('.chat_box')[0].scrollTop = 0;
 
             }
-            if (localStorage['SsulChatAnonymous'] === undefined || localStorage['SsulChatAnonymous'] != '익명' + parseInt(ip().split('.').join('')).toString(16)) {
-                localStorage['SsulChatAnonymous'] = '익명' + parseInt(ip().split('.').join('')).toString(16);
-            }
+            if(localStorage['SsulChatAnonymous']!==undefined)
+                localStorage.removeItem('SsulChatAnonymous');
+//            if (localStorage['SsulChatAnonymous'] === undefined || localStorage['SsulChatAnonymous'] != '익명' + parseInt(ip().split('.').join('')).toString(16)) {
+//                localStorage['SsulChatAnonymous'] = '익명' + parseInt(ip().split('.').join('')).toString(16);
+//            }
         }
     </script>
 
@@ -50,6 +60,18 @@
             }
 
         })
+        var selectMouseOver = function(e, b)
+        {
+            if(b)
+            {
+                e.target.children[1].hidden = true;
+                e.target.children[2].hidden = false;
+            }
+            else {
+                e.target.children[1].hidden = false;
+                e.target.children[2].hidden = true;
+            }
+        }
     </script>
 
 
@@ -62,8 +84,13 @@
             </ul>
             <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
             <div class="chat_search">
-                <a href="{{ route("login") }}">
-                    <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
+                    @if(Auth::user()->annony == true)
+                        <a href="{{ route("login") }}">
+                            <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
+                    @else
+                        <a href="{{ route("logout") }}">
+                            <button type="submit" style="background-image: url({{Auth::user()->profile_img}});"></button>
+                    @endif
                 </a>
                 <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
                     <input type="text" name="question"
@@ -130,24 +157,25 @@
                 <div class="chat_txt_area1">
                     <!-- TestADS -->
                     <!-- ssulchat/chattings/1/1 -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-8665007420370986"
-                         data-ad-slot="4947953757"
-                         data-ad-format="auto"></ins>
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-8665007420370986"
+                                 data-ad-slot="4947953757"
+                                 data-ad-format="auto"></ins>
 
 
-                    <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
+                            <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
 
-                        <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
-                            <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
-                            <dd id="teamApower">@{{ teamsPower[0] }}%</dd>
+                                <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}" onmouseover="selectMouseOver(event,true)" onmouseleave="selectMouseOver(event,false)">
+                                    <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
+                                    <dd id="teamApower">@{{ teamsPower[0] }}%</dd>
+                                    <dd id="select" hidden>선택하기</dd>
+                                </dl>
+                                <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}" onmouseover="selectMouseOver(event,true)" onmouseleave="selectMouseOver(event,false)">
+                                    <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
+                                    <dd id="teamBpower">@{{ teamsPower[1] }}%</dd>
+                            <dd id="select" hidden>선택하기</dd>
                         </dl>
-                        <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}">
-                            <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
-                            <dd id="teamBpower">@{{ teamsPower[1] }}%</dd>
-                        </dl>
-
                     </div>
                     <!--<p class="chat_txt_area1_txt01">#general</p>
                     <p><span class="chat_txt_area1_txt02">ost</span> created htis channel on May 21st. This is hte very beginning of the <span class="chat_txt_area1_txt03">#general</span> channel.<br>
@@ -209,9 +237,9 @@
             <div class="chat_box" style="overflow-y:auto">
                 @foreach($popularChats as $popularChat)
                     <ul class="gry_box">
-                        {{--<li class="grybox_pf_img">--}}
-                        {{--<div style="background-image: url('/images/chatpic01.png');"></div>--}}
-                        {{--</li>--}}
+                        <li class="grybox_pf_img">
+                            <div class="pf_img" style="background-image: url({{$popularChat->user->profile_img}});"></div>
+                        </li>
                         <li class="grybox_sj">{{ $popularChat->user->name }}</li>
                         <li class="grybox_good">{{ $popularChat->likes_count }}</li>
                         <li class="grybox_txt clear">{{ $popularChat->content }}
@@ -324,11 +352,14 @@
                             $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "";
                         }
                     }
+
 //                    console.log(e.popularChats);
                     $(".chat_box")[0].innerHTML = "";
                     for (var i = 0; i < e.popularChats.length; i++) {
                         $(".chat_box").append('<ul class="gry_box">' +
-                            '<li class="grybox_profilecircle">' + '<div class="grybox_profileimg">' + '</div>' + '</li>' +
+                            '<li class="grybox_pf_img">' +
+                            '<div class="pf_img" style="background-image: url('+ e.popularChats[i].user_profile_img + ');">' + '</div>' +
+                            '</li>' +
                             '<li class="grybox_sj">' + e.popularChats[i].user_name + '</li>' +
                             '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +
                             '<li class="grybox_txt clear">' + e.popularChats[i].content + '</li>' +
@@ -339,8 +370,6 @@
                 });
 
                 $("#someone_typing").show();
-
-
             },
 
             methods: {

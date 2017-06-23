@@ -483,7 +483,14 @@ div.chat_txt_area2 {
     overflow-y: auto;
     overflow-x: hidden;
 }
-
+.my_chat {
+    float: right;
+    overflow: auto;
+}
+.normal_chat {
+    width: 100%;
+    overflow: auto;
+}
 div.chat_txt_area2 ul {
     padding: 0px 20px 0px 20px;
 }
@@ -594,9 +601,16 @@ ul.gry_box {
 }
 
 li.grybox_pf_img{
-    width:20px;
-    height:20px;
+    float: left;
 }
+.pf_img{
+    width: 23px;
+    height: 23px;
+    background-size: cover;
+    border-radius: 21px;
+    margin-right: 11px;
+}
+
 
 li.grybox_sj {
     font-family: arial, Helvetica, AppleSDGothicNeo, sans-serif;
@@ -606,6 +620,7 @@ li.grybox_sj {
     font-weight: 600;
     float: left;
 }
+
 
 li.grybox_good {
     margin-top: 4px;

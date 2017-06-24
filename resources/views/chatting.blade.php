@@ -60,28 +60,31 @@
             }
 
         })
-        $('.selectL, .selectR').mouseover(function(e) {
-            if(e.target.children.length > 2) {
-                e.target.children[1].hidden = true;
-                e.target.children[2].hidden = false;
-            }
-            e.stopPropagation();
+        $(document).ready(function(){
+            $('.selectL, .selectR').hover(function(e) {
+                if(e.target.children.length > 2) {
+                    e.target.children[1].hidden = true;
+                    e.target.children[2].hidden = false;
+                }
+                e.stopPropagation();
+            });
+            $('.selectL, .selectR').mouseleave(function(e) {
+                if(e.target.children.length > 2) {
+                    e.target.children[1].hidden = false;
+                    e.target.children[2].hidden = true;
+                }
+                e.stopPropagation();
+            });
+            $('.selectL').click(function() {
+                $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[0]->id }};
+                $('form.teamSelect').submit();
+            });
+            $('.selectR').click(function() {
+                $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[1]->id }};
+                $('form.teamSelect').submit();
+            });
         });
-        $('.selectL, .selectR').mouseleave(function(e) {
-            if(e.target.children.length > 2) {
-                e.target.children[1].hidden = false;
-                e.target.children[2].hidden = true;
-            }
-            e.stopPropagation();
-        });
-        $('.selectL').click(function() {
-            $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[0]->id }};
-            $('form.teamSelect')[0].submit();
-        });
-        $('.selectR').click(function() {
-            $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[1]->id }};
-            $('form.teamSelect')[0].submit();
-        });
+
     </script>
 
 
@@ -172,6 +175,7 @@
                                  data-ad-slot="4947953757"
                                  data-ad-format="auto"></ins>
                         <form method="post" action="{{ route('team_select') }}" class="teamSelect">
+                            {!! csrf_field() !!}
                             <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
                                 <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
                                     <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>

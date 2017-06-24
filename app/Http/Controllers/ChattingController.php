@@ -126,11 +126,7 @@ class ChattingController extends Controller
 
     public function teamSelect(Request $request)
     {
-
-
         Session::put('myTeam', $request->teamSelect);
-
-
         return redirect()->back();
     }
 

@@ -60,18 +60,28 @@
             }
 
         })
-        var selectMouseOver = function(e, b)
-        {
-            if(b)
-            {
+        $('.selectL, .selectR').mouseover(function(e) {
+            if(e.target.children.length > 2) {
                 e.target.children[1].hidden = true;
                 e.target.children[2].hidden = false;
             }
-            else {
+            e.stopPropagation();
+        });
+        $('.selectL, .selectR').mouseleave(function(e) {
+            if(e.target.children.length > 2) {
                 e.target.children[1].hidden = false;
                 e.target.children[2].hidden = true;
             }
-        }
+            e.stopPropagation();
+        });
+        $('.selectL').click(function() {
+            $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[0]->id }};
+            $('form.teamSelect')[0].submit();
+        });
+        $('.selectR').click(function() {
+            $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[1]->id }};
+            $('form.teamSelect')[0].submit();
+        });
     </script>
 
 
@@ -96,7 +106,6 @@
                     <input type="text" name="question"
                            placeholder="찾고 싶은 주제를 검색하세요">
                 </form>
-
             </div>
 
         </div>
@@ -162,21 +171,21 @@
                                  data-ad-client="ca-pub-8665007420370986"
                                  data-ad-slot="4947953757"
                                  data-ad-format="auto"></ins>
-
-
+                        <form method="post" action="{{ route('team_select') }}" class="teamSelect">
                             <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
-
-                                <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}" onmouseover="selectMouseOver(event,true)" onmouseleave="selectMouseOver(event,false)">
+                                <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
                                     <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
                                     <dd id="teamApower">@{{ teamsPower[0] }}%</dd>
                                     <dd id="select" hidden>선택하기</dd>
                                 </dl>
-                                <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}" onmouseover="selectMouseOver(event,true)" onmouseleave="selectMouseOver(event,false)">
+                                <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}">
                                     <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
                                     <dd id="teamBpower">@{{ teamsPower[1] }}%</dd>
-                            <dd id="select" hidden>선택하기</dd>
-                        </dl>
-                    </div>
+                                    <dd id="select" hidden>선택하기</dd>
+                                </dl>
+                            </div>
+                            <input type="hidden" name="teamSelect">
+                        </form>
                     <!--<p class="chat_txt_area1_txt01">#general</p>
                     <p><span class="chat_txt_area1_txt02">ost</span> created htis channel on May 21st. This is hte very beginning of the <span class="chat_txt_area1_txt03">#general</span> channel.<br>
                     Purpose: <span class="chat_txt_area1_txt04">This channel is for team-wide communication and announcements. All team members are in the channel.</span> (<a href="#"><span class="chat_txt_area1_txt03">edit</span></a>)</p><br>
@@ -250,42 +259,41 @@
         </div>
     </div>
 
-    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">진영 선택</h4>
-                </div>
-                <form method="post" action="{{ route('team_select') }}">
-                    {!! csrf_field() !!}
-                    <div class="modal-body">
-                        <div class="radio">
-                            <label>
+    {{--<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">--}}
+        {{--<div class="modal-dialog" role="document">--}}
+            {{--<div class="modal-content">--}}
+                {{--<div class="modal-header">--}}
+                    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span--}}
+                                {{--aria-hidden="true">&times;</span></button>--}}
+                    {{--<h4 class="modal-title">진영 선택</h4>--}}
+                {{--</div>--}}
+                {{--<form method="post" action="{{ route('team_select') }}">--}}
+                    {{--{!! csrf_field() !!}--}}
+                    {{--<div class="modal-body">--}}
+                        {{--<div class="radio">--}}
+                            {{--<label>--}}
 
-                                <input type="radio" name="teamSelect" id="optionsRadios1"
-                                       value="{{ $thisChannel->ssul->teams[0]->id }}" checked>
-                                {{ $thisChannel->ssul->teams[0]->name }}
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="teamSelect" id="optionsRadios2"
-                                       value="{{ $thisChannel->ssul->teams[1]->id }}">
-                                {{ $thisChannel->ssul->teams[1]->name }}
-                            </label>
-                        </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="submit" class="btn btn-primary">확인</button>
-                    </div>
-                </form>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div>
+
+                                {{--{{ $thisChannel->ssul->teams[0]->name }}--}}
+                            {{--</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="radio">--}}
+                            {{--<label>--}}
+
+                                {{--{{ $thisChannel->ssul->teams[1]->name }}--}}
+                            {{--</label>--}}
+                        {{--</div>--}}
+
+                    {{--</div>--}}
+                    {{--<div class="modal-footer">--}}
+                        {{--<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>--}}
+                        {{--<button type="submit" class="btn btn-primary">확인</button>--}}
+                    {{--</div>--}}
+                {{--</form>--}}
+            {{--</div><!-- /.modal-content -->--}}
+        {{--</div><!-- /.modal-dialog -->--}}
+    {{--</div>--}}
 
     </body>
     <script>

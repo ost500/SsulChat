@@ -50,3 +50,5 @@ Route::post('/teamselect', ['as' => 'team_select', 'uses' => 'ChattingController
 Route::get('/facebook/login/', ['as' => 'facebookLogin', 'uses' => 'MainController@facebookLogin']);
 
 Route::get('/facebook/callback', ['as' => 'facebookLoginCallback', 'uses' => 'MainController@facebookCallback']);
+
+Route::get('/search_json', ['as' => 'search_json', 'uses'=> 'MainController@search_json']);

@@ -5,7 +5,10 @@
 #header:after{ display: block; content: ''; clear: both; }
 #visual:after{ display: block; content: ''; clear: both; }
 #container:after{ display: block; content: ''; clear: both; }
-
+html {
+    overflow-y: auto;
+    font-size: 17px;
+}
 body{letter-spacing:-1px; font-weight:400; }
 div#wrap{ position:relative; margin:0px; padding:0px; }
 

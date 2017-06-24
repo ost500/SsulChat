@@ -5,8 +5,9 @@
         dl.selectL, dl.selectR {
             transition: height 0.5s;
         }
-        dl.selectL:hover, dl.selectR:hover{
-            height:125%;
+
+        dl.selectL:hover, dl.selectR:hover {
+            height: 125%;
         }
     </style>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -32,7 +33,7 @@
                 $('.chat_box')[0].scrollTop = 0;
 
             }
-            if(localStorage['SsulChatAnonymous']!==undefined)
+            if (localStorage['SsulChatAnonymous'] !== undefined)
                 localStorage.removeItem('SsulChatAnonymous');
 //            if (localStorage['SsulChatAnonymous'] === undefined || localStorage['SsulChatAnonymous'] != '익명' + parseInt(ip().split('.').join('')).toString(16)) {
 //                localStorage['SsulChatAnonymous'] = '익명' + parseInt(ip().split('.').join('')).toString(16);
@@ -60,10 +61,8 @@
             }
 
         })
-        var selectMouseOver = function(e, b)
-        {
-            if(b)
-            {
+        var selectMouseOver = function (e, b) {
+            if (b) {
                 e.target.children[1].hidden = true;
                 e.target.children[2].hidden = false;
             }
@@ -82,21 +81,22 @@
                 <li class="hot_02"><span class="hot_num">13</span><span class="hot_txt">박근혜 오늘의 법정에서</span><span><img
                                 src="/images/top_hot_btn.png" alt="핫썰 더보기"></span></li>
             </ul>
-            <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
+            <a href="{{ route('main') }}"><h1 style="z-index:10"><img src="/images/main_logo01.png" alt="썰챗 로고"></h1></a>
             <div class="chat_search">
-                    @if(Auth::user()->annony == true)
-                        <a href="{{ route("login") }}">
-                            <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
-                    @else
-                        <a href="{{ route("logout") }}">
-                            <button type="submit" style="background-image: url({{Auth::user()->profile_img}});"></button>
-                    @endif
-                </a>
-                <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
-                    <input type="text" name="question"
-                           placeholder="찾고 싶은 주제를 검색하세요">
-                </form>
-
+                @if(Auth::user()->annony == true)
+                    <a href="{{ route("login") }}">
+                        <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
+                        @else
+                            <a href="{{ route("logout") }}">
+                                <button type="submit"
+                                        style="background-image: url({{Auth::user()->profile_img}});"></button>
+                                @endif
+                            </a>
+                            <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
+                                <input type="text" name="question"
+                                       placeholder="찾고 싶은 주제를 검색하세요">
+                            </form>
+                    </a>
             </div>
 
         </div>
@@ -157,23 +157,25 @@
                 <div class="chat_txt_area1">
                     <!-- TestADS -->
                     <!-- ssulchat/chattings/1/1 -->
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-client="ca-pub-8665007420370986"
-                                 data-ad-slot="4947953757"
-                                 data-ad-format="auto"></ins>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8665007420370986"
+                         data-ad-slot="4947953757"
+                         data-ad-format="auto"></ins>
 
 
-                            <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
+                    <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
 
-                                <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}" onmouseover="selectMouseOver(event,true)" onmouseleave="selectMouseOver(event,false)">
-                                    <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
-                                    <dd id="teamApower">@{{ teamsPower[0] }}%</dd>
-                                    <dd id="select" hidden>선택하기</dd>
-                                </dl>
-                                <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}" onmouseover="selectMouseOver(event,true)" onmouseleave="selectMouseOver(event,false)">
-                                    <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
-                                    <dd id="teamBpower">@{{ teamsPower[1] }}%</dd>
+                        <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}"
+                            onmouseover="selectMouseOver(event,true)" onmouseleave="selectMouseOver(event,false)">
+                            <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
+                            <dd id="teamApower">@{{ teamsPower[0] }}%</dd>
+                            <dd id="select" hidden>선택하기</dd>
+                        </dl>
+                        <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}"
+                            onmouseover="selectMouseOver(event,true)" onmouseleave="selectMouseOver(event,false)">
+                            <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
+                            <dd id="teamBpower">@{{ teamsPower[1] }}%</dd>
                             <dd id="select" hidden>선택하기</dd>
                         </dl>
                     </div>
@@ -238,7 +240,8 @@
                 @foreach($popularChats as $popularChat)
                     <ul class="gry_box">
                         <li class="grybox_pf_img">
-                            <div class="pf_img" style="background-image: url({{$popularChat->user->profile_img}});"></div>
+                            <div class="pf_img"
+                                 style="background-image: url({{$popularChat->user->profile_img}});"></div>
                         </li>
                         <li class="grybox_sj">{{ $popularChat->user->name }}</li>
                         <li class="grybox_good">{{ $popularChat->likes_count }}</li>
@@ -358,7 +361,7 @@
                     for (var i = 0; i < e.popularChats.length; i++) {
                         $(".chat_box").append('<ul class="gry_box">' +
                             '<li class="grybox_pf_img">' +
-                            '<div class="pf_img" style="background-image: url('+ e.popularChats[i].user_profile_img + ');">' + '</div>' +
+                            '<div class="pf_img" style="background-image: url(' + e.popularChats[i].user_profile_img + ');">' + '</div>' +
                             '</li>' +
                             '<li class="grybox_sj">' + e.popularChats[i].user_name + '</li>' +
                             '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "57ca1a30bc3ec211122716420d6eedf9",
+    "content-hash": "2cf8038f2cf00f39d621464724b1461b",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -58,6 +58,42 @@
                 "webmaster"
             ],
             "time": "2016-10-27T03:03:45+00:00"
+        },
+        {
+            "name": "bassjobsen/bootstrap-3-typeahead",
+            "version": "4.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bassjobsen/Bootstrap-3-Typeahead.git",
+                "reference": "7b59699d14865a3b7355c0e05f7a9cdc75f7e8e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bassjobsen/Bootstrap-3-Typeahead/zipball/7b59699d14865a3b7355c0e05f7a9cdc75f7e8e4",
+                "reference": "7b59699d14865a3b7355c0e05f7a9cdc75f7e8e4",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "files": [
+                        "bootstrap3-typeahead.js",
+                        "bootstrap3-typeahead.min.js"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Bass Jobsen",
+                    "email": "bass@w3masters.nl"
+                }
+            ],
+            "description": "Bootstrap 3 Typeahead",
+            "time": "2016-09-26T12:59:36+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

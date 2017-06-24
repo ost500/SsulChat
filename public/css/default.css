@@ -483,14 +483,17 @@ div.chat_txt_area2 {
     overflow-y: auto;
     overflow-x: hidden;
 }
+
 .my_chat {
     float: right;
     overflow: auto;
 }
+
 .normal_chat {
     width: 100%;
     overflow: auto;
 }
+
 div.chat_txt_area2 ul {
     padding: 0px 20px 0px 20px;
 }
@@ -534,6 +537,9 @@ div.chat_txt_area2 ul li.chat_id span img {
 div.chat_txt_area2 ul li.chat_text {
     padding-left: 52px;
     font-size: 14px;
+    height: 14px;
+    line-height: 0px;
+    margin-bottom: 14px;
 }
 
 div.chat_txt_area2 ul li.chat_textFirst {
@@ -595,22 +601,22 @@ ul.gry_box {
     width: 80%;
     margin: 0px auto;
     background: #f9f9f9;
-    margin-top: 26px;
-    padding: 10px 15px;
+    margin-top: 10px;
+    padding: 6px 0px;
     box-sizing: border-box;
 }
 
-li.grybox_pf_img{
+li.grybox_pf_img {
     float: left;
 }
-.pf_img{
+
+.pf_img {
     width: 23px;
     height: 23px;
     background-size: cover;
     border-radius: 21px;
     margin-right: 11px;
 }
-
 
 li.grybox_sj {
     font-family: arial, Helvetica, AppleSDGothicNeo, sans-serif;
@@ -621,16 +627,15 @@ li.grybox_sj {
     float: left;
 }
 
-
 li.grybox_good {
     margin-top: 4px;
-    height: 26px;
+    height: 16px;
     font-weight: 600;
     letter-spacing: 1px;
     float: right;
-    background: url(../images/like.png) no-repeat 0px 0px;
-    background-size: 17px;
-    padding-left: 20px;
+    background: url(../images/like.png) no-repeat 5px 5px;
+    background-size: 12px;
+    padding-left: 21px;
 }
 
 /*  chat02.html ------------------------------------------------------------------------------*/
@@ -641,6 +646,11 @@ div.header_main {
     float: left;
     background-color: #fbce2d;
     height: 300px;
+}
+
+.dropdown-menu {
+
+    left: 30% !important;
 }
 
 div.header_main h1 {
@@ -817,6 +827,7 @@ div.chat_btn {
         height: 33px;
         display: none;
     }
+
     div.header_chat ul.chat_top_hot {
         position: relative;
         float: left;

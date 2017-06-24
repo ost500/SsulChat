@@ -6,11 +6,18 @@
             <h1><img src="images/main_logo02.png" alt="썰챗로고"></h1>
             <form method="get" action="{{ route('search') }}">
 
+
                 @if(isset($question))
-                    <input autofocus type="text" name="question" value="{{ $question }}">
+                    <input class="typeahead" autofocus type="text" name="question"
+                           autocomplete="off"
+                           value="{{ $question }}">
+
                 @else
-                    <input autofocus type="text" name="question">
+                    <input class="typeahead" autofocus type="text" name="question"
+                           autocomplete="off">
+
                 @endif
+
             </form>
         </div>
 
@@ -80,4 +87,34 @@
 
     </div>
     </body>
+
+    <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="/js/bootstrap3-typeahead.js"></script>
+
+    <script type="text/javascript">
+        $('.typeahead').typeahead('destroy');
+
+        var $input = $(".typeahead");
+        $input.typeahead({
+            source: function (query, process) {
+
+                axios.get('/search_json', {
+                    'keyword': query
+                })
+                    .then((response) => {
+                        console.log(response);
+                        return process(response.data);
+                    });
+            },
+            autoSelect: true,
+            show: function () {
+                var pos = $.extend({}, this.$element.position(), {
+                    height: this.$element[0].offsetHeight,
+                    left: "50%"
+                })
+            },
+
+        });
+    </script>
 @endsection

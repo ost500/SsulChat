@@ -5,7 +5,10 @@
 #header:after{ display: block; content: ''; clear: both; }
 #visual:after{ display: block; content: ''; clear: both; }
 #container:after{ display: block; content: ''; clear: both; }
-
+html {
+    overflow-y: auto;
+    font-size: 17px;
+}
 body{letter-spacing:-1px; font-weight:400; }
 div#wrap{ position:relative; margin:0px; padding:0px; }
 
@@ -56,4 +59,9 @@ div#wrap{ position:relative; margin:0px; padding:0px; }
     }
     div.profile_form_btn div span#form_btn_n input{ width:120px; margin-right:10px; float:left; border:solid 2px #cfd0d3; background:#fff; border-radius:4px; height:34px; color:#333; }
     div.profile_form_btn div span#form_btn_o input{ width:120px; background:#fbce2d; border:solid 2px #fbce2d; border-radius:4px; height:34px; color:#fff; font-weight:600; }
+    .login_logo_img {
+        width: 100%;
+        padding-bottom: 40%;
+        margin-top: 30%;
+    }
 }

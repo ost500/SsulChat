@@ -95,20 +95,22 @@
                 <li class="hot_02"><span class="hot_num">13</span><span class="hot_txt">박근혜 오늘의 법정에서</span><span><img
                                 src="/images/top_hot_btn.png" alt="핫썰 더보기"></span></li>
             </ul>
-            <h1><a href="#"><img src="/images/main_logo01.png" alt="썰챗 로고"></a></h1>
+            <a href="{{ route('main') }}"><h1 style="z-index:10"><img src="/images/main_logo01.png" alt="썰챗 로고"></h1></a>
             <div class="chat_search">
-                    @if(Auth::user()->annony == true)
-                        <a href="{{ route("login") }}">
-                            <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
-                    @else
-                        <a href="{{ route("logout") }}">
-                            <button type="submit" style="background-image: url({{Auth::user()->profile_img}});"></button>
-                    @endif
-                </a>
-                <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
-                    <input type="text" name="question"
-                           placeholder="찾고 싶은 주제를 검색하세요">
-                </form>
+                @if(Auth::user()->annony == true)
+                    <a href="{{ route("login") }}">
+                        <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
+                        @else
+                            <a href="{{ route("logout") }}">
+                                <button type="submit"
+                                        style="background-image: url({{Auth::user()->profile_img}});"></button>
+                                @endif
+                            </a>
+                            <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
+                                <input type="text" name="question"
+                                       placeholder="찾고 싶은 주제를 검색하세요">
+                            </form>
+                    </a>
             </div>
 
         </div>
@@ -214,14 +216,14 @@
                             <li class="chat_id">{{$chat->user->name}}
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}}
-                                <button style="border:0;background:transparent;margin-left:2%"
+                                <button style="border:0;background:transparent;margin-left:1%"
                                         v-on:click="like('{{$chat->id}}')">
                                     @if($likes->where('chatting_id',$chat->id)->first())
-                                        <img src="/images/like.png">
-                                        <div style="float:right;font-weight: bold;color:#D75A4A">{{$chat->likes->count()}}</div>
+                                        <img src="/images/like.png" style="width: 55%;">
+                                        <h5 style="float:right;font-weight: bold;color:#D75A4A">{{$chat->likes->count()}}</h5>
                                     @else
-                                        <img src="/images/like_blank.png">
-                                        <div style="float:right">{{$chat->likes->count()}}</div>
+                                        <img src="/images/like_blank.png" style="width: 55%;">
+                                        <h5 style="float:right">{{$chat->likes->count()}}</h5>
                                     @endif
                                 </button>
                             </li>
@@ -251,7 +253,8 @@
                 @foreach($popularChats as $popularChat)
                     <ul class="gry_box">
                         <li class="grybox_pf_img">
-                            <div class="pf_img" style="background-image: url({{$popularChat->user->profile_img}});"></div>
+                            <div class="pf_img"
+                                 style="background-image: url({{$popularChat->user->profile_img}});"></div>
                         </li>
                         <li class="grybox_sj">{{ $popularChat->user->name }}</li>
                         <li class="grybox_good">{{ $popularChat->likes_count }}</li>
@@ -277,14 +280,15 @@
                         {{--<div class="radio">--}}
                             {{--<label>--}}
 
-
-
+                                {{--<input type="radio" name="teamSelect" id="optionsRadios1"--}}
+                                       {{--value="{{ $thisChannel->ssul->teams[0]->id }}" checked>--}}
                                 {{--{{ $thisChannel->ssul->teams[0]->name }}--}}
                             {{--</label>--}}
                         {{--</div>--}}
                         {{--<div class="radio">--}}
                             {{--<label>--}}
-
+                                {{--<input type="radio" name="teamSelect" id="optionsRadios2"--}}
+                                       {{--value="{{ $thisChannel->ssul->teams[1]->id }}">--}}
                                 {{--{{ $thisChannel->ssul->teams[1]->name }}--}}
                             {{--</label>--}}
                         {{--</div>--}}
@@ -315,7 +319,7 @@
                 typingUserName: [],
                 typing: false,
                 viewers: {},
-                teamsPower: [{{ $teamAPower }},{{$teamBPower}}],
+                teamsPower: [{{ $teamAPower }},{{ 100 - $teamAPower}}],
 
             },
             created: function () {
@@ -327,7 +331,7 @@
                     $('#chats').append("<ul id=" + e.id + ">" +
                         "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(" + e.profile_img + ")\"></div></li>" +
                         "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
-                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;margin-left: 2%;\" onclick=\"chatting_app.like(" + e.id + ")\"><img class=\"likeButtonImg\" src=\"/images/like_blank.png\"></img><div style=\"float:right\">0</div></button></li>" +
+                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;padding-top: 1%;margin-left: 1%;\" onclick=\"chatting_app.like(" + e.id + ")\"><img style=\"width:55%\" class=\"likeButtonImg\" src=\"/images/like_blank.png\"></img><div style=\"float:right\">0</div></button></li>" +
                         "</ul>");
                     $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
 
@@ -370,7 +374,7 @@
                     for (var i = 0; i < e.popularChats.length; i++) {
                         $(".chat_box").append('<ul class="gry_box">' +
                             '<li class="grybox_pf_img">' +
-                            '<div class="pf_img" style="background-image: url('+ e.popularChats[i].user_profile_img + ');">' + '</div>' +
+                            '<div class="pf_img" style="background-image: url(' + e.popularChats[i].user_profile_img + ');">' + '</div>' +
                             '</li>' +
                             '<li class="grybox_sj">' + e.popularChats[i].user_name + '</li>' +
                             '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +

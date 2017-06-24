@@ -77,4 +77,11 @@ class MainController extends Controller
         return redirect()->intended();
     }
 
+    public function search_json(Request $request)
+    {
+        $ssuls = Ssul::where('name', 'like', "%" . $request->keyword . "%")->limit(5)->get();
+
+        return response()->json($ssuls);
+    }
+
 }

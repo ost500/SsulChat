@@ -207,10 +207,10 @@
                                         v-on:click="like('{{$chat->id}}')">
                                     @if($likes->where('chatting_id',$chat->id)->first())
                                         <img src="/images/like.png">
-                                        <div style="float:right;font-weight: bold;color:#D75A4A">{{$chat->likes->count()}}</div>
+                                        <h5 style="float:right;font-weight: bold;color:#D75A4A">{{$chat->likes->count()}}</h5>
                                     @else
                                         <img src="/images/like_blank.png">
-                                        <div style="float:right">{{$chat->likes->count()}}</div>
+                                        <h5 style="float:right">{{$chat->likes->count()}}</h5>
                                     @endif
                                 </button>
                             </li>

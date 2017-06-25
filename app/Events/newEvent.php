@@ -29,6 +29,7 @@ class newEvent implements ShouldBroadcastNow
     public $chattingId;
     public $channelId;
     public $profile_img;
+    public $chatResult;
 
     /**
      * Create a new event instance.
@@ -64,6 +65,11 @@ class newEvent implements ShouldBroadcastNow
         $chat->team_id = $request->myTeam;
         $chat->save();
 
+
+        $this->chatResult = Chatting::where('id', $chat->id)->get()
+            ->first();
+
+
         $this->chattingId = $chat->id;
     }
 
@@ -74,7 +80,7 @@ class newEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        Notification::send(Auth::user(), new ChattingLog("[채널:{$this->channelId}]{$this->userName}({$this->time}) : {$this->message}"));
+//        Notification::send(Auth::user(), new ChattingLog("[채널:{$this->channelId}]{$this->userName}({$this->time}) : {$this->message}"));
 
         return new PresenceChannel('newMessage' . $this->channelId);
     }
@@ -88,12 +94,18 @@ class newEvent implements ShouldBroadcastNow
     {
         // This must always be an array. Since it will be parsed with json_encode()
         return [
-            'message' => $this->message,
-            'userName' => $this->userName,
-            'time' => $this->time,
-            'ipAddress' => $this->ipAddress,
-            'id' => $this->chattingId,
-            'profile_img' => $this->profile_img
+            "id" => $this->chatResult->id,
+            "user" => [
+                "profile_img" => $this->chatResult->user->profile_img,
+                "name" => $this->chatResult->user->name,
+            ],
+
+            "created_at" => $this->chatResult->created_at->toDateTimeString(),
+            "ipaddress" => $this->chatResult->ipaddress,
+            "content" => $this->chatResult->content,
+            "likes" => [
+
+            ]
         ];
     }
 }

@@ -12,7 +12,7 @@
     </style>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
-        $('#element').on('scroll touchmove mousewheel', function(event) {
+        $('#element').on('scroll touchmove mousewheel', function (event) {
             event.preventDefault();
             event.stopPropagation();
 
@@ -209,7 +209,8 @@
                 </div>
 
 
-                <div id="chats" class="chat_txt_area2">
+                <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"
+                     id="chats" class="chat_txt_area2">
                     {{--<span class="chat_date">May 21st</span>--}}
 
                     <ul v-for="chat in chats" class="normal_chat" v-bind:id="chat.id">
@@ -268,8 +269,13 @@
                 @foreach($popularChats as $popularChat)
                     <ul class="gry_box">
                         <li class="grybox_pf_img">
-                            <div class="pf_img"
-                                 style="background-image: url({{$popularChat->user->profile_img}});"></div>
+                            @if($popularChat->user->profile_img != null)
+                                <div class="pf_img"
+                                     style="background-image: url({{$popularChat->user->profile_img}});"></div>
+                            @else
+                                <div class="pf_img"
+                                     style="background-image: url('/images/chatpic01.png');"></div>
+                            @endif
                         </li>
                         <li class="grybox_sj">{{ $popularChat->user->name }}</li>
                         <li class="grybox_good">{{ $popularChat->likes_count }}</li>
@@ -343,7 +349,7 @@
                     {{ $like }},
                     @endforeach
                 ],
-
+                busy: false
 
             },
             filters: {
@@ -361,15 +367,12 @@
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
                     console.log(e);
 
-
-                    $('#chats').append("<ul id=" + e.id + ">" +
-                        "<li class=\"chat_pic\"><div class=\"chat_profile_img\" style=\"background-image: url(" + e.profile_img + ")\"></div></li>" +
-                        "<li class=\"chat_id\">" + e.userName + "<span>" + e.time + "</span><span>" + e.ipAddress + "</span></li>" +
-                        "<li class=\"chat_text\">" + e.message + "<button style=\"border:0;background:transparent;padding-top: 1%;margin-left: 1%;\" onclick=\"chatting_app.like(" + e.id + ")\"><img style=\"width:55%\" class=\"likeButtonImg\" src=\"/images/like_blank.png\"></img><div style=\"float:right\">0</div></button></li>" +
-                        "</ul>");
-                    $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
-
+                    this.chats.push(e);
                     // 맨 아래로 스크롤 이동
+                    setTimeout(() => {
+                        console.log($('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight);
+                    }, 10);
+
 
                 }).here(viewers => {
                     console.log('abc');
@@ -441,6 +444,15 @@
             },
 
             methods: {
+                loadMore: function () {
+                    this.busy = true;
+
+                    setTimeout(() => {
+                        console.log('hihi');
+                        this.busy = false;
+                    }, 1000);
+                },
+
                 isTyping: function () {
                     let channel = Echo.join('isTyping{{$thisChannel->id}}');
 
@@ -496,14 +508,15 @@
                     var message = $('#message').val();
                     $('#message').val(''); // 폼 초기화
 
-
-                    axios.post('/chat', {
+                    data = {
                         'message': message,
                         'ipaddress': ip(),
                         'channel_id': "{{ $thisChannel->id }}",
                         anony_name: localStorage['SsulChatAnonymous'],
                         'myTeam': "{{ $myTeam }}"
-                    })
+                    };
+
+                    axios.post('/chat', data)
                         .then((response) => {
 //                            console.log(response);
                         });

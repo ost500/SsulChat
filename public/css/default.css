@@ -66,9 +66,9 @@ div#wrap {
 }
 
 .chat_profile_img {
-    width: 42px;
+    width: 30px;
     border-radius: 50%;
-    height: 42px;
+    height: 30px;
     /* border-radius: 4px; */
     background-size: cover;
 }
@@ -435,7 +435,7 @@ dl.selectR dd {
     font-family: arial, Helvetica, AppleSDGothicNeo, sans-serif;
     font-size: 18px;
     letter-spacing: 0px;
-    line-height: 24px;
+    line-height: 17px;
 }
 
 p.chat_txt_area1_txt01 {
@@ -513,17 +513,18 @@ div.chat_txt_area2 ul li.chat_pic img {
 }
 
 div.chat_txt_area2 ul li.chat_id {
-    padding-left: 52px;
+    padding-left: 25px;
     font-family: arial, Helvetica, AppleSDGothicNeo, sans-serif;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 600;
     color: #222;
     letter-spacing: 0px;
+    padding-top: 5px;
 }
 
 div.chat_txt_area2 ul li.chat_id span {
     margin-left: 10px;
-    font-size: 12px;
+    font-size: 10px;
     color: #999;
     vertical-align: top;
 }
@@ -535,11 +536,12 @@ div.chat_txt_area2 ul li.chat_id span img {
 }
 
 div.chat_txt_area2 ul li.chat_text {
-    padding-left: 52px;
-    font-size: 14px;
-    height: 14px;
-    line-height: 0px;
-    margin-bottom: 14px;
+    padding-left: 40px;
+    font-size: 12px;
+    /* height: 14px; */
+    margin-bottom: 3px;
+    /* text-align: justify; */
+    line-height: 20px;
 }
 
 div.chat_txt_area2 ul li.chat_textFirst {
@@ -775,6 +777,9 @@ div.chat_btn {
     background: #3da8dc url(../images/comm_chat.png) no-repeat center center;
     border-radius: 50px;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+ins.adsbygoogle {
+    display: none!important;
 }
 
 /*모바일 반응형 대응*/

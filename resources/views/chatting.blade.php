@@ -11,8 +11,8 @@
         }
     </style>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        $('#element').on('scroll touchmove mousewheel', function (event) {
+    <script >
+        $('#element').on('scroll touchmove mousewheel', function(event) {
             event.preventDefault();
             event.stopPropagation();
 

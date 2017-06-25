@@ -84,4 +84,8 @@ class MainController extends Controller
         return response()->json($ssuls);
     }
 
+    public function ssul(Request $request)
+    {
+        return view('ssul');
+    }
 }

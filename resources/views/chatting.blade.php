@@ -216,14 +216,14 @@
                             <li class="chat_id">{{$chat->user->name}}
                                 <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
                             <li class="chat_text"> {{$chat->content}}
-                                <button style="border:0;background:transparent;margin-left:1%"
+                                <button style="border:0;background:transparent;margin-left:1%;    padding-top: 5px;"
                                         v-on:click="like('{{$chat->id}}')">
                                     @if($likes->where('chatting_id',$chat->id)->first())
-                                        <img src="/images/like.png" style="width: 55%;">
-                                        <h5 style="float:right;font-weight: bold;color:#D75A4A">{{$chat->likes->count()}}</h5>
+                                        <img src="/images/like.png" style="width: 45%;">
+                                        <h5 style="float:right;font-weight: bold;color:#D75A4A; font-size: 12px; ">{{$chat->likes->count()}}</h5>
                                     @else
-                                        <img src="/images/like_blank.png" style="width: 55%;">
-                                        <h5 style="float:right">{{$chat->likes->count()}}</h5>
+                                        <img src="/images/like_blank.png" style="width: 45%;">
+                                        <h5 style="float:right; font-size: 12px;">{{$chat->likes->count()}}</h5>
                                     @endif
                                 </button>
                             </li>

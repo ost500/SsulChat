@@ -14,9 +14,7 @@ div#wrap{ position:relative; margin:0px; padding:0px; }
 
 .clear{clear:both;}
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    ins.adsbygoogle {
-        display: none!important;
-    }
+
     div.header_profile {
         position: relative;
         width: 100%;
@@ -67,4 +65,5 @@ div#wrap{ position:relative; margin:0px; padding:0px; }
         padding-bottom: 40%;
         margin-top: 30%;
     }
+
 }

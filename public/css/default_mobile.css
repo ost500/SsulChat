@@ -178,4 +178,7 @@
         color: #999;
         vertical-align: top;
     }
+    ins.adsbygoogle {
+        display: none!important;
+    }
 }

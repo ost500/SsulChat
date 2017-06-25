@@ -11,8 +11,15 @@
     </style>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
+        $('#element').on('scroll touchmove mousewheel', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            return false;
+        });
+    </script>
+    <script>
         window.onload = function () {
-            $(window).scrollTo(0,1);
             if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
                 var outerheight = $(window).outerHeight(true) - $('.header_chat').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20
                 var inner = $('.chat_txt_area2');
@@ -43,7 +50,6 @@
 
     <script>
         $(window).resize(function () {
-            $(window).scrollTo(0,1);
             if (matchMedia("only screen and (max-device-width: 480px) and (min-device-width: 320px)").matches) {
                 var outerheight = $(window).outerHeight(true) - $('.chat_txt_area1').outerHeight(true) - $('.chat_input_wrap').outerHeight(true) - 20;
                 var inner = $('.chat_txt_area2');

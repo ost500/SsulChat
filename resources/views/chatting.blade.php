@@ -1,12 +1,13 @@
 @extends('layouts.header')
 @section('content')
-    <body xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <body xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <style>
         dl.selectL, dl.selectR {
             transition: height 0.5s;
         }
-        dl.selectL:hover, dl.selectR:hover{
-            height:125%;
+
+        dl.selectL:hover, dl.selectR:hover {
+            height: 125%;
         }
     </style>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -32,7 +33,7 @@
                 $('.chat_box')[0].scrollTop = 0;
 
             }
-            if(localStorage['SsulChatAnonymous']!==undefined)
+            if (localStorage['SsulChatAnonymous'] !== undefined)
                 localStorage.removeItem('SsulChatAnonymous');
 //            if (localStorage['SsulChatAnonymous'] === undefined || localStorage['SsulChatAnonymous'] != '익명' + parseInt(ip().split('.').join('')).toString(16)) {
 //                localStorage['SsulChatAnonymous'] = '익명' + parseInt(ip().split('.').join('')).toString(16);
@@ -60,26 +61,26 @@
             }
 
         })
-        $(document).ready(function(){
-            $('.selectL, .selectR').hover(function(e) {
-                if(e.target.children.length > 2) {
+        $(document).ready(function () {
+            $('.selectL, .selectR').hover(function (e) {
+                if (e.target.children.length > 2) {
                     e.target.children[1].hidden = true;
                     e.target.children[2].hidden = false;
                 }
                 e.stopPropagation();
             });
-            $('.selectL, .selectR').mouseleave(function(e) {
-                if(e.target.children.length > 2) {
+            $('.selectL, .selectR').mouseleave(function (e) {
+                if (e.target.children.length > 2) {
                     e.target.children[1].hidden = false;
                     e.target.children[2].hidden = true;
                 }
                 e.stopPropagation();
             });
-            $('.selectL').click(function() {
+            $('.selectL').click(function () {
                 $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[0]->id }};
                 $('form.teamSelect').submit();
             });
-            $('.selectR').click(function() {
+            $('.selectR').click(function () {
                 $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[1]->id }};
                 $('form.teamSelect').submit();
             });
@@ -95,7 +96,8 @@
                 <li class="hot_02"><span class="hot_num">13</span><span class="hot_txt">박근혜 오늘의 법정에서</span><span><img
                                 src="/images/top_hot_btn.png" alt="핫썰 더보기"></span></li>
             </ul>
-            <a href="{{ route('main') }}"><h1 style="z-index:10"><img src="/images/main_logo01.png" alt="썰챗 로고"></h1></a>
+            <a href="{{ route('main') }}"><h1 style="z-index:10"><img src="/images/main_logo01.png" alt="썰챗 로고"></h1>
+            </a>
             <div class="chat_search">
                 @if(Auth::user()->annony == true)
                     <a href="{{ route("login") }}">
@@ -171,27 +173,27 @@
                 <div class="chat_txt_area1">
                     <!-- TestADS -->
                     <!-- ssulchat/chattings/1/1 -->
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-client="ca-pub-8665007420370986"
-                                 data-ad-slot="4947953757"
-                                 data-ad-format="auto"></ins>
-                        <form method="post" action="{{ route('team_select') }}" class="teamSelect">
-                            {!! csrf_field() !!}
-                            <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
-                                <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
-                                    <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
-                                    <dd id="teamApower">@{{ teamsPower[0] }}%</dd>
-                                    <dd id="select" hidden>선택하기</dd>
-                                </dl>
-                                <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}">
-                                    <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
-                                    <dd id="teamBpower">@{{ teamsPower[1] }}%</dd>
-                                    <dd id="select" hidden>선택하기</dd>
-                                </dl>
-                            </div>
-                            <input type="hidden" name="teamSelect">
-                        </form>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8665007420370986"
+                         data-ad-slot="4947953757"
+                         data-ad-format="auto"></ins>
+                    <form method="post" action="{{ route('team_select') }}" class="teamSelect">
+                        {!! csrf_field() !!}
+                        <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
+                            <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
+                                <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
+                                <dd id="teamApower">@{{ teamsPower[0] }}%</dd>
+                                <dd id="select" hidden>선택하기</dd>
+                            </dl>
+                            <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}">
+                                <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
+                                <dd id="teamBpower">@{{ teamsPower[1] }}%</dd>
+                                <dd id="select" hidden>선택하기</dd>
+                            </dl>
+                        </div>
+                        <input type="hidden" name="teamSelect">
+                    </form>
                     <!--<p class="chat_txt_area1_txt01">#general</p>
                     <p><span class="chat_txt_area1_txt02">ost</span> created htis channel on May 21st. This is hte very beginning of the <span class="chat_txt_area1_txt03">#general</span> channel.<br>
                     Purpose: <span class="chat_txt_area1_txt04">This channel is for team-wide communication and announcements. All team members are in the channel.</span> (<a href="#"><span class="chat_txt_area1_txt03">edit</span></a>)</p><br>
@@ -201,35 +203,40 @@
 
                 <div id="chats" class="chat_txt_area2">
                     {{--<span class="chat_date">May 21st</span>--}}
-                    @foreach($chats as $chat)
-                        <ul class="normal_chat" id="{{$chat->id}}">
-                            <li class="chat_pic">
-                                @if($chat->user->profile_img == null)
-                                    <div class="chat_profile_img"
-                                         style="background-image: url('/images/chatpic01.png');"></div>
-                                @else
-                                    <div class="chat_profile_img"
-                                         style="background-image: url('{{$chat->user->profile_img}}');"></div>
-                                @endif
 
-                            </li>
-                            <li class="chat_id">{{$chat->user->name}}
-                                <span> {{$chat->created_at}}</span><span>{{$chat->ipaddress}}</span></li>
-                            <li class="chat_text"> {{$chat->content}}
-                                <button style="border:0;background:transparent;margin-left:1%"
-                                        v-on:click="like('{{$chat->id}}')">
-                                    @if($likes->where('chatting_id',$chat->id)->first())
-                                        <img src="/images/like.png" style="width: 55%;">
-                                        <h5 style="float:right;font-weight: bold;color:#D75A4A">{{$chat->likes->count()}}</h5>
-                                    @else
-                                        <img src="/images/like_blank.png" style="width: 55%;">
-                                        <h5 style="float:right">{{$chat->likes->count()}}</h5>
-                                    @endif
-                                </button>
-                            </li>
-                        </ul>
-                @endforeach
-                <!-- 채팅생성영역-->
+                    <ul v-for="chat in chats" class="normal_chat" v-bind:id="chat.id">
+                        <li class="chat_pic">
+
+                            <div v-if="chat.user.profile_img == null" class="chat_profile_img"
+                                 style="background-image: url('/images/chatpic01.png');"></div>
+
+                            <div v-else class="chat_profile_img"
+                                 :style="{'background-image': 'url('+chat.user.profile_img+')'}"></div>
+
+
+                        </li>
+                        <li class="chat_id">@{{chat.user.name}}
+                            <span> @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
+                        <li class="chat_text"> @{{chat.content}}
+                            <button style="border:0;background:transparent;margin-left:1%"
+                                    v-on:click="like(chat.id)">
+
+
+                                <div v-if="chat.myLike">
+                                    <img src="/images/like.png" style="width: 55%;">
+                                    <h5 style="float:right;font-weight: bold;color:#D75A4A">@{{chat.likes.length}}</h5>
+                                </div>
+
+                                <div v-else>
+                                    <img src="/images/like_blank.png" style="width: 55%;">
+                                    <h5 style="float:right">@{{ chat.likes.length }}</h5>
+                                </div>
+
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- 채팅생성영역-->
 
                 </div>
 
@@ -267,40 +274,40 @@
     </div>
 
     {{--<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">--}}
-        {{--<div class="modal-dialog" role="document">--}}
-            {{--<div class="modal-content">--}}
-                {{--<div class="modal-header">--}}
-                    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span--}}
-                                {{--aria-hidden="true">&times;</span></button>--}}
-                    {{--<h4 class="modal-title">진영 선택</h4>--}}
-                {{--</div>--}}
-                {{--<form method="post" action="{{ route('team_select') }}">--}}
-                    {{--{!! csrf_field() !!}--}}
-                    {{--<div class="modal-body">--}}
-                        {{--<div class="radio">--}}
-                            {{--<label>--}}
+    {{--<div class="modal-dialog" role="document">--}}
+    {{--<div class="modal-content">--}}
+    {{--<div class="modal-header">--}}
+    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span--}}
+    {{--aria-hidden="true">&times;</span></button>--}}
+    {{--<h4 class="modal-title">진영 선택</h4>--}}
+    {{--</div>--}}
+    {{--<form method="post" action="{{ route('team_select') }}">--}}
+    {{--{!! csrf_field() !!}--}}
+    {{--<div class="modal-body">--}}
+    {{--<div class="radio">--}}
+    {{--<label>--}}
 
-                                {{--<input type="radio" name="teamSelect" id="optionsRadios1"--}}
-                                       {{--value="{{ $thisChannel->ssul->teams[0]->id }}" checked>--}}
-                                {{--{{ $thisChannel->ssul->teams[0]->name }}--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="radio">--}}
-                            {{--<label>--}}
-                                {{--<input type="radio" name="teamSelect" id="optionsRadios2"--}}
-                                       {{--value="{{ $thisChannel->ssul->teams[1]->id }}">--}}
-                                {{--{{ $thisChannel->ssul->teams[1]->name }}--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
+    {{--<input type="radio" name="teamSelect" id="optionsRadios1"--}}
+    {{--value="{{ $thisChannel->ssul->teams[0]->id }}" checked>--}}
+    {{--{{ $thisChannel->ssul->teams[0]->name }}--}}
+    {{--</label>--}}
+    {{--</div>--}}
+    {{--<div class="radio">--}}
+    {{--<label>--}}
+    {{--<input type="radio" name="teamSelect" id="optionsRadios2"--}}
+    {{--value="{{ $thisChannel->ssul->teams[1]->id }}">--}}
+    {{--{{ $thisChannel->ssul->teams[1]->name }}--}}
+    {{--</label>--}}
+    {{--</div>--}}
 
-                    {{--</div>--}}
-                    {{--<div class="modal-footer">--}}
-                        {{--<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>--}}
-                        {{--<button type="submit" class="btn btn-primary">확인</button>--}}
-                    {{--</div>--}}
-                {{--</form>--}}
-            {{--</div><!-- /.modal-content -->--}}
-        {{--</div><!-- /.modal-dialog -->--}}
+    {{--</div>--}}
+    {{--<div class="modal-footer">--}}
+    {{--<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>--}}
+    {{--<button type="submit" class="btn btn-primary">확인</button>--}}
+    {{--</div>--}}
+    {{--</form>--}}
+    {{--</div><!-- /.modal-content -->--}}
+    {{--</div><!-- /.modal-dialog -->--}}
     {{--</div>--}}
 
     </body>
@@ -320,9 +327,28 @@
                 typing: false,
                 viewers: {},
                 teamsPower: [{{ $teamAPower }},{{ 100 - $teamAPower}}],
+                page: 1,
+                chats: [],
+                maxChatId: "{{ $maxChatId }}",
+                myLike: [
+                    @foreach($likes as $like)
+                    {{ $like }},
+                    @endforeach
+                ],
+
 
             },
+            filters: {
+                ifMyLike: function (value) {
+                    return this.myLike.indexof(value) > -1 ? true : false;
+                }
+            },
+
             created: function () {
+
+                console.log(this.myLike);
+
+                this.getChat();
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
                     console.log(e);
@@ -351,22 +377,40 @@
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.like', (e) => {
                     console.log(e);
+                    // 하트 채우기
                     if (e.available) {
-                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) + 1;
-                        if (e.userId == {{Auth::user()->id}}) {
-                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like.png";
-                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#D75A4A";
-                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "bold";
-                        }
+
+                        this.myLike.push(e.chattingId);
+                        console.log(this.myLike);
+
+                        this.chats.forEach(function (chat) {
+                            if (chat.id == e.chattingId) {
+                                chat.myLike = true;
+                                chat.likes.push(e.like);
+                            }
+                        });
                     }
+                    // 하트 비우기
                     else {
 
-                        $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML = parseInt($('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].innerHTML) - 1;
-                        if (e.userId == {{Auth::user()->id}}) {
-                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[0].src = "/images/like_blank.png";
-                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.color = "#000";
-                            $('#chats ul#' + e.chattingId)[0].children[2].children[0].children[1].style.fontWeight = "";
-                        }
+                        targeId = null;
+
+
+                        this.chats.forEach(function (chat) {
+                            if (chat.id == e.chattingId) {
+                                chat.myLike = false;
+
+                                chat.likes.forEach(function (like) {
+                                    if (like.user_id == "{{Auth::user()->id}}") {
+                                        chat.likes.splice(chat.likes.indexOf(like), 0);
+                                    }
+
+                                });
+
+                                chat.likes.splice(chat.likes.indexOf(chat.id))
+                            }
+                        });
+
                     }
 
 //                    console.log(e.popularChats);
@@ -473,6 +517,48 @@
 //                    console.log('hihihi');
                     setTimeout(chatting_app.submitMessage(), 0);
                     return false;
+                },
+                chatIdInMyLike: function (id) {
+                    this.myLike.forEach(function (value) {
+                        console.log('hererererer');
+                        console.log(value);
+                        console.log(id);
+                        console.log('hererererer');
+                        if (value == id) {
+                            console.log("truururu");
+                            return true;
+                        }
+                        else {
+                            console.log("false!!!");
+                            return false;
+                        }
+                    });
+                },
+
+                getChat: function () {
+                    request = '/chat_content/{{ $thisChannel->id }}/' + this.maxChatId;
+
+                    console.log(request);
+                    axios.get(request, {
+                        'page': this.page
+                    })
+                        .then((response) => {
+                            this.page++;
+
+                            console.log("here");
+                            console.log(response.data);
+                            console.log("there");
+
+                            response.data.forEach(function (value) {
+
+                                chatting_app.chats.push(value);
+                            });
+
+
+                            console.log(this.chats);
+
+//                            this.maxChatId;
+                        });
                 }
             }
         })

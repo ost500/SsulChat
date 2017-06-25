@@ -36,6 +36,7 @@ class likeEvent implements ShouldBroadcastNow
     public $popularChats;
     public $ssulId;
     public $teamsPower;
+    public $like;
 
     /**
      * Create a new event instance.
@@ -61,6 +62,8 @@ class likeEvent implements ShouldBroadcastNow
         $chatting = Chatting::find($this->chattingId);
         $chattingTeamId = $chatting->team_id;
 
+        // 좋아요 카운트 반환
+
         if ($hereTeams->pluck('id')->has($chattingTeamId)) {
             $chatting->team_id = null;
             $chatting->save();
@@ -71,10 +74,10 @@ class likeEvent implements ShouldBroadcastNow
             DB::table('likes')->where('chatting_id', $this->chattingId)->where('user_id', $this->userId)->delete();
             $this->available = false;
         } else {
-            $like = new Like();
-            $like->chatting_id = $this->chattingId;
-            $like->user_id = Auth::user()->id;
-            $like->save();
+            $this->like = new Like();
+            $this->like->chatting_id = $this->chattingId;
+            $this->like->user_id = Auth::user()->id;
+            $this->like->save();
 
             $this->available = true;
         }
@@ -142,7 +145,8 @@ class likeEvent implements ShouldBroadcastNow
             'userId' => $this->userId,
             'available' => $this->available,
             'popularChats' => $this->popularChats,
-            'teamsPower' => $this->teamsPower
+            'teamsPower' => $this->teamsPower,
+            'like' => $this->like
         ];
     }
 }

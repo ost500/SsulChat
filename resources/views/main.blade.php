@@ -23,6 +23,9 @@
 
         <div class="community_wrap">
             <div class="community">
+                <div style="margin:5px; text-align: center" class="make_ssul">
+                    <button type="submit" class="btn btn-primary">썰방 만들기</button>
+                </div>
                 <h2>썰방 리스트</h2>
                 <div>
                     @if($channels->isEmpty())

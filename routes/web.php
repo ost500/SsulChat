@@ -51,4 +51,6 @@ Route::get('/facebook/login/', ['as' => 'facebookLogin', 'uses' => 'MainControll
 
 Route::get('/facebook/callback', ['as' => 'facebookLoginCallback', 'uses' => 'MainController@facebookCallback']);
 
-Route::get('/search_json', ['as' => 'search_json', 'uses'=> 'MainController@search_json']);
+Route::get('/search_json', ['as' => 'search_json', 'uses' => 'MainController@search_json']);
+
+Route::get('/chat_content/{channelId}/{id}', ['as' => 'chat_content', 'uses' => 'ChattingController@chatContent']);

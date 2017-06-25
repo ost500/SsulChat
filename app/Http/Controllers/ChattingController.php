@@ -88,13 +88,13 @@ class ChattingController extends Controller
 
         $myTeam = $request->session()->get('myTeam');
 
-        $chats = Chatting::where('channel_id', $channelId)
-            ->orderBy('created_at', 'desc')
-            ->paginate(20)->sortBy('created_at');
+        $maxChatId = Chatting::selectRaw('MAX(id) as maxId')->get()
+            ->first()->maxId;
+
 
         $likes = Like::where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
-            ->paginate(20)->sortBy('created_at');
+            ->paginate(20)->sortBy('created_at')->pluck('chatting_id');
 
         $popularChats = Chatting::where('channel_id', $channelId)
             ->has('likes')
@@ -121,13 +121,32 @@ class ChattingController extends Controller
         }
 
 
-        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'teamAPower', 'teamBPower'));
+        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'teamAPower', 'teamBPower', 'maxChatId'));
     }
 
     public function teamSelect(Request $request)
     {
         Session::put('myTeam', $request->teamSelect);
         return redirect()->back();
+    }
+
+    public function chatContent($channelId, $id)
+    {
+        $chats = Chatting::where('channel_id', $channelId)
+            ->where('id', '<', $id)
+            ->with('user')
+            ->with('likes')
+            ->orderBy('created_at')
+            ->limit(20)->get()
+            ->each(function (Chatting $chat) {
+                if ($chat->likes->pluck('user_id')->contains(Auth::user()->id)) {
+                    $chat->myLike = true;
+                } else {
+                    $chat->myLike = false;
+                }
+            });
+
+        return $chats;
     }
 
 }

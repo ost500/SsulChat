@@ -80,7 +80,7 @@ class newEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-//        Notification::send(Auth::user(), new ChattingLog("[채널:{$this->channelId}]{$this->userName}({$this->time}) : {$this->message}"));
+        Notification::send(Auth::user(), new ChattingLog("[채널:{$this->channelId}]{$this->userName}({$this->time}) : {$this->message}"));
 
         return new PresenceChannel('newMessage' . $this->channelId);
     }

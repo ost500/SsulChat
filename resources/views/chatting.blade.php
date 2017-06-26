@@ -11,8 +11,8 @@
         }
     </style>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script >
-        $('#element').on('scroll touchmove mousewheel', function(event) {
+    <script>
+        $('#element').on('scroll touchmove mousewheel', function (event) {
             event.preventDefault();
             event.stopPropagation();
 
@@ -101,8 +101,9 @@
         <div class="header_chat">
             <ul class="chat_top_hot">
                 <li class="hot_01"><img src="/images/top_hot.png" alt="hot썰"></li>
-                <li class="hot_02"><span class="hot_num">13</span><span class="hot_txt">박근혜 오늘의 법정에서</span><span><img
-                                src="/images/top_hot_btn.png" alt="핫썰 더보기"></span></li>
+                <li class="hot_02"><span class="hot_num"></span><span class="hot_txt">썰챗 베타서비스</span><span>
+                        {{--<img src="/images/top_hot_btn.png" alt="핫썰 더보기">--}}
+                    </span></li>
             </ul>
             <a href="{{ route('main') }}"><h1 style="z-index:10"><img src="/images/main_logo01.png" alt="썰챗 로고"></h1>
             </a>
@@ -110,17 +111,20 @@
                 @if(Auth::user()->annony == true)
                     <a href="{{ route("login") }}">
                         <button type="submit" style="background-image: url('/images/chatpic01.png');"></button>
-                        @else
-                            <a href="{{ route("logout") }}">
-                                <button type="submit"
-                                        style="background-image: url({{Auth::user()->profile_img}});"></button>
-                                @endif
-                            </a>
-                            <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
-                                <input type="text" name="question"
-                                       placeholder="찾고 싶은 주제를 검색하세요">
-                            </form>
                     </a>
+                @else
+                    <form method="post" action="{{ route("logout") }}">
+                        {!! csrf_field() !!}
+                        <button type="submit"
+                                style="background-image: url({{Auth::user()->profile_img}});"></button>
+                    </form>
+                @endif
+
+                <form class="form-wrapper cf" method="get" action="{{ route("search") }}">
+                    <input type="text" name="question"
+                           placeholder="찾고 싶은 주제를 검색하세요">
+                </form>
+                </a>
             </div>
 
         </div>
@@ -134,12 +138,12 @@
                                         src="/images/chat_icon05.png"
                                         alt="더보기"></a></span></dt>
                     <dd>
-                        <a href="#"><span class="ddf">{{ str_limit($thisChannel->ssul->name, 30)}}</span></a>
+                        <a href="#"><span class="ddf">{{ $thisChannel->ssul->name }}</span></a>
                     @foreach($thisChannel->ssul->channels as $num => $channel)
                         @if($channel->id == $thisChannel->id)
                             <dd>
                                 <a href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
-                                            class="ddt">-->{{ $num+1 }}번 채널</span></a></dd>
+                                            class="ddt">-->{{ $num+1 }}번 채널 (@{{ viewers.length }})</span></a></dd>
                         @else
                             <dd>
                                 <a href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
@@ -209,7 +213,8 @@
                 </div>
 
 
-                <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"
+                {{--<div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"--}}
+                <div
                      id="chats" class="chat_txt_area2">
                     {{--<span class="chat_date">May 21st</span>--}}
 
@@ -349,7 +354,7 @@
                     {{ $like }},
                     @endforeach
                 ],
-                busy: false
+                busy: false,
 
             },
             filters: {
@@ -365,12 +370,16 @@
                 this.getChat();
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
-                    console.log(e);
+
 
                     this.chats.push(e);
+
+                    this.maxChatId = e.id;
+
+
                     // 맨 아래로 스크롤 이동
                     setTimeout(() => {
-                        console.log($('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight);
+                        $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
                     }, 10);
 
 
@@ -448,7 +457,31 @@
                     this.busy = true;
 
                     setTimeout(() => {
-                        console.log('hihi');
+
+                        request = '/chat_content/{{ $thisChannel->id }}/' + this.chats[0].id;
+
+                        console.log(request);
+                        axios.get(request, {
+                            'page': this.page
+                        })
+                            .then((response) => {
+                                this.page++;
+
+                                console.log("here");
+                                console.log(response.data);
+                                console.log("there");
+
+                                response.data.forEach(function (value) {
+
+                                    chatting_app.chats.push(value);
+                                });
+
+
+                                console.log(this.chats);
+
+//                            this.maxChatId;
+                            });
+
                         this.busy = false;
                     }, 1000);
                 },
@@ -571,7 +604,6 @@
                             console.log("there");
 
                             response.data.forEach(function (value) {
-
                                 chatting_app.chats.push(value);
                             });
 

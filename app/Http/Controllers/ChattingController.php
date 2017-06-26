@@ -132,12 +132,15 @@ class ChattingController extends Controller
 
     public function chatContent($channelId, $id)
     {
+
         $chats = Chatting::where('channel_id', $channelId)
-            ->where('id', '<', $id)
+            ->where('id', '<=', $id)
+            ->orderBy('created_at', 'desc')
             ->with('user')
             ->with('likes')
-            ->orderBy('created_at')
-            ->limit(20)->get()
+            ->limit(20)
+            ->get()
+            ->sortBy('id')->values()
             ->each(function (Chatting $chat) {
                 if ($chat->likes->pluck('user_id')->contains(Auth::user()->id)) {
                     $chat->myLike = true;

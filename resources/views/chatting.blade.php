@@ -243,7 +243,7 @@
 
                                 <div v-else>
                                     <img src="/images/like_blank.png" style="width: 55%;">
-                                    <h5 style="float:right">@{{ chat.likes.length }} @{{ chat.id }}</h5>
+                                    <h5 style="float:right">@{{ chat.likes.length }}</h5>
                                 </div>
 
                             </button>

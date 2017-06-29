@@ -134,7 +134,7 @@ class ChattingController extends Controller
     {
 
         $chats = Chatting::where('channel_id', $channelId)
-            ->where('id', '<=', $id)
+            ->where('id', '<', $id)
             ->orderBy('created_at', 'desc')
             ->with('user')
             ->with('likes')

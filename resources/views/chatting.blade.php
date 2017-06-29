@@ -213,13 +213,13 @@
                 </div>
 
 
-                {{--<div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"--}}
-                <div
-                     id="chats" class="chat_txt_area2">
+                <div id="chats" class="chat_txt_area2">
                     {{--<span class="chat_date">May 21st</span>--}}
 
+
+                    <infinite-loading :on-infinite="loadMore" ref="infiniteLoading" direction="top"></infinite-loading>
                     <ul v-for="chat in chats" class="normal_chat" v-bind:id="chat.id">
-                        <li class="chat_pic">
+                        <li class="chat_pic" v-bind:id="'chatrow'+chat.id">
 
                             <div v-if="chat.user.profile_img == null" class="chat_profile_img"
                                  style="background-image: url('/images/chatpic01.png');"></div>
@@ -243,7 +243,7 @@
 
                                 <div v-else>
                                     <img src="/images/like_blank.png" style="width: 55%;">
-                                    <h5 style="float:right">@{{ chat.likes.length }}</h5>
+                                    <h5 style="float:right">@{{ chat.likes.length }} @{{ chat.id }}</h5>
                                 </div>
 
                             </button>
@@ -337,7 +337,9 @@
     <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
+
     <script>
+
 
         var chatting_app = new Vue({
             el: '#chatting',
@@ -355,6 +357,7 @@
                     @endforeach
                 ],
                 busy: false,
+                chatIdOffset: "{{ $maxChatId }}"
 
             },
             filters: {
@@ -454,36 +457,45 @@
 
             methods: {
                 loadMore: function () {
-                    this.busy = true;
+                    if (this.chats != null) {
+                        setTimeout(() => {
 
-                    setTimeout(() => {
+                            request = '/chat_content/{{ $thisChannel->id }}/' + this.chats[0].id;
 
-                        request = '/chat_content/{{ $thisChannel->id }}/' + this.chats[0].id;
+                            let pastChatZeroId = this.chats[0].id;
 
-                        console.log(request);
-                        axios.get(request, {
-                            'page': this.page
-                        })
-                            .then((response) => {
-                                this.page++;
+                            console.log(request);
+                            axios.get(request, {
+                                'page': this.page
+                            })
+                                .then((response) => {
+                                    this.page++;
 
-                                console.log("here");
-                                console.log(response.data);
-                                console.log("there");
+                                    console.log("here");
 
-                                response.data.forEach(function (value) {
-
-                                    chatting_app.chats.push(value);
-                                });
+                                    console.log("there");
 
 
-                                console.log(this.chats);
+                                    chatting_app.chats = response.data.concat(chatting_app.chats);
+
+
+                                    console.log(this.chats);
+                                    if (response.data.length >= 20) {
+                                        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                                        setTimeout(() => {
+                                            $('.chat_txt_area2')[0].scrollTop = $("#chatrow" + this.chats[20].id)[0].scrollHeight + 800;
+                                        }, 10);
+                                    } else {
+                                        this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                                    }
+
 
 //                            this.maxChatId;
-                            });
+                                });
 
-                        this.busy = false;
-                    }, 1000);
+                            this.busy = false;
+                        }, 5000);
+                    }
                 },
 
                 isTyping: function () {
@@ -590,28 +602,33 @@
                 },
 
                 getChat: function () {
-                    request = '/chat_content/{{ $thisChannel->id }}/' + this.maxChatId;
+                    setTimeout(() => {
+                        request = '/chat_content/{{ $thisChannel->id }}/' + this.maxChatId;
 
-                    console.log(request);
-                    axios.get(request, {
-                        'page': this.page
-                    })
-                        .then((response) => {
-                            this.page++;
+                        console.log(request);
+                        axios.get(request, {
+                            'page': this.page
+                        })
+                            .then((response) => {
+                                this.page++;
 
-                            console.log("here");
-                            console.log(response.data);
-                            console.log("there");
+                                console.log("here");
+                                console.log(response.data);
+                                console.log("there");
 
-                            response.data.forEach(function (value) {
-                                chatting_app.chats.push(value);
+                                response.data.forEach(function (value) {
+                                    chatting_app.chats.push(value);
+                                });
+
+
+                                console.log(this.chats);
+                                setTimeout(() => {
+                                    $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+                                }, 100);
+//                            this.maxChatId;
                             });
 
-
-                            console.log(this.chats);
-
-//                            this.maxChatId;
-                        });
+                    }, 1000);
                 }
             }
         })

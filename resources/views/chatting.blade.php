@@ -1,5 +1,10 @@
 @extends('layouts.header')
 @section('content')
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
     <body xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <style>
         dl.selectL, dl.selectR {
@@ -142,7 +147,7 @@
                     @foreach($thisChannel->ssul->channels as $num => $channel)
                         @if($channel->id == $thisChannel->id)
                             <dd>
-                                <a href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
+                                <a v-cloak href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
                                             class="ddt">-->{{ $num+1 }}번 채널 (@{{ viewers.length }})</span></a></dd>
                         @else
                             <dd>
@@ -165,12 +170,12 @@
                             @endforeach
                 </dl>
                 <dl class="message">
-                    <dt>참석자 (@{{ viewers.length  }})<span class="chat_more"><a href="#"><img
+                    <dt v-cloak>참석자 (@{{ viewers.length  }})<span class="chat_more"><a href="#"><img
                                         src="/images/chat_icon05.png" alt="더보기"></a></span>
                     </dt>
 
                     <dd v-for="viewer in viewers">
-                        <a href="#"><span class="mess_icon01">@{{ viewer.name }}</span></a>
+                        <a href="#"><span v-cloak class="mess_icon01">@{{ viewer.name }}</span></a>
                     </dd>
 
                 </dl>
@@ -195,12 +200,12 @@
                         <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
                             <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
                                 <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
-                                <dd id="teamApower">@{{ teamsPower[0] }}%</dd>
+                                <dd v-cloak id="teamApower">@{{ teamsPower[0] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
                             </dl>
                             <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}">
                                 <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
-                                <dd id="teamBpower">@{{ teamsPower[1] }}%</dd>
+                                <dd v-cloak id="teamBpower">@{{ teamsPower[1] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
                             </dl>
                         </div>
@@ -229,21 +234,22 @@
 
 
                         </li>
-                        <li class="chat_id">@{{chat.user.name}}
-                            <span> @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
-                        <li class="chat_text"> @{{chat.content}}
+
+                        <li v-cloak class="chat_id v-cloak--hidden">@{{chat.user.name}}
+                            <span v-cloak > @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
+                        <li v-cloak class="chat_text"> @{{chat.content}}
                             <button style="border:0;background:transparent;margin-left:1%"
                                     v-on:click="like(chat.id)">
 
 
                                 <div v-if="chat.myLike">
                                     <img src="/images/like.png" style="width: 55%;">
-                                    <h5 style="float:right;font-weight: bold;color:#D75A4A">@{{chat.likes.length}}</h5>
+                                    <h5  v-cloak style="float:right;font-weight: bold;color:#D75A4A">@{{chat.likes.length}}</h5>
                                 </div>
 
                                 <div v-else>
                                     <img src="/images/like_blank.png" style="width: 55%;">
-                                    <h5 style="float:right">@{{ chat.likes.length }}</h5>
+                                    <h5 v-cloak style="float:right">@{{ chat.likes.length }}</h5>
                                 </div>
 
                             </button>
@@ -494,7 +500,7 @@
                                 });
 
                             this.busy = false;
-                        }, 5000);
+                        }, 10);
                     }
                 },
 

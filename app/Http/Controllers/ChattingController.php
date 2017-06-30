@@ -116,8 +116,8 @@ class ChattingController extends Controller
             $teamAPower = round($teamACount / ($teamACount + $teamBCount) * 100);
             $teamBPower = round($teamBCount / ($teamACount + $teamBCount) * 100);
         } else {
-            $teamAPower = $teamACount;
-            $teamBPower = $teamBCount;
+            $teamAPower = 50;
+            $teamBPower = 50;
         }
 
 

@@ -147,7 +147,8 @@
                     @foreach($thisChannel->ssul->channels as $num => $channel)
                         @if($channel->id == $thisChannel->id)
                             <dd>
-                                <a v-cloak href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
+                                <a v-cloak
+                                   href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
                                             class="ddt">-->{{ $num+1 }}번 채널 (@{{ viewers.length }})</span></a></dd>
                         @else
                             <dd>
@@ -198,12 +199,12 @@
                     <form method="post" action="{{ route('team_select') }}" class="teamSelect">
                         {!! csrf_field() !!}
                         <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
-                            <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
+                            <dl class="selectL" v-bind:style="{width:teamsPowerWidth[0]+'%'}">
                                 <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
                                 <dd v-cloak id="teamApower">@{{ teamsPower[0] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
                             </dl>
-                            <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}">
+                            <dl class="selectR" v-bind:style="{width:teamsPowerWidth[1]+'%'}">
                                 <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
                                 <dd v-cloak id="teamBpower">@{{ teamsPower[1] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
@@ -236,7 +237,7 @@
                         </li>
 
                         <li v-cloak class="chat_id v-cloak--hidden">@{{chat.user.name}}
-                            <span v-cloak > @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
+                            <span v-cloak> @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
                         <li v-cloak class="chat_text"> @{{chat.content}}
                             <button style="border:0;background:transparent;margin-left:1%"
                                     v-on:click="like(chat.id)">
@@ -244,7 +245,8 @@
 
                                 <div v-if="chat.myLike">
                                     <img src="/images/like.png" style="width: 55%;">
-                                    <h5  v-cloak style="float:right;font-weight: bold;color:#D75A4A">@{{chat.likes.length}}</h5>
+                                    <h5 v-cloak
+                                        style="float:right;font-weight: bold;color:#D75A4A">@{{chat.likes.length}}</h5>
                                 </div>
 
                                 <div v-else>
@@ -354,6 +356,7 @@
                 typing: false,
                 viewers: {},
                 teamsPower: [{{ $teamAPower }},{{ 100 - $teamAPower}}],
+                teamsPowerWidth: [],
                 page: 1,
                 chats: [],
                 maxChatId: "{{ $maxChatId }}",
@@ -377,6 +380,16 @@
                 console.log(this.myLike);
 
                 this.getChat();
+
+                // 팀 파워 길이 조절
+                this.teamsPowerWidth = [{{ $teamAPower }}, {{ 100 - $teamAPower }}];
+                if (this.teamsPowerWidth[0] > 80) {
+                    this.teamsPowerWidth[0] = 80;
+                    this.teamsPowerWidth[1] = 20;
+                } else if (this.teamsPowerWidth[0] < 20) {
+                    this.teamsPowerWidth[0] = 20;
+                    this.teamsPowerWidth[1] = 80;
+                }
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
 
@@ -453,6 +466,17 @@
                             '<li class="grybox_good">' + e.popularChats[i].likes_count + '</li>' +
                             '<li class="grybox_txt clear">' + e.popularChats[i].content + '</li>' +
                             '</ul>');
+                    }
+
+                    if (e.teamsPower[0] > 80) {
+                        this.teamsPowerWidth[0] = 80;
+                        this.teamsPowerWidth[1] = 20;
+                    } else if (e.teamsPower[0] < 20) {
+                        this.teamsPowerWidth[0] = 20;
+                        this.teamsPowerWidth[1] = 80;
+                    } else {
+                        this.teamsPowerWidth[0] = e.teamsPower[0];
+                        this.teamsPowerWidth[1] = e.teamsPower[1];
                     }
 
                     this.teamsPower = e.teamsPower;

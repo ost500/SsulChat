@@ -59,3 +59,14 @@ window.Echo = new Echo({
     broadcaster: 'socket.io',
     host: window.location.hostname + ':6001',
 });
+
+import InfiniteLoading from 'vue-infinite-loading';
+
+import VuePaginator from 'vue-infinite-loading';
+
+export default {
+    components: {
+        InfiniteLoading,
+        VuePaginator,
+    },
+};

@@ -40,7 +40,8 @@ Route::post('like', function (Request $request) {
     event(new App\Events\likeEvent($request));
 });
 
-rOUTE::get('/ssul',['as' => 'ssul', 'uses'=> 'MainController@ssul']);
+Route::get('/ssul', ['as' => 'ssul', 'uses' => 'MainController@ssul']);
+Route::post('/ssul', ['as' => 'ssul.create', 'uses' => 'MainController@ssulCreate']);
 
 Route::get('/search', ['as' => 'search', 'uses' => 'MainController@search']);
 

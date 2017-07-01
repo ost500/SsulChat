@@ -13,31 +13,37 @@
 <div id="wrap">
     <div class="header_profile">
         <h1>썰 만들기</h1>
-        <span><a href="#"><img src="images/profile_X.png" alt="닫기"></a></span>
+        <span><a href="{{ route('main') }}"><img src="images/profile_X.png" alt="닫기"></a></span>
     </div>
-    <form class="form-horizontal" role="form" method="POST" action="{{ route('ssul') }}">
+    <form class="form-horizontal" role="form" method="POST" action="{{ route('ssul.create') }}">
         {{ csrf_field() }}
         <div class="profile_form_wrap">
             <div class="profile_formL">
-                <div class="login_logo" >
+                <div class="login_logo">
                     <img src="images/main_logo02.png" alt="썰챗로고" class="login_logo_img">
                 </div>
-                <fieldset >
+                <fieldset>
                     <div id="box">
-                        <table summary="썰 만들기" >
+                        <table summary="썰 만들기">
                             <caption style="display:none;">썰 만들기</caption>
-                            <tr>
-                                <th scope="row" id="form01-1"><label for="form01">썰 제목</label></th>
-                                <td headers="form01-1"><input type="text" name="name" id="form01" class="textfield" style="outline:none" placeholder="SSUL NAME" required/></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" id="form02-1"><label for="form02">세력 이름1</label></th>
-                                <td headers="form02-1"><input type="text" name="team1" id="form02" class="textfield" style="outline:none" placeholder="TEAM1 NAME" required/></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" id="form02-1"><label for="form02">세력 이름2</label></th>
-                                <td headers="form02-1"><input type="text" name="team2" id="form03" class="textfield" style="outline:none" placeholder="TEAM2 NAME" required/></td>
-                            </tr>
+
+                                <tr>
+                                    <th scope="row" id="form01-1"><label for="form01">썰 제목</label></th>
+                                    <td headers="form01-1"><input type="text" name="name" id="form01" class="textfield"
+                                                                  style="outline:none" placeholder="썰 제목" required/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" id="form02-1"><label for="form02">세력 이름1</label></th>
+                                    <td headers="form02-1"><input type="text" name="team1" id="form02" class="textfield"
+                                                                  style="outline:none" placeholder="" required/></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" id="form02-1"><label for="form02">세력 이름2</label></th>
+                                    <td headers="form02-1"><input type="text" name="team2" id="form03" class="textfield"
+                                                                  style="outline:none" placeholder="" required/></td>
+                                </tr>
+
                             <!--												<tr>
                                                         <th scope="row" id="form03-1"><label for="form03">What I do</label></th>
                                                         <td headers="form03-1"><input type="text" name="textfield" id="form03" class="textfield" style="outline:none" placeholder="What I do" /></td>
@@ -64,6 +70,7 @@
                                                         <td class="td_txt">Your current time zone. Used to send summary and notiification emails, for times in your activity feeds, and for reminders.</td>
                                                     </tr>
                             -->
+
                         </table>
                     </div>
                 </fieldset>
@@ -72,8 +79,8 @@
 
         <div class="profile_form_btn">
             <div>
-                <span id="form_btn_n"><input type="submit" alt="Cancel" value="Cancel" /></span>
-                <span id="form_btn_o"><input type="submit" alt="OK" value="OK" /></span>
+                {{--<span id="form_btn_n"><input type="submit" alt="Cancel" value="Cancel"/></span>--}}
+                <span id="form_btn_o"><input type="submit" alt="OK" value="OK"/></span>
             </div>
         </div>
     </form>

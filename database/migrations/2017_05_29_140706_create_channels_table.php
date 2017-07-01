@@ -17,7 +17,7 @@ class CreateChannelsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('ssul_id')->unsigned()->index();
-            $table->foreign('ssul_id')->references('id')->on('ssuls')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

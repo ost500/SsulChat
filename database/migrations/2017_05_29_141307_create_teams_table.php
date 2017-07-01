@@ -18,7 +18,7 @@ class CreateTeamsTable extends Migration
             $table->integer('ssul_id')->unsigned();
             $table->string('name');
             $table->integer('value');
-            $table->foreign('ssul_id')->references('id')->on('ssuls')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

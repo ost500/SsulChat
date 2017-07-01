@@ -17,11 +17,11 @@ class CreateChattingsTable extends Migration
             $table->increments('id');
             $table->string('content');
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->integer('channel_id')->unsigned()->index();
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
+
             $table->integer('team_id')->unsigned()->index();
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
+
             $table->string('ipaddress');
             $table->timestamps();
         });

@@ -8,6 +8,7 @@ use App\Like;
 use App\Ssul;
 use App\User;
 
+use Artesaos\SEOTools\Traits\SEOTools;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,10 +19,14 @@ use Mockery\Exception;
 
 class ChattingController extends Controller
 {
+    use SEOTools;
+
     public function chattings(Request $request, $id, $channelId = 0)
     {
 
         $ssul = Ssul::find($id);
+
+        $this->seo()->setTitle($ssul->name);
 
         if ($channelId == 0) {
 

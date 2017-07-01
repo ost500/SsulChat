@@ -241,7 +241,7 @@
 
                         </li>
 
-                        <li v-cloak class="chat_id">@{{chat.user.name}} @{{ chat.id }}
+                        <li v-cloak class="chat_id">@{{chat.user.name}}
                             <span v-cloak> @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
                         <li v-cloak class="chat_text"> @{{chat.content}}
                             <button style="border:0;background:transparent;margin-left:1%"

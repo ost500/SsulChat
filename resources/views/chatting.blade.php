@@ -366,7 +366,8 @@
                     @endforeach
                 ],
                 busy: false,
-                chatIdOffset: "{{ $maxChatId }}"
+                chatIdOffset: "{{ $maxChatId }} + 1",
+                isFirstLoad: true
 
             },
             filters: {
@@ -379,7 +380,6 @@
 
                 console.log(this.myLike);
 
-                this.getChat();
 
                 // 팀 파워 길이 조절
                 this.teamsPowerWidth = [{{ $teamAPower }}, {{ 100 - $teamAPower }}];
@@ -487,45 +487,64 @@
 
             methods: {
                 loadMore: function () {
-                    if (this.chats != null) {
+
+                    console.log('called');
+
+                    if (this.busy) {
+                        // 다른게 로딩하고 있다면 이거는 완료 됐다 하고 리턴
                         setTimeout(() => {
-
-                            request = '/chat_content/{{ $thisChannel->id }}/' + this.chats[0].id;
-
-                            let pastChatZeroId = this.chats[0].id;
-
-                            console.log(request);
-                            axios.get(request, {
-                                'page': this.page
-                            })
-                                .then((response) => {
-                                    this.page++;
-
-                                    console.log("here");
-
-                                    console.log("there");
-
-
-                                    chatting_app.chats = response.data.concat(chatting_app.chats);
-
-
-                                    console.log(this.chats);
-                                    if (response.data.length >= 20) {
-                                        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
-                                        setTimeout(() => {
-                                            $('.chat_txt_area2')[0].scrollTop = $("#chatrow" + this.chats[20].id)[0].scrollHeight + 800;
-                                        }, 10);
-                                    } else {
-                                        this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
-                                    }
-
-
-//                            this.maxChatId;
-                                });
-
-                            this.busy = false;
-                        }, 10);
+                            this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                        }, 100);
+                        return;
                     }
+
+                    // 다른 것(처음 로딩) 도는 중
+                    this.busy = true;
+
+                    setTimeout(() => {
+
+
+                        request = '/chat_content/{{ $thisChannel->id }}/' + this.chatIdOffset;
+
+                        console.log(request);
+                        axios.get(request, {
+                            'page': this.page
+                        })
+                            .then((response) => {
+                                this.page++;
+
+                                chatting_app.chats = response.data.concat(chatting_app.chats);
+
+
+                                console.log(this.chats);
+                                if (response.data.length >= 20) {
+
+
+                                    if (this.isFirstLoad) {
+                                        setTimeout(() => {
+                                            $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
+                                            this.isFirstLoad = false;
+                                            this.busy = false;
+                                            console.log("first Loaded!!!!!!!!!");
+                                        }, 10);
+
+                                    } else {
+
+                                        $('.chat_txt_area2')[0].scrollTop = $("#chatrow" + this.chats[20].id)[0].scrollHeight + 800;
+                                        this.busy = false;
+
+                                    }
+                                    this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                                } else {
+                                    this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                                }
+
+                                this.chatIdOffset = this.chats[0].id + 1;
+                            });
+
+
+                    }, 100);
+
                 },
 
                 isTyping: function () {
@@ -631,35 +650,6 @@
                     });
                 },
 
-                getChat: function () {
-                    setTimeout(() => {
-                        request = '/chat_content/{{ $thisChannel->id }}/' + this.maxChatId;
-
-                        console.log(request);
-                        axios.get(request, {
-                            'page': this.page
-                        })
-                            .then((response) => {
-                                this.page++;
-
-                                console.log("here");
-                                console.log(response.data);
-                                console.log("there");
-
-                                response.data.forEach(function (value) {
-                                    chatting_app.chats.push(value);
-                                });
-
-
-                                console.log(this.chats);
-                                setTimeout(() => {
-                                    $('.chat_txt_area2')[0].scrollTop = $('.chat_txt_area2')[0].scrollHeight;
-                                }, 100);
-//                            this.maxChatId;
-                            });
-
-                    }, 1000);
-                }
             }
         })
 

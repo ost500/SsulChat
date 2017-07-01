@@ -44,6 +44,7 @@ class ChattingController extends Controller
             $users = $users->toArray();
 
 
+            // 로그인 된 익명들 제외
             if (!is_null($loginMembers)) {
                 foreach ($loginMembers as $member) {
                     $rmArr = array($member->user_info->id);

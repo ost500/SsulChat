@@ -20,9 +20,6 @@ class ChattingController extends Controller
 {
     public function chattings(Request $request, $id, $channelId = 0)
     {
-        if (Auth::check() && Auth::user()->annony == true) {
-            Auth::logout();
-        }
 
         $ssul = Ssul::find($id);
 
@@ -34,7 +31,7 @@ class ChattingController extends Controller
         $loginMembers = null;
 
         // 로그인 안 됐다면 익명
-        if (!Auth::check()) {
+        if (!Auth::check() || Auth::user()->annony) {
 
             $loginMembers = Redis::get("presence-newMessage{$channelId}:members");
 
@@ -58,30 +55,42 @@ class ChattingController extends Controller
 
             $user = null;
 
-            if (!is_null($users)) {
-                $user = Auth::loginUsingId($users[0]);
-                $user->updated_at = Carbon::now();
-                $user->save();
+            // 익명 로그인을 했고
+            // 로그인 명단에 익명 이 있다면 로그아웃 후 다른 이름으로 로그인
+            // 없다면 로그아웃 없이 그대로 진행
+            if (Auth::user()->annony && !in_array(Auth::user()->id, $users)) {
+                Auth::logout();
             } else {
+                $user = Auth::user();
+            }
 
-                for ($i = 0; $i <= 100; $i++) {
 
-                    try {
-                        $user = User::create([
-                            'name' => '익명' . rand(1, 10000),
-                            'email' => "anonymous" . rand(1, 10000) . "@osteng.com",
-                            'annony' => true,
-                            'profile_img' => '/images/chatpic01.png',
-                            'password' => bcrypt('!@#$%^&*()')
-                        ]);
+            if ($user == null) {
 
-                        break;
-                    } catch (Exception $e) {
+                if (!is_null($users)) {
+                    $user = Auth::loginUsingId($users[0]);
+                    $user->updated_at = Carbon::now();
+                    $user->save();
+                } else {
 
+                    for ($i = 0; $i <= 100; $i++) {
+
+                        try {
+                            $user = User::create([
+                                'name' => '익명' . rand(1, 10000),
+                                'email' => "anonymous" . rand(1, 10000) . "@osteng.com",
+                                'annony' => true,
+                                'profile_img' => '/images/chatpic01.png',
+                                'password' => bcrypt('!@#$%^&*()')
+                            ]);
+
+                            break;
+                        } catch (Exception $e) {
+
+                        }
                     }
                 }
             }
-
 
         } else {
             $user = Auth::user();

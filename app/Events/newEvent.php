@@ -66,8 +66,7 @@ class newEvent implements ShouldBroadcastNow
         $chat->save();
 
 
-        $this->chatResult = Chatting::where('id', $chat->id)->get()
-            ->first();
+        $this->chatResult = $chat;
 
 
         $this->chattingId = $chat->id;
@@ -95,6 +94,7 @@ class newEvent implements ShouldBroadcastNow
         // This must always be an array. Since it will be parsed with json_encode()
         return [
             "id" => $this->chatResult->id,
+            "team_id" => $this->chatResult->team_id,
             "user" => [
                 "profile_img" => $this->chatResult->user->profile_img,
                 "name" => $this->chatResult->user->name,

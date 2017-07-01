@@ -224,7 +224,8 @@
 
 
                     <infinite-loading :on-infinite="loadMore" ref="infiniteLoading" direction="top"></infinite-loading>
-                    <ul v-for="chat in chats" class="normal_chat" v-bind:id="chat.id">
+                    <ul v-for="chat in chats" class="normal_chat" v-bind:id="chat.id"
+                        v-bind:class="{ team1 : chat.team_id == teamIds[0] , team2 : chat.team_id == teamIds[1]}">
                         <li class="chat_pic" v-bind:id="'chatrow'+chat.id">
 
                             <div v-if="chat.user.profile_img == null" class="chat_profile_img"
@@ -236,7 +237,7 @@
 
                         </li>
 
-                        <li v-cloak class="chat_id v-cloak--hidden">@{{chat.user.name}}
+                        <li v-cloak class="chat_id">@{{chat.user.name}}
                             <span v-cloak> @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
                         <li v-cloak class="chat_text"> @{{chat.content}}
                             <button style="border:0;background:transparent;margin-left:1%"
@@ -360,6 +361,7 @@
                 page: 1,
                 chats: [],
                 maxChatId: "{{ $maxChatId }}",
+                teamIds: [{{ $thisChannel->ssul->teams[0]->id }}, {{ $thisChannel->ssul->teams[1]->id }}],
                 myLike: [
                     @foreach($likes as $like)
                     {{ $like }},

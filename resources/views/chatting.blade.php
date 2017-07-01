@@ -144,31 +144,35 @@
                                         alt="더보기"></a></span></dt>
                     <dd>
                         <a href="#"><span class="ddf">{{ $thisChannel->ssul->name }}</span></a>
+                    </dd>
                     @foreach($thisChannel->ssul->channels as $num => $channel)
                         @if($channel->id == $thisChannel->id)
                             <dd>
                                 <a v-cloak
                                    href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
-                                            class="ddt">-->{{ $num+1 }}번 채널 (@{{ viewers.length }})</span></a></dd>
+                                            class="ddt">-->{{ $num+1 }}번 채널 (@{{ viewers.length }})</span></a>
+                            </dd>
                         @else
                             <dd>
-                                <a href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
-                                            class="ddt">{{ $num+1 }}번 채널</span></a></dd>
-                            @endif
-                            @endforeach
+                                <a v-cloak
+                                   href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
+                                            class="ddt">{{ $num+1 }}번 채널</span></a>
                             </dd>
-                            @foreach($ssuls as $ssul)
-                                @if($ssul->id == $thisChannel->ssul->id)
-                                    @continue
-                                @endif
-                                <dd>
-                                    <a href="{{ route('chattings',['id' => $ssul->id]) }}"><span
-                                                class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
+                        @endif
+                    @endforeach
 
-                                </dd>
-                                {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
-                                {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
-                            @endforeach
+                    @foreach($ssuls as $ssul)
+                        @if($ssul->id == $thisChannel->ssul->id)
+                            @continue
+                        @endif
+                        <dd>
+                            <a href="{{ route('chattings',['id' => $ssul->id]) }}"><span
+                                        class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
+
+                        </dd>
+                        {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
+                        {{--<dd><a href="#"><span class="ddt">wiki</span></a></dd>--}}
+                    @endforeach
                 </dl>
                 <dl class="message">
                     <dt v-cloak>참석자 (@{{ viewers.length  }})<span class="chat_more"><a href="#"><img
@@ -192,19 +196,19 @@
                     <!-- TestADS -->
                     <!-- ssulchat/chattings/1/1 -->
                     <ins class="adsbygoogle"
-                         style="display:block"
+
                          data-ad-client="ca-pub-8665007420370986"
                          data-ad-slot="4947953757"
                          data-ad-format="auto"></ins>
                     <form method="post" action="{{ route('team_select') }}" class="teamSelect">
                         {!! csrf_field() !!}
                         <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
-                            <dl class="selectL" v-bind:style="{width:teamsPowerWidth[0]+'%'}">
+                            <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
                                 <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
                                 <dd v-cloak id="teamApower">@{{ teamsPower[0] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
                             </dl>
-                            <dl class="selectR" v-bind:style="{width:teamsPowerWidth[1]+'%'}">
+                            <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}">
                                 <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
                                 <dd v-cloak id="teamBpower">@{{ teamsPower[1] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
@@ -357,7 +361,6 @@
                 typing: false,
                 viewers: {},
                 teamsPower: [{{ $teamAPower }},{{ 100 - $teamAPower}}],
-                teamsPowerWidth: [],
                 page: 1,
                 chats: [],
                 maxChatId: "{{ $maxChatId }}",
@@ -384,13 +387,13 @@
 
 
                 // 팀 파워 길이 조절
-                this.teamsPowerWidth = [{{ $teamAPower }}, {{ 100 - $teamAPower }}];
-                if (this.teamsPowerWidth[0] > 80) {
-                    this.teamsPowerWidth[0] = 80;
-                    this.teamsPowerWidth[1] = 20;
-                } else if (this.teamsPowerWidth[0] < 20) {
-                    this.teamsPowerWidth[0] = 20;
-                    this.teamsPowerWidth[1] = 80;
+                this.teamsPower = [{{ $teamAPower }}, {{ 100 - $teamAPower }}];
+                if (this.teamsPower[0] > 80) {
+                    this.teamsPower[0] = 80;
+                    this.teamsPower[1] = 20;
+                } else if (this.teamsPower[0] < 20) {
+                    this.teamsPower[0] = 20;
+                    this.teamsPower[1] = 80;
                 }
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
@@ -424,7 +427,7 @@
                     // 하트 채우기
                     if (e.available) {
 
-                        this.myLike.push(e.chattingId);
+
                         console.log(this.myLike);
 
                         this.chats.forEach(function (chat) {
@@ -437,7 +440,7 @@
                     // 하트 비우기
                     else {
 
-                        targeId = null;
+
 
 
                         this.chats.forEach(function (chat) {
@@ -471,17 +474,15 @@
                     }
 
                     if (e.teamsPower[0] > 80) {
-                        this.teamsPowerWidth[0] = 80;
-                        this.teamsPowerWidth[1] = 20;
+                        this.teamsPower[0] = 80;
+                        this.teamsPower[1] = 20;
                     } else if (e.teamsPower[0] < 20) {
-                        this.teamsPowerWidth[0] = 20;
-                        this.teamsPowerWidth[1] = 80;
+                        this.teamsPower[0] = 20;
+                        this.teamsPower[1] = 80;
                     } else {
-                        this.teamsPowerWidth[0] = e.teamsPower[0];
-                        this.teamsPowerWidth[1] = e.teamsPower[1];
+                        this.teamsPower[0] = e.teamsPower[0];
+                        this.teamsPower[1] = e.teamsPower[1];
                     }
-
-                    this.teamsPower = e.teamsPower;
                 });
 
                 $("#someone_typing").show();

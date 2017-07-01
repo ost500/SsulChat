@@ -30,18 +30,21 @@
                                 <tr>
                                     <th scope="row" id="form01-1"><label for="form01">썰 제목</label></th>
                                     <td headers="form01-1"><input type="text" name="name" id="form01" class="textfield"
-                                                                  style="outline:none" placeholder="썰 제목" required/>
+                                                                  style="outline:none" placeholder="썰 제목" required value="{{ old('name') }}"/>
                                     </td>
+                                    <td>{{ $errors->first('name') }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" id="form02-1"><label for="form02">세력 이름1</label></th>
                                     <td headers="form02-1"><input type="text" name="team1" id="form02" class="textfield"
-                                                                  style="outline:none" placeholder="" required/></td>
+                                                                  style="outline:none" placeholder="" value="{{ old('team1') }}"/></td>
+                                    <td>{{ $errors->first('team1') }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" id="form02-1"><label for="form02">세력 이름2</label></th>
                                     <td headers="form02-1"><input type="text" name="team2" id="form03" class="textfield"
-                                                                  style="outline:none" placeholder="" required/></td>
+                                                                  style="outline:none" placeholder="" value="{{ old('team2') }}"/></td>
+                                    <td>{{ $errors->first('team2') }}</td>
                                 </tr>
 
                             <!--												<tr>

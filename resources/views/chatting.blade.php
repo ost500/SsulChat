@@ -241,7 +241,7 @@
 
                         </li>
 
-                        <li v-cloak class="chat_id">@{{chat.user.name}}
+                        <li v-cloak class="chat_id">@{{chat.user.name}} @{{ chat.id }}
                             <span v-cloak> @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
                         <li v-cloak class="chat_text"> @{{chat.content}}
                             <button style="border:0;background:transparent;margin-left:1%"
@@ -371,7 +371,7 @@
                     @endforeach
                 ],
                 busy: false,
-                chatIdOffset: "{{ $maxChatId }} + 1",
+                chatIdOffset: {{ $maxChatId }} + 1,
                 isFirstLoad: true
 
             },

@@ -110,6 +110,10 @@ class likeEvent implements ShouldBroadcastNow
         if (!isset($teamsPowerCount[0]) && !isset($teamsPowerCount[1])) {
             $teamsPowerCount[0] = 1;
             $teamsPowerCount[1] = 1;
+        } elseif (!isset($teamsPowerCount[0])) {
+            $teamsPowerCount[0] = 1;
+        } elseif (!isset($teamsPowerCount[1])) {
+            $teamsPowerCount[1] = 1;
         }
 
         $this->teamsPower[] = round($teamsPowerCount[0] / ($teamsPowerCount[0] + $teamsPowerCount[1]) * 100, 0);

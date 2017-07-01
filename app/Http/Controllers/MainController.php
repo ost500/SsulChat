@@ -22,7 +22,7 @@ class MainController extends Controller
     public function main()
     {
         $builder = Ssul::join('channels', 'channels.ssul_id', '=', 'ssuls.id')
-            ->join('chattings', 'chattings.channel_id', '=', 'channels.id')
+            ->leftjoin('chattings', 'chattings.channel_id', '=', 'channels.id')
             ->groupBy('ssuls.id')
             ->selectRaw("ssuls.*, count(chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc');
@@ -41,7 +41,7 @@ class MainController extends Controller
         $question = $request->question;
 
         $channels = Ssul::join('channels', 'channels.ssul_id', '=', 'ssuls.id')
-            ->join('chattings', 'chattings.channel_id', '=', 'channels.id')
+            ->leftjoin('chattings', 'chattings.channel_id', '=', 'channels.id')
             ->groupBy('ssuls.id')
             ->selectRaw("ssuls.*, count(chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc')

@@ -104,11 +104,10 @@
         $input.typeahead({
             source: function (query, process) {
 
-                axios.get('/search_json', {
-                    'keyword': query
-                })
+                console.log(query);
+                axios.get('/search_json?keyword=' + query, {})
                     .then((response) => {
-                        console.log(response);
+                        console.log(response.data);
                         return process(response.data);
                     });
             },

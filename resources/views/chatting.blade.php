@@ -203,12 +203,12 @@
                     <form method="post" action="{{ route('team_select') }}" class="teamSelect">
                         {!! csrf_field() !!}
                         <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
-                            <dl class="selectL" v-bind:style="{width:teamsPower[0]+'%'}">
+                            <dl class="selectL" v-bind:style="{width:teamsPowerWidth[0]+'%'}">
                                 <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
                                 <dd v-cloak id="teamApower">@{{ teamsPower[0] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
                             </dl>
-                            <dl class="selectR" v-bind:style="{width:teamsPower[1]+'%'}">
+                            <dl class="selectR" v-bind:style="{width:teamsPowerWidth[1]+'%'}">
                                 <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
                                 <dd v-cloak id="teamBpower">@{{ teamsPower[1] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
@@ -361,6 +361,7 @@
                 typing: false,
                 viewers: {},
                 teamsPower: [{{ $teamAPower }},{{ 100 - $teamAPower}}],
+                teamsPowerWidth: [],
                 page: 1,
                 chats: [],
                 maxChatId: "{{ $maxChatId }}",
@@ -371,7 +372,7 @@
                     @endforeach
                 ],
                 busy: false,
-                chatIdOffset: {{ $maxChatId }} + 1,
+                chatIdOffset: {{ $maxChatId }} +1,
                 isFirstLoad: true
 
             },
@@ -389,11 +390,13 @@
                 // 팀 파워 길이 조절
                 this.teamsPower = [{{ $teamAPower }}, {{ 100 - $teamAPower }}];
                 if (this.teamsPower[0] > 80) {
-                    this.teamsPower[0] = 80;
-                    this.teamsPower[1] = 20;
+                    this.teamsPowerWidth[0] = 80;
+                    this.teamsPowerWidth[1] = 20;
                 } else if (this.teamsPower[0] < 20) {
-                    this.teamsPower[0] = 20;
-                    this.teamsPower[1] = 80;
+                    this.teamsPowerWidth[0] = 20;
+                    this.teamsPowerWidth[1] = 80;
+                } else {
+                    this.teamsPowerWidth = this.teamsPower;
                 }
 
                 Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
@@ -441,8 +444,6 @@
                     else {
 
 
-
-
                         this.chats.forEach(function (chat) {
                             if (chat.id == e.chattingId) {
                                 chat.myLike = false;
@@ -474,15 +475,16 @@
                     }
 
                     if (e.teamsPower[0] > 80) {
-                        this.teamsPower[0] = 80;
-                        this.teamsPower[1] = 20;
+                        this.teamsPowerWidth[0] = 80;
+                        this.teamsPowerWidth[1] = 20;
                     } else if (e.teamsPower[0] < 20) {
-                        this.teamsPower[0] = 20;
-                        this.teamsPower[1] = 80;
+                        this.teamsPowerWidth[0] = 20;
+                        this.teamsPowerWidth[1] = 80;
                     } else {
-                        this.teamsPower[0] = e.teamsPower[0];
-                        this.teamsPower[1] = e.teamsPower[1];
+                        this.teamsPowerWidth[0] = e.teamsPower[0];
+                        this.teamsPowerWidth[1] = e.teamsPower[1];
                     }
+                    this.teamsPower = e.teamsPower;
                 });
 
                 $("#someone_typing").show();

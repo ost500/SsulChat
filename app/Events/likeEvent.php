@@ -57,17 +57,10 @@ class likeEvent implements ShouldBroadcastNow
         $this->ssulId = $request->ssul_id;
 
 
-        //        //여기 썰에 해당하는 팀이 아니면 팀 아이디 초기화
-        $hereTeams = Ssul::find($this->ssulId)->teams;
-        $chatting = Chatting::find($this->chattingId);
-        $chattingTeamId = $chatting->team_id;
+
+
 
         // 좋아요 카운트 반환
-
-        if ($hereTeams->pluck('id')->has($chattingTeamId)) {
-            $chatting->team_id = null;
-            $chatting->save();
-        }
 
         $old = DB::table('likes')->where('chatting_id', $this->chattingId)->where('user_id', $this->userId)->first();
         if ($old) {

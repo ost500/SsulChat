@@ -153,6 +153,8 @@ class ChattingController extends Controller
         }
 
 
+
+
         return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'teamAPower', 'teamBPower', 'maxChatId'));
     }
 

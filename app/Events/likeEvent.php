@@ -116,8 +116,8 @@ class likeEvent implements ShouldBroadcastNow
             $teamsPowerCount[1] = 1;
         }
 
-        $this->teamsPower[] = round($teamsPowerCount[0] / ($teamsPowerCount[0] + $teamsPowerCount[1]) * 100, 0);
-        $this->teamsPower[] = 100 - $this->teamsPower[0];
+        $this->teamsPower[0] = round($teamsPowerCount[0] / ($teamsPowerCount[0] + $teamsPowerCount[1]) * 100, 0);
+        $this->teamsPower[1] = 100 - $this->teamsPower[0];
 
 
     }

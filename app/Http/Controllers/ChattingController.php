@@ -24,6 +24,7 @@ class ChattingController extends Controller
     public function chattings(Request $request, $id, $channelId = 0)
     {
 
+
         $ssul = Ssul::find($id);
 
         $this->seo()->setTitle($ssul->name);
@@ -33,44 +34,58 @@ class ChattingController extends Controller
             $channelId = $ssul->channels->first()->id;
         }
 
-        $loginMembers = null;
+        $myPrevChat = $request->session()->get('myPrevChat');
 
-        // 로그인 안 됐다면 익명
-        if (!Auth::check() || Auth::user()->annony) {
-
-            $loginMembers = Redis::get("presence-newMessage{$channelId}:members");
-
-            $loginMembers = json_decode($loginMembers);
-
-            $users = User::where('annony', true)->orderby('updated_at')->pluck('id');
-            $users = $users->toArray();
+        Session::put('myPrevChat', $ssul->id);
 
 
-            // 로그인 된 익명들 제외
-            if (!is_null($loginMembers)) {
-                foreach ($loginMembers as $member) {
-                    $rmArr = array($member->user_info->id);
-                    $users = array_diff($users, $rmArr);
+        // 새로고침한 경우
+        if ($myPrevChat == $ssul->id) {
+
+            $user = Auth::user();
+
+        } else {
+
+
+            $loginMembers = null;
+
+
+            // 로그인 안 됐다면 또는 익명이라면
+            if (!Auth::check() || Auth::user()->annony) {
+
+                $loginMembers = Redis::get("presence-newMessage{$channelId}:members");
+
+                $loginMembers = json_decode($loginMembers);
+
+
+                $users = User::where('annony', true)->orderby('updated_at')->pluck('id');
+                $users = $users->toArray();
+
+                // 로그인 유저
+                $user = null;
+
+
+                // 로그인 된 익명들 제외
+                if (!is_null($loginMembers)) {
+                    foreach ($loginMembers as $member) {
+                        $rmArr = array($member->user_info->id);
+                        $users = array_diff($users, $rmArr);
+                    }
+
                 }
 
-            }
+                $users = array_values($users);
 
 
-            $users = array_values($users);
+                // 익명 로그인을 했고
+                // 로그인 명단에 익명 이 있다면 로그아웃 후 다른 이름으로 로그인
+                // 없다면 로그아웃 없이 그대로 진행
+                if ($user == null && Auth::check() && Auth::user()->annony && !in_array(Auth::user()->id, $users)) {
+                    Auth::logout();
+                } else {
+                    $user = Auth::user();
+                }
 
-            $user = null;
-
-            // 익명 로그인을 했고
-            // 로그인 명단에 익명 이 있다면 로그아웃 후 다른 이름으로 로그인
-            // 없다면 로그아웃 없이 그대로 진행
-            if (Auth::user()->annony && !in_array(Auth::user()->id, $users)) {
-                Auth::logout();
-            } else {
-                $user = Auth::user();
-            }
-
-
-            if ($user == null) {
 
                 if (!is_null($users)) {
                     $user = Auth::loginUsingId($users[0]);
@@ -94,11 +109,13 @@ class ChattingController extends Controller
 
                         }
                     }
-                }
-            }
 
-        } else {
-            $user = Auth::user();
+
+                }
+
+            } else {
+                $user = Auth::user();
+            }
         }
 
         $myTeam = $request->session()->get('myTeam');

@@ -5,6 +5,7 @@
             display: none;
         }
     </style>
+
     <body xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <style>
         dl.selectL, dl.selectR {
@@ -15,7 +16,7 @@
             height: 125%;
         }
     </style>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     <script>
         $('#element').on('scroll touchmove mousewheel', function (event) {
             event.preventDefault();
@@ -195,14 +196,23 @@
                 <div class="chat_txt_area1">
                     <!-- TestADS -->
                     <!-- ssulchat/chattings/1/1 -->
-                    <ins class="adsbygoogle"
 
-                         data-ad-client="ca-pub-8665007420370986"
-                         data-ad-slot="4947953757"
-                         data-ad-format="auto"></ins>
+                    <div style="width:1000px; height:100px">
+                        <!-- 썰챗 채팅방 광고 -->
+
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-8665007420370986"
+                             data-ad-slot="7639761356"
+                             data-ad-format="auto"></ins>
+
+                    </div>
+
                     <form method="post" action="{{ route('team_select') }}" class="teamSelect">
                         {!! csrf_field() !!}
+
                         <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
+
                             <dl class="selectL" v-bind:style="{width:teamsPowerWidth[0]+'%'}">
                                 <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
                                 <dd v-cloak id="teamApower">@{{ teamsPower[0] }}%</dd>
@@ -343,9 +353,13 @@
     {{--</div>--}}
 
     </body>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+
+
     <script type="text/javascript" src="http://jsgetip.appspot.com"></script>
     <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>

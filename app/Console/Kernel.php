@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CrawlGoogleTrends;
 use App\Console\Commands\NewsCrawling;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -14,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        NewsCrawling::class
+        NewsCrawling::class,
+        CrawlGoogleTrends::class
     ];
 
     /**
@@ -25,8 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+         $schedule->command('crawl:googleTrends')
+                  ->hourly();
     }
 
     /**

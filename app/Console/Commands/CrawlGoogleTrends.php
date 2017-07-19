@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Channel;
 use App\Ssul;
+use App\Team;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -70,6 +71,18 @@ class CrawlGoogleTrends extends Command
                     $newChannel->ssul_id = $newSsul->id;
                     $newChannel->name = 1;
                     $newChannel->save();
+
+                    $newTeam = new Team();
+                    $newTeam->ssul_id = $newSsul->id;
+                    $newTeam->name = "긍정";
+                    $newTeam->value = 50;
+                    $newTeam->save();
+
+                    $newTeam = new Team();
+                    $newTeam->ssul_id = $newSsul->id;
+                    $newTeam->name = "부정";
+                    $newTeam->value = 50;
+                    $newTeam->save();
                 });
 
             }

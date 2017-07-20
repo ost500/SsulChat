@@ -4,6 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Team
+ *
+ * @property-read \App\Ssul $channel
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Chatting[] $chattings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @mixin \Eloquent
+ */
 class Team extends Model
 {
     public function channel()

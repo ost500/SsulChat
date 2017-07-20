@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Channel[] $channel
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Channel[] $channels
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Team[] $teams
  */
 class Ssul extends Model
 {

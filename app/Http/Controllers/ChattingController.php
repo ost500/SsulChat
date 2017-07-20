@@ -172,7 +172,7 @@ class ChattingController extends Controller
             ->orderBy('created_at', 'desc')
             ->with('user')
             ->with('likes')
-            ->limit(20)
+            ->limit(100)
             ->get()
             ->sortBy('id')->values()
             ->each(function (Chatting $chat) {

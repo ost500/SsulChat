@@ -549,7 +549,7 @@
 
                                     } else {
 
-                                        $('.chat_txt_area2')[0].scrollTop = $("#chatrow" + this.chats[20].id)[0].scrollHeight + 800;
+                                        $('.chat_txt_area2')[0].scrollTop = $("#chatrow" + this.chats[100].id)[0].scrollHeight + 800;
                                         this.busy = false;
 
                                     }

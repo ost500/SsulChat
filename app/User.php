@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Chatting[] $chattings
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Team[] $teams
  */
 class User extends Authenticatable
 {

@@ -29,6 +29,9 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('crawl:googleTrends')
                   ->hourly();
+
+         $schedule->command('crawl:naverNews')
+                  ->hourly();
     }
 
     /**

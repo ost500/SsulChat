@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\TeamUser
+ * App\NaverNews
  *
  * @mixin \Eloquent
  */
-class TeamUser extends Model
+class NaverNews extends Model
 {
-
+    //
 }

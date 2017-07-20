@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \App\Channel $channel
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
+ * @property-read \App\Team $team
  */
 class Chatting extends Model
 {

@@ -151,8 +151,13 @@ class MainController extends Controller
 
         // check if there is cached sitemap and build new only if is not
         if (!$sitemap->isCached()) {
+
+            $images = [
+                ['url' => URL::to('/images/main_logo02.png'), 'title' => '썰챗'],
+            ];
+
             // add item to the sitemap (url, date, priority, freq)
-            $sitemap->add(URL::to('/'), '2012-08-25T20:10:00+02:00', '1.0', 'daily');
+            $sitemap->add(URL::to('/'), '2012-08-25T20:10:00+02:00', '1.0', 'daily', $images, "썰챗");
 
 
             // add item with images

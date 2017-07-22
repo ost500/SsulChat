@@ -59,3 +59,5 @@ Route::get('/search_json', ['as' => 'search_json', 'uses' => 'MainController@sea
 Route::get('/chat_content/{channelId}/{id}', ['as' => 'chat_content', 'uses' => 'ChattingController@chatContent']);
 
 Route::get('mysitemap', 'MainController@mysitemap');
+
+Route::get('instagram_redirect', ['as' => 'insta_redirect', 'uses' => 'MainController@instaRedirect']);

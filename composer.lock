@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9cc87e9cd08a64836b7f69c36755c735",
+    "content-hash": "1ce98836a147b61f51b1425269454c40",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -94,6 +94,49 @@
             ],
             "description": "Bootstrap 3 Typeahead",
             "time": "2016-09-26T12:59:36+00:00"
+        },
+        {
+            "name": "cosenary/instagram",
+            "version": "v2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cosenary/Instagram-PHP-API.git",
+                "reference": "fbf4c82e2cc7e9a7fd6f9fd7bba1fd2c506102a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cosenary/Instagram-PHP-API/zipball/fbf4c82e2cc7e9a7fd6f9fd7bba1fd2c506102a5",
+                "reference": "fbf4c82e2cc7e9a7fd6f9fd7bba1fd2c506102a5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MetzWeb\\Instagram\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Metz",
+                    "email": "christian-metz1@gmx.net",
+                    "homepage": "http://metzweb.net"
+                }
+            ],
+            "description": "An easy-to-use PHP Class for accessing Instagram's API.",
+            "homepage": "https://github.com/cosenary/Instagram-PHP-API",
+            "keywords": [
+                "api",
+                "instagram"
+            ],
+            "time": "2014-11-29T13:10:42+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2014,6 +2057,54 @@
                 "seomoz"
             ],
             "time": "2013-08-17T04:39:33+00:00"
+        },
+        {
+            "name": "smochin/instagram-php-crawler",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smochin/instagram-php-crawler.git",
+                "reference": "ec4bdf009599efa738fe3ef37e04bc2c5af0c706"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smochin/instagram-php-crawler/zipball/ec4bdf009599efa738fe3ef37e04bc2c5af0c706",
+                "reference": "ec4bdf009599efa738fe3ef37e04bc2c5af0c706",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.2",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Smochin\\Instagram\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jamerson Silva",
+                    "email": "jamersonweb@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple PHP Crawler for Instagram",
+            "keywords": [
+                "crawler",
+                "http",
+                "instagram",
+                "php"
+            ],
+            "time": "2016-11-15T13:41:38+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

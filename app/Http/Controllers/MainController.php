@@ -8,6 +8,7 @@ use App\Team;
 use App\User;
 
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
+use MetzWeb\Instagram\Instagram;
 
 
 class MainController extends Controller
@@ -180,6 +182,29 @@ class MainController extends Controller
         // show your sitemap (options: 'xml' (default), 'html', 'txt', 'ror-rss', 'ror-rdf')
         return $sitemap->render('xml');
 
+    }
+
+    public function instaRedirect(Request $request)
+    {
+        $media = $this->getMediaByTag(urlencode('오상택'));
+        foreach ($media as $me) {
+            print_r($me['media']['nodes']);
+
+        }
+
+    }
+
+    public function getMediaByTag(string $name): array
+    {
+        $client = new Client([
+            'base_uri' => 'https://www.instagram.com',
+            'query' => ['__a' => 1],
+        ]);
+        $response = $client->request('GET', '/explore/tags/' . $name);
+
+        $body = json_decode($response->getBody()->getContents(), true);
+
+        return ($body);
     }
 
 }

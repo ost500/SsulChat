@@ -102,7 +102,7 @@ class NewsCrawling extends Command
                                 $newChat->channel_id = $ssul->channels->first()->id;
                                 $newChat->ipaddress = "127.0.0.1";
 
-                                $content = $title . " " . $desc . " " . $new['link'];
+                                $content = $title . " " . $desc;
                                 $newChat->content = $content;
 
                                 $newChat->save();

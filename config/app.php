@@ -181,6 +181,7 @@ return [
 
         Laravel\Socialite\SocialiteServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
     ],
 
     /*

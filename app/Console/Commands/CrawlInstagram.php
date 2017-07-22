@@ -5,10 +5,13 @@ namespace App\Console\Commands;
 use App\Chatting;
 use App\Instagram;
 use App\Ssul;
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Console\Command;
+use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Smochin\Instagram\Crawler;
 
 class CrawlInstagram extends Command
@@ -66,42 +69,52 @@ class CrawlInstagram extends Command
         /** @var Ssul $ssuls */
         $ssuls = Ssul::get();
         $ssuls->each(function (Ssul $ssul) {
+            try {
 
-            $title = $ssul->name;
 
-            $title = str_replace(' ', '', $title);
-            echo "[Instagram]" . $title . "\n";
+                $title = $ssul->name;
 
-            $media = $this->getMediaByTag(urlencode($title));
+                $title = str_replace(' ', '', $title);
 
-            foreach ($media as $me) {
-                foreach ($me['media']['nodes'] as $node) {
-                    if (!Instagram::where('display_src', $node['display_src'])->exists()) {
-                        DB::transaction(function () use ($node, $title, $ssul) {
-                            $newInstagram = new Instagram();
+                $title = preg_replace("/[ #\&\+\-%@=\/\\\:;,\.'\"\^`~\_|\!\?\*$#<>()\[\]\{\}]/i", '', $title);
 
-                            $newInstagram->display_src = $node['display_src'];
-                            $newInstagram->date = $node['date'];
-                            $newInstagram->caption = $node['caption'];
-                            $newInstagram->ssul_id = $ssul->id;
+                echo "[Instagram]" . $title . "\n";
 
-                            $newInstagram->save();
+                $media = $this->getMediaByTag(urlencode($title));
 
-                            $newChat = new Chatting();
-                            $newChat->user_id = 1;
-                            $newChat->team_id = null;
-                            $newChat->channel_id = $ssul->channels->first()->id;
-                            $newChat->ipaddress = "127.0.0.1";
-                            $newChat->picture = $node['display_src'];
+                foreach ($media as $me) {
+                    foreach ($me['media']['nodes'] as $node) {
+                        if (!Instagram::where('display_src', $node['display_src'])->exists()) {
+                            DB::transaction(function () use ($node, $title, $ssul) {
+                                $newInstagram = new Instagram();
 
-                            $content = $node['caption'];
-                            $newChat->content = $content;
+                                $newInstagram->display_src = $node['display_src'];
+                                $newInstagram->date = $node['date'];
+                                $newInstagram->caption = $node['caption'];
+                                $newInstagram->ssul_id = $ssul->id;
 
-                            $newChat->save();
-                        });
+                                $newInstagram->save();
+
+                                $newChat = new Chatting();
+                                $newChat->user_id = 1;
+                                $newChat->team_id = null;
+                                $newChat->channel_id = $ssul->channels->first()->id;
+                                $newChat->ipaddress = "127.0.0.1";
+                                $newChat->picture = $node['display_src'];
+
+                                $content = $node['caption'];
+                                $newChat->content = $content;
+
+                                $newChat->save();
+                            });
+                        }
                     }
-                }
 
+                }
+            } catch (Exception $e) {
+                (new SlackMessage)
+                    ->from('Instagram Crawling')
+                    ->content("[Instagram Crawling]에러가 발생했습니다 {$title}\n" . $e->getMessage() . "\n" . $e->getTraceAsString());
             }
         });
 

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Chatting;
 use App\NaverNews;
 use App\Ssul;
+use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -98,7 +99,10 @@ class NewsCrawling extends Command
                                 $newNaverNews->save();
 
                                 $newChat = new Chatting();
-                                $newChat->user_id = 1;
+
+                                $naverNewsUser = User::where('name',"NaverNews")->first();
+
+                                $newChat->user_id = $naverNewsUser->id;
                                 $newChat->team_id = null;
                                 $newChat->channel_id = $ssul->channels->first()->id;
                                 $newChat->ipaddress = "127.0.0.1";

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Chatting;
 use App\Instagram;
 use App\Ssul;
+use App\User;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -96,7 +97,10 @@ class CrawlInstagram extends Command
                                 $newInstagram->save();
 
                                 $newChat = new Chatting();
-                                $newChat->user_id = 1;
+
+                                $instaUser = User::where('name', "instagram")->first();
+
+                                $newChat->user_id = $instaUser->id;
                                 $newChat->team_id = null;
                                 $newChat->channel_id = $ssul->channels->first()->id;
                                 $newChat->ipaddress = "127.0.0.1";

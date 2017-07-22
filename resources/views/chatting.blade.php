@@ -253,7 +253,7 @@
 
                         <li v-cloak class="chat_id">@{{chat.user.name}}
                             <span v-cloak> @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
-                        <li v-if="chat.picture != ''">
+                        <li v-if="chat.picture != '' && chat.picture != null">
                             <img style="width:200px;" v-bind:src="chat.picture">
                         </li>
                         <li v-cloak class="chat_text"> @{{chat.content}}

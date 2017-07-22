@@ -90,6 +90,7 @@ class NewsCrawling extends Command
 
                             DB::transaction(function () use ($title, $new, $ssul) {
                                 $newNaverNews = new NaverNews();
+                                $newNaverNews->ssul_id = $ssul->id;
                                 $newNaverNews->title = $title;
                                 $newNaverNews->link = $new['link'];
                                 $desc = strip_tags(htmlspecialchars_decode($new['description']));

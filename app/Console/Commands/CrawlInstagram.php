@@ -83,6 +83,7 @@ class CrawlInstagram extends Command
                             $newInstagram->display_src = $node['display_src'];
                             $newInstagram->date = $node['date'];
                             $newInstagram->caption = $node['caption'];
+                            $newInstagram->ssul_id = $ssul->id;
 
                             $newInstagram->save();
 

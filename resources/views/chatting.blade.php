@@ -253,6 +253,9 @@
 
                         <li v-cloak class="chat_id">@{{chat.user.name}}
                             <span v-cloak> @{{chat.created_at}}</span><span>@{{chat.ipaddress}}</span></li>
+                        <li v-if="chat.picture != ''">
+                            <img style="width:200px;" v-bind:src="chat.picture">
+                        </li>
                         <li v-cloak class="chat_text"> @{{chat.content}}
                             <button style="border:0;background:transparent;margin-left:1%"
                                     v-on:click="like(chat.id)">

@@ -52,11 +52,13 @@ class NewsCrawling extends Command
         $ssuls = Ssul::get();
         $ssuls->each(function (Ssul $ssul) use ($client_id, $client_secret, $crawlCount) {
 
-            for ($i = 1; $i <= $crawlCount; $i += 100) {
+            $countAtOnce = 10;
+
+            for ($i = 1; $i <= $crawlCount; $i += $countAtOnce) {
 
 
                 $encText = urlencode($ssul->name);
-                $url = "https://openapi.naver.com/v1/search/news.json?start={$i}&display=100&query=" . $encText; // json 결과
+                $url = "https://openapi.naver.com/v1/search/news.json?start={$i}&display={$countAtOnce}&query=" . $encText; // json 결과
 
                 $is_post = false;
                 $ch = curl_init();

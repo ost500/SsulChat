@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\CrawlGoogleTrends;
 use App\Console\Commands\CrawlInstagram;
+use App\Console\Commands\MorphCommand;
 use App\Console\Commands\NewsCrawling;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -18,7 +19,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         NewsCrawling::class,
         CrawlGoogleTrends::class,
-        CrawlInstagram::class
+        CrawlInstagram::class,
+        MorphCommand::class
     ];
 
     /**

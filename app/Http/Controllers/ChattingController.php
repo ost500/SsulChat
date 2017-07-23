@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Channel;
 use App\Chatting;
 use App\Like;
+use App\Morph;
 use App\Ssul;
 use App\User;
 
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Traits\SEOTools;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
@@ -24,10 +27,15 @@ class ChattingController extends Controller
     public function chattings(Request $request, $id, $channelId = 0)
     {
 
-
         $ssul = Ssul::find($id);
 
+        /** @var Collection $morphs */
+        $morphs = Morph::where('ssul_id', $id)
+            ->orderBy('count', 'desc')->take(10)->pluck('morph');
+
         $this->seo()->setTitle($ssul->name);
+        SEOMeta::addKeyword($morphs->toArray());
+
 
         if ($channelId == 0) {
 
@@ -151,8 +159,6 @@ class ChattingController extends Controller
             $teamAPower = 50;
             $teamBPower = 50;
         }
-
-
 
 
         return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'teamAPower', 'teamBPower', 'maxChatId'));

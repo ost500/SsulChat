@@ -35,4 +35,9 @@ class Ssul extends Model
     {
         return $this->hasMany(Team::class);
     }
+
+    public function morphs()
+    {
+        return $this->hasMany(Morph::class);
+    }
 }

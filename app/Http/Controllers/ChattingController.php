@@ -31,7 +31,7 @@ class ChattingController extends Controller
 
         /** @var Collection $morphs */
         $morphs = Morph::where('ssul_id', $id)
-            ->orderBy('count', 'desc')->take(10)->pluck('morph');
+            ->orderBy('count', 'desc')->take(30)->pluck('morph');
 
         $this->seo()->setTitle($ssul->name);
         SEOMeta::addKeyword($morphs->toArray());

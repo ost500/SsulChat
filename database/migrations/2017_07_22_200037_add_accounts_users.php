@@ -25,7 +25,7 @@ class AddAccountsUsers extends Migration
             $socialUser->email = "{$socialName}@{$lowSocialName}.com";
             $socialUser->password = bcrypt("social");
             $socialUser->annony = false;
-            $socialUser->profile_img = null;
+            $socialUser->profile_img = "/images/{$socialName}.png";
             $socialUser->save();
         }
     }

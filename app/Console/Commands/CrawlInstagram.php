@@ -5,11 +5,13 @@ namespace App\Console\Commands;
 use App\Chatting;
 use App\Instagram;
 use App\Ssul;
+use App\SsulChatting;
 use App\User;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -67,7 +69,7 @@ class CrawlInstagram extends Command
      */
     public function handle()
     {
-        /** @var Ssul $ssuls */
+        /** @var Collection $ssuls */
         $ssuls = Ssul::get();
         $ssuls->each(function (Ssul $ssul) {
             try {
@@ -102,7 +104,6 @@ class CrawlInstagram extends Command
 
                                 $newChat->user_id = $instaUser->id;
                                 $newChat->team_id = null;
-                                $newChat->channel_id = $ssul->channels->first()->id;
                                 $newChat->ipaddress = "127.0.0.1";
                                 $newChat->picture = $node['display_src'];
 
@@ -110,6 +111,11 @@ class CrawlInstagram extends Command
                                 $newChat->content = $content;
 
                                 $newChat->save();
+
+                                $newSsulChatting = new SsulChatting();
+                                $newSsulChatting->ssul_id = $ssul->id;
+                                $newSsulChatting->chatting_id = $newChat->id;
+                                $newSsulChatting->save();
                             });
                         }
                     }

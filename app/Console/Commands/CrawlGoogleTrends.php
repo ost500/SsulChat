@@ -67,11 +67,6 @@ class CrawlGoogleTrends extends Command
                     $newSsul->name = $item->title;
                     $newSsul->save();
 
-                    $newChannel = new Channel();
-                    $newChannel->ssul_id = $newSsul->id;
-                    $newChannel->name = 1;
-                    $newChannel->save();
-
                     $newTeam = new Team();
                     $newTeam->ssul_id = $newSsul->id;
                     $newTeam->name = "긍정";

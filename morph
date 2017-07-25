@@ -22,28 +22,31 @@ parameter = sys.argv
 # Open database connection
 db = MySQLdb.connect(host=parameter[1], user=parameter[2], passwd=parameter[3], db=parameter[4], charset='utf8')
 
-while(1):
-
-    # prepare a cursor object using cursor() method
-    cursor = db.cursor()
-
-    # execute SQL query using execute() method.
-    cursor.execute("SELECT * FROM chattings WHERE morphed=0 LIMIT 100")
 
 
-    results = cursor.fetchall()
-    for row in results:
+# prepare a cursor object using cursor() method
+cursor = db.cursor()
 
-        try:
+# execute SQL query using execute() method.
+cursor.execute("SELECT * FROM chattings WHERE morphed=0 LIMIT 100")
 
-            chatting_id = row[0]
-            message = row[1]
-            channel_id = row[4]
 
-            # ssul_id 검색
-            cursor.execute("SELECT * FROM channels WHERE id="+str(channel_id))
-            channel = cursor.fetchone()
-            ssul_id = str(channel[2])
+results = cursor.fetchall()
+for row in results:
+
+    try:
+
+        chatting_id = row[0]
+        message = row[1]
+
+
+        # ssul_id 검색
+        cursor.execute("SELECT * FROM chattings JOIN `ssul_chattings` ON ssul_chattings.chatting_id = chattings.id  WHERE chatting_id = "+str(chatting_id))
+        ssul_chattings = cursor.fetchall()
+
+        for ssuls in ssul_chattings:
+
+            ssul_id = str(ssuls[10])
 
 
             print("id : " + str(chatting_id) + " message : " +message)
@@ -76,12 +79,12 @@ while(1):
             cursor.execute(sql)
 
 
-            db.commit()
+        db.commit()
 
-        except:
-            db.rollback()
+    except:
+        db.rollback()
 
-    time.sleep(5)
+
 
 # disconnect from server
 db.close()

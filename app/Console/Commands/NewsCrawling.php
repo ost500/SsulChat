@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Chatting;
 use App\NaverNews;
 use App\Ssul;
+use App\SsulChatting;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
@@ -104,13 +105,18 @@ class NewsCrawling extends Command
 
                                 $newChat->user_id = $naverNewsUser->id;
                                 $newChat->team_id = null;
-                                $newChat->channel_id = $ssul->channels->first()->id;
                                 $newChat->ipaddress = "127.0.0.1";
 
                                 $content = $title . " " . $desc;
                                 $newChat->content = $content;
 
                                 $newChat->save();
+
+
+                                $newSsulChatting = new SsulChatting();
+                                $newSsulChatting->ssul_id = $ssul->id;
+                                $newSsulChatting->chatting_id = $newChat->id;
+                                $newSsulChatting->save();
                             });
 
                         }

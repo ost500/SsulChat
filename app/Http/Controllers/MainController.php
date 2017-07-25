@@ -24,18 +24,15 @@ class MainController extends Controller
 
     public function main()
     {
-        $builder = Ssul::join('channels', 'channels.ssul_id', '=', 'ssuls.id')
-            ->leftjoin('chattings', 'chattings.channel_id', '=', 'channels.id')
+        $builder = Ssul::join('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
             ->groupBy('ssuls.id')
-            ->selectRaw("ssuls.*, count(chattings.id) as chat_count")
+            ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc');
 
 
-        $channels = $builder->paginate(5);
+        $channels = $builder->paginate(10);
 
-//        return response()->json($channels);
-//
-////return response()->json($channels);
+
         return view('main', compact('channels'));
     }
 
@@ -43,12 +40,11 @@ class MainController extends Controller
     {
         $question = $request->question;
 
-        $channels = Ssul::join('channels', 'channels.ssul_id', '=', 'ssuls.id')
-            ->leftjoin('chattings', 'chattings.channel_id', '=', 'channels.id')
+        $channels = Ssul::join('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
             ->groupBy('ssuls.id')
-            ->selectRaw("ssuls.*, count(chattings.id) as chat_count")
+            ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc')
-            ->where('ssuls.name', 'like', "%{$question}%")
+            ->where('ssuls.name', 'like', "{$question}%")
             ->paginate(5);
 
         return view('main', compact('channels', 'question'));

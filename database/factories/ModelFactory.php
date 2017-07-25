@@ -94,3 +94,13 @@ $factory->define(App\TeamUser::class, function (Faker\Generator $faker) {
         'user_id' => $faker->randomElement($userId),
     ];
 });
+
+$factory->define(App\SsulChatting::class, function (Faker\Generator $faker) {
+    $ssulId = App\Ssul::pluck('id')->toArray();
+    $chattingId = App\Chatting::pluck('id')->toArray();
+
+    return [
+        'ssul_id' => $faker->randomElement($ssulId),
+        'chatting_id' => $faker->randomElement($chattingId),
+    ];
+});

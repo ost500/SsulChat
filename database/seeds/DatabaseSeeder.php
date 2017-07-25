@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Ssul::class,5)->create();
         factory(App\Channel::class,20)->create();
         $this->call(TeamSeeder::class);
+        $this->call(SsulChattingSeeder::class);
         factory(App\Chatting::class,50)->create();
         factory(App\Like::class,30)->create();
         factory(App\TeamUser::class,10)->create();

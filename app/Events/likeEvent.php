@@ -31,7 +31,6 @@ class likeEvent implements ShouldBroadcastNow
     public $userId;
     public $time;
     public $chattingId;
-    public $channelId;
     public $available;
     public $popularChats;
     public $ssulId;
@@ -53,11 +52,7 @@ class likeEvent implements ShouldBroadcastNow
         $this->userId = Auth::user()->id;
         $this->time = Carbon::now()->toDateTimeString();
         $this->chattingId = $request->chattingId;
-        $this->channelId = $request->channel_id;
         $this->ssulId = $request->ssul_id;
-
-
-
 
 
         // 좋아요 카운트 반환
@@ -74,7 +69,8 @@ class likeEvent implements ShouldBroadcastNow
 
             $this->available = true;
         }
-        $popularChats = Chatting::where('channel_id', $request->channel_id)
+        $popularChats = Chatting::join('ssul_chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
+            ->where('ssul_chattings.ssul_id', $this->ssulId)
             ->has('likes')
             ->with('likes')->withCount('likes')
             ->with('user')
@@ -124,7 +120,7 @@ class likeEvent implements ShouldBroadcastNow
     {
         //Notification::send(User::first(), new ChattingLog("{$this->userName}({$this->time}) : {$this->message}"));
 
-        return new PresenceChannel('newMessage' . $this->channelId);
+        return new PresenceChannel('newMessage' . $this->ssulId);
     }
 
     public function broadcastAs()

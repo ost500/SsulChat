@@ -91,11 +91,11 @@
                 e.stopPropagation();
             });
             $('.selectL').click(function () {
-                $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[0]->id }};
+                $('form.teamSelect')[0].teamSelect.value = {{ $ssul->teams[0]->id }};
                 $('form.teamSelect').submit();
             });
             $('.selectR').click(function () {
-                $('form.teamSelect')[0].teamSelect.value = {{ $thisChannel->ssul->teams[1]->id }};
+                $('form.teamSelect')[0].teamSelect.value = {{ $ssul->teams[1]->id }};
                 $('form.teamSelect').submit();
             });
         });
@@ -144,31 +144,16 @@
                                         src="/images/chat_icon05.png"
                                         alt="더보기"></a></span></dt>
                     <dd>
-                        <a href="#"><span class="ddf">{{ $thisChannel->ssul->name }}</span></a>
+                        <a href="#"><span class="ddf">{{ $ssul->name }}</span></a>
                     </dd>
-                    @foreach($thisChannel->ssul->channels as $num => $channel)
-                        @if($channel->id == $thisChannel->id)
-                            <dd>
-                                <a v-cloak
-                                   href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
-                                            class="ddt">-->{{ $num+1 }}번 채널 (@{{ viewers.length }})</span></a>
-                            </dd>
-                        @else
-                            <dd>
-                                <a v-cloak
-                                   href="{{ route('chattingsWithChannel',['id' => $thisChannel->ssul->id, 'channelId' => $channel->id]) }}"><span
-                                            class="ddt">{{ $num+1 }}번 채널</span></a>
-                            </dd>
-                        @endif
-                    @endforeach
 
-                    @foreach($ssuls as $ssul)
-                        @if($ssul->id == $thisChannel->ssul->id)
+                    @foreach($ssuls as $loopSsul)
+                        @if($loopSsul->id == $ssul->id)
                             @continue
                         @endif
                         <dd>
-                            <a href="{{ route('chattings',['id' => $ssul->id]) }}"><span
-                                        class="ddf">{{ str_limit($ssul->name, 30)}}</span></a>
+                            <a href="{{ route('chattings',['id' => $loopSsul->id]) }}"><span
+                                        class="ddf">{{ str_limit($loopSsul->name, 30)}}</span></a>
 
                         </dd>
                         {{--<dd class="active"><a href="#"><span class="dds">general</span></a></dd>--}}
@@ -214,12 +199,12 @@
                         <div class="graph" data-toggle="modal" data-target=".bs-example-modal-sm">
 
                             <dl class="selectL" v-bind:style="{width:teamsPowerWidth[0]+'%'}">
-                                <dt>{{ $thisChannel->ssul->teams[0]->name }}</dt>
+                                <dt>{{ $ssul->teams[0]->name }}</dt>
                                 <dd v-cloak id="teamApower">@{{ teamsPower[0] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
                             </dl>
                             <dl class="selectR" v-bind:style="{width:teamsPowerWidth[1]+'%'}">
-                                <dt>{{ $thisChannel->ssul->teams[1]->name }}</dt>
+                                <dt>{{ $ssul->teams[1]->name }}</dt>
                                 <dd v-cloak id="teamBpower">@{{ teamsPower[1] }}%</dd>
                                 <dd id="select" hidden>선택하기</dd>
                             </dl>
@@ -382,7 +367,7 @@
                 page: 1,
                 chats: [],
                 maxChatId: "{{ $maxChatId }}",
-                teamIds: [{{ $thisChannel->ssul->teams[0]->id }}, {{ $thisChannel->ssul->teams[1]->id }}],
+                teamIds: [{{ $ssul->teams[0]->id }}, {{ $ssul->teams[1]->id }}],
                 myLike: [
                     @foreach($likes as $like)
                     {{ $like }},
@@ -416,7 +401,7 @@
                     this.teamsPowerWidth = this.teamsPower;
                 }
 
-                Echo.join('newMessage{{$thisChannel->id}}').listen('.testing', (e) => {
+                Echo.join('newMessage{{$ssul->id}}').listen('.testing', (e) => {
 
 
                     this.chats.push(e);
@@ -442,7 +427,7 @@
                 });
 
 
-                Echo.join('newMessage{{$thisChannel->id}}').listen('.like', (e) => {
+                Echo.join('newMessage{{$ssul->id}}').listen('.like', (e) => {
                     console.log(e);
                     // 하트 채우기
                     if (e.available) {
@@ -526,7 +511,7 @@
                     setTimeout(() => {
 
 
-                        request = '/chat_content/{{ $thisChannel->id }}/' + this.chatIdOffset;
+                        request = '/chat_content/{{ $ssul->id }}/' + this.chatIdOffset;
 
                         console.log(request);
                         axios.get(request, {
@@ -570,7 +555,7 @@
                 },
 
                 isTyping: function () {
-                    let channel = Echo.join('isTyping{{$thisChannel->id}}');
+                    let channel = Echo.join('isTyping{{$ssul->id}}');
 
                     setTimeout(function () {
 //                        console.log('whisper!!');
@@ -603,7 +588,7 @@
                 },
 
                 isNotTyping: function () {
-                    let channel = Echo.join('isTyping{{$thisChannel->id}}');
+                    let channel = Echo.join('isTyping{{$ssul->id}}');
 
 //                    console.log('whisperStotp!!');
                     setTimeout(function () {
@@ -627,7 +612,7 @@
                     data = {
                         'message': message,
                         'ipaddress': ip(),
-                        'channel_id': "{{ $thisChannel->id }}",
+                        'ssul_id': "{{ $ssul->id }}",
                         anony_name: localStorage['SsulChatAnonymous'],
                         'myTeam': "{{ $myTeam }}"
                     };
@@ -642,8 +627,7 @@
 //                    console.log('like');
                     axios.post('/like', {
                         'chattingId': id,
-                        'channel_id': "{{ $thisChannel->id }}",
-                        'ssul_id': "{{$thisChannel->ssul->id}}"
+                        'ssul_id': "{{$ssul->id}}"
                     })
                         .then((response) => {
 //                                console.log(response);

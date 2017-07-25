@@ -54,4 +54,9 @@ class Chatting extends Model
     {
         return $this->belongsTo(Team::class);
     }
+
+    public function ssuls()
+    {
+        return $this->belongsToMany(Ssul::class);
+    }
 }

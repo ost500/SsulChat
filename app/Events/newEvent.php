@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Chatting;
 use App\Notifications\ChattingLog;
+use App\SsulChatting;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
@@ -30,6 +31,7 @@ class newEvent implements ShouldBroadcastNow
     public $channelId;
     public $profile_img;
     public $chatResult;
+    public $ssulId;
 
     /**
      * Create a new event instance.
@@ -38,6 +40,8 @@ class newEvent implements ShouldBroadcastNow
      */
     public function __construct($request)
     {
+        $this->ssulId = $request->ssul_id;
+
         $this->message = $request->message;
         if (!Auth::check()) {
             Auth::loginUsingId(1);
@@ -55,15 +59,19 @@ class newEvent implements ShouldBroadcastNow
         $this->profile_img = Auth::user()->profile_img;
 
         $this->time = Carbon::now()->toDateTimeString();
-        $this->channelId = $request->channel_id;
+
 
         $chat = new Chatting();
         $chat->content = $this->message;
-        $chat->channel_id = $request->channel_id;
         $chat->user_id = Auth::user()->id;
         $chat->ipaddress = $this->ipAddress;
         $chat->team_id = $request->myTeam;
         $chat->save();
+
+        $newSsulChatting = new SsulChatting();
+        $newSsulChatting->ssul_id = $request->ssul_id;
+        $newSsulChatting->chatting_id = $chat->id;
+        $newSsulChatting->save();
 
 
         $this->chatResult = $chat;
@@ -81,7 +89,7 @@ class newEvent implements ShouldBroadcastNow
     {
         Notification::send(Auth::user(), new ChattingLog("[채널:{$this->channelId}]{$this->userName}({$this->time}) : {$this->message}"));
 
-        return new PresenceChannel('newMessage' . $this->channelId);
+        return new PresenceChannel('newMessage' . $this->ssulId);
     }
 
     public function broadcastAs()

@@ -40,4 +40,9 @@ class Ssul extends Model
     {
         return $this->hasMany(Morph::class);
     }
+
+    public function chattings()
+    {
+        return $this->hasMany(Chatting::class);
+    }
 }

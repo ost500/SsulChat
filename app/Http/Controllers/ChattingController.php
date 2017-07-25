@@ -24,7 +24,7 @@ class ChattingController extends Controller
 {
     use SEOTools;
 
-    public function chattings(Request $request, $id, $channelId = 0)
+    public function chattings(Request $request, $id)
     {
 
         $ssul = Ssul::find($id);
@@ -36,11 +36,6 @@ class ChattingController extends Controller
         $this->seo()->setTitle($ssul->name);
         SEOMeta::addKeyword($morphs->toArray());
 
-
-        if ($channelId == 0) {
-
-            $channelId = $ssul->channels->first()->id;
-        }
 
         $myPrevChat = $request->session()->get('myPrevChat');
 
@@ -61,7 +56,7 @@ class ChattingController extends Controller
             // 로그인 안 됐다면 또는 익명이라면
             if (!Auth::check() || Auth::user()->annony) {
 
-                $loginMembers = Redis::get("presence-newMessage{$channelId}:members");
+                $loginMembers = Redis::get("presence-newMessage{$ssul->id}:members");
 
                 $loginMembers = json_decode($loginMembers);
 
@@ -136,16 +131,18 @@ class ChattingController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(20)->sortBy('created_at')->pluck('chatting_id');
 
-        $popularChats = Chatting::where('channel_id', $channelId)
+        $popularChats = Chatting::join('ssul_chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
+            ->where('ssul_id', $ssul->id)
             ->has('likes')
             ->with('likes')->withCount('likes')
             ->with('user')
             ->orderBy('likes_count', 'desc')
             ->get();
 
-        $ssuls = Ssul::with('channels')->with('teams')->get();
+        $ssuls = Ssul::where('name', 'like', $ssul->name . "%")
+            ->with('teams')->get();
 
-        $thisChannel = Channel::with('ssul.teams')->with('ssul.channels')->findOrFail($channelId);
+
 
         $teamACount = $ssul->teams[0]->chattings()
             ->join("likes", "likes.chatting_id", "chattings.id")->count();
@@ -161,7 +158,7 @@ class ChattingController extends Controller
         }
 
 
-        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'teamAPower', 'teamBPower', 'maxChatId'));
+        return view('chatting', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'teamAPower', 'teamBPower', 'maxChatId', 'ssul'));
     }
 
     public function teamSelect(Request $request)
@@ -170,11 +167,13 @@ class ChattingController extends Controller
         return redirect()->back();
     }
 
-    public function chatContent($channelId, $id)
+    public function chatContent($ssulId, $id)
     {
 
-        $chats = Chatting::where('channel_id', $channelId)
-            ->where('id', '<', $id)
+        $chats = Chatting::join('ssul_chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
+            ->where('ssul_chattings.ssul_id', $ssulId)
+            ->selectRaw('chattings.*')
+            ->where('chattings.id', '<', $id)
             ->orderBy('created_at', 'desc')
             ->with('user')
             ->with('likes')

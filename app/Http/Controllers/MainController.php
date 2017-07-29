@@ -203,10 +203,10 @@ class MainController extends Controller
         return ($body);
     }
 
-    public function group($id)
+    public function page($id)
     {
         $ssul = Ssul::withCount('chattings')->findOrFail($id);
-        return view('chatting_group', compact('ssul'));
+        return view('page', compact('ssul'));
     }
 
 }

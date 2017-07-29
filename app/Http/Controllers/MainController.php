@@ -205,8 +205,8 @@ class MainController extends Controller
 
     public function group($id)
     {
-//        return 'hi';
-        return view('chatting_group');
+        $ssul = Ssul::withCount('chattings')->findOrFail($id);
+        return view('chatting_group', compact('ssul'));
     }
 
 }

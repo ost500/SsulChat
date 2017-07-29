@@ -43,6 +43,6 @@ class Ssul extends Model
 
     public function chattings()
     {
-        return $this->hasMany(Chatting::class);
+        return $this->hasMany(SsulChatting::class);
     }
 }

@@ -4,9 +4,9 @@
 <section class="gl-page-header-wrapper">
   <div class="container">
     <div class="row">
-      <h1>Blue Sea</h1>
-      <p><i class="ion-ios-location-outline"></i>Highway Road 3, Lane 56, California, USA</p>
-      <span class="gl-item-rating"><i class="ion-ios-star"></i>4.5</span>
+      <h1>{{ $ssul->name }}</h1>
+      {{--<p><i class="ion-ios-location-outline"></i>Highway Road 3, Lane 56, California, USA</p>--}}
+      <span class="gl-item-rating"><i class="ion-ios-star"></i>{{ $ssul->chattings_count }}</span>
 
       <div class="gl-page-head-btn-wrapper">
             <a data-remodal-target="modal-share" class="gl-btn gl-icon-btn gl-share-btn">Share</a>

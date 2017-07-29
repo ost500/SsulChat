@@ -203,4 +203,10 @@ class MainController extends Controller
         return ($body);
     }
 
+    public function group($id)
+    {
+//        return 'hi';
+        return view('chatting_group');
+    }
+
 }

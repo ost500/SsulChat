@@ -1,80 +1,192 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<head>
+    <meta charset="UTF-8">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>{{ config('app.name', 'Ssulchat') }}</title>
+    <!-- PAGE TITLE -->
+    <title>{{ config('app.name', 'WIKICHAT') }}</title>
 
+    <!-- FAVICON ICONS -->
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+    <link rel="shortcut icon" href="/images/favicon.ico">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
+    <link rel="stylesheet" href="/css/business.style.css">
+</head>
+
+<body class="gl-business-template gl-home-template">
+
+<div id="gl-circle-loader-wrapper">
+    <div id="gl-circle-loader-center">
+        <div class="gl-circle-load">
+            <img src="/images/ploading.gif" alt="Page Loader">
+        </div>
+    </div>
+</div>
+
+<!--================================
+            SIDE MENU
+=================================-->
+<!-- PAGE OVERLAY WHEN MENU ACTIVE -->
+<div class="gl-side-menu-overlay"></div>
+<!-- PAGE OVERLAY WHEN MENU ACTIVE END -->
+
+<div class="gl-side-menu-wrap">
+    <div class="gl-side-menu">
+        <div class="gl-side-menu-widget-wrap">
+            <div class="gl-login-form-wrapper">
+                <h3>로그인</h3>
+                <p>정보의 바다로 로그인하세요</p>
+
+                <div class="gl-login-form">
+                    <form action="#">
+                        <input type="text" name="gl-user-name" id="gl-user-input" placeholder="이메일">
+                        <input type="password" name="gl-user-password" id="gl-user-password" placeholder="패스워드">
+                        <button type="submit">로그인</button>
+                    </form>
+                </div>
+
+                <div class="gl-social-login-opt">
+                    <a href="#" class="gl-social-login-btn gl-facebook-login">페이스북으로 로그인</a>
+
+                </div>
+
+                <div class="gl-other-options">
+                    <a href="#" class="gl-forgot-pass">비밀번호를 잊으셨나요?</a>
+                    <a href="#" class="gl-signup">가입하기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="gl-side-menu-close-button" id="gl-side-menu-close-button">Close Menu</button>
+</div>
+<!-- SIDE MENU END -->
+
+
+<!-- HEADER -->
+<header class="gl-header">
+    <!-- BOTTOM BAR/NAVIGATION -->
+    <div class="gl-header-bottombar">
+        <!-- Navigation Menu start-->
+        <nav class="navbar gl-header-main-menu" role="navigation">
+            <div class="container-fluid">
+
+                <!-- Navbar Toggle -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Ssulchat') }}
-                    </a>
+                    <!-- Logo -->
+                    <a class="navbar-brand" href="index.html"><img class="logo" src="/images/logo-header.png"
+                                                                   alt="GLIMPSE"></a>
+                </div>
+                <!-- Navbar Toggle End -->
+
+                <!-- navbar-collapse start-->
+                <div id="nav-menu" class="navbar-collapse gl-menu-wrapper collapse" role="navigation">
+                    <ul class="nav navbar-nav gl-menus">
+                        <li class="active">
+                            <a href="index.html">홈</a>
+                        </li>
+                        <li>
+                            <a href="listing-style-1.html">그룹</a>
+
+                        </li>
+                        <li>
+                            <a href="company.html">채팅</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- navbar-collapse end-->
+
+                <div class="gl-extra-btns-wrapper">
+                    <button class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
+                    <button class="gl-add-post-btn">+ 채팅 페이지 만들기</button>
                 </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+            </div>
+        </nav>
+        <!-- Navigation Menu end-->
+    </div>
+    <!-- END -->
+</header>
+<!-- HEADER END -->
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">로그인</a></li>
-                            <li><a href="{{ route('register') }}">가입하기</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }}님 <span class="caret"></span>
-                                </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            로그아웃
-                                        </a>
+@yield('content')
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
+
+
+<!-- FOOTER -->
+<footer>
+
+    <!-- FOOTER BOTTOM -->
+    <div class="gl-footer-bottom-wrapper">
+        <div class="container">
+            <div class="row">
+                <!-- COPYRIGHT INFO -->
+                <div class="gl-copyright-info-wrapper">
+                    <p>Copyright &copy; 2016 WIKICHAT. All rights reserved</p>
+                </div>
+                <!-- COPYRIGHT INFO -->
+
+                <div class="gl-social-info-wrapper">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-behance"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-dribbble"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-vimeo"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-
-        @yield('content')
+        </div>
     </div>
+    <!-- END -->
+</footer>
+<!-- FOOTER END -->
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<script src="/js/jquery.min.js"></script>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+
+
+<!-- Google Map -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBF0FPDHlurGkDKua7PfZjpD2fr2rQsRw0&libraries=places"></script>
+<script src="/js/google-autocomplete.js"></script>
+
+<script src="/js/plugins.js"></script>
+<script src="/js/scripts.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Channel;
 use App\Ssul;
 use App\Team;
+use DOMDocument;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +54,8 @@ class CrawlGoogleTrends extends Command
         ]);
         $body = $response->getBody();
 
+        $body = preg_replace('~(</?|\s)([a-z0-9_]+):~is', '$1$2_', $body);
+
 
         $xml = simplexml_load_string($body);
 
@@ -65,6 +68,7 @@ class CrawlGoogleTrends extends Command
                 DB::transaction(function () use ($item) {
                     $newSsul = new Ssul();
                     $newSsul->name = $item->title;
+                    $newSsul->picture = "https:" . $item->ht_picture;
                     $newSsul->save();
 
                     $newTeam = new Team();

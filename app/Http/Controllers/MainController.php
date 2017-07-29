@@ -24,7 +24,7 @@ class MainController extends Controller
 
     public function main()
     {
-        $builder = Ssul::join('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
+        $builder = Ssul::leftJoin('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
             ->groupBy('ssuls.id')
             ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc');

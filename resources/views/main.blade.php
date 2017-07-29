@@ -37,25 +37,25 @@
     <div class="gl-side-menu">
         <div class="gl-side-menu-widget-wrap">
             <div class="gl-login-form-wrapper">
-                <h3>User Login</h3>
-                <p>Login to add new listing </p>
+                <h3>로그인</h3>
+                <p>정보의 바다로 로그인하세요</p>
 
                 <div class="gl-login-form">
                     <form action="#">
-                        <input type="text" name="gl-user-name" id="gl-user-input" placeholder="User Name">
-                        <input type="password" name="gl-user-password" id="gl-user-password" placeholder="Password">
-                        <button type="submit">Login</button>
+                        <input type="text" name="gl-user-name" id="gl-user-input" placeholder="이메일">
+                        <input type="password" name="gl-user-password" id="gl-user-password" placeholder="패스워드">
+                        <button type="submit">로그인</button>
                     </form>
                 </div>
 
                 <div class="gl-social-login-opt">
-                    <a href="#" class="gl-social-login-btn gl-facebook-login">Login with Facebook</a>
-                    <a href="#" class="gl-social-login-btn gl-twitter-login">Login with Twitter</a>
+                    <a href="#" class="gl-social-login-btn gl-facebook-login">페이스북으로 로그인</a>
+
                 </div>
 
                 <div class="gl-other-options">
-                    <a href="#" class="gl-forgot-pass">Forget Password ?</a>
-                    <a href="#" class="gl-signup">Sign up</a>
+                    <a href="#" class="gl-forgot-pass">비밀번호를 잊으셨나요?</a>
+                    <a href="#" class="gl-signup">가입하기</a>
                 </div>
             </div>
         </div>
@@ -148,8 +148,8 @@
                 <!-- navbar-collapse end-->
 
                 <div class="gl-extra-btns-wrapper">
-                    <button class="gl-login-btn" id="gl-side-menu-btn">Login</button>
-                    <button class="gl-add-post-btn">+ Post Add</button>
+                    <button class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
+                    <button class="gl-add-post-btn">+ 채팅 페이지 만들기</button>
                 </div>
 
             </div>
@@ -255,68 +255,6 @@
 
 <!-- FOOTER -->
 <footer>
-    <!-- FOOTER TOP -->
-    <div class="gl-footer-top-wrapper">
-        <div class="container">
-            <div class="row">
-                <!-- FOOTER WIDGET -->
-                <div class="gl-footer-widget gl-footer-logo gl-footer-fixed-widget">
-                    <a href="#">
-                        <img src="/images/logo-footer.png" alt="Glimpse">
-                    </a>
-                </div>
-                <!-- END -->
-
-                <!-- FOOTER WIDGET -->
-                <div class="gl-footer-widget gl-contact-info">
-                    <h3 class="gl-footer-widget-title">Contact info</h3>
-
-                    <div class="gl-footer-widget-content">
-                        <ul>
-                            <li><i class="fa fa-map-marker"></i>Road 3, West side lane Texas,  USA</li>
-                            <li><i class="fa fa-phone"></i>0632 0152 001</li>
-                            <li><i class="fa fa-envelope-o"></i>mail@gmail.com</li>
-                            <li><i class="fa fa-globe"></i>www.glimpse.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- END -->
-
-                <!-- FOOTER WIDGET -->
-                <div class="gl-footer-widget gl-useful-links">
-                    <h3 class="gl-footer-widget-title">Company</h3>
-
-                    <div class="gl-footer-widget-content">
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">History</a></li>
-                            <li><a href="#">Career &amp; Goal</a></li>
-                            <li><a href="#">Company Profile</a></li>
-                            <li><a href="#">Process</a></li>
-                            <li><a href="#">Account</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- END -->
-
-                <!-- FOOTER WIDGET -->
-                <div class="gl-footer-widget gl-subscribe-widget">
-                    <h3 class="gl-footer-widget-title">Subscribe</h3>
-
-                    <div class="gl-footer-widget-content">
-                        <p>Checkout and enjoy the biggest eco</p>
-
-                        <form action="#">
-                            <input type="email" name="gl-subscription" id="gl-subscription" placeholder="Your email">
-                            <button type="submit" class="gl-btn">Submit</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- END -->
-            </div>
-        </div>
-    </div>
-    <!-- END -->
 
     <!-- FOOTER BOTTOM -->
     <div class="gl-footer-bottom-wrapper">

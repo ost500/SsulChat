@@ -90,59 +90,59 @@
                 <!-- navbar-collapse start-->
                 <div id="nav-menu" class="navbar-collapse gl-menu-wrapper collapse" role="navigation">
                     <ul class="nav navbar-nav gl-menus">
-                        <li class="active">
-                            <a href="index.html">Home</a>
-                            <ul class="gl-sub-menu">
-                                <li>
-                                    <a href="/jobs/index.html">Home - Job</a>
-                                </li>
-                                <li>
-                                    <a href="/real-estate/index.html">Home - Real Estate</a>
-                                </li>
-                                <li>
-                                    <a href="/restaurant/index.html">Home - Restaurant</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="listing-style-1.html">Listing</a>
-                            <ul class="gl-sub-menu">
-                                <li>
-                                    <a href="listing-style-2.html">Listing Style - Map Right</a>
-                                </li>
-                                <li>
-                                    <a href="listing-style-3.html">Listing Style - Map Top</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="company.html">company</a>
-                        </li>
-                        <li>
-                            <a href="about-us.html">About</a>
-                        </li>
-                        <li>
-                            <a href="/elements/elements.html">Elements</a>
-                            <ul class="gl-sub-menu">
-                                <li>
-                                    <a href="/frontend-subbmission/index.html">Frontend Submission Page</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="blog-grid.html">Blog</a>
-                            <ul class="gl-sub-menu">
-                                <li>
-                                    <a href="blog-default.html">Blog Default</a>
-                                </li>
-                                <li>
-                                    <a href="blog-details.html">Blog Details</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="contact-us.html">Contact</a>
-                        </li>
+                        {{--<li class="active">--}}
+                            {{--<a href="index.html">홈</a>--}}
+                            {{--<ul class="gl-sub-menu">--}}
+                                {{--<li>--}}
+                                    {{--<a href="/jobs/index.html">Home - Job</a>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<a href="/real-estate/index.html">Home - Real Estate</a>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<a href="/restaurant/index.html">Home - Restaurant</a>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="listing-style-1.html">Listing</a>--}}
+                            {{--<ul class="gl-sub-menu">--}}
+                                {{--<li>--}}
+                                    {{--<a href="listing-style-2.html">Listing Style - Map Right</a>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<a href="listing-style-3.html">Listing Style - Map Top</a>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="company.html">company</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="about-us.html">About</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="/elements/elements.html">Elements</a>--}}
+                            {{--<ul class="gl-sub-menu">--}}
+                                {{--<li>--}}
+                                    {{--<a href="/frontend-subbmission/index.html">Frontend Submission Page</a>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="blog-grid.html">Blog</a>--}}
+                            {{--<ul class="gl-sub-menu">--}}
+                                {{--<li>--}}
+                                    {{--<a href="blog-default.html">Blog Default</a>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<a href="blog-details.html">Blog Details</a>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="contact-us.html">Contact</a>--}}
+                        {{--</li>--}}
                     </ul>
                 </div>
                 <!-- navbar-collapse end-->
@@ -212,12 +212,12 @@
                 @foreach($channels as $num => $channel)
 
                     <!-- FEATURED ITEMS -->
-                    <div class="gl-featured-items col-md-2 col-sm-2 col-xs-12 appear fadeIn" data-wow-duration="1s" data-wow-delay=".3s">
+                    <div class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn" data-wow-duration="1s" data-wow-delay=".3s">
                         <div class="gl-feat-items-img-wrapper">
 
                             <picture>
                                 <source media="(min-width: 768px)" srcset="{{ $channel->picture }}">
-                                <img alt="Featured Listing" srcset="{{ $channel->picture }}">
+                                <img alt="{{ $channel->name }}" srcset="{{ $channel->picture }}">
                             </picture>
                         </div>
 

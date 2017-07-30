@@ -36,6 +36,150 @@
                                             beguiled and demoralized by the of pleasure</p>
                                     </div>
                                     <!-- END -->
+                                </li> <li>
+                                    <!-- USER IMG -->
+                                    <div class="chat-user-img">
+                                        <img src="/images/user-img.png" alt="User" class="gl-lazy">
+                                    </div>
+                                    <!-- END -->
+
+                                    <!-- TEXT -->
+                                    <div class="gl-comment-text-chat">
+
+                                        <div class="gl-username-date">
+                                            <h3>David Neo</h3>
+                                            <span class="gl-comments-date">23 March, 2016</span>
+                                        </div>
+                                        <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                            beguiled and demoralized by the of pleasure</p>
+                                    </div>
+                                    <!-- END -->
+                                </li> <li>
+                                    <!-- USER IMG -->
+                                    <div class="chat-user-img">
+                                        <img src="/images/user-img.png" alt="User" class="gl-lazy">
+                                    </div>
+                                    <!-- END -->
+
+                                    <!-- TEXT -->
+                                    <div class="gl-comment-text-chat">
+
+                                        <div class="gl-username-date">
+                                            <h3>David Neo</h3>
+                                            <span class="gl-comments-date">23 March, 2016</span>
+                                        </div>
+                                        <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                            beguiled and demoralized by the of pleasure</p>
+                                    </div>
+                                    <!-- END -->
+                                </li> <li>
+                                    <!-- USER IMG -->
+                                    <div class="chat-user-img">
+                                        <img src="/images/user-img.png" alt="User" class="gl-lazy">
+                                    </div>
+                                    <!-- END -->
+
+                                    <!-- TEXT -->
+                                    <div class="gl-comment-text-chat">
+
+                                        <div class="gl-username-date">
+                                            <h3>David Neo</h3>
+                                            <span class="gl-comments-date">23 March, 2016</span>
+                                        </div>
+                                        <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                            beguiled and demoralized by the of pleasure</p>
+                                    </div>
+                                    <!-- END -->
+                                </li> <li>
+                                    <!-- USER IMG -->
+                                    <div class="chat-user-img">
+                                        <img src="/images/user-img.png" alt="User" class="gl-lazy">
+                                    </div>
+                                    <!-- END -->
+
+                                    <!-- TEXT -->
+                                    <div class="gl-comment-text-chat">
+
+                                        <div class="gl-username-date">
+                                            <h3>David Neo</h3>
+                                            <span class="gl-comments-date">23 March, 2016</span>
+                                        </div>
+                                        <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                            beguiled and demoralized by the of pleasure</p>
+                                    </div>
+                                    <!-- END -->
+                                </li> <li>
+                                    <!-- USER IMG -->
+                                    <div class="chat-user-img">
+                                        <img src="/images/user-img.png" alt="User" class="gl-lazy">
+                                    </div>
+                                    <!-- END -->
+
+                                    <!-- TEXT -->
+                                    <div class="gl-comment-text-chat">
+
+                                        <div class="gl-username-date">
+                                            <h3>David Neo</h3>
+                                            <span class="gl-comments-date">23 March, 2016</span>
+                                        </div>
+                                        <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                            beguiled and demoralized by the of pleasure</p>
+                                    </div>
+                                    <!-- END -->
+                                </li> <li>
+                                    <!-- USER IMG -->
+                                    <div class="chat-user-img">
+                                        <img src="/images/user-img.png" alt="User" class="gl-lazy">
+                                    </div>
+                                    <!-- END -->
+
+                                    <!-- TEXT -->
+                                    <div class="gl-comment-text-chat">
+
+                                        <div class="gl-username-date">
+                                            <h3>David Neo</h3>
+                                            <span class="gl-comments-date">23 March, 2016</span>
+                                        </div>
+                                        <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                            beguiled and demoralized by the of pleasure</p>
+                                    </div>
+                                    <!-- END -->
+                                </li> <li>
+                                    <!-- USER IMG -->
+                                    <div class="chat-user-img">
+                                        <img src="/images/user-img.png" alt="User" class="gl-lazy">
+                                    </div>
+                                    <!-- END -->
+
+                                    <!-- TEXT -->
+                                    <div class="gl-comment-text-chat">
+
+                                        <div class="gl-username-date">
+                                            <h3>David Neo</h3>
+                                            <span class="gl-comments-date">23 March, 2016</span>
+                                        </div>
+                                        <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                            beguiled and demoralized by the of pleasure</p>
+                                    </div>
+                                    <!-- END -->
+                                </li> <li>
+                                    <!-- USER IMG -->
+                                    <div class="chat-user-img">
+                                        <img src="/images/user-img.png" alt="User" class="gl-lazy">
+                                    </div>
+                                    <!-- END -->
+
+                                    <!-- TEXT -->
+                                    <div class="gl-comment-text-chat">
+
+                                        <div class="gl-username-date">
+                                            <h3>David Neo</h3>
+                                            <span class="gl-comments-date">23 March, 2016</span>
+                                        </div>
+                                        <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                            beguiled and demoralized by the of pleasure</p>
+                                    </div>
+                                    <!-- END -->
                                 </li>
                             </ul>
                         </div>

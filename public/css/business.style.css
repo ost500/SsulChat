@@ -25293,7 +25293,6 @@ body {
 }
 
 .gl-page-content-section {
-    position: fixed;
     display: block;
     overflow: hidden;
 }
@@ -26195,6 +26194,7 @@ form.gl-review-submission-form fieldset.gl-submit-wrapper input.gl-btn:hover {
     -moz-box-shadow: 0 0 1px #f2f2f2;
     box-shadow: 0 0 1px #f2f2f2;
     padding: 10px 10px;
+    margin: 3px 3px;
 }
 
 .gl-post-comments-wrapper .gl-comments .chat {
@@ -26300,13 +26300,14 @@ form.gl-review-submission-form fieldset.gl-submit-wrapper input.gl-btn:hover {
     *zoom: 1;
     float: left;
 }
+
 .gl-post-comments-wrapper .gl-comments .gl-comment-text-chat .gl-username-date h3 {
     font-family: 'pt_sansregular', sans-serif;
-    font-size: 21px;
+    font-size: 14px;
     font-weight: 400;
     color: #454545;
     padding-right: 10px;
-    margin: 0;
+    margin: 3px;
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -26346,6 +26347,7 @@ form.gl-review-submission-form fieldset.gl-submit-wrapper input.gl-btn:hover {
     position: absolute;
     left: 0;
 }
+
 .gl-post-comments-wrapper .gl-comments .gl-comment-text-chat .gl-username-date span.gl-comments-date:before {
     content: '|';
     position: absolute;
@@ -30946,6 +30948,8 @@ header.gl-header .gl-header-bottombar .gl-header-main-menu .container-fluid .gl-
 }
 
 .gl-page-content-section {
+    padding-top: 75px;
+    padding-bottom: 100px;
     display: block;
     overflow: hidden;
 }

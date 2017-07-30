@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
                 'name' => '익명'.$i,
                 'email' => "anonymous{$i}@osteng.com",
                 'annony' => true,
-                'profile_img' => '/images/chatpic01.png',
+                'profile_img' => '/images/user-img.png',
                 'password' => bcrypt('!@#$%^&*()')
             ]);
         }

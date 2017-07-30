@@ -1463,6 +1463,31 @@ pre code {
     }
 }
 
+.container-chat {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+    .container-chat {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container-chat {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container-chat {
+        width: 800px;
+    }
+}
+
 .container-fluid {
     margin-right: auto;
     margin-left: auto;
@@ -26101,7 +26126,7 @@ form.gl-review-submission-form fieldset.gl-submit-wrapper input.gl-btn:hover {
 
 @media only screen and (max-width: 767px) {
     .gl-post-comments-wrapper .gl-comments {
-        text-align: center;
+
     }
 }
 

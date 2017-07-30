@@ -70,58 +70,6 @@
 <!-- SIDE MENU END -->
 
 
-<!-- HEADER -->
-<header class="gl-header">
-    <!-- BOTTOM BAR/NAVIGATION -->
-    <div class="gl-header-bottombar">
-        <!-- Navigation Menu start-->
-        <nav class="navbar gl-header-main-menu" role="navigation">
-            <div class="container-fluid">
-
-                <!-- Navbar Toggle -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Logo -->
-                    <a class="navbar-brand" href="{{ url('/') }}"><img class="logo" src="/images/logo-header.png"
-                                                                   alt="GLIMPSE"></a>
-                </div>
-                <!-- Navbar Toggle End -->
-
-                <!-- navbar-collapse start-->
-                <div id="nav-menu" class="navbar-collapse gl-menu-wrapper collapse" role="navigation">
-                    <ul class="nav navbar-nav gl-menus">
-                        <li class="active">
-                            <a href="{{ url('/') }}">홈</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('pageList') }}">페이지</a>
-
-                        </li>
-                        <li>
-                            <a href="{{ route('chattingList') }}">채팅</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- navbar-collapse end-->
-
-                <div class="gl-extra-btns-wrapper">
-                    <button class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
-                    <button class="gl-add-post-btn">+ 채팅 페이지 만들기</button>
-                </div>
-
-            </div>
-        </nav>
-        <!-- Navigation Menu end-->
-    </div>
-    <!-- END -->
-</header>
-<!-- HEADER END -->
-
 
 @yield('content')
 

@@ -170,14 +170,14 @@ class ChattingController extends Controller
     public function chatContent($ssulId, $id)
     {
 
-        $chats = Chatting::join('ssul_chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
+        $chats = Chatting::rightJoin('ssul_chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
             ->where('ssul_chattings.ssul_id', $ssulId)
-            ->selectRaw('chattings.*')
-            ->where('chattings.id', '<', $id)
-            ->orderBy('created_at', 'desc')
+            ->selectRaw('chattings.*, ssul_chattings.id')
+            ->where('ssul_chattings.id', '<', $id)
+            ->orderBy('ssul_chattings.id', 'desc')
             ->with('user')
             ->with('likes')
-            ->limit(100)
+            ->limit(10)
             ->get()
             ->sortBy('id')->values()
             ->each(function (Chatting $chat) {

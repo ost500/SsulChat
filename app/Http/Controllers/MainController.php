@@ -44,14 +44,16 @@ class MainController extends Controller
     {
         $question = $request->question;
 
-        $channels = Ssul::join('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
+        $chattings = Ssul::join('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
             ->groupBy('ssuls.id')
             ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc')
             ->where('ssuls.name', 'like', "{$question}%")
-            ->paginate(5);
+            ->paginate(10);
 
-        return view('main', compact('channels', 'question'));
+        $pages = Page::where('title', 'like', "{$question}%")->paginate(10);
+
+        return view('search', compact('chattings', 'pages', 'question'));
     }
 
     public function facebookLogin()

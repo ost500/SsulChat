@@ -10,9 +10,9 @@
 
                     <!-- DIRECTORY FORM -->
                     <div class="gl-directory-searchbar gl-bz-directory-searchbar">
-                        <form action="#" id="gl-bz-directory-form">
+                        <form action="{{ route('search') }}" id="gl-bz-directory-form">
                             <fieldset>
-                                <input type="text" name="gl-business-keyword" id="gl-business-keyword"
+                                <input type="text" name="question" id="gl-business-keyword"
                                        class="gl-directory-input" placeholder="키워드">
 
 

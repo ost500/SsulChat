@@ -45,15 +45,24 @@
                 <p>정보의 바다로 로그인하세요</p>
 
                 <div class="gl-login-form">
-                    <form action="#">
-                        <input type="text" name="gl-user-name" id="gl-user-input" placeholder="이메일">
-                        <input type="password" name="gl-user-password" id="gl-user-password" placeholder="패스워드">
+                    <form method="POST" action="{{ route('login') }}">
+                        {{ csrf_field() }}
+                        <input type="text" name="email" id="gl-user-input" placeholder="이메일">
+                        @if ($errors->has('email'))
+                            {{ $errors->first('email') }}
+                        @endif
+                        <input type="password" name="password" id="gl-user-password" placeholder="패스워드">
+                        @if ($errors->has('password'))
+
+                            {{ $errors->first('password') }}
+
+                        @endif
                         <button type="submit">로그인</button>
                     </form>
                 </div>
 
                 <div class="gl-social-login-opt">
-                    <a href="#" class="gl-social-login-btn gl-facebook-login">페이스북으로 로그인</a>
+                    <a href="{{ route('facebookLogin') }}" class="gl-social-login-btn gl-facebook-login">페이스북으로 로그인</a>
 
                 </div>
 
@@ -88,7 +97,7 @@
 
                     <!-- Logo -->
                     <a class="navbar-brand" href="{{ url('/') }}"><img class="logo" src="/images/logo-header.png"
-                                                                   alt="GLIMPSE"></a>
+                                                                       alt="GLIMPSE"></a>
                 </div>
                 <!-- Navbar Toggle End -->
 
@@ -166,24 +175,24 @@
                             </a>
                         </li>
                         {{--<li>--}}
-                            {{--<a href="#">--}}
-                                {{--<i class="fa fa-twitter"></i>--}}
-                            {{--</a>--}}
+                        {{--<a href="#">--}}
+                        {{--<i class="fa fa-twitter"></i>--}}
+                        {{--</a>--}}
                         {{--</li>--}}
                         {{--<li>--}}
-                            {{--<a href="#">--}}
-                                {{--<i class="fa fa-behance"></i>--}}
-                            {{--</a>--}}
+                        {{--<a href="#">--}}
+                        {{--<i class="fa fa-behance"></i>--}}
+                        {{--</a>--}}
                         {{--</li>--}}
                         {{--<li>--}}
-                            {{--<a href="#">--}}
-                                {{--<i class="fa fa-dribbble"></i>--}}
-                            {{--</a>--}}
+                        {{--<a href="#">--}}
+                        {{--<i class="fa fa-dribbble"></i>--}}
+                        {{--</a>--}}
                         {{--</li>--}}
                         {{--<li>--}}
-                            {{--<a href="#">--}}
-                                {{--<i class="fa fa-vimeo"></i>--}}
-                            {{--</a>--}}
+                        {{--<a href="#">--}}
+                        {{--<i class="fa fa-vimeo"></i>--}}
+                        {{--</a>--}}
                         {{--</li>--}}
                     </ul>
                 </div>

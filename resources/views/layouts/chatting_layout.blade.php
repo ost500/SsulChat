@@ -2,6 +2,7 @@
 <html style="height:100%" lang="{{ config('app.locale') }}">
 
 <head>
+    {!! SEO::generate() !!}
     <meta charset="UTF-8">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

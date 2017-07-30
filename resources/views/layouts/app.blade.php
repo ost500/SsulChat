@@ -2,6 +2,7 @@
 <html lang="{{ config('app.locale') }}">
 
 <head>
+    {!! SEO::generate() !!}
     <meta charset="UTF-8">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="/css/business.style.css">
 </head>
 
-<body class="gl-business-template gl-home-template">
+<body class="gl-business-template gl-home-template @if(isset($loginView)) gl-show-menu @endif">
 
 <div id="gl-circle-loader-wrapper">
     <div id="gl-circle-loader-center">

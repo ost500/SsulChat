@@ -6,7 +6,7 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults'       => [
-            'title'        => "썰챗", // set false to total remove
+            'title'        => app('APP_NAME', 'WIKICHAT'), // set false to total remove
             'description'  => '온라인 썰전, 아무말 대잔치', // set false to total remove
             'separator'    => ' - ',
             'keywords'     => [],

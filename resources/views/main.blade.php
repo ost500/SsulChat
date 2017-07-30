@@ -83,7 +83,14 @@
                         </div>
                         <!-- END -->
                     @endforeach
+
+
                 </div>
+                <!-- MORE BTN -->
+                <div class="gl-more-btn-wrapper">
+                    <a href="{{ route('pageList') }}" class="gl-more-btn gl-btn">더보기</a>
+                </div>
+                <!-- END -->
             </div>
         </div>
 
@@ -137,7 +144,7 @@
 
                 <!-- MORE BTN -->
                 <div class="gl-more-btn-wrapper">
-                    <a href="#" class="gl-more-btn gl-btn">More</a>
+                    <a href="{{ route('chattingList') }}" class="gl-more-btn gl-btn">더보기</a>
                 </div>
                 <!-- END -->
             </div>

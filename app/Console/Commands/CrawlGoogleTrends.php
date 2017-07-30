@@ -71,17 +71,6 @@ class CrawlGoogleTrends extends Command
                     $newSsul->picture = "https:" . $item->ht_picture;
                     $newSsul->save();
 
-                    $newTeam = new Team();
-                    $newTeam->ssul_id = $newSsul->id;
-                    $newTeam->name = "긍정";
-                    $newTeam->value = 50;
-                    $newTeam->save();
-
-                    $newTeam = new Team();
-                    $newTeam->ssul_id = $newSsul->id;
-                    $newTeam->name = "부정";
-                    $newTeam->value = 50;
-                    $newTeam->save();
                 });
 
             }

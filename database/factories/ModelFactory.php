@@ -116,3 +116,12 @@ $factory->define(App\Page::class, function (Faker\Generator $faker) {
         'background_picture' => $faker->imageUrl()
     ];
 });
+
+$factory->define(App\PageSsul::class, function (Faker\Generator $faker) {
+    $ssulId = App\Ssul::pluck('id')->toArray();
+
+    return [
+        'ssul_id' => $faker->randomElement($ssulId),
+
+    ];
+});

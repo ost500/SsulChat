@@ -22,6 +22,7 @@ class CreatePagesTable extends Migration
                 ->onDelete('cascade');
 
             $table->string('title')->unique();
+            $table->string('description');
             $table->string('main_picture');
             $table->string('background_picture');
 

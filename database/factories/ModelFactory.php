@@ -111,6 +111,7 @@ $factory->define(App\Page::class, function (Faker\Generator $faker) {
     return [
         'user_id' => $faker->randomElement($userId),
         'title' => $faker->name,
+        'description' => $faker->sentence,
         'main_picture' => $faker->imageUrl(),
         'background_picture' => $faker->imageUrl()
     ];

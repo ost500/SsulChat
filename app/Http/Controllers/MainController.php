@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\Page;
 use App\Ssul;
 use App\Team;
 use App\User;
@@ -33,7 +34,10 @@ class MainController extends Controller
         $channels = $builder->paginate(10);
 
 
-        return view('main', compact('channels'));
+        $pages = Page::take(4)->get();
+
+
+        return view('main', compact('channels', 'pages'));
     }
 
     public function search(Request $request)

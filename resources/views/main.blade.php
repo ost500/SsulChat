@@ -48,58 +48,41 @@
 
                 <!-- WRAPPER -->
                 <div class="gl-featured-listing-wrapper">
-                    <div class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
-                        <div class="gl-feat-items-img-wrapper">
-                            <picture>
-                                <source media="(min-width: 768px)" srcset="images/real-estate-img-2-lg.jpg">
-                                <img alt="Category Image" srcset="images/real-estate-img-2.jpg">
-                            </picture>
+                    @foreach($pages as $page)
+                        <div class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
+                            <div class="gl-feat-items-img-wrapper">
+                                <picture>
+                                    <source media="(min-width: 768px)" srcset="{{ $page->main_picture }}">
+                                    <img alt="Category Image" srcset="{{ $page->main_picture }}">
+                                </picture>
 
 
-                        </div>
-
-                        <div class="gl-feat-item-details">
-                            <h3>
-                                <a href="#">Lake Cafe</a>
-                            </h3>
-                            <div class="gl-item-location">
-                                <i class="ion-ios-location-outline"></i>
-                                <span>Road 3, West Portland, USA</span>
                             </div>
 
+                            <div class="gl-feat-item-details">
+                                <h3>
+                                    <a href="#">{{ $page->title }}</a>
+                                </h3>
+                                <div class="gl-item-location">
 
+                                    <span>{{ $page->description }}</span>
+                                </div>
+
+
+                            </div>
+
+                            <div class="gl-feat-item-metas">
+                                <ul class="gl-feature-info">
+                                    <li>구독자<span>3</span>
+                                    </li>
+                                    <li>채팅방<span>2</span>
+                                    </li>
+
+                                </ul>
+                            </div>
                         </div>
-
-                        <div class="gl-feat-item-metas">
-                            <ul class="gl-feature-info">
-                                <li>Beds<span>3</span>
-                                </li>
-                                <li>Baths<span>2</span>
-                                </li>
-                                <li>Area<span>900 sqft</span>
-                                </li>
-                            </ul>
-
-                            <ul class="gl-wishlist-compare-wrapper">
-                                <li>
-                                    <a href="#" class="gl-add-wishlist">
-                                        <i class="fa fa-heart-o"></i>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="gl-add-compare">
-                                        <div class="gl-compare-btn">
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- END -->
+                        <!-- END -->
+                    @endforeach
                 </div>
             </div>
         </div>

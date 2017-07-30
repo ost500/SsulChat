@@ -209,8 +209,11 @@ class MainController extends Controller
 
     public function page($id)
     {
-        $ssul = Ssul::withCount('chattings')->findOrFail($id);
-        return view('page', compact('ssul'));
+        $page = Page::with('ssuls')->withCount('ssuls')->findOrFail($id);
+
+//        return response()->json($page);
+
+        return view('page', compact('page'));
     }
 
 }

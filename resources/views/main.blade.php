@@ -61,7 +61,7 @@
 
                             <div class="gl-feat-item-details">
                                 <h3>
-                                    <a href="#">{{ $page->title }}</a>
+                                    <a href="{{ route('pages', ['id' => $page->id]) }}">{{ $page->title }}</a>
                                 </h3>
                                 <div class="gl-item-location">
 

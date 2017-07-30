@@ -87,7 +87,7 @@
                     </button>
 
                     <!-- Logo -->
-                    <a class="navbar-brand" href="index.html"><img class="logo" src="/images/logo-header.png"
+                    <a class="navbar-brand" href="{{ url('/') }}"><img class="logo" src="/images/logo-header.png"
                                                                    alt="GLIMPSE"></a>
                 </div>
                 <!-- Navbar Toggle End -->

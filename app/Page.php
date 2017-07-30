@@ -8,6 +8,6 @@ class Page extends Model
 {
     public function ssuls()
     {
-        return $this->hasMany(PageSsul::class);
+        return $this->belongsToMany(Ssul::class,'page_ssuls');
     }
 }

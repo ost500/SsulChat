@@ -104,3 +104,14 @@ $factory->define(App\SsulChatting::class, function (Faker\Generator $faker) {
         'chatting_id' => $faker->randomElement($chattingId),
     ];
 });
+
+$factory->define(App\Page::class, function (Faker\Generator $faker) {
+    $userId = App\User::pluck('id')->toArray();
+
+    return [
+        'user_id' => $faker->randomElement($userId),
+        'title' => $faker->name,
+        'main_picture' => $faker->imageUrl(),
+        'background_picture' => $faker->imageUrl()
+    ];
+});

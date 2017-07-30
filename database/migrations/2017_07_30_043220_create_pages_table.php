@@ -16,10 +16,15 @@ class CreatePagesTable extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('ssul_id')->unsigned();
-            $table->foreign('ssul_id')
-                ->references('id')->on('ssuls')
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onDelete('cascade');
+
+            $table->string('title')->unique();
+            $table->string('main_picture');
+            $table->string('background_picture');
+
 
             $table->timestamps();
         });

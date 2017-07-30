@@ -99,11 +99,11 @@
                             <a href="index.html">홈</a>
                         </li>
                         <li>
-                            <a href="listing-style-1.html">그룹</a>
+                            <a href="{{ route('pageList') }}">페이지</a>
 
                         </li>
                         <li>
-                            <a href="company.html">채팅</a>
+                            <a href="{{ route('chattingList') }}">채팅</a>
                         </li>
                     </ul>
                 </div>

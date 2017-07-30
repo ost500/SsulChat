@@ -40,9 +40,14 @@ Route::post('like', function (Request $request) {
     event(new App\Events\likeEvent($request));
 });
 
+Route::get('/pages/', ['as' => 'pageList', 'uses' => 'MainController@pageList']);
+
 Route::get('/pages/{id}', ['as' => 'pages', 'uses' => 'MainController@page']);
 
 Route::get('/ssul', ['as' => 'ssul', 'uses' => 'MainController@ssul']);
+Route::get('/chattings', ['as' => 'chattingList', 'uses' => 'MainController@chattingList']);
+
+
 Route::post('/ssul', ['as' => 'ssul.create', 'uses' => 'MainController@ssulCreate']);
 
 Route::get('/search', ['as' => 'search', 'uses' => 'MainController@search']);

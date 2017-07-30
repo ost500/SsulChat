@@ -216,4 +216,27 @@ class MainController extends Controller
         return view('page', compact('page'));
     }
 
+    public function pageList()
+    {
+        $pages = Page::paginate(20);
+
+//        return response()->json($page);
+
+        return view('pageList', compact('pages'));
+    }
+
+    public function chattingList()
+    {
+        $builder = Ssul::leftJoin('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
+            ->groupBy('ssuls.id')
+            ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
+            ->orderBy('chat_count', 'desc');
+
+
+        $chattings = $builder->paginate(40);
+
+
+        return view('chattingList', compact('chattings'));
+    }
+
 }

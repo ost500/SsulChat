@@ -35,7 +35,9 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-
+        if (Auth::check() and Auth::user()->annony) {
+            Auth::logout();
+        }
         $this->middleware('guest')->except('logout');
     }
 

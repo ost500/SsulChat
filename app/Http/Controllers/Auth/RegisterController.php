@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -36,6 +37,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        if(Auth::check() and Auth::user()->annony){
+            Auth::logout();
+        }
         $this->middleware('guest');
     }
 
@@ -67,6 +71,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'profile_img' => '/images/chatpic01.png'
 
         ]);
     }

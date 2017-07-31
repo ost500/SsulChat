@@ -105,15 +105,22 @@
                 <!-- navbar-collapse start-->
                 <div id="nav-menu" class="navbar-collapse gl-menu-wrapper collapse" role="navigation">
                     <ul class="nav navbar-nav gl-menus">
-                        <li class="active">
+                        <li class="{{ (Request::is('/')) ? "active": "" }}">
                             <a href="{{ url('/') }}">홈</a>
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('pages')) ? "active": "" }}">
                             <a href="{{ route('pageList') }}">페이지</a>
 
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('chattings')) ? "active": "" }}">
                             <a href="{{ route('chattingList') }}">채팅</a>
+                        </li>
+
+                        <li style="padding:0px" class="{{ (Request::is('mypages/*')) ? "active": "" }}">
+                            <a href="{{ route('chattingList') }}">
+                                <img src="{{ Auth::user()->profile_img }}" alt="User"
+                                     class="gl-lazy">
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -124,7 +131,8 @@
                     @if(!Auth::check())
                         <button class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
                     @else
-                        <button hidden class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
+
+
                     @endif
 
                     <button class="gl-add-post-btn">+ 채팅 페이지 만들기</button>
@@ -137,6 +145,11 @@
     <!-- END -->
 </header>
 <!-- HEADER END -->
+
+@if(Auth::check())
+    <section class="gl-fake-div" style="height: 70px;"></section>
+@endif
+
 
 
 @yield('content')

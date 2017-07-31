@@ -25,6 +25,10 @@ class MainController extends Controller
 
     public function main()
     {
+        if (Auth::check() and Auth::user()->annony) {
+            Auth::logout();
+        }
+
         $builder = Ssul::leftJoin('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
             ->groupBy('ssuls.id')
             ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")

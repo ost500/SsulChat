@@ -120,7 +120,13 @@
                 <!-- navbar-collapse end-->
 
                 <div class="gl-extra-btns-wrapper">
-                    <button class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
+
+                    @if(!Auth::check())
+                        <button class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
+                    @else
+                        <button hidden class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
+                    @endif
+
                     <button class="gl-add-post-btn">+ 채팅 페이지 만들기</button>
                 </div>
 

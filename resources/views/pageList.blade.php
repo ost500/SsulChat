@@ -42,40 +42,47 @@
 
                 <!-- WRAPPER -->
                 <div class="gl-featured-listing-wrapper">
-                    @foreach($pages as $page)
-                        <div class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
-                            <div class="gl-feat-items-img-wrapper">
-                                <picture>
-                                    <source media="(min-width: 768px)" srcset="{{ $page->main_picture }}">
-                                    <img alt="Category Image" srcset="{{ $page->main_picture }}">
-                                </picture>
+                    @foreach($pages as $num => $page)
+                        @if(($num +1) %4 == 0)
+                            <div class="row">
+                                @endif
+                                <div class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
+                                    <div class="gl-feat-items-img-wrapper">
+                                        <picture>
+                                            <source media="(min-width: 768px)" srcset="{{ $page->main_picture }}">
+                                            <img alt="Category Image" srcset="{{ $page->main_picture }}">
+                                        </picture>
 
 
-                            </div>
+                                    </div>
 
-                            <div class="gl-feat-item-details">
-                                <h3>
-                                    <a href="{{ route('pages', ['id' => $page->id]) }}">{{ $page->title }}</a>
-                                </h3>
-                                <div class="gl-item-location">
+                                    <div class="gl-feat-item-details">
+                                        <h3>
+                                            <a href="{{ route('pages', ['id' => $page->id]) }}">{{ $page->title }}</a>
+                                        </h3>
+                                        <div class="gl-item-location">
 
-                                    <span>{{ $page->description }}</span>
+                                            <span>{{ $page->description }}</span>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="gl-feat-item-metas">
+                                        <ul class="gl-feature-info">
+                                            <li>구독자<span>3</span>
+                                            </li>
+                                            <li>채팅방<span>2</span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
                                 </div>
+                                <!-- END -->
 
-
+                                @if(($num +1) %4 == 0)
                             </div>
-
-                            <div class="gl-feat-item-metas">
-                                <ul class="gl-feature-info">
-                                    <li>구독자<span>3</span>
-                                    </li>
-                                    <li>채팅방<span>2</span>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- END -->
+                        @endif
                     @endforeach
                 </div>
                 <div class="gl-more-btn-wrapper">

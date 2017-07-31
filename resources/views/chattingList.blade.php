@@ -31,57 +31,63 @@
     <!-- FEATURED LISTINGS -->
     <section class="gl-feat-listing-section gl-section-wrapper">
         <div class="container">
-            <div class="row">
-                <!-- SECTION HEADINGS -->
-                <div class="gl-section-headings">
-                    <h1>위키 채팅</h1>
-                    <p>오늘의 핫이슈</p>
-                </div>
-                <!-- END -->
 
-                <!-- WRAPPER -->
-                <div class="gl-featured-listing-wrapper">
+            <!-- SECTION HEADINGS -->
+            <div class="gl-section-headings">
+                <h1>위키 채팅</h1>
+                <p>오늘의 핫이슈</p>
+            </div>
+            <!-- END -->
+
+            <!-- WRAPPER -->
+            <div class="gl-featured-listing-wrapper">
                 @foreach($chattings as $num => $channel)
+                    @if(($num + 1) %6 == 0)
+                        <div class="row">
+                        @endif
+                        <!-- FEATURED ITEMS -->
+                            <div class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn"
+                                 data-wow-duration="1s"
+                                 data-wow-delay=".3s">
+                                <div class="gl-feat-items-img-wrapper">
 
-                    <!-- FEATURED ITEMS -->
-                        <div class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn" data-wow-duration="1s"
-                             data-wow-delay=".3s">
-                            <div class="gl-feat-items-img-wrapper">
+                                    <picture>
+                                        <source media="(min-width: 768px)" srcset="{{ $channel->picture }}">
+                                        <img alt="{{ $channel->name }}" srcset="{{ $channel->picture }}">
+                                    </picture>
+                                </div>
 
-                                <picture>
-                                    <source media="(min-width: 768px)" srcset="{{ $channel->picture }}">
-                                    <img alt="{{ $channel->name }}" srcset="{{ $channel->picture }}">
-                                </picture>
-                            </div>
-
-                            <div class="gl-feat-item-details">
+                                <div class="gl-feat-item-details">
                             <span class="gl-item-rating">
                               <i class="ion-android-star-outline"></i>
                                 @if(isset($channel->chat_count))
                                     {{ $channel->chat_count }}
                                 @endif
                             </span>
-                                <h3>
-                                    <a href="{{ route('chattings',['id'=>$channel->id]) }}">{{ $channel->name }}</a>
-                                </h3>
+                                    <h3>
+                                        <a href="{{ route('chattings',['id'=>$channel->id]) }}">{{ $channel->name }}</a>
+                                    </h3>
 
+                                </div>
                             </div>
+                            <!-- END -->
+                            @if(($num + 1) %6 == 0)
                         </div>
-                        <!-- END -->
-                    @endforeach
+                    @endif
+                @endforeach
 
 
-                </div>
-                <!-- END -->
-
-                <!-- MORE BTN -->
-                <div class="gl-more-btn-wrapper">
-
-                    {{ $chattings->render() }}
-                    {{--<a href="#" class="gl-more-btn gl-btn">More</a>--}}
-                </div>
-                <!-- END -->
             </div>
+            <!-- END -->
+
+            <!-- MORE BTN -->
+            <div class="gl-more-btn-wrapper">
+
+                {{ $chattings->render() }}
+                {{--<a href="#" class="gl-more-btn gl-btn">More</a>--}}
+            </div>
+            <!-- END -->
+
         </div>
     </section>
     <!-- FEATURED LISTINGS END -->

@@ -38,60 +38,66 @@
     <!-- FEATURED LISTINGS -->
     <section class="gl-feat-listing-section gl-section-wrapper">
         <div class="container">
-            <div class="row">
-                <!-- SECTION HEADINGS -->
-                <div class="gl-section-headings">
-                    <h1>위키 페이지</h1>
-                    <p>오늘의 페이지</p>
-                </div>
-                <!-- END -->
 
-                <!-- WRAPPER -->
-                <div class="gl-featured-listing-wrapper">
-                    @foreach($pages as $page)
-                        <div class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
-                            <div class="gl-feat-items-img-wrapper">
-                                <picture>
-                                    <source media="(min-width: 768px)" srcset="{{ $page->main_picture }}">
-                                    <img alt="Category Image" srcset="{{ $page->main_picture }}">
-                                </picture>
+            <!-- SECTION HEADINGS -->
+            <div class="gl-section-headings">
+                <h1>위키 페이지</h1>
+                <p>오늘의 페이지</p>
+            </div>
+            <!-- END -->
+
+            <!-- WRAPPER -->
+            <div class="gl-featured-listing-wrapper">
+                @foreach($pages as $num => $page)
+                    @if(($num + 1) % 4 == 0)
+                        <div class="row">
+                            @endif
+                            <div class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
+                                <div class="gl-feat-items-img-wrapper">
+                                    <picture>
+                                        <source media="(min-width: 768px)" srcset="{{ $page->main_picture }}">
+                                        <img alt="Category Image" srcset="{{ $page->main_picture }}">
+                                    </picture>
 
 
-                            </div>
-
-                            <div class="gl-feat-item-details">
-                                <h3>
-                                    <a href="{{ route('pages', ['id' => $page->id]) }}">{{ $page->title }}</a>
-                                </h3>
-                                <div class="gl-item-location">
-
-                                    <span>{{ $page->description }}</span>
                                 </div>
 
+                                <div class="gl-feat-item-details">
+                                    <h3>
+                                        <a href="{{ route('pages', ['id' => $page->id]) }}">{{ $page->title }}</a>
+                                    </h3>
+                                    <div class="gl-item-location">
 
+                                        <span>{{ $page->description }}</span>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="gl-feat-item-metas">
+                                    <ul class="gl-feature-info">
+                                        <li>구독자<span>3</span>
+                                        </li>
+                                        <li>채팅방<span>2</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
                             </div>
-
-                            <div class="gl-feat-item-metas">
-                                <ul class="gl-feature-info">
-                                    <li>구독자<span>3</span>
-                                    </li>
-                                    <li>채팅방<span>2</span>
-                                    </li>
-
-                                </ul>
-                            </div>
+                            <!-- END -->
+                            @if(($num + 1) % 4 == 0)
                         </div>
-                        <!-- END -->
-                    @endforeach
+                    @endif
+                @endforeach
 
 
-                </div>
-                <!-- MORE BTN -->
-                <div class="gl-more-btn-wrapper">
-                    <a href="{{ route('pageList') }}" class="gl-more-btn gl-btn">더보기</a>
-                </div>
-                <!-- END -->
             </div>
+            <!-- MORE BTN -->
+            <div class="gl-more-btn-wrapper">
+                <a href="{{ route('pageList') }}" class="gl-more-btn gl-btn">더보기</a>
+            </div>
+            <!-- END -->
+
         </div>
 
     </section>
@@ -99,55 +105,62 @@
     <!-- FEATURED LISTINGS -->
     <section class="gl-feat-listing-section gl-section-wrapper">
         <div class="container">
-            <div class="row">
-                <!-- SECTION HEADINGS -->
-                <div class="gl-section-headings">
-                    <h1>위키 채팅</h1>
-                    <p>오늘의 핫이슈</p>
-                </div>
-                <!-- END -->
 
-                <!-- WRAPPER -->
-                <div class="gl-featured-listing-wrapper">
+            <!-- SECTION HEADINGS -->
+            <div class="gl-section-headings">
+                <h1>위키 채팅</h1>
+                <p>오늘의 핫이슈</p>
+            </div>
+            <!-- END -->
+
+            <!-- WRAPPER -->
+            <div class="gl-featured-listing-wrapper">
                 @foreach($channels as $num => $channel)
 
-                    <!-- FEATURED ITEMS -->
-                        <div class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn" data-wow-duration="1s"
-                             data-wow-delay=".3s">
-                            <div class="gl-feat-items-img-wrapper">
+                    @if(($num + 1) % 6 == 0)
+                        <div class="row">
+                        @endif
+                        <!-- FEATURED ITEMS -->
+                            <div class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn"
+                                 data-wow-duration="1s"
+                                 data-wow-delay=".3s">
+                                <div class="gl-feat-items-img-wrapper">
 
-                                <picture>
-                                    <source media="(min-width: 768px)" srcset="{{ $channel->picture }}">
-                                    <img alt="{{ $channel->name }}" srcset="{{ $channel->picture }}">
-                                </picture>
-                            </div>
+                                    <picture>
+                                        <source media="(min-width: 768px)" srcset="{{ $channel->picture }}">
+                                        <img alt="{{ $channel->name }}" srcset="{{ $channel->picture }}">
+                                    </picture>
+                                </div>
 
-                            <div class="gl-feat-item-details">
+                                <div class="gl-feat-item-details">
                             <span class="gl-item-rating">
                               <i class="ion-android-star-outline"></i>
                                 @if(isset($channel->chat_count))
                                     {{ $channel->chat_count }}
                                 @endif
                             </span>
-                                <h3>
-                                    <a href="{{ route('chattings',['id'=>$channel->id]) }}">{{ $channel->name }}</a>
-                                </h3>
+                                    <h3>
+                                        <a href="{{ route('chattings',['id'=>$channel->id]) }}">{{ $channel->name }}</a>
+                                    </h3>
 
+                                </div>
                             </div>
+                            <!-- END -->
+                            @if(($num + 1)%6 == 0)
                         </div>
-                        <!-- END -->
-                    @endforeach
+                    @endif
+                @endforeach
 
 
-                </div>
-                <!-- END -->
-
-                <!-- MORE BTN -->
-                <div class="gl-more-btn-wrapper">
-                    <a href="{{ route('chattingList') }}" class="gl-more-btn gl-btn">더보기</a>
-                </div>
-                <!-- END -->
             </div>
+            <!-- END -->
+
+            <!-- MORE BTN -->
+            <div class="gl-more-btn-wrapper">
+                <a href="{{ route('chattingList') }}" class="gl-more-btn gl-btn">더보기</a>
+            </div>
+            <!-- END -->
+
         </div>
     </section>
     <!-- FEATURED LISTINGS END -->

@@ -20,69 +20,76 @@ parameter = sys.argv
 
 
 # Open database connection
-db = MySQLdb.connect(host=parameter[1], user=parameter[2], passwd=parameter[3], db=parameter[4], charset='utf8')
+
 
 
 
 # prepare a cursor object using cursor() method
-cursor = db.cursor()
-
-# execute SQL query using execute() method.
-cursor.execute("SELECT * FROM chattings WHERE morphed=0 LIMIT 100")
 
 
-results = cursor.fetchall()
-for row in results:
-
-    try:
-
-        chatting_id = row[0]
-        message = row[1]
+while(1):
+    db = MySQLdb.connect(host=parameter[1], user=parameter[2], passwd=parameter[3], db=parameter[4], charset='utf8')
+    cursor = db.cursor()
+    # execute SQL query using execute() method.
+    cursor.execute("SELECT * FROM chattings WHERE morphed=0 LIMIT 100")
 
 
-        # ssul_id 검색
-        cursor.execute("SELECT * FROM chattings JOIN `ssul_chattings` ON ssul_chattings.chatting_id = chattings.id  WHERE chatting_id = "+str(chatting_id))
-        ssul_chattings = cursor.fetchall()
+    results = cursor.fetchall()
+    for row in results:
 
-        for ssuls in ssul_chattings:
+        try:
 
-            ssul_id = str(ssuls[10])
-
-
-            print("id : " + str(chatting_id) + " message : " +message)
-
-            morphs = twitter.nouns(message)
-
-            for morphed_message in morphs:
-
-                query = "SELECT * FROM morphs WHERE morph='" + str(morphed_message) + "'"
-                alreadyExistCursor = db.cursor()
-                alreadyExistCursor.execute(query)
-
-                alreadyExist = alreadyExistCursor.fetchone()
-
-                if alreadyExist == None:
-                    sql = "INSERT INTO morphs(ssul_id, morph, created_at, updated_at) VALUES ("+ssul_id+", '"+ morphed_message +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"')"
+            chatting_id = row[0]
+            message = row[1]
 
 
-                    cursor.execute(sql)
+            # ssul_id 검색
+            cursor.execute("SELECT * FROM chattings JOIN `ssul_chattings` ON ssul_chattings.chatting_id = chattings.id  WHERE chatting_id = "+str(chatting_id))
+            ssul_chattings = cursor.fetchall()
+
+            for ssuls in ssul_chattings:
+
+                ssul_id = str(ssuls[10])
 
 
+                print("id : " + str(chatting_id))
 
-                else:
-                    sql = "UPDATE morphs SET count = count + 1 WHERE id = '%d'" % (alreadyExist[0])
+                morphs = twitter.nouns(message)
 
-                    cursor.execute(sql)
+                morphs = list(set(morphs))
 
-            sql = "UPDATE chattings SET morphed = 1 WHERE id = '%d'" % (chatting_id)
+                for morphed_message in morphs:
 
-            cursor.execute(sql)
+                    if len(morphed_message) <= 1:
+                        continue
+
+                    query = "SELECT * FROM morphs WHERE morph='" + str(morphed_message) + "'"
+                    alreadyExistCursor = db.cursor()
+                    alreadyExistCursor.execute(query)
+
+                    alreadyExist = alreadyExistCursor.fetchone()
+
+                    if alreadyExist == None:
+                        sql = "INSERT INTO morphs(ssul_id, morph, created_at, updated_at) VALUES ("+ssul_id+", '"+ morphed_message +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"')"
+                        print(sql)
+
+                        cursor.execute(sql)
+
+                    else:
+                        sql = "UPDATE morphs SET count = count + 1, updated_at ='"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"' WHERE id = '%d'" % (alreadyExist[0])
+                        print(sql)
+                        cursor.execute(sql)
+
+                print("123")
+                sql = "UPDATE chattings SET morphed = 1 WHERE id = '%d'" % (chatting_id)
+                print(sql)
+                cursor.execute(sql)
 
 
-        db.commit()
+            db.commit()
 
-    except:
-        db.rollback()
+        except:
+            db.rollback()
 
 
 

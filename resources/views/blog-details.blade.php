@@ -49,8 +49,9 @@
                         <!-- navbar-collapse end-->
 
                         <div class="gl-extra-btns-wrapper">
-                            @if(Auth::user()->annony)
-                                <button class="gl-login-btn" id="gl-side-menu-btn">로그인</button>@endif
+                            @if(!Auth::check() and Auth::user()->annony)
+                                <button class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
+                            @endif
                             <button class="gl-add-post-btn">참석자 @{{ viewers.length  }}</button>
                         </div>
 

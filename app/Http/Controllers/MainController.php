@@ -9,6 +9,7 @@ use App\Team;
 use App\User;
 
 
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -233,7 +234,10 @@ class MainController extends Controller
 
     public function chattingList()
     {
-        $builder = Ssul::leftJoin('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
+        $builder = Ssul::leftJoin('ssul_chattings', function ($q) {
+            $q->on('ssul_chattings.ssul_id', '=', 'ssuls.id');
+        })
+//            ->where('ssul_chattings.created_at', '>', Carbon::now()->subWeek()->format('Y-m-d'))
             ->groupBy('ssuls.id')
             ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc');

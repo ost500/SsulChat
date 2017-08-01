@@ -69,7 +69,7 @@
 
                 <div class="gl-other-options">
                     <a href="#" class="gl-forgot-pass">비밀번호를 잊으셨나요?</a>
-                    <a href="#" class="gl-signup">가입하기</a>
+                    <a href="{{ route('register') }}" class="gl-signup">가입하기</a>
                 </div>
             </div>
         </div>
@@ -104,7 +104,8 @@
 
                 <!-- navbar-collapse start-->
                 <div id="nav-menu" class="navbar-collapse gl-menu-wrapper collapse" role="navigation">
-                    <ul class="nav navbar-nav gl-menus">
+                    <ul class="nav navbar-nav
+                     gl-menus">
                         <li class="{{ (Request::is('/')) ? "active": "" }}">
                             <a href="{{ url('/') }}">홈</a>
                         </li>
@@ -116,12 +117,14 @@
                             <a href="{{ route('chattingList') }}">채팅</a>
                         </li>
 
-                        <li style="padding:0px" class="{{ (Request::is('mypages/*')) ? "active": "" }}">
-                            <a href="{{ route('chattingList') }}">
-                                <img src="{{ Auth::user()->profile_img }}" alt="User"
-                                     class="gl-lazy">
-                            </a>
-                        </li>
+                        @if(Auth::check())
+                            <li style="padding:0px" class="{{ (Request::is('/')) ? "active": "" }}">
+                                <a href="{{ route('chattingList') }}">
+                                    <img src="{{ Auth::user()->profile_img }}" alt="User"
+                                         class="gl-lazy">
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
                 <!-- navbar-collapse end-->

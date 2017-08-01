@@ -71,16 +71,26 @@ while(1):
 
                     if alreadyExist == None:
                         sql = "INSERT INTO morphs(ssul_id, morph, created_at, updated_at) VALUES ("+ssul_id+", '"+ morphed_message +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"')"
-                        print(sql)
 
                         cursor.execute(sql)
+                        db.commit()
 
-                    else:
-                        sql = "UPDATE morphs SET count = count + 1, updated_at ='"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"' WHERE id = '%d'" % (alreadyExist[0])
-                        print(sql)
-                        cursor.execute(sql)
+                    query = "SELECT * FROM morphs WHERE morph='" + str(morphed_message) + "'"
 
-                print("123")
+
+                    cursor.execute(query)
+                    insertedMorph = cursor.fetchone()
+
+                    print(insertedMorph[0])
+
+                    sql = "INSERT INTO morph_logs(morph_id, created_at, updated_at) VALUES ('"+str(insertedMorph[0])+"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"')"
+
+                    print(sql)
+                    cursor.execute(sql)
+                    db.commit()
+
+
+
                 sql = "UPDATE chattings SET morphed = 1 WHERE id = '%d'" % (chatting_id)
                 print(sql)
                 cursor.execute(sql)
@@ -88,7 +98,8 @@ while(1):
 
             db.commit()
 
-        except:
+        except Exception as inst:
+            print(inst)
             db.rollback()
 
 

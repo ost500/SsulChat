@@ -36,7 +36,7 @@ class MainController extends Controller
             ->orderBy('chat_count', 'desc');
 
 
-        $channels = $builder->paginate(10);
+        $channels = $builder->paginate(12);
 
 
         $pages = Page::take(4)->get();
@@ -243,10 +243,15 @@ class MainController extends Controller
             ->orderBy('chat_count', 'desc');
 
 
-        $chattings = $builder->paginate(40);
+        $chattings = $builder->paginate(42);
 
 
         return view('chattingList', compact('chattings'));
+    }
+
+    public function create_page()
+    {
+        return view('createPage');
     }
 
 }

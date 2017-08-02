@@ -67,3 +67,5 @@ Route::get('/chat_content/{ssulId}/{id}', ['as' => 'chat_content', 'uses' => 'Ch
 Route::get('mysitemap', 'MainController@mysitemap');
 
 Route::get('instagram_redirect', ['as' => 'insta_redirect', 'uses' => 'MainController@instaRedirect']);
+
+Route::get('create_page', ['as' => 'create_page', 'uses' => 'MainController@create_page']);

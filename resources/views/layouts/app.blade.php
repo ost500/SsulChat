@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="gl-other-options">
-                    <a href="#" class="gl-forgot-pass">비밀번호를 잊으셨나요?</a>
+                    <a href="{{ route('password.request')  }}" class="gl-forgot-pass">비밀번호를 잊으셨나요?</a>
                     <a href="{{ route('register') }}" class="gl-signup">가입하기</a>
                 </div>
             </div>
@@ -138,7 +138,7 @@
 
                     @endif
 
-                    <button class="gl-add-post-btn">+ 채팅 페이지 만들기</button>
+                    <button onclick="location.href='{{ route('create_page') }}'" class="gl-add-post-btn">+ 채팅 페이지 만들기</button>
                 </div>
 
             </div>

@@ -1,46 +1,45 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <section class="gl-elements-shortcode-section">
+        <div class="container">
+            <div class="row">
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
-                        {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                <!-- *****************
+                Contact Form
+                ***************** -->
+                <div class="gl-element-type-wrapper">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                    <div class="gl-element-wrapper">
+                        <div class="gl-row">
+                            <div class="col-md-3 col-sm-3"></div>
+                            <div style="margin-top:20px;" class="col-md-6 col-sm-6 col-xs-12">
+                                <h1 class="gl-sub-heading">비밀번호 찾기</h1>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
+                                <form class="gl-contact-form" method="POST" action="{{ route('password.email') }}">
+                                    {{ csrf_field() }}
+                                    <h3>이메일</h3>
+                                    <input type="email" name="email" id="gl-contact-email"
+                                           placeholder="Email">
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+
+                                    <input style="margin:40px;margin-left: auto;margin-right: auto;" type="submit"
+                                           value="리셋 링크 보내기" class="gl-btn">
+                                </form>
                             </div>
+                            <div class="col-md-3 col-sm-3"></div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+
+                    </div>
                 </div>
+                <!-- Tags End -->
+
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection

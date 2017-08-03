@@ -227,7 +227,9 @@
             el: '#chart',
             data: {
                 statics_max_point: 0,
-                statics_list: []
+                morph_statics_max_point: 0,
+                statics_list: [],
+                morph_statics_list: []
             },
             created: function () {
                 this.statics_load();
@@ -260,7 +262,7 @@
                                     "theme": "light",
                                     "dataProvider": main.statics_list,
                                     "valueAxes": [{
-                                        "maximum": main.statics_max_point+10,
+                                        "maximum": main.statics_max_point + (main.statics_max_point * 0.2),
                                         "minimum": 0,
                                         "axisAlpha": 0,
                                         "dashLength": 4,
@@ -295,33 +297,36 @@
                                         "enabled": true
                                     }
                                 });
+
+                        });
+
+                    axios.get('{{ route('morph_statistics') }}')
+                        .then(function (response) {
+                            console.log(response);
+
+                            for (var i = 0, len = response.data.length; i < len; i++) {
+                                var object = {
+                                    "name": response.data[i].morph,
+                                    "points": response.data[i].countMorphs,
+                                    "color": "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                                    "bullet": response.data[i].picture
+                                };
+                                console.log(object);
+                                main.morph_statics_list.push(object);
+                                console.log(main.morph_statics_list);
+                            }
+
+                            main.morph_statics_max_point = main.morph_statics_list[0].points;
+                            console.log(main.morph_statics_max_point);
+
+
                             var chart2 = AmCharts.makeChart("chartdiv2",
                                 {
                                     "type": "serial",
                                     "theme": "light",
-                                    "dataProvider": [{
-                                        "name": "John",
-                                        "points": 35654,
-                                        "color": "#7F8DA9",
-                                        "bullet": "https://www.amcharts.com/lib/images/faces/A04.png"
-                                    }, {
-                                        "name": "Damon",
-                                        "points": 65456,
-                                        "color": "#FEC514",
-                                        "bullet": "https://www.amcharts.com/lib/images/faces/C02.png"
-                                    }, {
-                                        "name": "Patrick",
-                                        "points": 45724,
-                                        "color": "#DB4C3C",
-                                        "bullet": "https://www.amcharts.com/lib/images/faces/D02.png"
-                                    }, {
-                                        "name": "Mark",
-                                        "points": 13654,
-                                        "color": "#DAF0FD",
-                                        "bullet": "https://www.amcharts.com/lib/images/faces/E01.png"
-                                    }],
+                                    "dataProvider": main.morph_statics_list,
                                     "valueAxes": [{
-                                        "maximum": 80000,
+                                        "maximum": main.morph_statics_max_point,
                                         "minimum": 0,
                                         "axisAlpha": 0,
                                         "dashLength": 4,
@@ -356,6 +361,7 @@
                                         "enabled": true
                                     }
                                 });
+
                         });
 
                 }

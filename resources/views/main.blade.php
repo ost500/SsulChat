@@ -1,6 +1,22 @@
 @extends('layouts.app')
 @section('content')
 
+    <style>
+        #chartdiv {
+
+            width: 100%;
+            height: 300px;
+        }
+
+        #chartdiv2 {
+
+            width: 100%;
+            height: 300px;
+        }
+
+
+    </style>
+
     <!-- HERO IMAGE -->
     <section class="gl-hero-img-wrapper">
         <div class="container">
@@ -36,6 +52,36 @@
 
 
     <!-- FEATURED LISTINGS -->
+    <section class="gl-feat-listing-section gl-section-wrapper">
+        <div id="chart" class="container">
+
+            <!-- SECTION HEADINGS -->
+            <div class="gl-section-headings">
+                <h1>이번주 위키챗</h1>
+                <p>#빅데이터</p>
+            </div>
+            <!-- END -->
+
+            <!-- WRAPPER -->
+            <div class="gl-featured-listing-wrapper">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div id="chartdiv"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="chartdiv2"></div>
+                    </div>
+
+                </div>
+                <!-- MORE BTN -->
+                <div class="gl-more-btn-wrapper">
+                    <a href="{{ route('pageList') }}" class="gl-more-btn gl-btn">더보기</a>
+                </div>
+                <!-- END -->
+
+            </div>
+
+    </section><!-- FEATURED LISTINGS -->
     <section class="gl-feat-listing-section gl-section-wrapper">
         <div class="container">
 
@@ -164,5 +210,160 @@
         </div>
     </section>
     <!-- FEATURED LISTINGS END -->
+
+    <!-- Resources -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all"/>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+
+
+
+    <!-- Chart code -->
+    <script>
+        var main = new Vue({
+            el: '#chart',
+            data: {
+                statics_max_point: 0,
+                statics_list: []
+            },
+            created: function () {
+                this.statics_load();
+            },
+            methods: {
+                statics_load: function () {
+                    axios.get('{{ route('statistics') }}')
+                        .then(function (response) {
+                            console.log(response);
+
+                            for (var i = 0, len = response.data.length; i < len; i++) {
+                                var object = {
+                                    "name": response.data[i].name,
+                                    "points": response.data[i].countSsul,
+                                    "color": "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                                    "bullet": response.data[i].picture
+                                };
+                                console.log(object);
+                                main.statics_list.push(object);
+                                console.log(main.statics_list);
+                            }
+
+                            main.statics_max_point = main.statics_list[0].points;
+                            console.log(main.statics_max_point);
+
+
+                            var chart = AmCharts.makeChart("chartdiv",
+                                {
+                                    "type": "serial",
+                                    "theme": "light",
+                                    "dataProvider": main.statics_list,
+                                    "valueAxes": [{
+                                        "maximum": main.statics_max_point+10,
+                                        "minimum": 0,
+                                        "axisAlpha": 0,
+                                        "dashLength": 4,
+                                        "position": "left"
+                                    }],
+                                    "startDuration": 1,
+                                    "graphs": [{
+                                        "balloonText": "<span style='font-size:13px;'>[[category]]: <b>[[value]]</b></span>",
+                                        "bulletOffset": 10,
+                                        "bulletSize": 52,
+                                        "colorField": "color",
+                                        "cornerRadiusTop": 8,
+                                        "customBulletField": "bullet",
+                                        "fillAlphas": 0.8,
+                                        "lineAlpha": 0,
+                                        "type": "column",
+                                        "valueField": "points"
+                                    }],
+                                    "marginTop": 0,
+                                    "marginRight": 0,
+                                    "marginLeft": 0,
+                                    "marginBottom": 0,
+                                    "autoMargins": false,
+                                    "categoryField": "name",
+                                    "categoryAxis": {
+                                        "axisAlpha": 0,
+                                        "gridAlpha": 0,
+                                        "inside": true,
+                                        "tickLength": 0
+                                    },
+                                    "export": {
+                                        "enabled": true
+                                    }
+                                });
+                            var chart2 = AmCharts.makeChart("chartdiv2",
+                                {
+                                    "type": "serial",
+                                    "theme": "light",
+                                    "dataProvider": [{
+                                        "name": "John",
+                                        "points": 35654,
+                                        "color": "#7F8DA9",
+                                        "bullet": "https://www.amcharts.com/lib/images/faces/A04.png"
+                                    }, {
+                                        "name": "Damon",
+                                        "points": 65456,
+                                        "color": "#FEC514",
+                                        "bullet": "https://www.amcharts.com/lib/images/faces/C02.png"
+                                    }, {
+                                        "name": "Patrick",
+                                        "points": 45724,
+                                        "color": "#DB4C3C",
+                                        "bullet": "https://www.amcharts.com/lib/images/faces/D02.png"
+                                    }, {
+                                        "name": "Mark",
+                                        "points": 13654,
+                                        "color": "#DAF0FD",
+                                        "bullet": "https://www.amcharts.com/lib/images/faces/E01.png"
+                                    }],
+                                    "valueAxes": [{
+                                        "maximum": 80000,
+                                        "minimum": 0,
+                                        "axisAlpha": 0,
+                                        "dashLength": 4,
+                                        "position": "left"
+                                    }],
+                                    "startDuration": 1,
+                                    "graphs": [{
+                                        "balloonText": "<span style='font-size:13px;'>[[category]]: <b>[[value]]</b></span>",
+                                        "bulletOffset": 10,
+                                        "bulletSize": 52,
+                                        "colorField": "color",
+                                        "cornerRadiusTop": 8,
+                                        "customBulletField": "bullet",
+                                        "fillAlphas": 0.8,
+                                        "lineAlpha": 0,
+                                        "type": "column",
+                                        "valueField": "points"
+                                    }],
+                                    "marginTop": 0,
+                                    "marginRight": 0,
+                                    "marginLeft": 0,
+                                    "marginBottom": 0,
+                                    "autoMargins": false,
+                                    "categoryField": "name",
+                                    "categoryAxis": {
+                                        "axisAlpha": 0,
+                                        "gridAlpha": 0,
+                                        "inside": true,
+                                        "tickLength": 0
+                                    },
+                                    "export": {
+                                        "enabled": true
+                                    }
+                                });
+                        });
+
+                }
+            }
+        });
+
+    </script>
+
+
 
 @endsection

@@ -64,7 +64,6 @@ import InfiniteLoading from 'vue-infinite-loading';
 
 import VuePaginator from 'vue-infinite-loading';
 
-import AmChart from 'amcharts3';
 
 
 export default {

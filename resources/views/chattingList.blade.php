@@ -46,7 +46,7 @@
                         <div class="row">
                         @endif
                         <!-- FEATURED ITEMS -->
-                            <div onclick="location.href='{{ route('chattings',['id'=>$channel->id]) }}'"
+                            <div onclick="location.href='{{ route('chattings',['name'=>$channel->name]) }}'"
                                  class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn"
                                  data-wow-duration="1s"
                                  data-wow-delay=".3s">
@@ -66,7 +66,7 @@
                                 @endif
                             </span>
                                     <h3>
-                                        <a href="{{ route('chattings',['id'=>$channel->id]) }}">{{ $channel->name }}</a>
+                                        <a href="{{ route('chattings',['name'=>$channel->name]) }}">{{ $channel->name }}</a>
                                     </h3>
 
                                 </div>

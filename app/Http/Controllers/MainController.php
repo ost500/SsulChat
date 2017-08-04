@@ -218,9 +218,19 @@ class MainController extends Controller
     {
         $page = Page::with('ssuls')->withCount('ssuls')->findOrFail($id);
 
-//        return response()->json($page);
+        $morphs = Page::join('page_ssuls', 'page_ssuls.page_id', '=', 'pages.id')
+            ->join('ssuls', 'ssuls.id', '=', 'page_ssuls.ssul_id')
+            ->join('morphs', 'morphs.ssul_id', '=', 'ssuls.id')
+            ->join('morph_logs', 'morph_logs.morph_id', '=', 'morphs.id')
+            ->groupBy('morph')
+            ->selectRaw('morphs.morph, count(morph_logs.id) as morph_count')
+            ->where('pages.id', $id)
+            ->orderBy('morph_count', 'desc')
+            ->take(20)
+            ->get();
 
-        return view('page', compact('page'));
+
+        return view('page', compact('page', 'morphs'));
     }
 
     public function pageList()

@@ -23659,9 +23659,7 @@ a.gl-tag-btn {
     border-radius: 3px;
 }
 
-a.gl-tag-btn span.gl-close {
-    margin-left: 10px;
-}
+
 
 a.gl-tag-btn:last-child {
     margin-right: 0;

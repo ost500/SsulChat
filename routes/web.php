@@ -52,7 +52,7 @@ Route::post('/ssul', ['as' => 'ssul.create', 'uses' => 'MainController@ssulCreat
 
 Route::get('/search', ['as' => 'search', 'uses' => 'MainController@search']);
 
-Route::get('/chattings/{id}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);
+Route::get('/chattings/{name}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);
 
 Route::post('/teamselect', ['as' => 'team_select', 'uses' => 'ChattingController@teamSelect']);
 
@@ -73,3 +73,8 @@ Route::get('create_page', ['as' => 'create_page', 'uses' => 'MainController@crea
 Route::get('statistics', ['as' => 'statistics', 'uses' => 'StatisticsController@statistics']);
 
 Route::get('morph_statistics', ['as' => 'morph_statistics', 'uses' => 'StatisticsController@morphStatistics']);
+
+Route::get('pages/{id}/statistics', ['as' => 'pages.statistics', 'uses' => 'StatisticsController@pageStatistics']);
+
+Route::get('pages/{id}/morph_statistics', ['as' => 'pages.morph_statistics', 'uses' => 'StatisticsController@pageMorphStatistics']);
+

@@ -12,6 +12,7 @@ use App\User;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Traits\SEOTools;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -24,13 +25,17 @@ class ChattingController extends Controller
 {
     use SEOTools;
 
-    public function chattings(Request $request, $id)
+    public function chattings(Request $request, $name)
     {
 
-        $ssul = Ssul::find($id);
+        try {
+            $ssul = Ssul::where('name', $name)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
 
         /** @var Collection $morphs */
-        $morphs = Morph::where('ssul_id', $id)
+        $morphs = Morph::where('ssul_id', $ssul->id)
             ->orderBy('count', 'desc')->take(30)->pluck('morph');
 
         $this->seo()->setTitle($ssul->name);
@@ -141,7 +146,6 @@ class ChattingController extends Controller
 
         $ssuls = Ssul::where('name', 'like', $ssul->name . "%")
             ->with('teams')->get();
-
 
 
         $teamACount = $ssul->teams[0]->chattings()

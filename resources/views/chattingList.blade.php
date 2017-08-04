@@ -46,7 +46,8 @@
                         <div class="row">
                         @endif
                         <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn"
+                            <div onclick="location.href='{{ route('chattings',['id'=>$channel->id]) }}'"
+                                 class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn"
                                  data-wow-duration="1s"
                                  data-wow-delay=".3s">
                                 <div class="gl-feat-items-img-wrapper">

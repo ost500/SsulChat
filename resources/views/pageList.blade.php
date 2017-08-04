@@ -46,7 +46,8 @@
                         @if(($num +1) %4 == 0)
                             <div class="row">
                                 @endif
-                                <div class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
+                                <div onclick="location.href='{{ route('pages', ['id' => $page->id]) }}'"
+                                        class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
                                     <div class="gl-feat-items-img-wrapper">
                                         <picture>
                                             <source media="(min-width: 768px)" srcset="{{ $page->main_picture }}">

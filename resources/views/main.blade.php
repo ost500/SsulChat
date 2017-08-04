@@ -97,8 +97,10 @@
                 @foreach($pages as $num => $page)
                     @if(($num + 1) % 4 == 0)
                         <div class="row">
+
                             @endif
-                            <div class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
+                            <div onclick="location.href='{{ route('pages', ['id' => $page->id]) }}'"
+                                 class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
                                 <div class="gl-feat-items-img-wrapper">
                                     <picture>
                                         <source media="(min-width: 768px)" srcset="{{ $page->main_picture }}">
@@ -112,10 +114,10 @@
                                     <h3>
                                         <a href="{{ route('pages', ['id' => $page->id]) }}">{{ $page->title }}</a>
                                     </h3>
-                                    <div class="gl-item-location">
+                                    {{--<div class="gl-item-location">--}}
 
-                                        <span>{{ $page->description }}</span>
-                                    </div>
+                                    {{--<span>{{ $page->description }}</span>--}}
+                                    {{--</div>--}}
 
 
                                 </div>
@@ -167,7 +169,8 @@
                         <div class="row">
                         @endif
                         <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn"
+                            <div onclick="location.href='{{ route('chattings',['id'=>$channel->id]) }}'"
+                                 class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn"
                                  data-wow-duration="1s"
                                  data-wow-delay=".3s">
                                 <div class="gl-feat-items-img-wrapper">

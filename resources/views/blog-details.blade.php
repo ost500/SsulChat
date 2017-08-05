@@ -34,16 +34,17 @@
                         <!-- navbar-collapse start-->
                         <div id="nav-menu" class="navbar-collapse gl-menu-wrapper collapse" role="navigation">
                             <ul class="nav navbar-nav gl-menus">
-                                {{--<li class="active">--}}
-                                {{--<a href="{{ url('/') }}">홈</a>--}}
-                                {{--</li>--}}
-                                {{--<li>--}}
-                                {{--<a href="{{ route('pageList') }}">채팅만 보기</a>--}}
+                                <li class="active">
+                                    <a href="{{ route('chattings',['name' => $ssul->name]) }}">{{ $ssul->name }}</a>
+                                </li>
 
-                                {{--</li>--}}
-                                {{--<li>--}}
-                                {{--<a v-cloak href="{{ route('chattingList') }}">좋아요 보기</a>--}}
-                                {{--</li>--}}
+
+                                <li>
+                                    <a href="{{ route('pageList') }}">채팅만 보기</a>
+                                </li>
+                                <li>
+                                <a v-cloak href="{{ route('chattingList') }}">통계</a>
+                                </li>
                             </ul>
                         </div>
                         <!-- navbar-collapse end-->
@@ -52,7 +53,7 @@
                             @if(!Auth::check() and Auth::user()->annony)
                                 <button class="gl-login-btn" id="gl-side-menu-btn">로그인</button>
                             @endif
-                            <button class="gl-add-post-btn">참석자 @{{ viewers.length  }}</button>
+                            <button class="gl-add-post-btn">{{$ssul->name}} 참석자 @{{ viewers.length  }}</button>
                         </div>
 
                     </div>

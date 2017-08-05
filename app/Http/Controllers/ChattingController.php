@@ -29,7 +29,12 @@ class ChattingController extends Controller
     {
 
         try {
-            $ssul = Ssul::where('name', $name)->firstOrFail();
+            if (is_numeric($name)) {
+                $ssul = Ssul::findOrFail($name);
+            } else {
+                $ssul = Ssul::where('name', $name)->firstOrFail();
+            }
+
         } catch (ModelNotFoundException $e) {
             abort(404);
         }

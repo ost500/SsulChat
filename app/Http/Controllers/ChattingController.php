@@ -40,7 +40,12 @@ class ChattingController extends Controller
             }
 
         } catch (ModelNotFoundException $e) {
-            abort(404);
+            $newSsul = new Ssul();
+            $newSsul->name = $name;
+            $newSsul->picture = "/images/post-img-1.jpg";
+            $newSsul->save();
+
+            $ssul = $newSsul;
         }
 
         /** @var Collection $morphs */
@@ -139,7 +144,6 @@ class ChattingController extends Controller
 
         $maxChatId = Chatting::selectRaw('MAX(id) as maxId')->get()
             ->first()->maxId;
-
 
 
         $likes = Like::where('user_id', Auth::user()->id)

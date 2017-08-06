@@ -11,6 +11,7 @@ use App\User;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +59,14 @@ class MainController extends Controller
 
         $pages = Page::where('title', 'like', "{$question}%")->paginate(10);
 
-        return view('search', compact('chattings', 'pages', 'question'));
+        /** @var Collection $exactChatting */
+        $exactChatting = Ssul::where('name', $question)->get();
+
+        if ($exactChatting->isEmpty()) {
+            $addNew = true;
+        }
+
+        return view('search', compact('chattings', 'pages', 'question', 'addNew'));
     }
 
     public function facebookLogin()

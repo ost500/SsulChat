@@ -136,12 +136,12 @@
                                 </div>
 
                                 <div class="gl-feat-item-details">
-                            <span class="gl-item-rating">
-                              <i class="ion-android-star-outline"></i>
-                                @if(isset($channel->chat_count))
-                                    {{ $channel->chat_count }}
-                                @endif
-                            </span>
+                                    <span class="gl-item-rating">
+                                      <i class="ion-android-star-outline"></i>
+                                        @if(isset($channel->chat_count))
+                                            {{ $channel->chat_count }}
+                                        @endif
+                                    </span>
                                     <h3>
                                         <a href="{{ route('chattings',['id'=>$channel->id]) }}">{{ $channel->name }}</a>
                                     </h3>
@@ -149,7 +149,8 @@
                                 </div>
                             </div>
                             <!-- END -->
-                        @endforeach
+                    @endforeach
+
 
 
                     </div>
@@ -176,6 +177,34 @@
                         <p>채팅방 검색 결과가 없습니다</p>
                     </div>
                     <!-- END -->
+
+                @if($addNew)
+
+                    <!-- FEATURED ITEMS -->
+                        <div class="gl-featured-items col-md-2 col-sm-2 col-xs-6 appear fadeIn"
+                             data-wow-duration="1s"
+                             data-wow-delay=".3s">
+                            <div class="gl-feat-items-img-wrapper">
+
+                                <picture>
+                                    <source media="(min-width: 768px)" srcset="/images/post-img-1.jpg">
+                                    <img alt="{{ $question }}" srcset="/images/post-img-1.jpg">
+                                </picture>
+                            </div>
+
+                            <div class="gl-feat-item-details">
+                                    <span class="gl-item-rating">
+                                      <i class="ion-android-star-outline"></i>
+                                        0
+                                    </span>
+                                <h3>
+                                    <a href="{{ route('chattings',['name'=>$question]) }}">{{ $question }} 새로 만들기</a>
+                                </h3>
+
+                            </div>
+                        </div>
+                        <!-- END -->
+                    @endif
 
                 </div>
             </div>

@@ -57,7 +57,7 @@ class ChattingController extends Controller
 
 
         // 새로고침한 경우
-        if ($myPrevChat == $ssul->id) {
+        if ($myPrevChat == $ssul->id && Auth::check()) {
 
             $user = Auth::user();
 
@@ -141,6 +141,7 @@ class ChattingController extends Controller
             ->first()->maxId;
 
 
+        print_r(Auth::user());
         $likes = Like::where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(20)->sortBy('created_at')->pluck('chatting_id');
@@ -157,9 +158,7 @@ class ChattingController extends Controller
             ->with('teams')->get();
 
 
-
-
-        return view('blog-details', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam',  'maxChatId', 'ssul', 'chat_only'));
+        return view('blog-details', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'maxChatId', 'ssul', 'chat_only'));
     }
 
     public function chatting_only(Request $request, $name)
@@ -292,7 +291,6 @@ class ChattingController extends Controller
 
         $ssuls = Ssul::where('name', 'like', $ssul->name . "%")
             ->with('teams')->get();
-
 
 
         return view('chattings.chatting_only', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'maxChatId', 'ssul', 'chat_only'));

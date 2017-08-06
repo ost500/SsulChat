@@ -141,7 +141,7 @@ class ChattingController extends Controller
             ->first()->maxId;
 
 
-        print_r(Auth::user());
+
         $likes = Like::where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(20)->sortBy('created_at')->pluck('chatting_id');

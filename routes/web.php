@@ -43,6 +43,10 @@ Route::post('like', function (Request $request) {
 Route::get('/pages/', ['as' => 'pageList', 'uses' => 'MainController@pageList']);
 
 Route::get('/pages/{id}', ['as' => 'pages', 'uses' => 'MainController@page']);
+Route::get('/pages/{id}/setting', ['as' => 'pages.setting', 'uses' => 'PageController@pageSetting']);
+Route::get('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.chatting_create', 'uses' => 'PageController@chattingCreate']);
+Route::post('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.chatting.create', 'uses' => 'PageController@chattingCreatePost']);
+Route::delete('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.chatting.delete', 'uses' => 'PageController@chattingCreateDelete']);
 
 Route::get('/ssul', ['as' => 'ssul', 'uses' => 'MainController@ssul']);
 Route::get('/chattings', ['as' => 'chattingList', 'uses' => 'MainController@chattingList']);

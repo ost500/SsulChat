@@ -373,7 +373,8 @@
                 ],
                 busy: false,
                 chatIdOffset: {{ $maxChatId }} +1,
-                isFirstLoad: true
+                isFirstLoad: true,
+                chat_only: ''
 
             },
             filters: {
@@ -491,6 +492,11 @@
             },
 
             methods: {
+                chatOnly: function () {
+                    this.chat_only = "?chat_only=ture";
+                    this.chats = [];
+                    this.loadMore();
+                },
                 loadMore: function () {
 
                     console.log('called');
@@ -509,7 +515,7 @@
                     setTimeout(() => {
 
 
-                        request = '/chat_content/{{ $ssul->id }}/' + this.chatIdOffset;
+                        request = '/chat_content/{{ $ssul->id }}/' + this.chatIdOffset + this.chat_only;
 
                         console.log(request);
                         axios.get(request, {

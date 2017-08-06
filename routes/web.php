@@ -54,6 +54,8 @@ Route::get('/search', ['as' => 'search', 'uses' => 'MainController@search']);
 
 Route::get('/chattings/{name}', ['as' => 'chattings', 'uses' => 'ChattingController@chattings']);
 
+Route::get('/chattings/{name}/chat_only', ['as' => 'chatting_only', 'uses' => 'ChattingController@chatting_only']);
+
 Route::post('/teamselect', ['as' => 'team_select', 'uses' => 'ChattingController@teamSelect']);
 
 Route::get('/facebook/login/', ['as' => 'facebookLogin', 'uses' => 'MainController@facebookLogin']);

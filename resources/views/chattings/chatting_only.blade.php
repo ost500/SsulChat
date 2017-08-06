@@ -1,6 +1,6 @@
 @extends('layouts.chatting_layout')
 @section('content')
-    <style>
+<style xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
         [v-cloak] {
             display: none;
         }
@@ -39,7 +39,7 @@
                                 </li>
 
 
-                                <li v-bind:class="{'active' : chat_only}">
+                                <li class="active">
                                     <a href="{{ route('chatting_only',['name' => $ssul->name]) }}">채팅만 보기</a>
                                 </li>
                                 <li>
@@ -335,12 +335,6 @@
             },
 
             methods: {
-                chatOnly: function () {
-                    this.chat_only = "?chat_only=true";
-                    this.chats = [];
-                    $('#content-section')[0].scrollTop = $('#content-section')[0].scrollHeight;
-                    this.loadMore();
-                },
                 loadMore: function () {
 
                     console.log('called');
@@ -359,7 +353,7 @@
                     setTimeout(() => {
 
 
-                        request = '/chat_content/{{ $ssul->id }}/' + this.chatIdOffset + this.chat_only;
+                        request = '/chat_content/{{ $ssul->id }}/' + this.chatIdOffset + '/?chat_only=true';
 
                         console.log(request);
                         axios.get(request, {

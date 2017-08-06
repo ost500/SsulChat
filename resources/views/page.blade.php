@@ -27,8 +27,10 @@
                 <span class="gl-item-rating"><i class="ion-ios-star"></i>{{ $page->ssuls_count }}</span>
 
                 <div class="gl-page-head-btn-wrapper">
-                    <a data-remodal-target="modal-share" class="gl-btn gl-icon-btn gl-share-btn">Share</a>
-                    <a href="#" class="gl-btn gl-icon-btn"><i class="fa fa-heart-o"></i>Favourite</a>
+                    <a data-remodal-target="modal-share" class="gl-btn gl-icon-btn gl-share-btn">공유하기</a>
+                    @if($admin)
+                        <a href="#" class="gl-btn gl-icon-btn"><i class="fa fa-cog"></i>설정</a>
+                    @endif
                 </div>
             </div>
         </div>

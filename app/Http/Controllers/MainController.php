@@ -237,8 +237,20 @@ class MainController extends Controller
             ->take(20)
             ->get();
 
+        $admin = false;
 
-        return view('page', compact('page', 'morphs'));
+        /** @var Collection $admins */
+        $admins = $page->admin;
+
+        if (Auth::check()) {
+            if (Auth::user()->name == "ost") {
+                $admin = true;
+            } elseif (!$admins->where('name', Auth::user()->name)->isEmpty()) {
+                $admin = true;
+            }
+        }
+
+        return view('page', compact('page', 'morphs', 'admin'));
     }
 
     public function pageList()

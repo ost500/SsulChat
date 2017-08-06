@@ -56,6 +56,8 @@ Route::get('/chattings/{name}', ['as' => 'chattings', 'uses' => 'ChattingControl
 
 Route::get('/chattings/{name}/chat_only', ['as' => 'chatting_only', 'uses' => 'ChattingController@chatting_only']);
 
+Route::get('/chattings/{name}/statistics', ['as' => 'chatting_statistics','uses' => 'ChattingController@statistics']);
+
 Route::post('/teamselect', ['as' => 'team_select', 'uses' => 'ChattingController@teamSelect']);
 
 Route::get('/facebook/login/', ['as' => 'facebookLogin', 'uses' => 'MainController@facebookLogin']);
@@ -79,4 +81,7 @@ Route::get('morph_statistics', ['as' => 'morph_statistics', 'uses' => 'Statistic
 Route::get('pages/{id}/statistics', ['as' => 'pages.statistics', 'uses' => 'StatisticsController@pageStatistics']);
 
 Route::get('pages/{id}/morph_statistics', ['as' => 'pages.morph_statistics', 'uses' => 'StatisticsController@pageMorphStatistics']);
+
+Route::get('chattings/{id}/morph_statistics', ['as' => 'chattings.morph_statistics', 'uses' => 'StatisticsController@chattingsMorphStatistics']);
+Route::get('chattings/{id}/week_morph_statistics', ['as' => 'chattings.week_morph_statistics', 'uses' => 'StatisticsController@chattingsWeekMorphStatistics']);
 

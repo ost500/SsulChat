@@ -81,7 +81,7 @@
                     <div class="gl-element-wrapper gl-elements-page" style="margin-bottom: 130px;">
                         @foreach($morphs as $morph)
                             <a href="#" class="gl-tag-btn gl-design">{{ $morph->morph }}
-                                {{ $morph->morph_count }}</a>
+                                ({{ $morph->morph_count }})</a>
                         @endforeach
                     </div>
                 </div>

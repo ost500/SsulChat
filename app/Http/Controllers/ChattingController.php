@@ -36,7 +36,7 @@ class ChattingController extends Controller
             if (is_numeric($name)) {
                 $ssul = Ssul::findOrFail($name);
             } else {
-                $ssul = Ssul::where('name', $name)->firstOrFail();
+                $ssul = Ssul::where('name', 'like', $name)->firstOrFail();
             }
 
         } catch (ModelNotFoundException $e) {
@@ -157,21 +157,9 @@ class ChattingController extends Controller
             ->with('teams')->get();
 
 
-        $teamACount = $ssul->teams[0]->chattings()
-            ->join("likes", "likes.chatting_id", "chattings.id")->count();
-        $teamBCount = $ssul->teams[1]->chattings()
-            ->join("likes", "likes.chatting_id", "chattings.id")->count();
-
-        if (($teamACount + $teamBCount) != 0) {
-            $teamAPower = round($teamACount / ($teamACount + $teamBCount) * 100);
-            $teamBPower = round($teamBCount / ($teamACount + $teamBCount) * 100);
-        } else {
-            $teamAPower = 50;
-            $teamBPower = 50;
-        }
 
 
-        return view('blog-details', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'teamAPower', 'teamBPower', 'maxChatId', 'ssul', 'chat_only'));
+        return view('blog-details', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam',  'maxChatId', 'ssul', 'chat_only'));
     }
 
     public function chatting_only(Request $request, $name)
@@ -306,21 +294,8 @@ class ChattingController extends Controller
             ->with('teams')->get();
 
 
-        $teamACount = $ssul->teams[0]->chattings()
-            ->join("likes", "likes.chatting_id", "chattings.id")->count();
-        $teamBCount = $ssul->teams[1]->chattings()
-            ->join("likes", "likes.chatting_id", "chattings.id")->count();
 
-        if (($teamACount + $teamBCount) != 0) {
-            $teamAPower = round($teamACount / ($teamACount + $teamBCount) * 100);
-            $teamBPower = round($teamBCount / ($teamACount + $teamBCount) * 100);
-        } else {
-            $teamAPower = 50;
-            $teamBPower = 50;
-        }
-
-
-        return view('chattings.chatting_only', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'myTeam', 'teamAPower', 'teamBPower', 'maxChatId', 'ssul', 'chat_only'));
+        return view('chattings.chatting_only', compact('ssuls', 'chats', 'thisChannel', 'popularChats', 'likes', 'user', 'loginMembers', 'maxChatId', 'ssul', 'chat_only'));
     }
 
     public function teamSelect(Request $request)
@@ -361,6 +336,27 @@ class ChattingController extends Controller
             });
 
         return $chats;
+    }
+
+    public function statistics(Request $request, $name)
+    {
+        $chat_only = false;
+        if ($request->chat_only != null) {
+            $chat_only = true;
+        }
+
+        try {
+            if (is_numeric($name)) {
+                $ssul = Ssul::findOrFail($name);
+            } else {
+                $ssul = Ssul::where('name', $name)->firstOrFail();
+            }
+
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
+
+        return view('chattings.chatting_statistics', compact('ssul'));
     }
 
 }

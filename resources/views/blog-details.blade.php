@@ -43,7 +43,8 @@
                                     <a href="{{ route('chatting_only',['name' => $ssul->name]) }}">채팅만 보기</a>
                                 </li>
                                 <li>
-                                    <a v-cloak href="{{ route('chattingList') }}">통계</a>
+                                    <a v-cloak
+                                       href="{{ route('chatting_statistics', ['name' => $ssul->name]) }}">통계</a>
                                 </li>
                             </ul>
                         </div>
@@ -208,12 +209,12 @@
                 typingUserName: [],
                 typing: false,
                 viewers: {},
-                teamsPower: [{{ $teamAPower }},{{ 100 - $teamAPower}}],
+
                 teamsPowerWidth: [],
                 page: 1,
                 chats: [],
                 maxChatId: "{{ $maxChatId }}",
-                teamIds: [{{ $ssul->teams[0]->id }}, {{ $ssul->teams[1]->id }}],
+
                 myLike: [
                     @foreach($likes as $like)
                     {{ $like }},
@@ -230,18 +231,6 @@
 
                 console.log(this.myLike);
 
-
-                // 팀 파워 길이 조절
-                this.teamsPower = [{{ $teamAPower }}, {{ 100 - $teamAPower }}];
-                if (this.teamsPower[0] > 80) {
-                    this.teamsPowerWidth[0] = 80;
-                    this.teamsPowerWidth[1] = 20;
-                } else if (this.teamsPower[0] < 20) {
-                    this.teamsPowerWidth[0] = 20;
-                    this.teamsPowerWidth[1] = 80;
-                } else {
-                    this.teamsPowerWidth = this.teamsPower;
-                }
 
                 Echo.join('newMessage{{$ssul->id}}').listen('.testing', (e) => {
 
@@ -318,17 +307,6 @@
                             '</ul>');
                     }
 
-                    if (e.teamsPower[0] > 80) {
-                        this.teamsPowerWidth[0] = 80;
-                        this.teamsPowerWidth[1] = 20;
-                    } else if (e.teamsPower[0] < 20) {
-                        this.teamsPowerWidth[0] = 20;
-                        this.teamsPowerWidth[1] = 80;
-                    } else {
-                        this.teamsPowerWidth[0] = e.teamsPower[0];
-                        this.teamsPowerWidth[1] = e.teamsPower[1];
-                    }
-                    this.teamsPower = e.teamsPower;
                 });
 
                 $("#someone_typing").show();

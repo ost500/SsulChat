@@ -29,7 +29,8 @@
                 <div class="gl-page-head-btn-wrapper">
                     <a data-remodal-target="modal-share" class="gl-btn gl-icon-btn gl-share-btn">공유하기</a>
                     @if($admin)
-                        <a href="{{ route('pages.setting', ['id' => $page->id]) }}" class="gl-btn gl-icon-btn"><i class="fa fa-cog"></i>설정</a>
+                        <a href="{{ route('pages.setting', ['id' => $page->id]) }}" class="gl-btn gl-icon-btn"><i
+                                    class="fa fa-cog"></i>설정</a>
                     @endif
                 </div>
             </div>
@@ -165,25 +166,26 @@
 
                         <!-- REVIEWS / COMMENT DETAILS -->
                         <div class="gl-review-details appear fadeIn" data-wow-duration="1s" data-wow-delay=".3s">
-                            <h3 class="gl-content-title">5 Reviews</h3>
+                            <h3 class="gl-content-title">이번 주 베스트 챗</h3>
+                        @foreach($likeBests as $likeBest)
                             <!-- Reviews -->
-                            <div class="gl-reviews">
-                                <!-- USER IMG -->
-                                <div class="gl-user-img">
-                                    <img src="/images/author-img.jpg" alt="User" class="gl-lazy">
-                                </div>
-                                <!-- END -->
+                                <div class="gl-reviews">
+                                    <!-- USER IMG -->
+                                    <div class="gl-user-img">
+                                        <img src="{{ $likeBest->profile_img }}" alt="User" class="gl-lazy">
+                                    </div>
+                                    <!-- END -->
 
-                                <!-- TEXT -->
-                                <div class="gl-review-text">
-                                    <h3>David Neo</h3>
-                                    <p>On the other hand, we denounce with righteous indignation and dislike men who
-                                        beguiled and demoralized by the of pleasure</p>
-                                    <span class="gl-item-rating"><i class="ion-ios-star"></i>4.5</span>
+                                    <!-- TEXT -->
+                                    <div class="gl-review-text">
+                                        <h3>{{ $likeBest->name }}</h3>
+                                        <p>{{ $likeBest->content }}</p>
+                                        <span class="gl-item-rating"><i class="ion-ios-star"></i>{{ $likeBest->likeCount }}</span>
+                                    </div>
+                                    <!-- END -->
                                 </div>
                                 <!-- END -->
-                            </div>
-                            <!-- END -->
+                            @endforeach
                         </div>
                         <!-- END -->
 

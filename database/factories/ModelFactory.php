@@ -56,20 +56,20 @@ $factory->define(App\Team::class, function (Faker\Generator $faker) {
     ];
 });
 
-    $factory->define(App\Chatting::class, function (Faker\Generator $faker) {
-        $userIds = App\User::pluck('id')->toArray();
-        $channelIds = App\Channel::pluck('id')->toArray();
-        $teamId = App\Team::pluck('id')->toArray();
+$factory->define(App\Chatting::class, function (Faker\Generator $faker) {
+    $userIds = App\User::pluck('id')->toArray();
+    $channelIds = App\Channel::pluck('id')->toArray();
+    $teamId = App\Team::pluck('id')->toArray();
 
-        return [
-            'content' => $faker->sentence,
-            'ipaddress' => $faker->ipv4,
-            'user_id' => $faker->randomElement($userIds),
-            'channel_id' => $faker->randomElement($channelIds),
-            'team_id' => $faker->randomElement($teamId),
-            'created_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '-1 years'),
-            'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
-        ];
+    return [
+        'content' => $faker->sentence,
+        'ipaddress' => $faker->ipv4,
+        'user_id' => $faker->randomElement($userIds),
+        'channel_id' => $faker->randomElement($channelIds),
+        'team_id' => $faker->randomElement($teamId),
+        'created_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '-1 years'),
+        'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
+    ];
 });
 
 $factory->define(App\Like::class, function (Faker\Generator $faker) {
@@ -119,9 +119,10 @@ $factory->define(App\Page::class, function (Faker\Generator $faker) {
 
 $factory->define(App\PageSsul::class, function (Faker\Generator $faker) {
     $ssulId = App\Ssul::pluck('id')->toArray();
-
+    $pageId = App\Page::pluck('id')->toArray();
     return [
         'ssul_id' => $faker->randomElement($ssulId),
+        'page_id' => $faker->randomElement($pageId)
 
     ];
 });

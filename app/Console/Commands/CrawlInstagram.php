@@ -106,6 +106,7 @@ class CrawlInstagram extends Command
                                 $newChat->team_id = null;
                                 $newChat->ipaddress = "127.0.0.1";
                                 $newChat->picture = $node['display_src'];
+                                $newChat->social = 1;
 
                                 $content = $node['caption'];
                                 $newChat->content = $content;

@@ -106,6 +106,7 @@ class NewsCrawling extends Command
                                 $newChat->user_id = $naverNewsUser->id;
                                 $newChat->team_id = null;
                                 $newChat->ipaddress = "127.0.0.1";
+                                $newChat->social = 2;
 
                                 $content = $title . " " . $desc;
                                 $newChat->content = $content;

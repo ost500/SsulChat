@@ -16,7 +16,7 @@ class PageController extends Controller
     {
         $page = Page::with('ssuls')->withCount('ssuls')->with('ssuls')->findOrFail($id);
         /** @var Collection $admins */
-        $admins = $page->admin;
+        $admins = $page->admins;
 
 
         if (Auth::user()->name == "ost") {
@@ -35,7 +35,7 @@ class PageController extends Controller
     {
         $page = Page::with('ssuls')->withCount('ssuls')->with('ssuls')->findOrFail($id);
         /** @var Collection $admins */
-        $admins = $page->admin;
+        $admins = $page->admins;
 
 
         if (Auth::user()->name == "ost") {

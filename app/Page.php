@@ -13,6 +13,6 @@ class Page extends Model
 
     public function admins()
     {
-        return $this->hasMany(Admin::class);
+        return $this->belongsToMany(User::class, 'admins');
     }
 }

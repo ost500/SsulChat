@@ -54,8 +54,6 @@ class PageController extends Controller
         $page = Page::findOrFail($id);
 
         try {
-
-
             /** @var Ssul $newInputSsul */
             $newInputSsul = Ssul::where('name', $request->create_chatting)->firstOrFail();
         } catch (ModelNotFoundException $e) {

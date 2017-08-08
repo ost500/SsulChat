@@ -193,7 +193,7 @@
                                                 <div class="up-redq-fieldset">
                                                     @endif
                                                     <h3 class="up-redq-fieldset-label">채팅방</h3>
-                                                    <input type="text" class="up-redq-inputbox" name="create_chatting">
+                                                    <input autofocus type="text" class="up-redq-inputbox" name="create_chatting">
 
                                                     @if (session()->get('create_chatting'))
                                                         <span class="up-redq-err-field">

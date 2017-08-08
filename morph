@@ -47,11 +47,11 @@ while(1):
             cursor.execute("SELECT * FROM chattings LEFT JOIN `ssul_chattings` ON ssul_chattings.chatting_id = chattings.id  WHERE chattings.id = "+str(chatting_id))
             ssul_chattings = cursor.fetchall()
 
-            print("SELECT * FROM chattings LEFT JOIN `ssul_chattings` ON ssul_chattings.chatting_id = chattings.id  WHERE chattings.id = "+str(chatting_id))
+
             for ssuls in ssul_chattings:
-                print("2")
+                print('1')
                 ssul_id = str(ssuls[11])
-                print(ssuls)
+
 
 
                 print("id : " + str(chatting_id))
@@ -75,7 +75,7 @@ while(1):
                         sql = "INSERT INTO morphs(ssul_id, morph, created_at, updated_at) VALUES ("+ssul_id+", '"+ morphed_message +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"')"
 
                         cursor.execute(sql)
-                        db.commit()
+
 
                     query = "SELECT * FROM morphs WHERE morph='" + str(morphed_message) + "'"
 
@@ -83,13 +83,13 @@ while(1):
                     cursor.execute(query)
                     insertedMorph = cursor.fetchone()
 
-                    print(insertedMorph[0])
+                    #print(insertedMorph[0])
 
-                    sql = "INSERT INTO morph_logs(morph_id, created_at, updated_at) VALUES ('"+str(insertedMorph[0])+"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"')"
+                    sql = "INSERT INTO morph_logs(morph_id, created_at, updated_at, chatting_id) VALUES ('"+str(insertedMorph[0])+"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"', chatting_id)"
 
-                    print(sql)
+                    #print(sql)
                     cursor.execute(sql)
-                    db.commit()
+
 
 
 

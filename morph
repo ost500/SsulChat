@@ -61,41 +61,43 @@ while(1):
                 morphs = list(set(morphs))
 
                 for morphed_message in morphs:
+                    try:
+                        if len(morphed_message) <= 1:
+                            continue
 
-                    if len(morphed_message) <= 1:
-                        continue
+                        query = "SELECT * FROM morphs WHERE morph='" + str(morphed_message) + "'"
+                        alreadyExistCursor = db.cursor()
+                        alreadyExistCursor.execute(query)
 
-                    query = "SELECT * FROM morphs WHERE morph='" + str(morphed_message) + "'"
-                    alreadyExistCursor = db.cursor()
-                    alreadyExistCursor.execute(query)
+                        alreadyExist = alreadyExistCursor.fetchone()
 
-                    alreadyExist = alreadyExistCursor.fetchone()
+                        if alreadyExist == None:
+                            sql = "INSERT INTO morphs(ssul_id, morph, created_at, updated_at) VALUES ("+ssul_id+", '"+ morphed_message +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"')"
 
-                    if alreadyExist == None:
-                        sql = "INSERT INTO morphs(ssul_id, morph, created_at, updated_at) VALUES ("+ssul_id+", '"+ morphed_message +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"')"
+                            cursor.execute(sql)
 
+
+                        query = "SELECT * FROM morphs WHERE morph='" + str(morphed_message) + "'"
+
+
+                        cursor.execute(query)
+                        insertedMorph = cursor.fetchone()
+
+                        #print(insertedMorph[0])
+
+                        sql = "INSERT INTO morph_logs(morph_id, created_at, updated_at, chatting_id) VALUES ('"+str(insertedMorph[0])+"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"', "+str(chatting_id)+")"
+
+                        print(sql)
                         cursor.execute(sql)
-
-
-                    query = "SELECT * FROM morphs WHERE morph='" + str(morphed_message) + "'"
-
-
-                    cursor.execute(query)
-                    insertedMorph = cursor.fetchone()
-
-                    #print(insertedMorph[0])
-
-                    sql = "INSERT INTO morph_logs(morph_id, created_at, updated_at, chatting_id) VALUES ('"+str(insertedMorph[0])+"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") +"','"+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"', chatting_id)"
-
-                    #print(sql)
-                    cursor.execute(sql)
-
-
+                        db.commit()
+                    except Exception as inst:
+                        print(inst)
 
 
                 sql = "UPDATE chattings SET morphed = 1 WHERE id = '%d'" % (chatting_id)
                 print(sql)
                 cursor.execute(sql)
+                db.commit()
 
 
             db.commit()

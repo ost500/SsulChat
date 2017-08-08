@@ -19,7 +19,7 @@
 
     </style>
     <!-- PAGE HEADER -->
-    <section class="gl-page-header-wrapper">
+    <section class="gl-page-header-wrapper" style="background: url('{{ $page->background_picture }}')">
         <div class="container">
             <div class="row">
                 <h1>{{ $page->title }}</h1>

@@ -30393,7 +30393,7 @@ header.gl-header .gl-header-bottombar .gl-header-main-menu .container-fluid .gl-
 }
 
 .gl-page-header-wrapper {
-    background: url("../images/page-header-bg.jpg");
+
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center center;

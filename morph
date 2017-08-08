@@ -44,11 +44,12 @@ while(1):
 
 
             # ssul_id 검색
-            cursor.execute("SELECT * FROM chattings JOIN `ssul_chattings` ON ssul_chattings.chatting_id = chattings.id  WHERE chatting_id = "+str(chatting_id))
+            cursor.execute("SELECT * FROM chattings LEFT JOIN `ssul_chattings` ON ssul_chattings.chatting_id = chattings.id  WHERE chattings.id = "+str(chatting_id))
             ssul_chattings = cursor.fetchall()
 
+            print("SELECT * FROM chattings LEFT JOIN `ssul_chattings` ON ssul_chattings.chatting_id = chattings.id  WHERE chattings.id = "+str(chatting_id))
             for ssuls in ssul_chattings:
-
+                print("2")
                 ssul_id = str(ssuls[11])
                 print(ssuls)
 

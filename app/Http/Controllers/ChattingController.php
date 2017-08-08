@@ -40,12 +40,16 @@ class ChattingController extends Controller
             }
 
         } catch (ModelNotFoundException $e) {
-            $newSsul = new Ssul();
-            $newSsul->name = $name;
-            $newSsul->picture = "/images/post-img-1.jpg";
-            $newSsul->save();
+            try {
+                $ssul = Ssul::where('name', 'like', $name)->firstOrFail();
+            } catch (ModelNotFoundException $e) {
+                $newSsul = new Ssul();
+                $newSsul->name = $name;
+                $newSsul->picture = "/images/post-img-1.jpg";
+                $newSsul->save();
 
-            $ssul = $newSsul;
+                $ssul = $newSsul;
+            }
         }
 
         /** @var Collection $morphs */
@@ -176,11 +180,20 @@ class ChattingController extends Controller
             if (is_numeric($name)) {
                 $ssul = Ssul::findOrFail($name);
             } else {
-                $ssul = Ssul::where('name', $name)->firstOrFail();
+                $ssul = Ssul::where('name', 'like', $name)->firstOrFail();
             }
 
         } catch (ModelNotFoundException $e) {
-            abort(404);
+            try {
+                $ssul = Ssul::where('name', 'like', $name)->firstOrFail();
+            } catch (ModelNotFoundException $e) {
+                $newSsul = new Ssul();
+                $newSsul->name = $name;
+                $newSsul->picture = "/images/post-img-1.jpg";
+                $newSsul->save();
+
+                $ssul = $newSsul;
+            }
         }
 
         /** @var Collection $morphs */
@@ -351,11 +364,20 @@ class ChattingController extends Controller
             if (is_numeric($name)) {
                 $ssul = Ssul::findOrFail($name);
             } else {
-                $ssul = Ssul::where('name', $name)->firstOrFail();
+                $ssul = Ssul::where('name', 'like', $name)->firstOrFail();
             }
 
         } catch (ModelNotFoundException $e) {
-            abort(404);
+            try {
+                $ssul = Ssul::where('name', 'like', $name)->firstOrFail();
+            } catch (ModelNotFoundException $e) {
+                $newSsul = new Ssul();
+                $newSsul->name = $name;
+                $newSsul->picture = "/images/post-img-1.jpg";
+                $newSsul->save();
+
+                $ssul = $newSsul;
+            }
         }
 
         return view('chattings.chatting_statistics', compact('ssul'));

@@ -149,69 +149,107 @@
                             <!-- widget title -->
                             <div class="up-redq-widget-title">
                                 <i class="mic-icon-file"></i>
-                                <h3>{{$page->title}} 페이지의 채팅방 리스트</h3>
+                                <h3>{{$page->title}} 페이지의 메인사진</h3>
                                 <span class="up-redq-widget-meta--num">{{ $page->ssuls->count() }}</span>
                             </div>
                             <!-- widget title -->
 
-                            <!-- widget body -->
-                            <div class="up-redq-widget-body up-redq-listings-list">
+                            <img src="{{ $page->main_picture }}">
+                            <from>
+                                <input type="file">
+                                <input type="submit">
+                            </from>
+                            <!-- widget body end -->
+                        </div>
 
-                                <div class="up-redq-list-item">
-                                    <a href="{{ route('pages.setting.chatting_create',['id' => $page->id]) }}"><h3
-                                                class="up-redq-service-name">+ 채팅방 추가하기</h3></a>
+                        <div class="up-redq-listing-widgets up-redq-widgets">
+                            <!-- widget title -->
+                            <div class="up-redq-widget-title">
+                                <i class="mic-icon-file"></i>
+                                <h3>{{$page->title}} 페이지의 배경사진</h3>
+                                <span class="up-redq-widget-meta--num">{{ $page->ssuls->count() }}</span>
+                            </div>
+                            <!-- widget title -->
 
+                            <img src="{{ $page->background_picture }}">
+                            <form>
+                                <input type="file">
+                                <input type="submit">
+                            </form>
+                            <!-- widget body end -->
+                        </div>
 
-                                    <div class="up-redq-fav-btn">
-                                        <input type="checkbox" name="favourite" id="favourite-1">
-                                        <label for="favourite-1">
-                                            <i class="fa fa-plus"></i>
-                                        </label>
-                                    </div>
+                        <!-- ************************
+                        # Listing Widget #
+                        ************************* -->
+                        <div class="flex-lg-12 flex-md-12 flex-sm-12 flex-xs-12">
+                            <div class="up-redq-listing-widgets up-redq-widgets">
+                                <!-- widget title -->
+                                <div class="up-redq-widget-title">
+                                    <i class="mic-icon-file"></i>
+                                    <h3>{{$page->title}} 페이지의 채팅방 리스트</h3>
+                                    <span class="up-redq-widget-meta--num">{{ $page->ssuls->count() }}</span>
                                 </div>
+                                <!-- widget title -->
 
-                            @foreach($page->ssuls as $ssul)
-                                <!-- list -->
+                                <!-- widget body -->
+                                <div class="up-redq-widget-body up-redq-listings-list">
+
                                     <div class="up-redq-list-item">
-                                        <h3 class="up-redq-service-name">{{ $ssul->name }}</h3>
+                                        <a href="{{ route('pages.setting.chatting_create',['id' => $page->id]) }}"><h3
+                                                    class="up-redq-service-name">+ 채팅방 추가하기</h3></a>
 
-                                        <span class="up-redq-post-time">{{ $ssul->created_at }}</span>
+
                                         <div class="up-redq-fav-btn">
                                             <input type="checkbox" name="favourite" id="favourite-1">
-                                            <label for="favourite-1" v-on:click="deleteSsul({{ $ssul->id }})">
-                                                <i class="fa fa-minus"></i>
+                                            <label for="favourite-1">
+                                                <i class="fa fa-plus"></i>
                                             </label>
                                         </div>
                                     </div>
+
+                                @foreach($page->ssuls as $ssul)
                                     <!-- list -->
-                                @endforeach
+                                        <div class="up-redq-list-item">
+                                            <h3 class="up-redq-service-name">{{ $ssul->name }}</h3>
+
+                                            <span class="up-redq-post-time">{{ $ssul->created_at }}</span>
+                                            <div class="up-redq-fav-btn">
+                                                <input type="checkbox" name="favourite" id="favourite-1">
+                                                <label for="favourite-1" v-on:click="deleteSsul({{ $ssul->id }})">
+                                                    <i class="fa fa-minus"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- list -->
+                                    @endforeach
+                                </div>
+                                <!-- widget body end -->
                             </div>
-                            <!-- widget body end -->
                         </div>
+                        <!-- # Listing Widget End # -->
+
+
+                        {{--<!-- ************************--}}
+                        {{--# Notifier Widget #--}}
+                        {{--************************* -->--}}
+                        {{--<div class="flex-md-12 flex-sm-12 flex-xs-12">--}}
+                        {{--<div class="up-redq-notification-widgets up-redq-widgets">--}}
+                        {{--<p>Your subscription is about to expired. Please update your <a href="#">subscription</a> here--}}
+                        {{--</p>--}}
+                        {{--<button class="up-redq-notification-close-btn">--}}
+                        {{--<i class="ion-ios-close-empty"></i>--}}
+                        {{--</button>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<!-- # Notifier Widget End # -->--}}
+
+
                     </div>
-                    <!-- # Listing Widget End # -->
-
-
-                    {{--<!-- ************************--}}
-                    {{--# Notifier Widget #--}}
-                    {{--************************* -->--}}
-                    {{--<div class="flex-md-12 flex-sm-12 flex-xs-12">--}}
-                    {{--<div class="up-redq-notification-widgets up-redq-widgets">--}}
-                    {{--<p>Your subscription is about to expired. Please update your <a href="#">subscription</a> here--}}
-                    {{--</p>--}}
-                    {{--<button class="up-redq-notification-close-btn">--}}
-                    {{--<i class="ion-ios-close-empty"></i>--}}
-                    {{--</button>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- # Notifier Widget End # -->--}}
-
-
+                    <!-- MAIN CONTENT END -->
                 </div>
-                <!-- MAIN CONTENT END -->
+                <!-- CONTENTS WRAPPER END -->
             </div>
-            <!-- CONTENTS WRAPPER END -->
-        </div>
     </section>
 
     <script>

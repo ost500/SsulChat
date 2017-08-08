@@ -47,6 +47,8 @@ Route::get('/pages/{id}/setting', ['as' => 'pages.setting', 'uses' => 'PageContr
 Route::get('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.chatting_create', 'uses' => 'PageController@chattingCreate']);
 Route::post('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.chatting.create', 'uses' => 'PageController@chattingCreatePost']);
 Route::delete('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.chatting.delete', 'uses' => 'PageController@chattingCreateDelete']);
+Route::post('/pages/{id}/setting/main_picture', ['as' => 'pages.setting.main_picture', 'uses' => 'PageController@changePageMainImage']);
+Route::post('/pages/{id}/setting/background_picture', ['as' => 'pages.setting.background_picture', 'uses' => 'PageController@changePageBackgroundImage']);
 
 Route::get('/ssul', ['as' => 'ssul', 'uses' => 'MainController@ssul']);
 Route::get('/chattings', ['as' => 'chattingList', 'uses' => 'MainController@chattingList']);

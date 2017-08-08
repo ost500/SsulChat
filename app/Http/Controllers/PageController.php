@@ -19,9 +19,9 @@ class PageController extends Controller
         $admins = $page->admins;
 
 
-        if (Auth::user()->name == "ost") {
+        if (Auth::check() && Auth::user()->name == "ost") {
             $admin = true;
-        } elseif (!$admins->where('name', Auth::user()->name)->isEmpty()) {
+        } elseif (Auth::check() && !$admins->where('name', Auth::user()->name)->isEmpty()) {
             $admin = true;
         } else {
             abort(404);
@@ -58,7 +58,7 @@ class PageController extends Controller
 
             /** @var Ssul $newInputSsul */
             $newInputSsul = Ssul::where('name', $request->create_chatting)->firstOrFail();
-        } catch (ModelNotFoundException $e){
+        } catch (ModelNotFoundException $e) {
             $newSsul = new Ssul();
             $newSsul->name = $request->create_chatting;
             $newSsul->picture = "/images/gallery_img-4.jpg";
@@ -85,5 +85,51 @@ class PageController extends Controller
     {
 
         PageSsul::where('page_id', $id)->where('ssul_id', $request->ssul_id)->delete();
+    }
+
+    public function changePageMainImage(Request $request, $id)
+    {
+        $page = Page::findOrFail($id);
+
+
+        if ($request->hasFile('picture')) {
+            // pictureFile = file
+            $pictureFile = $request->file('picture');
+            // name
+            $filename = $pictureFile->getClientOriginalName();
+            // path
+            $destinationPath = '/picture/page_main/';
+            // save the name with path
+            $page->main_picture = $destinationPath . $page->id . '_' . $filename;
+            // upload
+            $pictureFile->move(public_path() . $destinationPath, $page->main_picture);
+
+        }
+        $page->save();
+
+        return redirect()->back();
+    }
+
+    public function changePageBackgroundImage(Request $request, $id)
+    {
+        $page = Page::findOrFail($id);
+
+
+        if ($request->hasFile('picture')) {
+            // pictureFile = file
+            $pictureFile = $request->file('picture');
+            // name
+            $filename = $pictureFile->getClientOriginalName();
+            // path
+            $destinationPath = '/picture/page_background/';
+            // save the name with path
+            $page->background_picture = $destinationPath . $page->id . '_' . $filename;
+            // upload
+            $pictureFile->move(public_path() .$destinationPath, $page->background_picture);
+
+        }
+        $page->save();
+
+        return redirect()->back();
     }
 }

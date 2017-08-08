@@ -109,7 +109,7 @@
                         <li class="{{ (Request::is('/')) ? "active": "" }}">
                             <a href="{{ url('/') }}">홈</a>
                         </li>
-                        <li class="{{ (Request::is('pages')) ? "active": "" }}">
+                        <li class="{{ (Request::is('pages')) || (Request::is('pages/*')) ? "active": "" }}">
                             <a href="{{ route('pageList') }}">페이지</a>
 
                         </li>
@@ -150,7 +150,7 @@
 <!-- HEADER END -->
 
 @if(Auth::check())
-    <section class="gl-fake-div"></section>
+    <section class="gl-fake-div" style="height: 70px;"></section>
 @endif
 
 <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>

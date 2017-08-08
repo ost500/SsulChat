@@ -155,10 +155,12 @@
                             <!-- widget title -->
 
                             <img src="{{ $page->main_picture }}">
-                            <from>
-                                <input type="file">
-                                <input type="submit">
-                            </from>
+                            <form action="{{ route('pages.setting.main_picture', ['id' => $page->id]) }}" method="post"
+                                  enctype="multipart/form-data">
+                                {!! csrf_field() !!}
+                                <input name="picture" type="file">
+                                <button type="submit">제출</button>
+                            </form>
                             <!-- widget body end -->
                         </div>
 
@@ -172,9 +174,12 @@
                             <!-- widget title -->
 
                             <img src="{{ $page->background_picture }}">
-                            <form>
-                                <input type="file">
-                                <input type="submit">
+                            <form action="{{ route('pages.setting.background_picture', ['id' => $page->id]) }}"
+                                  method="post"
+                                  enctype="multipart/form-data">
+                                {!! csrf_field() !!}
+                                <input name="picture" type="file">
+                                <button type="submit">제출</button>
                             </form>
                             <!-- widget body end -->
                         </div>

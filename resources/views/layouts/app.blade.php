@@ -150,7 +150,7 @@
 <!-- HEADER END -->
 
 @if(Auth::check())
-    <section class="gl-fake-div" style="height: 70px;"></section>
+    <section class="gl-fake-div"></section>
 @endif
 
 <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>

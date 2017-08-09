@@ -38,30 +38,6 @@
     </section>
     <!-- PAGE HEADER -->
 
-    <!-- TAB NAV & META -->
-    <section class="gl-tab-profile-meta-section">
-        <div class="container">
-            <div class="row">
-                <div class="gl-tab-nav-wrapper col-md-8 col-sm-8 col-xs-12">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab"
-                                                                  data-toggle="tab">Overview</a></li>
-                        <li role="presentation"><a href="#similar-listing" aria-controls="similar-listing" role="tab"
-                                                   data-toggle="tab">Similar Listing</a></li>
-                    </ul>
-                </div>
-
-                <div class="gl-profile-meta-wrapper col-md-4 col-sm-4 col-xs-12">
-                    <ul>
-                        {{--<li><i class="fa fa-link"></i>domain.com</li>--}}
-                        {{--<li><i class="fa fa-phone"></i>096 535 11</li>--}}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- TAB NAV & META END -->
-
 
 
 
@@ -83,8 +59,7 @@
                     <h3>연관 검색어</h3>
                     <div class="gl-element-wrapper gl-elements-page" style="margin-bottom: 130px;">
                         @foreach($morphs as $morph)
-                            <a href="#" class="gl-tag-btn gl-design">{{ $morph->morph }}
-                                ({{ $morph->morph_count }})</a>
+                            <a href="#" class="gl-tag-btn gl-design">{{ $morph->morph }} ({{ $morph->morph_count }})</a>
                         @endforeach
                     </div>
                 </div>
@@ -178,9 +153,11 @@
 
                                     <!-- TEXT -->
                                     <div class="gl-review-text">
+                                        {{--<img src="{{ $likeBest->picture }}">--}}
                                         <h3>{{ $likeBest->name }}</h3>
                                         <p>{{ $likeBest->content }}</p>
-                                        <span class="gl-item-rating"><i class="ion-ios-star"></i>{{ $likeBest->likeCount }}</span>
+                                        <span class="gl-item-rating"><i
+                                                    class="ion-ios-star"></i>{{ $likeBest->likeCount }}</span>
                                     </div>
                                     <!-- END -->
                                 </div>
@@ -192,193 +169,6 @@
                     </div>
                     <!-- GALLERY TAB END -->
 
-                    <!-- PROTFOLIO TAB -->
-                    <div role="tabpanel" class="tab-pane fade" id="similar-listing">
-                        <!-- WRAPPER -->
-                        <div class="gl-similar-listing-wrapper">
-
-                            <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                <div class="gl-feat-items-img-wrapper">
-                                    <img src="/images/featured-listing-1.jpg" alt="Featured Listing" class="gl-lazy">
-                                </div>
-
-                                <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-
-                                    <h3>
-                                        <a href="#">Office Rent</a>
-                                    </h3>
-                                    <div class="gl-item-location">
-                                        <i class="ion-ios-location-outline"></i>
-                                        <span>Road 3, West Portland, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END -->
-
-                            <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                <div class="gl-feat-items-img-wrapper">
-                                    <img src="/images/featured-listing-2.jpg" alt="Featured Listing" class="gl-lazy">
-                                </div>
-
-                                <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-
-                                    <h3>
-                                        <a href="#">Lake Heaven</a>
-                                    </h3>
-                                    <div class="gl-item-location">
-                                        <i class="ion-ios-location-outline"></i>
-                                        <span>Road 3, West Portland, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END -->
-
-                            <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                <div class="gl-feat-items-img-wrapper">
-                                    <img src="/images/featured-listing-3.jpg" alt="Featured Listing" class="gl-lazy">
-                                </div>
-
-                                <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-                                    <h3>
-                                        <a href="#">Cafe Hapus</a>
-                                    </h3>
-                                    <div class="gl-item-location">
-                                        <i class="ion-ios-location-outline"></i>
-                                        <span>Road 3, West Portland, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END -->
-
-                            <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                <div class="gl-feat-items-img-wrapper">
-                                    <img src="/images/business-img-1.jpg" alt="Featured Listing" class="gl-lazy">
-                                </div>
-
-                                <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-                                    <h3>
-                                        <a href="#">Lake Heaven</a>
-                                    </h3>
-                                    <div class="gl-item-location">
-                                        <i class="ion-ios-location-outline"></i>
-                                        <span>Road 3, West Portland, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END -->
-
-                            <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                <div class="gl-feat-items-img-wrapper">
-                                    <img src="/images/business-img-4.jpg" alt="Featured Listing" class="gl-lazy">
-                                </div>
-
-                                <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-                                    <h3>
-                                        <a href="#">Office Rent</a>
-                                    </h3>
-                                    <div class="gl-item-location">
-                                        <i class="ion-ios-location-outline"></i>
-                                        <span>Road 3, West Portland, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END -->
-
-                            <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                <div class="gl-feat-items-img-wrapper">
-                                    <img src="/images/business-img-10.jpg" alt="Featured Listing" class="gl-lazy">
-                                </div>
-
-                                <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-                                    <h3>
-                                        <a href="#">Cafe Hapus</a>
-                                    </h3>
-                                    <div class="gl-item-location">
-                                        <i class="ion-ios-location-outline"></i>
-                                        <span>Road 3, West Portland, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END -->
-
-                            <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                <div class="gl-feat-items-img-wrapper">
-                                    <img src="/images/business-img-3.jpg" alt="Featured Listing" class="gl-lazy">
-                                </div>
-
-                                <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-                                    <h3>
-                                        <a href="#">Lake Heaven</a>
-                                    </h3>
-                                    <div class="gl-item-location">
-                                        <i class="ion-ios-location-outline"></i>
-                                        <span>Road 3, West Portland, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END -->
-
-                            <!-- FEATURED ITEMS -->
-                            <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                <div class="gl-feat-items-img-wrapper">
-                                    <img src="/images/business-img-7.jpg" alt="Featured Listing" class="gl-lazy">
-                                </div>
-
-                                <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-                                    <h3>
-                                        <a href="#">Office Rent</a>
-                                    </h3>
-                                    <div class="gl-item-location">
-                                        <i class="ion-ios-location-outline"></i>
-                                        <span>Road 3, West Portland, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END -->
-
-                        </div>
-                        <!-- END -->
-                    </div>
-                    <!-- PROTFOLIO TAB END -->
                 </div>
                 <!-- PAGE CONTENT DETAILS END -->
 

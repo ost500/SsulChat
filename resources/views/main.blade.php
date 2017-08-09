@@ -73,11 +73,11 @@
                     </div>
 
                 </div>
-                <!-- MORE BTN -->
-                <div class="gl-more-btn-wrapper">
-                    <a href="{{ route('pageList') }}" class="gl-more-btn gl-btn">더보기</a>
-                </div>
-                <!-- END -->
+                {{--<!-- MORE BTN -->--}}
+                {{--<div class="gl-more-btn-wrapper">--}}
+                    {{--<a href="{{ route('pageList') }}" class="gl-more-btn gl-btn">더보기</a>--}}
+                {{--</div>--}}
+                {{--<!-- END -->--}}
 
             </div>
 

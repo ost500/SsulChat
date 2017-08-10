@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\Chatting;
+use App\Jobs\FetchNaverImage;
 use App\Like;
 use App\Morph;
 use App\Ssul;
@@ -47,6 +48,8 @@ class ChattingController extends Controller
                 $newSsul->name = $name;
                 $newSsul->picture = "/images/post-img-1.jpg";
                 $newSsul->save();
+
+                dispatch(new FetchNaverImage($newSsul->id));
 
                 $ssul = $newSsul;
             }
@@ -191,6 +194,8 @@ class ChattingController extends Controller
                 $newSsul->name = $name;
                 $newSsul->picture = "/images/post-img-1.jpg";
                 $newSsul->save();
+
+                dispatch(new FetchNaverImage($newSsul->id));
 
                 $ssul = $newSsul;
             }
@@ -375,6 +380,8 @@ class ChattingController extends Controller
                 $newSsul->name = $name;
                 $newSsul->picture = "/images/post-img-1.jpg";
                 $newSsul->save();
+
+                dispatch(new FetchNaverImage($newSsul->id));
 
                 $ssul = $newSsul;
             }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\FetchNaverImage;
 use App\Page;
 use App\PageSsul;
 use App\Ssul;
@@ -61,6 +62,9 @@ class PageController extends Controller
             $newSsul->name = $request->create_chatting;
             $newSsul->picture = "/images/gallery_img-4.jpg";
             $newSsul->save();
+
+            dispatch(new FetchNaverImage($newSsul->id));
+
             $newInputSsul = $newSsul;
         }
 

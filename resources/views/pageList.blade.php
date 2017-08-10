@@ -50,8 +50,8 @@
                                         class="gl-featured-items gl-featured-items-alt col-md-3 col-sm-3 col-xs-6">
                                     <div class="gl-feat-items-img-wrapper">
                                         <picture>
-                                            <source media="(min-width: 768px)" srcset="{{ $page->main_picture }}">
-                                            <img alt="Category Image" srcset="{{ $page->main_picture }}">
+                                            <source media="(min-width: 768px)" src="{{ $page->main_picture }}">
+                                            <img alt="Category Image" src="{{ $page->main_picture }}">
                                         </picture>
 
 

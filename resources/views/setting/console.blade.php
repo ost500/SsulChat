@@ -145,6 +145,41 @@
                     # Listing Widget #
                     ************************* -->
                     <div class="flex-lg-12 flex-md-12 flex-sm-12 flex-xs-12">
+                        <div class="up-redq-profile-widgets up-redq-widgets">
+
+
+                            <form action="{{ route('pages.setting.fb_crawl',['id' => $page->id]) }}" method="post">
+                                {!! csrf_field() !!}
+                                <div class="up-redq-fieldset" style="width:100%; text-align:center">
+                                    <h3 class="up-redq-fieldset-label">페이지 아이디</h3>
+                                    <input name="fb_page_id" type="text" class="up-redq-inputbox"
+                                           value="{{ $page->fb_page_id }}">
+                                </div>
+
+
+                                <button type="submit" class="up-redq-follow-btn">페이스북 페이지 게시물 가져오기</button>
+
+                            </form>
+
+                            <div class="up-redq-user-stats">
+                                <ul>
+
+
+                                    <li class="up-redq-total-post">
+                                        <i class="mic-icon-file"></i>
+                                        <span>{{ $page->page_posts_count }}</span>
+                                    </li>
+                                    {{--<li class="up-redq-total-favourite">--}}
+                                    {{--<i class="mic-icon-heart"></i>--}}
+                                    {{--<span>350</span>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="up-redq-total-friends">--}}
+                                    {{--<i class="mic-icon-user"></i>--}}
+                                    {{--<span>350</span>--}}
+                                    {{--</li>--}}
+                                </ul>
+                            </div>
+                        </div>
                         <div class="up-redq-listing-widgets up-redq-widgets">
                             <!-- widget title -->
                             <div class="up-redq-widget-title">

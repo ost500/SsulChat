@@ -44,6 +44,7 @@ Route::get('/pages/', ['as' => 'pageList', 'uses' => 'MainController@pageList'])
 
 Route::get('/pages/{id}', ['as' => 'pages', 'uses' => 'MainController@page']);
 Route::get('/pages/{id}/setting', ['as' => 'pages.setting', 'uses' => 'PageController@pageSetting']);
+Route::post('/pages/{id}/setting/fb_crawl', ['as' => 'pages.setting.fb_crawl', 'uses' => 'PageController@fbCrawl']);
 Route::get('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.chatting_create', 'uses' => 'PageController@chattingCreate']);
 Route::post('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.chatting.create', 'uses' => 'PageController@chattingCreatePost']);
 Route::delete('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.chatting.delete', 'uses' => 'PageController@chattingCreateDelete']);
@@ -91,3 +92,6 @@ Route::get('pages/{id}/morph_statistics', ['as' => 'pages.morph_statistics', 'us
 Route::get('chattings/{id}/morph_statistics', ['as' => 'chattings.morph_statistics', 'uses' => 'StatisticsController@chattingsMorphStatistics']);
 Route::get('chattings/{id}/week_morph_statistics', ['as' => 'chattings.week_morph_statistics', 'uses' => 'StatisticsController@chattingsWeekMorphStatistics']);
 
+
+
+Route::get('facebooktest', 'HomeController@fbtest');

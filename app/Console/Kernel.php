@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CrawlFacebookPage;
 use App\Console\Commands\CrawlGoogleTrends;
 use App\Console\Commands\CrawlInstagram;
 use App\Console\Commands\MorphCommand;
@@ -20,25 +21,26 @@ class Kernel extends ConsoleKernel
         NewsCrawling::class,
         CrawlGoogleTrends::class,
         CrawlInstagram::class,
-        MorphCommand::class
+        MorphCommand::class,
+        CrawlFacebookPage::class
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('crawl:googleTrends')
-                  ->hourly();
+        $schedule->command('crawl:googleTrends')
+            ->hourly();
 
-         $schedule->command('crawl:naverNews')
-                  ->hourly();
+        $schedule->command('crawl:naverNews')
+            ->hourly();
 
-         $schedule->command('crawl:instagram')
-                  ->hourly();
+        $schedule->command('crawl:instagram')
+            ->hourly();
 
 
     }

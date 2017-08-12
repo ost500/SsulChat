@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\FetchFacebookPagePosts;
 use App\Jobs\FetchNaverImage;
 use App\Page;
 use App\PageSsul;
@@ -15,7 +16,7 @@ class PageController extends Controller
 {
     public function pageSetting($id)
     {
-        $page = Page::with('ssuls')->withCount('ssuls')->with('ssuls')->findOrFail($id);
+        $page = Page::with('ssuls')->withCount('ssuls')->with('ssuls')->withCount('pagePosts')->findOrFail($id);
         /** @var Collection $admins */
         $admins = $page->admins;
 
@@ -27,7 +28,7 @@ class PageController extends Controller
         } else {
             abort(404);
         }
-
+//return response()->json($page);
 
         return view('setting.console', compact('page', 'admin'));
     }
@@ -127,10 +128,23 @@ class PageController extends Controller
             // save the name with path
             $page->background_picture = $destinationPath . $page->id . '_' . $filename;
             // upload
-            $pictureFile->move(public_path() .$destinationPath, $page->background_picture);
+            $pictureFile->move(public_path() . $destinationPath, $page->background_picture);
 
         }
         $page->save();
+
+        return redirect()->back();
+    }
+
+    public function fbCrawl(Request $request, $id)
+    {
+        $page = Page::findOrFail($id);
+
+        $fbPageId = $request->fb_page_id;
+
+        $page->fb_page_id = $fbPageId;
+
+        dispatch(new FetchFacebookPagePosts($id));
 
         return redirect()->back();
     }

@@ -15,4 +15,9 @@ class Page extends Model
     {
         return $this->belongsToMany(User::class, 'admins');
     }
+
+    public function pagePosts()
+    {
+        return $this->hasMany(PagePost::class);
+    }
 }

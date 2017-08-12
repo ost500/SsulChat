@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        
+
     }
 
     /**
@@ -32,5 +32,12 @@ class HomeController extends Controller
 
 
         //return view('chat');
+    }
+
+    public function fbtest()
+    {
+
+
+        return view('fbtest');
     }
 }

@@ -34,7 +34,7 @@
 
             <!-- SECTION HEADINGS -->
             <div class="gl-section-headings">
-                <h1>위키 채팅</h1>
+                <h1>배틀채팅 채팅방</h1>
                 <p>오늘의 핫이슈</p>
             </div>
             <!-- END -->

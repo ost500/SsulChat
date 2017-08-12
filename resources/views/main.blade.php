@@ -23,8 +23,8 @@
             <div class="row">
                 <div class="gl-elements-content-wrapper">
                     <div id="typed-strings">
-                        <p>모두의 <span class="gl-color-text">WIKICHAT</span></p>
-                        <p>내가 만드는 <span class="gl-color-text">빅데이터</span></p>
+                        <p>모두의 <span class="gl-color-text">배틀채팅</span></p>
+                        <p>내가 만드는<span class="gl-color-text">빅데이터</span></p>
                         {{--<p>Find The <span class="gl-color-text">Best Places</span> In Your City</p>--}}
                     </div>
                     <h2 id="gl-slogan" class="gl-hero-text-heading"></h2>
@@ -57,7 +57,7 @@
 
             <!-- SECTION HEADINGS -->
             <div class="gl-section-headings">
-                <h1>오늘의 위키챗</h1>
+                <h1>오늘의 배틀채팅</h1>
                 <p>#빅데이터</p>
             </div>
             <!-- END -->
@@ -87,7 +87,7 @@
 
             <!-- SECTION HEADINGS -->
             <div class="gl-section-headings">
-                <h1>위키 페이지</h1>
+                <h1>배틀채팅 페이지</h1>
                 <p>오늘의 페이지</p>
             </div>
             <!-- END -->
@@ -156,7 +156,7 @@
 
             <!-- SECTION HEADINGS -->
             <div class="gl-section-headings">
-                <h1>위키 채팅</h1>
+                <h1>배틀채팅 채팅방</h1>
                 <p>오늘의 핫이슈</p>
             </div>
             <!-- END -->

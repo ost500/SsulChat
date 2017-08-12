@@ -35,7 +35,7 @@
             <div class="row">
                 <!-- SECTION HEADINGS -->
                 <div class="gl-section-headings">
-                    <h1>위키 페이지</h1>
+                    <h1>배틀채팅 페이지</h1>
                     <p>오늘의 페이지</p>
                 </div>
                 <!-- END -->

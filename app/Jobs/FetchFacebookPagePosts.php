@@ -42,7 +42,7 @@ class FetchFacebookPagePosts implements ShouldQueue
         $client = new Client([
             'base_uri' => 'https://graph.facebook.com/',
         ]);
-        $response = $client->get('/1527339707336364/posts?fields=attachments,message,full_picture&access_token=427264620986956|99892342ae43a174020519c255dac6f7', [
+        $response = $client->get($this->page->fb_page_id . '/posts?fields=attachments,message,full_picture&access_token=427264620986956|99892342ae43a174020519c255dac6f7', [
 
         ]);
         $body = \GuzzleHttp\json_decode($response->getBody()->getContents());

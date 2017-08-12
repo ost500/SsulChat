@@ -1466,7 +1466,7 @@ pre code {
 
 @media (min-width: 1200px) {
     .container {
-        width: 1170px;
+        width: 1000px;
     }
 }
 
@@ -24093,7 +24093,7 @@ a.gl-tag-btn:last-child {
 
 .gl-featured-items .gl-feat-items-img-wrapper {
     width: 100%;
-    height: 175px;
+    height: 145px;
     display: block;
     overflow: hidden;
     position: relative;
@@ -31780,7 +31780,7 @@ body.gl-blog-page .gl-page-content-section .gl-blog-details-wrapper {
 
 .gl-featured-image-wrapper {
     width: 100%;
-    height: 600px;
+    height: 300px;
     position: relative;
     overflow: hidden;
 }

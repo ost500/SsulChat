@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\FetchFacebookPagePosts;
 use App\Jobs\FetchNaverImage;
 use App\Page;
+use App\PagePost;
 use App\PageSsul;
 use App\Ssul;
 use Illuminate\Database\Eloquent\Collection;
@@ -147,5 +148,12 @@ class PageController extends Controller
         dispatch(new FetchFacebookPagePosts($id));
 
         return redirect()->back();
+    }
+
+    public function pagePosts($id)
+    {
+        $pagePost = PagePost::with('pagePostPictures')->with('page')->findOrFail($id);
+
+        return view('pagePost', compact('pagePost'));
     }
 }

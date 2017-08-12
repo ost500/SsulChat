@@ -89,51 +89,28 @@
                             <ul class="gl-gallery">
 
 
+                            @foreach($page->pagePosts as $post)
                                 <!-- FEATURED ITEMS -->
-                                <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                    <div class="gl-feat-items-img-wrapper">
-                                        <img src="/images/featured-listing-3.jpg" alt="Featured Listing"
-                                             class="gl-lazy">
-                                    </div>
+                                    <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
+                                        <div class="gl-feat-items-img-wrapper">
+                                            <img src="{{ $post->main_photo }}" alt="Featured Listing"
+                                                 class="gl-lazy">
+                                        </div>
 
-                                    <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-                                        <h3>
-                                            <a href="#">Cafe Hapus</a>
-                                        </h3>
-                                        <div class="gl-item-location">
-                                            <i class="ion-ios-location-outline"></i>
-                                            <span>Road 3, West Portland, USA</span>
+                                        <div class="gl-feat-item-details">
+                                            {{--<span class="gl-item-rating">--}}
+                                            {{--<i class="ion-android-star-outline"></i>--}}
+                                            {{--4.5--}}
+                                            {{--</span>--}}
+                                            <h3>
+                                                <a href="{{ route('pages.posts',['id'=>$post->id]) }}">{{ $post->message }}</a>
+                                            </h3>
+
                                         </div>
                                     </div>
-                                </div>
-                                <!-- END -->
+                                    <!-- END -->
+                                @endforeach
 
-                                <!-- FEATURED ITEMS -->
-                                <div class="gl-featured-items col-md-6 col-sm-6 col-xs-12">
-                                    <div class="gl-feat-items-img-wrapper">
-                                        <img src="/images/featured-listing-3.jpg" alt="Featured Listing"
-                                             class="gl-lazy">
-                                    </div>
-
-                                    <div class="gl-feat-item-details">
-                    <span class="gl-item-rating">
-                      <i class="ion-android-star-outline"></i>
-                      4.5
-                    </span>
-                                        <h3>
-                                            <a href="#">Cafe Hapus</a>
-                                        </h3>
-                                        <div class="gl-item-location">
-                                            <i class="ion-ios-location-outline"></i>
-                                            <span>Road 3, West Portland, USA</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END -->
                             </ul>
                         </div>
                         <!-- END -->

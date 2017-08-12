@@ -224,7 +224,7 @@ class MainController extends Controller
 
     public function page($id)
     {
-        $page = Page::with('ssuls')->withCount('ssuls')->findOrFail($id);
+        $page = Page::with('ssuls')->withCount('ssuls')->with('pagePosts')->findOrFail($id);
 
         $morphs = Page::join('page_ssuls', 'page_ssuls.page_id', '=', 'pages.id')
             ->join('ssuls', 'ssuls.id', '=', 'page_ssuls.ssul_id')

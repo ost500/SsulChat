@@ -51,6 +51,8 @@ Route::delete('/pages/{id}/setting/chatting_create', ['as' => 'pages.setting.cha
 Route::post('/pages/{id}/setting/main_picture', ['as' => 'pages.setting.main_picture', 'uses' => 'PageController@changePageMainImage']);
 Route::post('/pages/{id}/setting/background_picture', ['as' => 'pages.setting.background_picture', 'uses' => 'PageController@changePageBackgroundImage']);
 
+Route::get('page_posts/{id}', ['as' => 'pages.posts', 'uses' => 'PageController@pagePosts']);
+
 Route::get('/ssul', ['as' => 'ssul', 'uses' => 'MainController@ssul']);
 Route::get('/chattings', ['as' => 'chattingList', 'uses' => 'MainController@chattingList']);
 
@@ -63,7 +65,7 @@ Route::get('/chattings/{name}', ['as' => 'chattings', 'uses' => 'ChattingControl
 
 Route::get('/chattings/{name}/chat_only', ['as' => 'chatting_only', 'uses' => 'ChattingController@chatting_only']);
 
-Route::get('/chattings/{name}/statistics', ['as' => 'chatting_statistics','uses' => 'ChattingController@statistics']);
+Route::get('/chattings/{name}/statistics', ['as' => 'chatting_statistics', 'uses' => 'ChattingController@statistics']);
 
 Route::post('/teamselect', ['as' => 'team_select', 'uses' => 'ChattingController@teamSelect']);
 
@@ -91,7 +93,6 @@ Route::get('pages/{id}/morph_statistics', ['as' => 'pages.morph_statistics', 'us
 
 Route::get('chattings/{id}/morph_statistics', ['as' => 'chattings.morph_statistics', 'uses' => 'StatisticsController@chattingsMorphStatistics']);
 Route::get('chattings/{id}/week_morph_statistics', ['as' => 'chattings.week_morph_statistics', 'uses' => 'StatisticsController@chattingsWeekMorphStatistics']);
-
 
 
 Route::get('facebooktest', 'HomeController@fbtest');

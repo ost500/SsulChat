@@ -34,7 +34,7 @@ class StatisticsController extends Controller
 
         $pageFirst = $page->first();
 
-        if ($dt->dayOfWeek >= $pageFirst) {
+        if ($dt->dayOfWeek >= $pageFirst->week_cycle) {
             $weekGap = $dt->dayOfWeek - $pageFirst->week_cycle;
         } else {
             $weekGap = 7 - ($pageFirst->week_cycle - $dt->dayOfWeek);

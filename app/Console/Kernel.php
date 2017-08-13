@@ -44,6 +44,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('crawl:instagram')
             ->hourly();
 
+        $schedule->command('crawl:youtube')
+            ->hourly();
+
 
     }
 

@@ -7,39 +7,20 @@ use App\Page;
 use App\Ssul;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class StatisticsController extends Controller
 {
     public function statistics()
     {
-        $dt = new Carbon();
-
-        $statics = Ssul::rightJoin('ssul_chattings', function ($q) use ($dt) {
-            $q->on('ssuls.id', '=', 'ssul_chattings.ssul_id');
-            $q->where('ssul_chattings.created_at', '>', $dt->subDay()->format('Y-m-d H:i:s'));
-        })
-            ->groupBy('ssuls.id')
-            ->selectRaw('count(ssuls.id) as countSsul, ssuls.*')
-            ->orderBy('countSsul', 'desc')
-            ->limit(8)
-            ->get();
+        $statics = Cache::get('cache:statistics');
         return response()->json($statics);
     }
 
     public function morphStatistics()
     {
-        $dt = new Carbon();
 
-        $morphStatics = Morph::rightJoin('morph_logs', function ($q) use ($dt) {
-            $q->on('morph_logs.morph_id', '=', 'morphs.id');
-            $q->where('morph_logs.created_at', '>', $dt->subDay()->format('Y-m-d H:i:s'));
-        })
-            ->groupBy('morphs.id')
-            ->selectRaw('count(morphs.id) as countMorphs, morphs.*')
-            ->orderBy('countMorphs', 'desc')
-            ->limit(8)
-            ->get();
-
+        $morphStatics = Cache::get('cache:morph');
 
         return response()->json($morphStatics);
 

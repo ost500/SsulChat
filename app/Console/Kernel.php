@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CacheMorph;
+use App\Console\Commands\CacheQueries;
 use App\Console\Commands\CrawlFacebookPage;
 use App\Console\Commands\CrawlGoogleTrends;
 use App\Console\Commands\CrawlInstagram;
@@ -24,7 +26,9 @@ class Kernel extends ConsoleKernel
         CrawlInstagram::class,
         MorphCommand::class,
         CrawlFacebookPage::class,
-        CrawlYoutube::class
+        CrawlYoutube::class,
+        CacheQueries::class,
+        CacheMorph::class
     ];
 
     /**
@@ -47,7 +51,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('crawl:youtube')
             ->hourly();
 
+        $schedule->command('cache:statistics')
+            ->everyMinute();
 
+        $schedule->command('cache:morph')
+            ->everyMinute();
     }
 
     /**

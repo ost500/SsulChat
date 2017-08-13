@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\CrawlFacebookPage;
 use App\Console\Commands\CrawlGoogleTrends;
 use App\Console\Commands\CrawlInstagram;
+use App\Console\Commands\CrawlYoutube;
 use App\Console\Commands\MorphCommand;
 use App\Console\Commands\NewsCrawling;
 use Illuminate\Console\Scheduling\Schedule;
@@ -22,7 +23,8 @@ class Kernel extends ConsoleKernel
         CrawlGoogleTrends::class,
         CrawlInstagram::class,
         MorphCommand::class,
-        CrawlFacebookPage::class
+        CrawlFacebookPage::class,
+        CrawlYoutube::class
     ];
 
     /**

@@ -105,10 +105,16 @@
 
                                                 </div>
                                                 <p v-if="chat.picture != '' && chat.picture != null">
-                                                    <img style="width:200px;" v-bind:src="chat.picture">
+                                                    <a v-bind:href="chat.url">
+                                                        <img style="width:200px;" v-bind:src="chat.picture">
+                                                    </a>
                                                 </p>
 
-                                                <p v-cloak class="chat_text"> @{{chat.content}}
+
+                                                <p v-cloak class="chat_text">
+                                                    @{{chat.content}}
+
+
                                                     <button style="border:0;background:transparent;margin-left:1%"
                                                             v-on:click="like(chat.id)">
 
@@ -202,6 +208,22 @@
     <script src="{{ asset('js/bootstrap.js') }}"></script>
 
     <script>
+
+
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        function onYouTubeIframeAPIReady() {
+
+            for (var i = 0; i < chatting_app.chats.length; i++) {
+                if (chatting_app.chats[i].social === 2) {
+                    console.log("youtube generated" + chatting_app.chats[i].id);
+                    var curplayer = chatting_app.createPlayer(chatting_app.chats[i]);
+                }
+            }
+        }
 
         var chatting_app = new Vue({
             el: '#chatting',
@@ -310,15 +332,28 @@
                 });
 
                 $("#someone_typing").show();
+
+
             },
 
             methods: {
+
+
+                createPlayer: function (chat) {
+                    return new YT.Player("youtube_" + chat.id, {
+                        height: 400,
+                        width: 600,
+                        videoId: chat.picture
+                    });
+                },
+
                 chatOnly: function () {
                     this.chat_only = "?chat_only=true";
                     this.chats = [];
                     $('#content-section')[0].scrollTop = $('#content-section')[0].scrollHeight;
                     this.loadMore();
-                },
+                }
+                ,
                 loadMore: function () {
 
                     console.log('called');
@@ -351,6 +386,8 @@
 
                                 console.log(this.isFirstLoad);
                                 console.log(this.chats);
+
+
                                 if (response.data.length > 0) {
                                     console.log("first???????");
                                     console.log(this.isFirstLoad);
@@ -382,7 +419,8 @@
 
                     }, 100);
 
-                },
+                }
+                ,
 
                 isTyping: function () {
                     let channel = Echo.join('isTyping{{$ssul->id}}');
@@ -415,7 +453,8 @@
                             chatting_app.typing = false;
                         }, 5000);
                     });
-                },
+                }
+                ,
 
                 isNotTyping: function () {
                     let channel = Echo.join('isTyping{{$ssul->id}}');
@@ -429,7 +468,8 @@
                     }, 300);
 
 
-                },
+                }
+                ,
 
 
                 submitMessage: function () {
@@ -468,7 +508,8 @@
 //                    console.log('hihihi');
                     setTimeout(chatting_app.submitMessage(), 0);
                     return false;
-                },
+                }
+                ,
                 chatIdInMyLike: function (id) {
                     this.myLike.forEach(function (value) {
                         console.log('hererererer');
@@ -484,14 +525,15 @@
                             return false;
                         }
                     });
-                },
+                }
+                ,
 
             }
         })
 
 
     </script>
-    </script>
+
 
 
 

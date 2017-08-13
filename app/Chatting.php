@@ -34,6 +34,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Chatting extends Model
 {
+    const instagram = 1;
+    const youtube = 2;
+
     //
     public function user()
     {

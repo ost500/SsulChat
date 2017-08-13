@@ -29,7 +29,7 @@
     </script>
 </head>
 
-<body class="gl-business-template gl-home-template @if(isset($loginView)) gl-show-menu @endif">
+<body class="gl-business-template gl-home-template @if(isset($loginView) || $errors->has('email') || $errors->has('password')) gl-show-menu @endif">
 
 <div id="gl-circle-loader-wrapper">
     <div id="gl-circle-loader-center">

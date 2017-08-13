@@ -30,12 +30,28 @@ class StatisticsController extends Controller
     {
         $dt = new Carbon();
 
+        $page = Page::where('pages.id', $id);
 
-        $statics = Page::where('pages.id', $id)->join('page_ssuls', 'page_ssuls.page_id', '=', 'pages.id')
+        $pageFirst = $page->first();
+
+        if ($dt->dayOfWeek >= $pageFirst) {
+            $weekGap = $dt->dayOfWeek - $pageFirst->week_cycle;
+        } else {
+            $weekGap = 7 - ($pageFirst->week_cycle - $dt->dayOfWeek);
+        }
+
+        $dt->subDays($weekGap);
+
+        $timeCycle = explode(":", $pageFirst->time_cycle);
+
+        $dt->setTime($timeCycle[0], $timeCycle[1], $timeCycle[2]);
+
+
+        $statics = $page->join('page_ssuls', 'page_ssuls.page_id', '=', 'pages.id')
             ->join('ssuls', 'ssuls.id', '=', 'page_ssuls.ssul_id')
             ->join('ssul_chattings', function ($q) use ($dt) {
                 $q->on('ssuls.id', '=', 'ssul_chattings.ssul_id');
-                $q->where('ssul_chattings.created_at', '>', $dt->subWeek()->format('Y-m-d H:i:s'));
+                $q->where('ssul_chattings.created_at', '>', $dt->format('Y-m-d H:i:s'));
             })
             ->groupBy('ssuls.id')
             ->selectRaw('count(ssul_chattings.id) as countSsul, ssuls.*')

@@ -40,7 +40,7 @@ class MainController extends Controller
         $channels = $builder->paginate(12);
 
 
-        $pages = Page::take(4)->get();
+        $pages = Page::take(4)->withCount('ssuls')->get();
 
 
         return view('main', compact('channels', 'pages'));
@@ -274,7 +274,7 @@ class MainController extends Controller
 
     public function pageList()
     {
-        $pages = Page::paginate(20);
+        $pages = Page::withCount('ssuls')->paginate(20);
 
 //        return response()->json($page);
 

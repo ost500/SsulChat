@@ -124,9 +124,7 @@
 
                                 <div class="gl-feat-item-metas">
                                     <ul class="gl-feature-info">
-                                        <li>구독자<span>3</span>
-                                        </li>
-                                        <li>채팅방<span>2</span>
+                                        <li>채팅방<span>{{ $page->ssuls_count }}</span>
                                         </li>
 
                                     </ul>

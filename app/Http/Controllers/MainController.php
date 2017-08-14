@@ -253,16 +253,17 @@ class MainController extends Controller
         $likeBests = Page::join('page_ssuls', 'page_ssuls.page_id', '=', 'pages.id')
             ->join('ssuls', 'ssuls.id', '=', 'page_ssuls.ssul_id')
             ->join('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
-            ->join('chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
+            ->rightJoin('chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
             ->join('users', 'users.id', '=', 'chattings.user_id')
-            ->join('likes', function ($q) {
+            ->leftJoin('likes', function ($q) {
                 $q->on('likes.chatting_id', '=', 'chattings.id');
-                $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
+//                $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
             })
             ->groupBy('chattings.id')
             ->selectRaw('chattings.*, count(likes.id) as likeCount, users.*')
             ->where('pages.id', $id)
             ->orderBy('likeCount', 'desc')
+            ->orderBy('likes.created_at')
             ->take(20)
             ->get();
 

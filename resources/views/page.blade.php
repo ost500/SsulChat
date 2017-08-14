@@ -132,6 +132,7 @@
                                     <div class="gl-review-text">
                                         {{--<img src="{{ $likeBest->picture }}">--}}
                                         <h3>{{ $likeBest->name }}</h3>
+                                        <img src="{{ $likeBest->picture }}">
                                         <p>{{ $likeBest->content }}</p>
                                         <span class="gl-item-rating"><i
                                                     class="ion-ios-star"></i>{{ $likeBest->likeCount }}</span>

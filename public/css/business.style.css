@@ -25639,7 +25639,12 @@ ul.gl-gallery li .gl-more-img-text span {
     -webkit-box-shadow: 0 0 1px #f2f2f2;
     -moz-box-shadow: 0 0 1px #f2f2f2;
     box-shadow: 0 0 1px #f2f2f2;
-    padding: 40px 50px;
+    padding: 20px 20px;
+}
+.gl-review-details .gl-reviews .gl-review-text img{
+    width:200px;
+    height:auto;
+    padding-bottom:10px;
 }
 
 @media only screen and (max-width: 767px) {

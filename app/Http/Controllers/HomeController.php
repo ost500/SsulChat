@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Chatting;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 
 class HomeController extends Controller
@@ -14,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware('auth');
     }
 
     /**
@@ -39,5 +42,15 @@ class HomeController extends Controller
 
 
         return view('fbtest');
+    }
+
+    public function mypage()
+    {
+        $user = Auth::user();
+
+        $myChattings = User::where('users.id', Auth::user()->id)
+            ->rightJoin('chattings', 'users.id', '=', 'chattings.user_id')->get();
+
+        return view('mypage', compact('user', 'myChattings'));
     }
 }

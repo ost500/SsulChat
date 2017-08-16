@@ -20,6 +20,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/mypage', ['as' => 'mypage', 'uses' => 'HomeController@mypage']);
+
 //Route::get('/chat', 'HomeController@chat');
 
 Route::get('/log_in', function () {

@@ -126,8 +126,8 @@
                         </li>
 
                         @if(Auth::check())
-                            <li style="padding:0px" class="{{ (Request::is('/')) ? "active": "" }}">
-                                <a href="{{ route('chattingList') }}">
+                            <li style="padding:0px" class="{{ (Request::is('mypage')) ? "active": "" }}">
+                                <a href="{{ route('mypage') }}">
                                     <img src="{{ Auth::user()->profile_img }}" alt="User"
                                          class="gl-lazy">
                                 </a>

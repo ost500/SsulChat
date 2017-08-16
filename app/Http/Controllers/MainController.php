@@ -274,7 +274,7 @@ class MainController extends Controller
             ->selectRaw('morphs.morph, count(morph_logs.id) as morph_count')
             ->where('pages.id', $id)
             ->orderBy('morph_count', 'desc')
-            ->take(20)
+            ->take(40)
             ->get();
 
         $admin = false;

@@ -26227,7 +26227,12 @@ form.gl-review-submission-form fieldset.gl-submit-wrapper input.gl-btn:hover {
     -webkit-box-shadow: 0 0 1px #f2f2f2;
     -moz-box-shadow: 0 0 1px #f2f2f2;
     box-shadow: 0 0 1px #f2f2f2;
-    padding: 40px 50px;
+    padding: 20px 20px;
+}
+.gl-post-comments-wrapper .gl-comments .gl-comment-text img{
+    width:200px;
+    height:auto;
+    padding-bottom:10px;
 }
 
 .gl-post-comments-wrapper .gl-comments .gl-comment-text-chat {
@@ -26340,6 +26345,19 @@ form.gl-review-submission-form fieldset.gl-submit-wrapper input.gl-btn:hover {
     margin-bottom: 5px;
 }
 
+.gl-post-comments-wrapper .gl-comments .gl-comment-text .gl-username-date a h3 {
+    font-family: 'pt_sansregular', sans-serif;
+    font-size: 21px;
+    font-weight: 400;
+    color: #454545;
+    padding-right: 10px;
+    margin: 0;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    float: left;
+}
+
 .gl-post-comments-wrapper .gl-comments .gl-comment-text .gl-username-date h3 {
     font-family: 'pt_sansregular', sans-serif;
     font-size: 21px;
@@ -26413,7 +26431,7 @@ form.gl-review-submission-form fieldset.gl-submit-wrapper input.gl-btn:hover {
     font-size: 14px;
     font-weight: 300;
     color: #888888;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 }
 
 .gl-post-comments-wrapper .gl-comments .gl-comment-text-chat p {

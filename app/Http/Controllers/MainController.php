@@ -42,8 +42,22 @@ class MainController extends Controller
 
         $pages = Page::take(4)->withCount('ssuls')->get();
 
+        $likeBests = Ssul::join('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
+            ->Join('chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
+            ->join('users', 'users.id', '=', 'chattings.user_id')
+            ->leftJoin('likes', function ($q) {
+                $q->on('likes.chatting_id', '=', 'chattings.id');
+//                $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
+            })
+            ->groupBy('chattings.id')
+            ->selectRaw('chattings.*, count(likes.id) as likeCount, users.*, ssuls.name as ssul_name')
+            ->orderBy('likeCount', 'desc')
+            ->orderBy('likes.created_at')
+            ->take(20)
+            ->get();
 
-        return view('main', compact('channels', 'pages'));
+
+        return view('main', compact('channels', 'pages', 'likeBests'));
     }
 
     public function search(Request $request)

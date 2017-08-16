@@ -75,12 +75,12 @@
                 </div>
                 {{--<!-- MORE BTN -->--}}
                 {{--<div class="gl-more-btn-wrapper">--}}
-                    {{--<a href="{{ route('pageList') }}" class="gl-more-btn gl-btn">더보기</a>--}}
+                {{--<a href="{{ route('pageList') }}" class="gl-more-btn gl-btn">더보기</a>--}}
                 {{--</div>--}}
                 {{--<!-- END -->--}}
 
             </div>
-
+        </div>
     </section><!-- FEATURED LISTINGS -->
     <section class="gl-feat-listing-section gl-section-wrapper">
         <div class="container">
@@ -207,6 +207,50 @@
                 <a href="{{ route('chattingList') }}" class="gl-more-btn gl-btn">더보기</a>
             </div>
             <!-- END -->
+
+        </div>
+    </section>
+    <!-- FEATURED LISTINGS END -->
+    <!-- FEATURED LISTINGS -->
+    <section class="gl-feat-listing-section gl-section-wrapper">
+        <div class="container">
+
+            <!-- SECTION HEADINGS -->
+            <div class="gl-section-headings">
+                <h1>베스트 채팅</h1>
+                <p>오늘의 핫이슈</p>
+            </div>
+            <!-- END -->
+
+
+            <div class="gl-post-comments-wrapper">
+                <h3 class="gl-blog-sec-title">Comments</h3>
+                <!-- Reviews -->
+                @foreach($likeBests as $best)
+                    <div class="gl-comments">
+                        <!-- USER IMG -->
+                        <div class="gl-user-img">
+                            <img src="{{ $best->profile_img }}" alt="User" class="gl-lazy">
+                        </div>
+                        <!-- END -->
+
+                        <!-- TEXT -->
+                        <div class="gl-comment-text">
+                            <div class="gl-username-date">
+                                <h3>{{ $best->name }}</h3>
+                                <a href="{{ route('chattings', ['name' => $best->ssul_name]) }}"><h3>{{ $best->ssul_name }}</h3></a>
+                                <span class="gl-comments-date">{{ $best->created_at }}</span>
+                            </div>
+                            <img src="{{ $best->picture }}">
+                            <p>{{ $best->content }}</p>
+                            {{--<a href="#" class="gl-reply">Reply</a>--}}
+                        </div>
+                        <!-- END -->
+                    </div>
+                @endforeach
+            <!-- END -->
+            </div>
+
 
         </div>
     </section>

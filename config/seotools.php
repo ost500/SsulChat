@@ -10,7 +10,7 @@ return [
             'description'  => '온라인 썰전, 아무말 대잔치', // set false to total remove
             'separator'    => ' - ',
             'keywords'     => [],
-            'canonical'    => false, // Set null for using Url::current(), set false to total remove
+            'canonical'    => null, // Set null for using Url::current(), set false to total remove
         ],
 
         /*
@@ -29,9 +29,9 @@ return [
          * The default configurations to be used by the opengraph generator.
          */
         'defaults' => [
-            'title'       => '썰챗', // set false to total remove
+            'title'       => env('APP_NAME', 'WIKICHAT'), // set false to total remove
             'description' => '온라인 썰전, 아무말 대잔치', // set false to total remove
-            'url'         => false, // Set null for using Url::current(), set false to total remove
+            'url'         => null, // Set null for using Url::current(), set false to total remove
             'type'        => false,
             'site_name'   => false,
             'images'      => [],

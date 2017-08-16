@@ -382,12 +382,12 @@
 	    /*
 	    TAG REMOVE FUNCTIONALITY
 	    */
-	    $("a.gl-tag-btn").append('<span class="gl-close">x</span>');
-	
-	    $("a.gl-tag-btn").on('click', '.gl-close', function (e) {
-	        e.preventDefault();
-	        $(this).parent().remove();
-	    });
+	    // $("a.gl-tag-btn").append('<span class="gl-close">x</span>');
+        //
+	    // $("a.gl-tag-btn").on('click', '.gl-close', function (e) {
+	    //     e.preventDefault();
+	    //     $(this).parent().remove();
+	    // });
 	})(jQuery);
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 

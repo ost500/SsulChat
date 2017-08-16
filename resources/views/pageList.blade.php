@@ -51,7 +51,7 @@
                                     <div class="gl-feat-items-img-wrapper">
                                         <picture>
                                             <source media="(min-width: 768px)" src="{{ $page->main_picture }}">
-                                            <img alt="Category Image" src="{{ $page->main_picture }}">
+                                            <img alt="{{ $page->title }} Image" src="{{ $page->main_picture }}">
                                         </picture>
 
 
@@ -73,6 +73,8 @@
                                         <ul class="gl-feature-info">
 
                                             <li>채팅방<span>{{ $page->ssuls_count }}</span>
+                                            </li>
+                                            <li>참가자<span>{{ $page->membersCount }}</span>
                                             </li>
 
                                         </ul>

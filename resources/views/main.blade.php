@@ -104,7 +104,7 @@
                                 <div class="gl-feat-items-img-wrapper">
                                     <picture>
                                         <source media="(min-width: 768px)" src="{{ $page->main_picture }}">
-                                        <img alt="Category Image" src="{{ $page->main_picture }}">
+                                        <img alt="{{ $page->title }}" src="{{ $page->main_picture }}">
                                     </picture>
 
 
@@ -125,6 +125,8 @@
                                 <div class="gl-feat-item-metas">
                                     <ul class="gl-feature-info">
                                         <li>채팅방<span>{{ $page->ssuls_count }}</span>
+                                        </li>
+                                        <li>참가자<span>{{ $page->membersCount }}</span>
                                         </li>
 
                                     </ul>
@@ -182,9 +184,9 @@
                                 <div class="gl-feat-item-details">
                             <span class="gl-item-rating">
                               <i class="ion-android-star-outline"></i>
-                                @if(isset($channel->chat_count))
-                                    {{ $channel->chat_count }}
-                                @endif
+
+                                {{ $channel->loginMembersCount }}
+
                             </span>
                                     <h3>
                                         <a href="{{ route('chattings',['name'=>$channel->name]) }}">{{ $channel->name }}</a>
@@ -237,17 +239,22 @@
                         <!-- TEXT -->
                         <div class="gl-comment-text">
                             <div class="gl-username-date">
-                                <h3>{{ $best->name }}</h3>
-                                <a href="{{ route('chattings', ['name' => $best->ssul_name]) }}"><h3>{{ $best->ssul_name }}</h3></a>
-                                <span class="gl-comments-date">{{ $best->created_at }}</span>
+
+                                <a href="{{ route('chattings', ['name' => $best->ssul_name]) }}">
+                                    <h3>{{ $best->name }}</h3>
+                                    <h3>{{ $best->ssul_name }}</h3>
+                                    <span class="gl-comments-date">{{ $best->created_at }}</span>
+                                </a>
+
                             </div>
-                            <img src="{{ $best->picture }}">
+                            <a href="{{ route('chattings', ['name' => $best->ssul_name]) }}"><img
+                                        src="{{ $best->picture }}"></a>
                             <p>{{ $best->content }}</p>
                             {{--<a href="#" class="gl-reply">Reply</a>--}}
                         </div>
                         <!-- END -->
                     </div>
-                @endforeach
+            @endforeach
             <!-- END -->
             </div>
 

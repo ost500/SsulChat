@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
@@ -39,8 +40,33 @@ class MainController extends Controller
 
         $channels = $builder->paginate(12);
 
+        $channels->each(function ($value) {
+            $loginMembers = Redis::get("presence-newMessage{$value->id}:members");
 
-        $pages = Page::take(4)->withCount('ssuls')->get();
+            /** @var Collection $loginMembers */
+            $loginMembers = collect(json_decode($loginMembers));
+
+            $value->loginMembersCount = $loginMembers->count();
+        });
+
+
+        $pages = Page::take(4)->with('ssuls')->withCount('ssuls')->get();
+
+        $pageUserCount = 0;
+
+        foreach ($pages as $page) {
+
+            foreach ($page->ssuls as $ssul) {
+                $loginMembers = Redis::get("presence-newMessage{$ssul->id}:members");
+
+                /** @var Collection $loginMembers */
+                $loginMembers = collect(json_decode($loginMembers));
+
+                $pageUserCount += $loginMembers->count();
+            }
+            $page->membersCount = $pageUserCount;
+            $pageUserCount = 0;
+        }
 
         $likeBests = Ssul::join('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
             ->Join('chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
@@ -289,9 +315,25 @@ class MainController extends Controller
 
     public function pageList()
     {
-        $pages = Page::withCount('ssuls')->paginate(20);
+        $pages = Page::with('ssuls')->withCount('ssuls')->paginate(20);
 
 //        return response()->json($page);
+
+        $pageUserCount = 0;
+
+        foreach ($pages as $page) {
+
+            foreach ($page->ssuls as $ssul) {
+                $loginMembers = Redis::get("presence-newMessage{$ssul->id}:members");
+
+                /** @var Collection $loginMembers */
+                $loginMembers = collect(json_decode($loginMembers));
+
+                $pageUserCount += $loginMembers->count();
+            }
+            $page->membersCount = $pageUserCount;
+            $pageUserCount = 0;
+        }
 
         return view('pageList', compact('pages'));
     }
@@ -308,6 +350,15 @@ class MainController extends Controller
 
 
         $chattings = $builder->paginate(42);
+
+        $chattings->each(function ($value) {
+            $loginMembers = Redis::get("presence-newMessage{$value->id}:members");
+
+            /** @var Collection $loginMembers */
+            $loginMembers = collect(json_decode($loginMembers));
+
+            $value->loginMembersCount = $loginMembers->count();
+        });
 
 
         return view('chattingList', compact('chattings'));

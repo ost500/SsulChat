@@ -21,6 +21,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/mypage', ['as' => 'mypage', 'uses' => 'HomeController@mypage']);
+Route::post('/mypage', ['as' => 'mypage.post', 'uses' => 'HomeController@mypagePost']);
+Route::post('/mypage_picture', ['as' => 'mypage_picture.post', 'uses' => 'HomeController@myPicturePost']);
 
 //Route::get('/chat', 'HomeController@chat');
 

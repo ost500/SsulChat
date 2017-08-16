@@ -60,6 +60,6 @@ class Chatting extends Model
 
     public function ssuls()
     {
-        return $this->belongsToMany(Ssul::class);
+        return $this->belongsToMany(Ssul::class, 'ssul_chattings');
     }
 }

@@ -22,6 +22,7 @@
     <section class="gl-page-header-wrapper" style="background: url('{{ $page->background_picture }}')">
         <div class="container">
             <div class="row">
+                <img src="{{ $page->main_picture }}">
                 <h1>{{ $page->title }}</h1>
                 {{--<p><i class="ion-ios-location-outline"></i>Highway Road 3, Lane 56, California, USA</p>--}}
                 <span class="gl-item-rating"><i class="ion-ios-star"></i>{{ $page->ssuls_count }}</span>

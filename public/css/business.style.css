@@ -25162,6 +25162,10 @@ span.gl-item-rating i {
     margin: 0 0 5px;
     position: relative;
 }
+.gl-page-header-wrapper .container img {
+    width:150px;
+    margin-bottom:20px;
+}
 
 @media only screen and (max-width: 767px) {
     .gl-page-header-wrapper .container h1 {

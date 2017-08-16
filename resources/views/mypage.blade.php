@@ -3,6 +3,7 @@
     <section class="gl-page-header-wrapper" style="background: url('/images/featured-img.jpg')">
         <div class="container">
             <div class="row">
+                <img src="{{ $user->profile_img }}">
                 <h1>{{ $user->name }}</h1>
 
 
@@ -13,29 +14,45 @@
     <section class="gl-page-content-section">
         <div class="container">
             <div class="row">
-                <div class="gl-blog-details-wrapper">
 
-
-                    <!-- COMMENTS FORM -->
-                    <div class="gl-comments-form-wrapper">
-                        <h3 class="gl-blog-sec-title">개인 정보</h3>
-
-                        <form action="#">
-                            <fieldset>
-                                <input type="text" name="gl-comment-name" id="gl-comment-name" placeholder="이름"
-                                       value="{{ $user->name }}">
-                                <input type="email" name="gl-comment-email" id="gl-comment-email" placeholder="이메일"
-                                       value="{{ $user->email }}">
-
-                            </fieldset>
-
-
-                            <input type="submit" value="변경하기" class="gl-btn">
-                        </form>
+                <div class="gl-sidebar-widget gl-author-widget">
+                    <div class="gl-author-img-wrapper">
+                        <img src="{{ $user->profile_img }}" alt="Author" class="gl-lazy">
                     </div>
-                    <!-- END -->
 
+                    <div class="gl-author-details">
+                        <h3>{{ $user->name }}</h3>
+                        <p>{{ $user->email }}</p>
+                        <h4>사진 변경</h4>
+
+                        <div class="row">
+                            <form action="{{ route('mypage_picture.post') }}" method="post" enctype="multipart/form-data">
+                                {!! csrf_field() !!}
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6">
+                                    <input type="file" name="picture" class="gl-btn">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="submit" value="변경하기" class="gl-btn">
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
+
+                <div class="gl-sidebar-widget gl-sidebar-contact-form">
+                    <h3 class="gl-sidebar-title">이름 변경</h3>
+
+                    <form action="{{ route('mypage.post') }}" method="post">
+                        {!! csrf_field() !!}
+                        <input type="text" name="name" id="gl-name" placeholder="이름"
+                               value="{{ $user->name }}">
+                        <input type="submit" value="변경하기" class="gl-btn">
+                    </form>
+                </div>
+
+
             </div>
         </div>
     </section>
@@ -50,11 +67,11 @@
                     <div class="gl-post-comments-wrapper">
                         <h3 class="gl-blog-sec-title">채팅</h3>
                         <!-- Reviews -->
-                        @foreach($myChattings as $chatting)
+                        @foreach($myChattings->chattings as $chatting)
                             <div class="gl-comments">
                                 <!-- USER IMG -->
                                 <div class="gl-user-img">
-                                    <img src="images/user-img.png" alt="User" class="gl-lazy">
+                                    <img src="{{ $user->profile_img }}" alt="User" class="gl-lazy">
                                 </div>
                                 <!-- END -->
 
@@ -62,11 +79,16 @@
                                 <!-- TEXT -->
                                 <div class="gl-comment-text">
                                     <div class="gl-username-date">
-                                        <h3>David Neo</h3>
-                                        <span class="gl-comments-date">23 March, 2016</span>
+                                        <a href="{{ route('chattings', ['name' => $chatting->ssuls->first()->name]) }}">
+                                            <h3>{{ $user->name }}</h3>
+                                            <h3>{{ $chatting->ssuls->first()->name }}</h3>
+                                            <span class="gl-comments-date">{{ $chatting->created_at }}</span>
+                                        </a>
                                     </div>
-                                    <p>{{ $chatting->message }}</p>
-                                    <a href="#" class="gl-reply">Reply</a>
+
+
+                                    <p>{{ $chatting->content }}</p>
+                                    {{--<a href="#" class="gl-reply">Reply</a>--}}
                                 </div>
                                 <!-- END -->
                             </div>

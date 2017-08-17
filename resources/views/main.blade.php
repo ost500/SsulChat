@@ -232,7 +232,7 @@
                     <div class="gl-comments">
                         <!-- USER IMG -->
                         <div class="gl-user-img">
-                            <img src="{{ $best->profile_img }}" alt="User" class="gl-lazy">
+                            <img src="{{ $best->user->profile_img }}" alt="User" class="gl-lazy">
                         </div>
                         <!-- END -->
 
@@ -240,14 +240,14 @@
                         <div class="gl-comment-text">
                             <div class="gl-username-date">
 
-                                <a href="{{ route('chattings', ['name' => $best->ssul_name]) }}">
-                                    <h3>{{ $best->name }}</h3>
-                                    <h3>{{ $best->ssul_name }}</h3>
+                                <a href="{{ route('chattings', ['name' => $best->ssuls->first()->name]) }}">
+                                    <h3>{{ $best->user->name }}</h3>
+                                    <h3>{{ $best->ssuls->first()->name }}</h3>
                                     <span class="gl-comments-date">{{ $best->created_at }}</span>
                                 </a>
 
                             </div>
-                            <a href="{{ route('chattings', ['name' => $best->ssul_name]) }}"><img
+                            <a href="{{ route('chattings', ['name' => $best->ssuls->first()->name]) }}"><img
                                         src="{{ $best->picture }}"></a>
                             <p>{{ $best->content }}</p>
                             {{--<a href="#" class="gl-reply">Reply</a>--}}

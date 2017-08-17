@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\Chatting;
 use App\Page;
 use App\Ssul;
 use App\Team;
@@ -68,20 +69,16 @@ class MainController extends Controller
             $pageUserCount = 0;
         }
 
-        $likeBests = Ssul::join('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
-            ->Join('chattings', 'chattings.id', '=', 'ssul_chattings.chatting_id')
-            ->join('users', 'users.id', '=', 'chattings.user_id')
-            ->leftJoin('likes', function ($q) {
-                $q->on('likes.chatting_id', '=', 'chattings.id');
-//                $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
-            })
-            ->groupBy('chattings.id')
-            ->selectRaw('chattings.*, count(likes.id) as likeCount, users.*, ssuls.name as ssul_name')
-            ->orderBy('likeCount', 'desc')
-            ->orderBy('likes.created_at')
-            ->take(20)
-            ->get();
 
+        $likeBests = Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
+                $q->on('likes.chatting_id', '=', 'chattings.id');
+                $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
+            })
+            ->selectRaw('chattings.*, count(chattings.id) as likeCount')
+            ->groupBy('chattings.id')
+            ->orderBy('likeCount', 'desc')
+            ->orderBy('created_at')
+            ->take(20)->with('ssuls')->with('user')->get();
 
         return view('main', compact('channels', 'pages', 'likeBests'));
     }

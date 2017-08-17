@@ -33,7 +33,12 @@ class MainController extends Controller
             Auth::logout();
         }
 
-        $builder = Ssul::leftJoin('ssul_chattings', 'ssul_chattings.ssul_id', '=', 'ssuls.id')
+        $dt = new Carbon();
+
+        $builder = Ssul::leftJoin('ssul_chattings', function ($q) use ($dt) {
+            $q->on('ssul_chattings.ssul_id', '=', 'ssuls.id');
+            $q->where('ssul_chattings.created_at', '>', $dt->subDay()->format('Y-m-d H:i:s'));
+        })
             ->groupBy('ssuls.id')
             ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
             ->orderBy('chat_count', 'desc');
@@ -50,7 +55,10 @@ class MainController extends Controller
             $value->loginMembersCount = $loginMembers->count();
         });
 
+        $channels = $channels->sortByDesc('loginMembersCount');
 
+
+        /** @var Collection $pages */
         $pages = Page::take(4)->with('ssuls')->withCount('ssuls')->get();
 
         $pageUserCount = 0;
@@ -69,11 +77,13 @@ class MainController extends Controller
             $pageUserCount = 0;
         }
 
+        $pages = $pages->sortByDesc('membersCount');
+
 
         $likeBests = Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
-                $q->on('likes.chatting_id', '=', 'chattings.id');
-                $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
-            })
+            $q->on('likes.chatting_id', '=', 'chattings.id');
+            $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
+        })
             ->selectRaw('chattings.*, count(chattings.id) as likeCount')
             ->groupBy('chattings.id')
             ->orderBy('likeCount', 'desc')

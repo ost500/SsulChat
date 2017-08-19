@@ -40,6 +40,7 @@ class CacheQueries extends Command
      */
     public function handle()
     {
+        Cache::pull('cache:statistics');
         Cache::remember('cache:statistics', 20, function () {
             $dt = new Carbon();
 

@@ -11,7 +11,7 @@
 
 
         <div class="gl-post-comments-wrapper">
-            <h3 class="gl-blog-sec-title">Comments</h3>
+
             <!-- Reviews -->
             @foreach($likeBests as $best)
                 <div class="gl-comments">

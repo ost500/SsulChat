@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\URL;
@@ -80,15 +81,7 @@ class MainController extends Controller
         $pages = $pages->sortByDesc('membersCount');
 
 
-        $likeBests = Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
-            $q->on('likes.chatting_id', '=', 'chattings.id');
-            $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
-        })
-            ->selectRaw('chattings.*, count(chattings.id) as likeCount')
-            ->groupBy('chattings.id')
-            ->orderBy('likeCount', 'desc')
-            ->orderBy('created_at')
-            ->take(20)->with('ssuls')->with('user')->get();
+        $likeBests = Cache::get('cache:likeBests');
 
         return view('main', compact('channels', 'pages', 'likeBests'));
     }
@@ -342,15 +335,7 @@ class MainController extends Controller
             $pageUserCount = 0;
         }
 
-        $likeBests = Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
-            $q->on('likes.chatting_id', '=', 'chattings.id');
-            $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
-        })
-            ->selectRaw('chattings.*, count(chattings.id) as likeCount')
-            ->groupBy('chattings.id')
-            ->orderBy('likeCount', 'desc')
-            ->orderBy('created_at')
-            ->take(20)->with('ssuls')->with('user')->get();
+        $likeBests = Cache::get('cache:likeBests');
 
         return view('pageList', compact('pages', 'likeBests'));
     }
@@ -377,15 +362,7 @@ class MainController extends Controller
             $value->loginMembersCount = $loginMembers->count();
         });
 
-        $likeBests = Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
-            $q->on('likes.chatting_id', '=', 'chattings.id');
-            $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
-        })
-            ->selectRaw('chattings.*, count(chattings.id) as likeCount')
-            ->groupBy('chattings.id')
-            ->orderBy('likeCount', 'desc')
-            ->orderBy('created_at')
-            ->take(20)->with('ssuls')->with('user')->get();
+        $likeBests = Cache::get('cache:likeBests');
 
         return view('chattingList', compact('chattings', 'likeBests'));
     }

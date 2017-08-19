@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CacheLikeBests;
 use App\Console\Commands\CacheMorph;
 use App\Console\Commands\CacheQueries;
 use App\Console\Commands\CrawlFacebookPage;
@@ -30,7 +31,8 @@ class Kernel extends ConsoleKernel
         CrawlYoutube::class,
         CacheQueries::class,
         CacheMorph::class,
-        NaverImageLoad::class
+        NaverImageLoad::class,
+        CacheLikeBests::class
     ];
 
     /**
@@ -58,6 +60,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('cache:morph')
             ->everyMinute();
+
+        $schedule->command('cache:likeBests')
+            ->everyFiveMinutes();
     }
 
     /**

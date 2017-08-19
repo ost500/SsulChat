@@ -42,6 +42,7 @@ class CacheMorph extends Command
      */
     public function handle()
     {
+        $dt = new Carbon();
         /** @var Collection $morphStatics */
         $morphStatics = Morph::rightJoin('morph_logs', function ($q) use ($dt) {
             $q->on('morph_logs.morph_id', '=', 'morphs.id');
@@ -54,8 +55,8 @@ class CacheMorph extends Command
             ->limit(8)
             ->get();
         Cache::pull('cache:morph');
-        Cache::remember('cache:morph', 20, function () use ($morphStatics) {
-            $dt = new Carbon();
+        Cache::remember('cache:morph', 20, function () use ($morphStatics, $dt) {
+
             print_r($dt->subDay()->format('Y-m-d H:i:s'));
 
             print_r($morphStatics->toArray());

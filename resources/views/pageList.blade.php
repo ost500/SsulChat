@@ -97,4 +97,6 @@
 
     </section>
 
+    @include('belowBest')
+
 @endsection

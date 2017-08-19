@@ -92,5 +92,6 @@
         </div>
     </section>
     <!-- FEATURED LISTINGS END -->
+    @include('belowBest')
 
 @endsection

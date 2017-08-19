@@ -43,6 +43,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return redirect()->back()->with(['login' => true]);
+        $loginView = 'true';
+        return redirect()->back()->withErrors(['email' => '로그인 하세요']);
     }
 }

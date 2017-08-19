@@ -66,10 +66,10 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
-    public function routeNotificationFor()
-    {
-        return env('SLACK_WEBHOOK_URL');
-    }
+//    public function routeNotificationFor()
+//    {
+//        return env('SLACK_WEBHOOK_URL');
+//    }
 
     public function teams()
     {

@@ -52,7 +52,7 @@ class CacheQueries extends Command
             ->get();
         Cache::pull('cache:statistics');
 
-        Cache::remember('cache:statistics', 20, function () use ($statics) {
+        Cache::remember('cache:statistics', 120, function () use ($statics) {
 
             return $statics;
         });

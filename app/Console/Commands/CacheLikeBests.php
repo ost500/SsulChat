@@ -51,7 +51,9 @@ class CacheLikeBests extends Command
             ->orderBy('created_at')
             ->take(50)->with('ssuls')->with('user')->get();
         Cache::pull('cache:likeBests');
-        Cache::remember('cache:likeBests', 20, function () use ($likeBests) {
+        Cache::remember('cache:likeBests', 120, function () use ($likeBests) {
+
+
             return $likeBests;
         });
     }

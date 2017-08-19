@@ -14,7 +14,7 @@ class CacheMainSsuls extends Command
      *
      * @var string
      */
-    protected $signature = 'cache:MainSsuls';
+    protected $signature = 'cache:mainSsuls';
 
     /**
      * The console command description.
@@ -56,7 +56,7 @@ class CacheMainSsuls extends Command
 
 
         Cache::pull('cache:mainSsuls');
-        Cache::remember('cache:mainSsuls', 20, function () use ($channels, $dt) {
+        Cache::remember('cache:mainSsuls', 120, function () use ($channels, $dt) {
 
             print_r($channels->toArray());
 

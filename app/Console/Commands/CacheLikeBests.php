@@ -43,7 +43,7 @@ class CacheLikeBests extends Command
     {
         Cache::pull('cache:likeBests');
         Cache::remember('cache:likeBests', 20, function () {
-            Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
+            return Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
                 $q->on('likes.chatting_id', '=', 'chattings.id');
                 $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
             })

@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -332,16 +333,16 @@ class MainController extends Controller
 
     public function chattingList()
     {
-        $builder = Ssul::leftJoin('ssul_chattings', function ($q) {
-            $q->on('ssul_chattings.ssul_id', '=', 'ssuls.id');
-        })
-//            ->where('ssul_chattings.created_at', '>', Carbon::now()->subWeek()->format('Y-m-d'))
-            ->groupBy('ssuls.id')
-            ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
-            ->orderBy('chat_count', 'desc');
+//        $builder = Ssul::leftJoin('ssul_chattings', function ($q) {
+//            $q->on('ssul_chattings.ssul_id', '=', 'ssuls.id');
+//        })
+////            ->where('ssul_chattings.created_at', '>', Carbon::now()->subWeek()->format('Y-m-d'))
+//            ->groupBy('ssuls.id')
+//            ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
+//            ->orderBy('chat_count', 'desc');
 
-
-        $chattings = $builder->paginate(42);
+        /** @var LengthAwarePaginator $chattings */
+        $chattings = Ssul::orderBy('created_at')->paginate(42);
 
         $chattings->each(function ($value) {
             $loginMembers = Redis::get("presence-newMessage{$value->id}:members");
@@ -349,8 +350,9 @@ class MainController extends Controller
             /** @var Collection $loginMembers */
             $loginMembers = collect(json_decode($loginMembers));
 
-            $value->loginMembersCount = $loginMembers->count();
+            $value->loginMembersCount = $loginMembers->count() == null ? 0 : $loginMembers->count();
         });
+
 
         $likeBests = Cache::get('cache:likeBests');
 

@@ -60,10 +60,12 @@
 
                                 <div class="gl-feat-item-details">
                             <span class="gl-item-rating">
-                              <i class="fa fa-commenting-o"></i>
-                                @if(isset($channel->chat_count))
-                                    {{ $channel->chat_count }}
-                                @endif
+                              <i class="fa fa-user" aria-hidden="true">
+                                  </i>
+                                @if(isset($channel->loginMembersCount)){{ $channel->loginMembersCount }}@endif
+
+
+
                             </span>
                                     <h3>
                                         <a href="{{ route('chattings',['name'=>$channel->name]) }}">{{ $channel->name }}</a>

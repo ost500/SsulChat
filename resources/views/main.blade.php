@@ -183,9 +183,9 @@
 
                                 <div class="gl-feat-item-details">
                             <span class="gl-item-rating">
-                              <i class="fa fa-user" aria-hidden="true"></i>
+                              <i class="fa fa-user" aria-hidden="true">{{ $channel->loginMembersCount }}</i>
 
-                                {{ $channel->loginMembersCount }}
+
 
                             </span>
                                     <h3>

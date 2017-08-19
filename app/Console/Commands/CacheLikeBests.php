@@ -41,19 +41,17 @@ class CacheLikeBests extends Command
      */
     public function handle()
     {
-
-        Cache::remember('cache:likeBests', 20, function () {
-
-            $likeBests = Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
-                $q->on('likes.chatting_id', '=', 'chattings.id');
-                $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
-            })
-                ->selectRaw('chattings.*, count(chattings.id) as likeCount')
-                ->groupBy('chattings.id')
-                ->orderBy('likeCount', 'desc')
-                ->orderBy('created_at')
-                ->take(50)->with('ssuls')->with('user')->get();
-            Cache::pull('cache:likeBests');
+        $likeBests = Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
+            $q->on('likes.chatting_id', '=', 'chattings.id');
+            $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
+        })
+            ->selectRaw('chattings.*, count(chattings.id) as likeCount')
+            ->groupBy('chattings.id')
+            ->orderBy('likeCount', 'desc')
+            ->orderBy('created_at')
+            ->take(50)->with('ssuls')->with('user')->get();
+        Cache::pull('cache:likeBests');
+        Cache::remember('cache:likeBests', 20, function () use ($likeBests) {
             return $likeBests;
         });
     }

@@ -42,25 +42,24 @@ class CacheMorph extends Command
      */
     public function handle()
     {
-
-        Cache::remember('cache:morph', 20, function () {
+        /** @var Collection $morphStatics */
+        $morphStatics = Morph::rightJoin('morph_logs', function ($q) use ($dt) {
+            $q->on('morph_logs.morph_id', '=', 'morphs.id');
+            $q->where('morph_logs.created_at', '>', $dt->subDay()->format('Y-m-d H:i:s'));
+        })
+            ->groupBy('morphs.id')
+            ->selectRaw('count(morphs.id) as countMorphs, morphs.*')
+            ->orderBy('countMorphs', 'desc')
+            ->whereNotIn('morphs.id', MorphExcept::pluck('morph_id')->values()->all())
+            ->limit(8)
+            ->get();
+        Cache::pull('cache:morph');
+        Cache::remember('cache:morph', 20, function () use ($morphStatics) {
             $dt = new Carbon();
             print_r($dt->subDay()->format('Y-m-d H:i:s'));
 
-            /** @var Collection $morphStatics */
-            $morphStatics = Morph::rightJoin('morph_logs', function ($q) use ($dt) {
-                $q->on('morph_logs.morph_id', '=', 'morphs.id');
-                $q->where('morph_logs.created_at', '>', $dt->subDay()->format('Y-m-d H:i:s'));
-            })
-                ->groupBy('morphs.id')
-                ->selectRaw('count(morphs.id) as countMorphs, morphs.*')
-                ->orderBy('countMorphs', 'desc')
-                ->whereNotIn('morphs.id', MorphExcept::pluck('morph_id')->values()->all())
-                ->limit(8)
-                ->get();
-
             print_r($morphStatics->toArray());
-            Cache::pull('cache:morph');
+
             return $morphStatics;
         });
     }

@@ -12,9 +12,15 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PageController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth')->only('create_page');
+    }
+
     public function pageSetting($id)
     {
         $page = Page::with('ssuls')->withCount('ssuls')->with('ssuls')->withCount('pagePosts')->findOrFail($id);
@@ -156,4 +162,31 @@ class PageController extends Controller
 
         return view('pagePost', compact('pagePost'));
     }
+
+
+    public function create_page()
+    {
+        return view('createPage');
+    }
+
+    public function createPagePost(Request $request)
+    {
+        Validator::make($request->all(), [
+            'name' => 'required|max:255',
+        ], [
+            'name.required' => '페이지명은 필수 입니다.',
+            'name.max' => '페이지명이 너무 깁니다.',
+
+        ])->validate();
+
+        $newPage = new Page();
+        $newPage->user_id = Auth::user()->id;
+        $newPage->title = $request->name;
+        $newPage->main_picture = '/images/post-img-1.jpg';
+        $newPage->background_picture = '/images/featured-img.jpg';
+        $newPage->save();
+
+        return redirect()->route('pages', ['id' => $newPage]);
+    }
+
 }

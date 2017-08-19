@@ -85,7 +85,8 @@ Route::get('mysitemap', 'MainController@mysitemap');
 
 Route::get('instagram_redirect', ['as' => 'insta_redirect', 'uses' => 'MainController@instaRedirect']);
 
-Route::get('create_page', ['as' => 'create_page', 'uses' => 'MainController@create_page']);
+Route::get('create_page', ['as' => 'create_page', 'uses' => 'PageController@create_page']);
+Route::post('create_page', ['as' => 'create.page.post', 'uses' => 'PageController@createPagePost']);
 
 Route::get('statistics', ['as' => 'statistics', 'uses' => 'StatisticsController@statistics']);
 

@@ -359,9 +359,4 @@ class MainController extends Controller
         return view('chattingList', compact('chattings', 'likeBests'));
     }
 
-    public function create_page()
-    {
-        return view('createPage');
-    }
-
 }

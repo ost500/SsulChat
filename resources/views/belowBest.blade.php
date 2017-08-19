@@ -13,35 +13,37 @@
         <div class="gl-post-comments-wrapper">
 
             <!-- Reviews -->
-            @foreach($likeBests as $best)
-                <div class="gl-comments">
-                    <!-- USER IMG -->
-                    <div class="gl-user-img">
-                        <img src="{{ $best->user->profile_img }}" alt="User" class="gl-lazy">
-                    </div>
-                    <!-- END -->
-
-                    <!-- TEXT -->
-                    <div class="gl-comment-text">
-                        <div class="gl-username-date">
-
-                            <a href="{{ route('chattings', ['name' => $best->ssuls->first()->name]) }}">
-                                <h3>{{ $best->user->name }}</h3>
-                                <h3>{{ $best->ssuls->first()->name }}</h3>
-                                <span class="gl-comments-date">{{ $best->created_at }}</span>
-                            </a>
-
+            @if($likeBests)
+                @foreach($likeBests as $best)
+                    <div class="gl-comments">
+                        <!-- USER IMG -->
+                        <div class="gl-user-img">
+                            <img src="{{ $best->user->profile_img }}" alt="User" class="gl-lazy">
                         </div>
-                        <a href="{{ route('chattings', ['name' => $best->ssuls->first()->name]) }}"><img
-                                    src="{{ $best->picture }}"></a>
-                        <p>{{ $best->content }} <i style="color: #fc4a52;" class="fa fa-heart"
-                                                   aria-hidden="true"> {{ $best->likeCount }}</i></p>
+                        <!-- END -->
 
-                        {{--<a href="#" class="gl-reply">Reply</a>--}}
+                        <!-- TEXT -->
+                        <div class="gl-comment-text">
+                            <div class="gl-username-date">
+
+                                <a href="{{ route('chattings', ['name' => $best->ssuls->first()->name]) }}">
+                                    <h3>{{ $best->user->name }}</h3>
+                                    <h3>{{ $best->ssuls->first()->name }}</h3>
+                                    <span class="gl-comments-date">{{ $best->created_at }}</span>
+                                </a>
+
+                            </div>
+                            <a href="{{ route('chattings', ['name' => $best->ssuls->first()->name]) }}"><img
+                                        src="{{ $best->picture }}"></a>
+                            <p>{{ $best->content }} <i style="color: #fc4a52;" class="fa fa-heart"
+                                                       aria-hidden="true"> {{ $best->likeCount }}</i></p>
+
+                            {{--<a href="#" class="gl-reply">Reply</a>--}}
+                        </div>
+                        <!-- END -->
                     </div>
-                    <!-- END -->
-                </div>
-        @endforeach
+            @endforeach
+        @endif
         <!-- END -->
         </div>
 

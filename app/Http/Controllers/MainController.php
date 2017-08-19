@@ -34,18 +34,8 @@ class MainController extends Controller
             Auth::logout();
         }
 
-        $dt = new Carbon();
+        $channels = Cache::get('cache:mainSsuls');
 
-        $builder = Ssul::leftJoin('ssul_chattings', function ($q) use ($dt) {
-            $q->on('ssul_chattings.ssul_id', '=', 'ssuls.id');
-            $q->where('ssul_chattings.created_at', '>', $dt->subDay()->format('Y-m-d H:i:s'));
-        })
-            ->groupBy('ssuls.id')
-            ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
-            ->orderBy('chat_count', 'desc');
-
-
-        $channels = $builder->paginate(12);
 
         $channels->each(function ($value) {
             $loginMembers = Redis::get("presence-newMessage{$value->id}:members");

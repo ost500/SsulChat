@@ -355,7 +355,8 @@ class MainController extends Controller
 
         $chattings = $chattings->sortByDesc('loginMembersCount');
 
-        $chattings = new LengthAwarePaginator($chattings, $chattings->count(), 42);
+        $chattings = new LengthAwarePaginator($chattings->values(), $chattings->count(), 42);
+
 
         $likeBests = Cache::get('cache:likeBests');
 

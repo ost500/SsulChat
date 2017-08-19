@@ -341,8 +341,8 @@ class MainController extends Controller
 //            ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
 //            ->orderBy('chat_count', 'desc');
 
-        /** @var LengthAwarePaginator $chattings */
-        $chattings = Ssul::orderBy('created_at', 'desc')->paginate(42);
+        /** @var Collection $chattings */
+        $chattings = Ssul::orderBy('created_at', 'desc')->get();
 
         $chattings->each(function ($value) {
             $loginMembers = Redis::get("presence-newMessage{$value->id}:members");
@@ -353,6 +353,9 @@ class MainController extends Controller
             $value->loginMembersCount = $loginMembers->count() == null ? 0 : $loginMembers->count();
         });
 
+        $chattings = $chattings->sortByDesc('loginMembersCount');
+
+        $chattings = new LengthAwarePaginator($chattings, $chattings->count(), 42);
 
         $likeBests = Cache::get('cache:likeBests');
 

@@ -60,7 +60,7 @@
 
                                 <div class="gl-feat-item-details">
                             <span class="gl-item-rating">
-                              <i class="ion-android-star-outline"></i>
+                              <i class="fa fa-commenting-o"></i>
                                 @if(isset($channel->chat_count))
                                     {{ $channel->chat_count }}
                                 @endif

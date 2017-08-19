@@ -183,7 +183,7 @@
 
                                 <div class="gl-feat-item-details">
                             <span class="gl-item-rating">
-                              <i class="ion-android-star-outline"></i>
+                              <i class="fa fa-user" aria-hidden="true"></i>
 
                                 {{ $channel->loginMembersCount }}
 

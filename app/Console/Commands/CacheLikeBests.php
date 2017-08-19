@@ -52,7 +52,7 @@ class CacheLikeBests extends Command
                 ->groupBy('chattings.id')
                 ->orderBy('likeCount', 'desc')
                 ->orderBy('created_at')
-                ->take(20)->with('ssuls')->with('user')->get();
+                ->take(50)->with('ssuls')->with('user')->get();
             Cache::pull('cache:likeBests');
             return $likeBests;
         });

@@ -342,7 +342,7 @@ class MainController extends Controller
 //            ->orderBy('chat_count', 'desc');
 
         /** @var LengthAwarePaginator $chattings */
-        $chattings = Ssul::orderBy('created_at')->paginate(42);
+        $chattings = Ssul::orderBy('created_at', 'desc')->paginate(42);
 
         $chattings->each(function ($value) {
             $loginMembers = Redis::get("presence-newMessage{$value->id}:members");

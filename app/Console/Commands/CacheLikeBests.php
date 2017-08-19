@@ -41,9 +41,10 @@ class CacheLikeBests extends Command
      */
     public function handle()
     {
-        Cache::pull('cache:likeBests');
+
         Cache::remember('cache:likeBests', 20, function () {
-            return Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
+
+            $likeBests = Chatting::leftJoin(DB::raw('`likes` FORCE INDEX (likes_chatting_id_index)'), function ($q) {
                 $q->on('likes.chatting_id', '=', 'chattings.id');
                 $q->where('likes.created_at', '>', Carbon::now()->subWeek()->format("Y-m-d H:i:s"));
             })
@@ -52,6 +53,8 @@ class CacheLikeBests extends Command
                 ->orderBy('likeCount', 'desc')
                 ->orderBy('created_at')
                 ->take(20)->with('ssuls')->with('user')->get();
+            Cache::pull('cache:likeBests');
+            return $likeBests;
         });
     }
 }

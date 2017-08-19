@@ -42,7 +42,7 @@ class CacheMorph extends Command
      */
     public function handle()
     {
-        Cache::pull('cache:morph');
+
         Cache::remember('cache:morph', 20, function () {
             $dt = new Carbon();
             print_r($dt->subDay()->format('Y-m-d H:i:s'));
@@ -60,6 +60,7 @@ class CacheMorph extends Command
                 ->get();
 
             print_r($morphStatics->toArray());
+            Cache::pull('cache:morph');
             return $morphStatics;
         });
     }

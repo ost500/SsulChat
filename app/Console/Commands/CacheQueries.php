@@ -40,11 +40,10 @@ class CacheQueries extends Command
      */
     public function handle()
     {
-        Cache::pull('cache:statistics');
+
         Cache::remember('cache:statistics', 20, function () {
             $dt = new Carbon();
-
-            return $statics = Ssul::rightJoin('ssul_chattings', function ($q) use ($dt) {
+            $statics = Ssul::rightJoin('ssul_chattings', function ($q) use ($dt) {
                 $q->on('ssuls.id', '=', 'ssul_chattings.ssul_id');
                 $q->where('ssul_chattings.created_at', '>', $dt->subDay()->format('Y-m-d H:i:s'));
             })
@@ -53,6 +52,8 @@ class CacheQueries extends Command
                 ->orderBy('countSsul', 'desc')
                 ->limit(8)
                 ->get();
+            Cache::pull('cache:statistics');
+            return $statics;
         });
     }
 }

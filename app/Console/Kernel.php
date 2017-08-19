@@ -9,6 +9,7 @@ use App\Console\Commands\CrawlGoogleTrends;
 use App\Console\Commands\CrawlInstagram;
 use App\Console\Commands\CrawlYoutube;
 use App\Console\Commands\MorphCommand;
+use App\Console\Commands\NaverImageLoad;
 use App\Console\Commands\NewsCrawling;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -28,7 +29,8 @@ class Kernel extends ConsoleKernel
         CrawlFacebookPage::class,
         CrawlYoutube::class,
         CacheQueries::class,
-        CacheMorph::class
+        CacheMorph::class,
+        NaverImageLoad::class
     ];
 
     /**

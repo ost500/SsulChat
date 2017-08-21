@@ -331,7 +331,7 @@ class MainController extends Controller
         return view('pageList', compact('pages', 'likeBests'));
     }
 
-    public function chattingList()
+    public function chattingList(Request $request)
     {
 //        $builder = Ssul::leftJoin('ssul_chattings', function ($q) {
 //            $q->on('ssul_chattings.ssul_id', '=', 'ssuls.id');
@@ -340,6 +340,11 @@ class MainController extends Controller
 //            ->groupBy('ssuls.id')
 //            ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
 //            ->orderBy('chat_count', 'desc');
+
+        if($request->page == null){
+            $page = 1;
+        }
+        $perPage = 42;
 
         /** @var Collection $chattings */
         $chattings = Ssul::orderBy('created_at', 'desc')->get();
@@ -355,8 +360,9 @@ class MainController extends Controller
 
         $chattings = $chattings->sortByDesc('loginMembersCount');
 
-        $chattings = new LengthAwarePaginator($chattings->values(), $chattings->count(), 42);
+        $chattings = $chattings->slice(($page - 1) * $perPage, $perPage);
 
+        $chattings = new LengthAwarePaginator($chattings->values(), $chattings->count(), $perPage);
 
         $likeBests = Cache::get('cache:likeBests');
 

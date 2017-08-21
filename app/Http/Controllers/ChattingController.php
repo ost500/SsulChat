@@ -338,7 +338,7 @@ class ChattingController extends Controller
             ->orderBy('ssul_chattings.id', 'desc')
             ->with('user')
             ->with('likes')
-            ->limit(10);
+            ->limit(30);
 
         if ($chat_only == true) {
             $builder->where('chattings.social', null);

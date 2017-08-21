@@ -151,6 +151,10 @@ class PageController extends Controller
 
         $page->fb_page_id = $fbPageId;
 
+        $page->save();
+
+        $page->fb_page_id = $fbPageId;
+
         dispatch(new FetchFacebookPagePosts($id));
 
         return redirect()->back();

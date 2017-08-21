@@ -58,7 +58,7 @@
             <!-- SECTION HEADINGS -->
             <div class="gl-section-headings">
                 <h1>오늘의 배틀채팅</h1>
-                <p>#빅데이터</p>
+                <p>~{{ $fromDt }}</p>
             </div>
             <!-- END -->
 

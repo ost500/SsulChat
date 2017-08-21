@@ -74,7 +74,11 @@ class MainController extends Controller
 
         $likeBests = Cache::get('cache:likeBests');
 
-        return view('main', compact('channels', 'pages', 'likeBests'));
+
+        $dt = new Carbon();
+        $fromDt = $dt->subDay()->format('Y-m-d H:i:s');
+
+        return view('main', compact('channels', 'pages', 'likeBests', 'fromDt'));
     }
 
     public function search(Request $request)

@@ -31,14 +31,6 @@
 
 <body class="gl-business-template gl-home-template @if(isset($loginView) || $errors->has('email') || $errors->has('password')) gl-show-menu @endif">
 
-<ins class="daum_ddn_area" style="display:none;width:100%;"
-     data-ad-unit    = "DAN-s0xbsl25rm7o"
-     data-ad-media   = "59v"
-     data-ad-pubuser = "3HU"
-     data-ad-type    = "A"
-     data-ad-width   = "320"
-     data-ad-height  = "50"></ins>
-<script type="text/javascript" src="//t1.daumcdn.net/adfit/static/ad.min.js"></script>
 
 
 <div id="gl-circle-loader-wrapper">
@@ -167,6 +159,14 @@
 </header>
 <!-- HEADER END -->
 
+<ins class="daum_ddn_area" style="display:none;width:100%;"
+     data-ad-unit    = "DAN-s0xbsl25rm7o"
+     data-ad-media   = "59v"
+     data-ad-pubuser = "3HU"
+     data-ad-type    = "A"
+     data-ad-width   = "320"
+     data-ad-height  = "50"></ins>
+<script type="text/javascript" src="//t1.daumcdn.net/adfit/static/ad.min.js"></script>
 @if(Auth::check())
     <section class="gl-fake-div" style="height: 70px;"></section>
 @endif

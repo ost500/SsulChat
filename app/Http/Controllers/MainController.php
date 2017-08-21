@@ -341,9 +341,8 @@ class MainController extends Controller
 //            ->selectRaw("ssuls.*, count(ssul_chattings.id) as chat_count")
 //            ->orderBy('chat_count', 'desc');
 
-        if($request->page == null){
-            $page = 1;
-        }
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
         $perPage = 42;
 
         /** @var Collection $chattings */
@@ -360,13 +359,17 @@ class MainController extends Controller
 
         $chattings = $chattings->sortByDesc('loginMembersCount');
 
-        $chattings = $chattings->slice(($page - 1) * $perPage, $perPage);
+
 
         $chattings = new LengthAwarePaginator($chattings->values(), $chattings->count(), $perPage);
 
+        $chattings->setPath(route('chattingList'));
+
+        $chattingItems = $chattings->forPage($currentPage, $perPage);
+
         $likeBests = Cache::get('cache:likeBests');
 
-        return view('chattingList', compact('chattings', 'likeBests'));
+        return view('chattingList', compact('chattings','chattingItems', 'likeBests'));
     }
 
 }

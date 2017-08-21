@@ -41,7 +41,7 @@
 
             <!-- WRAPPER -->
             <div class="gl-featured-listing-wrapper">
-                @foreach($chattings as $num => $channel)
+                @foreach($chattingItems as $num => $channel)
                     @if(($num + 1) %6 == 0)
                         <div class="row">
                         @endif

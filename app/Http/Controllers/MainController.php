@@ -225,7 +225,18 @@ class MainController extends Controller
                     ['url' => URL::to('/images/main_logo02.png'), 'title' => $ssul->name],
                 ];
 
-                $sitemap->add(route('chattings', ['id' => $ssul->id]), $ssul->created_at, '1.0', 'daily', $images, $ssul->name, []);
+                $sitemap->add(route('chattings', ['name' => $ssul->name]), $ssul->created_at, '1.0', 'daily', $images, $ssul->name, []);
+            }
+
+            $pages = Page::get();
+
+            // add every post to the sitemap
+            foreach ($pages as $page) {
+                $images = [
+                    ['url' => URL::to('/images/main_logo02.png'), 'title' => $page->title],
+                ];
+
+                $sitemap->add(route('pages', ['id' => $page->id]), $page->created_at, '1.0', 'daily', $images, $page->title, []);
             }
         }
 
